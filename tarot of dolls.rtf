@@ -1,0 +1,1207 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fmodern\fcharset0 CourierNewPSMT;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Crear una animaci\'f3n de estrella basada en puntos que crece desde un punto y se despliega detr\'e1s de la carta y la otra estrella es un proyecto interesante. Podemos utilizar la librer\'eda de p5.js para lograr un efecto animado donde los puntos de la estrella se dibujan uno a uno, simulando una expansi\'f3n desde el centro. \
+\
+Aqu\'ed tienes una implementaci\'f3n paso a paso para lograr este efecto:\
+\
+### Implementaci\'f3n de la Animaci\'f3n\
+\
+```javascript\
+let xPos = -200; // Posici\'f3n inicial en el eje x\
+let angle = 0; // \'c1ngulo de rotaci\'f3n inicial\
+let speed = 6; // Velocidad de movimiento hacia el centro\
+let colorSwitch = true; // Alternar entre colores\
+let points = []; // Almacenamiento de puntos de la estrella\
+\
+function setup() \{\
+  createCanvas(800, 600, WEBGL); // Usar modo WEBGL para efectos tridimensionales\
+  rectMode(CENTER); // Centrar el rect\'e1ngulo\
+\
+  // Generar puntos para la estrella de puntos\
+  generateStarPoints(0, 0, 150, 75, 5);\
+\}\
+\
+function draw() \{\
+  background("#5E50A0"); // Fondo de color p\'farpura\
+\
+  // Ajustar la c\'e1mara para dar un efecto de perspectiva\
+  let fov = PI / 3; // Campo de visi\'f3n de la c\'e1mara\
+  let cameraZ = (height / 2.0) / tan(fov / 2.0);\
+  perspective(fov, width / height, cameraZ / 10.0, cameraZ * 10.0);\
+\
+  // Dibujar la estrella de puntos detr\'e1s de todo\
+  drawPointStar(0, 0, frameCount); // frameCount como par\'e1metro para animar\
+\
+  // Dibujar estrella detr\'e1s del marco\
+  let outerRadius = 150 + 30 * sin(frameCount * 0.05); // Cambia de tama\'f1o con el tiempo\
+  let innerRadius = 75 + 15 * sin(frameCount * 0.05); // Cambia de tama\'f1o con el tiempo\
+  drawStar(0, 0, outerRadius, innerRadius, 5); // Coordenadas (x, y), radios, n\'famero de puntas\
+\
+  // Mover el marco hacia el centro del lienzo\
+  if (xPos < 0) \{\
+    xPos += speed;\
+  \}\
+\
+  // Rotar y desplazar el marco de la carta de tarot\
+  push();\
+  translate(xPos, 0, 0); // Mover el marco hacia la posici\'f3n actual\
+  rotateY(angle); // Rotar en torno al eje Y para efecto 3D\
+  noFill(); // No llenar el marco, s\'f3lo mostrar el borde\
+  stroke(colorSwitch ? '#2696CB' : '#7DD1F5'); // Alternar entre los dos colores\
+  strokeWeight(5); // Grosor del borde del marco\
+  beginShape(); // Iniciar la forma del marco\
+  vertex(-75, -125); // Esquina superior izquierda\
+  vertex(75, -125); // Esquina superior derecha\
+  vertex(75, 125); // Esquina inferior derecha\
+  vertex(-75, 125); // Esquina inferior izquierda\
+  endShape(CLOSE); // Cerrar la forma del marco\
+  pop();\
+\
+  // Aumentar el \'e1ngulo de rotaci\'f3n para el efecto 3D\
+  angle += 0.03;\
+\
+  // Cambiar el color despu\'e9s de cada rotaci\'f3n completa\
+  if (angle > TWO_PI) \{\
+    angle = 0; // Reiniciar el \'e1ngulo\
+    colorSwitch = !colorSwitch; // Alternar el color\
+  \}\
+\}\
+\
+function drawStar(x, y, outerRadius, innerRadius, npoints) \{\
+  push();\
+  rotateY(-angle); // Contrarrestar la rotaci\'f3n del marco para mantener la estrella fija\
+  fill('#F4E3BE'); // Color de relleno para la estrella\
+  stroke('#D4AC0D'); // Color del borde para la estrella\
+  strokeWeight(3);\
+\
+  let starAngle = TWO_PI / npoints; // Usamos un nombre diferente para la variable de \'e1ngulo aqu\'ed\
+  let halfAngle = starAngle / 2.0;\
+  beginShape();\
+  for (let a = 0; a < TWO_PI; a += starAngle) \{\
+    let sx = x + cos(a) * outerRadius;\
+    let sy = y + sin(a) * outerRadius;\
+    vertex(sx, sy, -10); // Estrella detr\'e1s del marco, en -10 en el eje z\
+    sx = x + cos(a + halfAngle) * innerRadius;\
+    sy = y + sin(a + halfAngle) * innerRadius;\
+    vertex(sx, sy, -10);\
+  \}\
+  endShape(CLOSE);\
+  pop();\
+\}\
+\
+// Funci\'f3n para generar puntos de estrella y almacenarlos\
+function generateStarPoints(x, y, outerRadius, innerRadius, npoints) \{\
+  let angle = TWO_PI / npoints;\
+  let halfAngle = angle / 2.0;\
+\
+  for (let a = 0; a < TWO_PI; a += angle) \{\
+    let sx = x + cos(a) * outerRadius;\
+    let sy = y + sin(a) * outerRadius;\
+    points.push(\{ x: sx, y: sy \}); // Agregar punto externo\
+\
+    sx = x + cos(a + halfAngle) * innerRadius;\
+    sy = y + sin(a + halfAngle) * innerRadius;\
+    points.push(\{ x: sx, y: sy \}); // Agregar punto interno\
+  \}\
+\}\
+\
+// Funci\'f3n para dibujar la estrella de puntos con animaci\'f3n\
+function drawPointStar(x, y, frameCount) \{\
+  push();\
+  rotateY(-angle); // Contrarrestar la rotaci\'f3n del marco para mantener la estrella fija\
+  translate(0, 0, -15); // Poner detr\'e1s de la otra estrella\
+\
+  let maxPoints = map(sin(frameCount * 0.05), -1, 1, 0, points.length);\
+  fill(255);\
+  noStroke();\
+\
+  for (let i = 0; i < maxPoints; i++) \{\
+    ellipse(points[i].x, points[i].y, 5, 5); // Dibujar cada punto\
+  \}\
+  pop();\
+\}\
+```\
+\
+### Explicaci\'f3n Detallada\
+\
+- **Generaci\'f3n de Puntos de Estrella:**\
+  - Utilizamos la funci\'f3n `generateStarPoints` para calcular y almacenar las coordenadas de los puntos de la estrella. Esto se hace con una l\'f3gica similar a la de dibujar la estrella, pero guardamos cada punto como un objeto en un array.\
+\
+- **Dibujo de la Estrella de Puntos:**\
+  - La funci\'f3n `drawPointStar` utiliza el array de puntos y los dibuja uno por uno usando `ellipse()`. La cantidad de puntos dibujados est\'e1 controlada por la variable `frameCount`, lo que crea la animaci\'f3n de crecimiento.\
+  - Utilizamos `sin(frameCount * 0.05)` para controlar el tama\'f1o del c\'edrculo de puntos y crear un efecto de expansi\'f3n suave. La funci\'f3n `map()` convierte el rango de salida de `sin()` a un rango adecuado para el n\'famero de puntos.\
+\
+- **Posicionamiento y Rotaci\'f3n:**\
+  - Se asegura que la estrella de puntos est\'e9 fija detr\'e1s de las otras figuras, utilizando `translate(0, 0, -15)`.\
+  - La rotaci\'f3n de la estrella de puntos se contrarresta con `rotateY(-angle)` para mantenerla fija mientras el marco se mueve y rota.\
+\
+### Detalles Visuales\
+\
+- **Colores:**\
+  - Los puntos de la estrella son blancos, haciendo un buen contraste con el fondo p\'farpura.\
+\
+- **Oscilaci\'f3n del N\'famero de Puntos:**\
+  - La estrella crece y decrece c\'edclicamente, creando un efecto de pulso en la animaci\'f3n.\
+\
+### Ideas Adicionales\
+\
+- **Efecto de Transparencia:** Puedes aplicar una transparencia a los puntos con `fill(255, alphaValue)` para que la estrella se desvanezca al crecer.\
+  \
+- **Interactividad:** A\'f1ade interactividad, como hacer que la estrella crezca m\'e1s r\'e1pido al hacer clic o cambiar de color al pasar el rat\'f3n por encima.\
+\
+Si quieres a\'f1adir efectos o funcionalidades adicionales, \'a1no dudes en preguntar!\
+\
+\
+
+\f1\b Alternar los colores de la estrella\
+\
+
+\f0\b0 Claro, podemos hacer que las cruces parpadeen alternando entre diferentes colores hexadecimales. Para implementar esto, podemos cambiar el color de las cruces utilizando un \'edndice que oscile entre los diferentes colores de manera aleatoria o secuencial. \
+\
+A continuaci\'f3n, te mostrar\'e9 c\'f3mo lograr que las cruces cambien su color entre las opciones que proporcionaste: **#9C1D00, #FF5529, #46389B, #FFFFFF**.\
+\
+### Plan del Dise\'f1o con Oscilaci\'f3n de Color\
+\
+1. **Lienzo**: Continuar con un lienzo de 1920x1080 p\'edxeles.\
+2. **Crucetas**: Dibujar peque\'f1as cruces utilizando dos l\'edneas perpendiculares.\
+3. **Distribuci\'f3n**: Las posiciones de las cruces se distribuir\'e1n aleatoriamente dentro del lienzo.\
+4. **Color Intermitente**: Implementar un cambio de color c\'edclico en cada cuadro de animaci\'f3n.\
+5. **Transparencia**: Variar la opacidad de las cruces para darle un efecto m\'e1s din\'e1mico.\
+\
+### Implementaci\'f3n en p5.js\
+\
+Aqu\'ed tienes el c\'f3digo para crear este efecto intermitente de color:\
+\
+```javascript\
+let crosses = []; // Array para almacenar las cruces\
+const numCrosses = 3000; // N\'famero total de cruces\
+const colors = ['#9C1D00', '#FF5529', '#46389B', '#FFFFFF']; // Colores de las cruces\
+\
+function setup() \{\
+  createCanvas(1920, 1080);\
+  noStroke(); // Sin borde para las cruces\
+  // Inicializar las cruces con posiciones, tama\'f1os, y colores aleatorios\
+  for (let i = 0; i < numCrosses; i++) \{\
+    crosses.push(\{\
+      x: random(width), // Posici\'f3n x aleatoria\
+      y: random(height), // Posici\'f3n y aleatoria\
+      size: random(10, 20), // Tama\'f1o aleatorio entre 10 y 20 p\'edxeles\
+      opacity: random(50, 200), // Opacidad inicial\
+      opacityChange: random(0.5, 2), // Velocidad de cambio de opacidad\
+      colorIndex: floor(random(colors.length)) // \'cdndice de color inicial\
+    \});\
+  \}\
+\}\
+\
+function draw() \{\
+  background(20); // Fondo oscuro\
+  for (let i = 0; i < crosses.length; i++) \{\
+    let cross = crosses[i];\
+    \
+    // Ajustar opacidad para simular parpadeo\
+    cross.opacity += cross.opacityChange;\
+    \
+    // Invertir direcci\'f3n del cambio de opacidad si est\'e1 fuera de los l\'edmites\
+    if (cross.opacity > 255 || cross.opacity < 50) \{\
+      cross.opacityChange *= -1;\
+    \}\
+    \
+    // Cambiar el color intermitente cada ciertos frames\
+    if (frameCount % 10 === 0) \{ // Cambia el color cada 10 frames\
+      cross.colorIndex = (cross.colorIndex + 1) % colors.length; // Oscilar el \'edndice de color\
+    \}\
+    \
+    // Asignar el color actual a la cruz\
+    let currentColor = colors[cross.colorIndex];\
+    fill(color(currentColor + hex(floor(cross.opacity), 2))); // A\'f1adir transparencia al color\
+\
+    // Dibujar la cruz\
+    drawCross(cross.x, cross.y, cross.size);\
+  \}\
+\}\
+\
+function drawCross(x, y, size) \{\
+  // L\'ednea horizontal\
+  rect(x - size / 2, y - 1, size, 2);\
+  \
+  // L\'ednea vertical\
+  rect(x - 1, y - size / 2, 2, size);\
+\}\
+```\
+\
+### Explicaci\'f3n del C\'f3digo\
+\
+- **Array de Cruces**: \
+  - El array `crosses` contiene las propiedades de cada cruz: posici\'f3n, tama\'f1o, opacidad, velocidad de cambio de opacidad y un \'edndice de color que se utiliza para seleccionar el color actual de la cruz.\
+  - El \'edndice de color se inicializa aleatoriamente dentro del rango de los colores proporcionados.\
+\
+- **Cambio de Color Intermitente**: \
+  - Dentro del bucle `draw()`, usamos `frameCount % 10 === 0` para cambiar el color de cada cruz cada 10 cuadros.\
+  - El \'edndice de color `colorIndex` se incrementa secuencialmente y utiliza el operador m\'f3dulo `%` para oscilar entre los diferentes colores.\
+  \
+- **Transparencia Din\'e1mica**:\
+  - Cada cruz tiene una opacidad que cambia continuamente, creando un efecto de parpadeo.\
+  - La funci\'f3n `fill()` se usa para establecer el color actual de la cruz, agregando transparencia mediante `hex(floor(cross.opacity), 2)` para el canal alfa.\
+\
+### Ajustes Opcionales\
+\
+Puedes ajustar los siguientes aspectos para personalizar la animaci\'f3n:\
+\
+1. **Velocidad de Cambio de Color**:\
+   - Cambiar el intervalo de frames en `if (frameCount % 10 === 0)` a otro valor para ajustar la velocidad del cambio de color.\
+   ```javascript\
+   if (frameCount % 5 === 0) \{ // Cambia cada 5 frames para un cambio m\'e1s r\'e1pido\
+     cross.colorIndex = (cross.colorIndex + 1) % colors.length;\
+   \}\
+   ```\
+\
+2. **Rango de Tama\'f1o de Cruces**:\
+   - Modificar `random(10, 20)` a otro rango en `setup()` para cambiar el tama\'f1o de las cruces.\
+\
+3. **Controlar la Opacidad**:\
+   - Ajustar el rango de opacidad inicial en `random(50, 200)` o la velocidad de cambio `random(0.5, 2)` para crear diferentes efectos de parpadeo.\
+\
+### Ejemplo con Cambios de Color M\'e1s R\'e1pidos\
+\
+Aqu\'ed tienes un ajuste para que las cruces cambien de color m\'e1s r\'e1pido:\
+\
+```javascript\
+function draw() \{\
+  background(20);\
+  for (let i = 0; i < crosses.length; i++) \{\
+    let cross = crosses[i];\
+    \
+    cross.opacity += cross.opacityChange;\
+    \
+    if (cross.opacity > 255 || cross.opacity < 50) \{\
+      cross.opacityChange *= -1;\
+    \}\
+    \
+    // Cambiar el color cada 5 frames para un cambio m\'e1s r\'e1pido\
+    if (frameCount % 5 === 0) \{\
+      cross.colorIndex = (cross.colorIndex + 1) % colors.length;\
+    \}\
+    \
+    let currentColor = colors[cross.colorIndex];\
+    fill(color(currentColor + hex(floor(cross.opacity), 2)));\
+\
+    drawCross(cross.x, cross.y, cross.size);\
+  \}\
+\}\
+```\
+\
+Con estos ajustes, puedes experimentar y personalizar el efecto de parpadeo y oscilaci\'f3n de color de las cruces seg\'fan tus preferencias. \'a1Espero que esto te ayude a lograr el efecto visual que deseas!
+\f2 \
+\
+let crosses = []; // Array para almacenar las cruces\
+const numCrosses = 3000; // N\'famero total de cruces\
+const colors = ['#9C1D00', '#FF5529', '#46389B', '#FFFFFF']; // Colores de las cruces\
+\
+function setup() \{\
+  createCanvas(1920, 1080);\
+  noStroke(); // Sin borde para las cruces\
+  // Inicializar las cruces con posiciones, tama\'f1os, y colores aleatorios\
+  for (let i = 0; i < numCrosses; i++) \{\
+    crosses.push(\{\
+      x: random(width), // Posici\'f3n x aleatoria\
+      y: random(height), // Posici\'f3n y aleatoria\
+      size: random(10, 20), // Tama\'f1o aleatorio entre 10 y 20 p\'edxeles\
+      opacity: random(50, 200), // Opacidad inicial\
+      opacityChange: random(0.5, 2), // Velocidad de cambio de opacidad\
+      colorIndex: floor(random(colors.length)) // \'cdndice de color inicial\
+    \});\
+  \}\
+\}\
+\
+function draw() \{\
+  background("#46389B"); // Fondo oscuro\
+  for (let i = 0; i < crosses.length; i++) \{\
+    let cross = crosses[i];\
+    \
+    // Ajustar opacidad para simular parpadeo\
+    cross.opacity += cross.opacityChange;\
+    \
+    // Invertir direcci\'f3n del cambio de opacidad si est\'e1 fuera de los l\'edmites\
+    if (cross.opacity > 255 || cross.opacity < 50) \{\
+      cross.opacityChange *= -1;\
+    \}\
+    \
+    // Cambiar el color intermitente cada ciertos frames\
+    if (frameCount % 10 === 0) \{ // Cambia el color cada 10 frames\
+      cross.colorIndex = (cross.colorIndex + 1) % colors.length; // Oscilar el \'edndice de color\
+    \}\
+    \
+    // Asignar el color actual a la cruz\
+    let currentColor = colors[cross.colorIndex];\
+    fill(color(currentColor + hex(floor(cross.opacity), 2))); // A\'f1adir transparencia al color\
+\
+    // Dibujar la cruz\
+    drawCross(cross.x, cross.y, cross.size);\
+  \}\
+\}\
+\
+function drawCross(x, y, size) \{\
+  // L\'ednea horizontal\
+  rect(x - size / 2, y - 1, size, 2);\
+  \
+  // L\'ednea vertical\
+  rect(x - 1, y - size / 2, 2, size);\
+\}\
+\
+\
+
+\f0 Para lograr un efecto de parpadeo en los truenos que siga la secuencia especificada (una vez por segundo, luego dos veces por segundo, y luego repetir), podemos utilizar la funci\'f3n `millis()` de p5.js para controlar el tiempo. Ajustaremos la transparencia de los truenos seg\'fan esta secuencia, creando un parpadeo m\'e1s controlado.\
+\
+Aqu\'ed tienes c\'f3mo se puede implementar este efecto en el c\'f3digo de p5.js:\
+\
+### C\'f3digo p5.js\
+\
+```javascript\
+const numThunderbolts = 480; // Cantidad de truenos\
+const thunderColor = '#7DD1F5'; // Color de los truenos\
+const bgColor = '#EAEEF0'; // Color de fondo\
+\
+let thunderbolts = []; // Array para almacenar los truenos\
+\
+function setup() \{\
+  createCanvas(800, 600); // Tama\'f1o del canvas\
+  for (let i = 0; i < numThunderbolts; i++) \{\
+    thunderbolts.push(new Thunderbolt(random(width), random(height)));\
+  \}\
+\}\
+\
+function draw() \{\
+  background(bgColor);\
+\
+  // Actualizar y dibujar cada trueno\
+  for (let bolt of thunderbolts) \{\
+    bolt.update();\
+    bolt.display();\
+  \}\
+\}\
+\
+class Thunderbolt \{\
+  constructor(x, y) \{\
+    this.x = x;\
+    this.y = y;\
+    this.alpha = 0; // Transparencia inicial\
+    this.size = random(5, 20); // Tama\'f1o del trueno\
+    this.shapeType = floor(random(3)); // Tipo de forma del trueno\
+    this.blinkState = 0; // Estado del parpadeo\
+    this.lastBlinkTime = 0; // \'daltimo tiempo de parpadeo\
+  \}\
+\
+  update() \{\
+    // Movimiento aleatorio\
+    this.x += random(-1, 1);\
+    this.y += random(-1, 1);\
+\
+    // Actualizar el estado de parpadeo\
+    const currentTime = millis();\
+    if (this.blinkState === 0) \{\
+      if (currentTime - this.lastBlinkTime > 1000) \{ // Una vez por segundo\
+        this.alpha = this.alpha === 0 ? 150 : 0;\
+        this.lastBlinkTime = currentTime;\
+        this.blinkState = 1; // Cambiar al siguiente estado\
+      \}\
+    \} else if (this.blinkState === 1) \{\
+      if (currentTime - this.lastBlinkTime > 500) \{ // Dos veces por segundo\
+        this.alpha = this.alpha === 0 ? 150 : 0;\
+        this.lastBlinkTime = currentTime;\
+        this.blinkState = 0; // Cambiar al primer estado\
+      \}\
+    \}\
+  \}\
+\
+  display() \{\
+    // Dibujar el trueno\
+    push();\
+    translate(this.x, this.y);\
+    fill(thunderColor + hex(this.alpha, 2));\
+    stroke(thunderColor + hex(this.alpha, 2));\
+    strokeWeight(2);\
+\
+    beginShape();\
+    if (this.shapeType === 0) \{\
+      // Trueno tipo 1\
+      vertex(-this.size, 0);\
+      vertex(-this.size / 2, -this.size);\
+      vertex(0, -this.size / 2);\
+      vertex(this.size / 2, -this.size);\
+      vertex(this.size, 0);\
+      vertex(this.size / 2, this.size);\
+      vertex(0, this.size / 2);\
+      vertex(-this.size / 2, this.size);\
+    \} else if (this.shapeType === 1) \{\
+      // Trueno tipo 2\
+      vertex(0, -this.size);\
+      vertex(this.size / 3, -this.size / 3);\
+      vertex(this.size, 0);\
+      vertex(this.size / 3, this.size / 3);\
+      vertex(0, this.size);\
+      vertex(-this.size / 3, this.size / 3);\
+      vertex(-this.size, 0);\
+      vertex(-this.size / 3, -this.size / 3);\
+    \} else if (this.shapeType === 2) \{\
+      // Trueno tipo 3\
+      vertex(-this.size, -this.size / 2);\
+      vertex(0, -this.size);\
+      vertex(this.size, -this.size / 2);\
+      vertex(this.size / 2, 0);\
+      vertex(this.size, this.size / 2);\
+      vertex(0, this.size);\
+      vertex(-this.size, this.size / 2);\
+      vertex(-this.size / 2, 0);\
+    \}\
+    endShape(CLOSE);\
+    pop();\
+  \}\
+\}\
+```\
+\
+### Explicaci\'f3n del C\'f3digo\
+\
+Aqu\'ed te detallo c\'f3mo implementamos el efecto de parpadeo deseado:\
+\
+1. **Estado de Parpadeo (`blinkState`)**: Hemos introducido una variable `blinkState` para controlar en qu\'e9 fase de parpadeo se encuentra el trueno. Tiene dos valores posibles: `0` para parpadeo una vez por segundo y `1` para parpadeo dos veces por segundo.\
+\
+2. **Temporizador de Parpadeo (`lastBlinkTime`)**: Utilizamos la funci\'f3n `millis()` para medir el tiempo transcurrido desde el \'faltimo parpadeo y controlar la frecuencia del parpadeo.\
+\
+3. **Cambio de Transparencia**: Seg\'fan el estado de parpadeo, cambiamos la transparencia del trueno (`alpha`) entre 0 y 150 para hacerlos visibles o invisibles.\
+\
+4. **Cambio de Estado**: Al final de cada ciclo de parpadeo, cambiamos el estado de parpadeo para la siguiente secuencia.\
+\
+### Ajustes\
+\
+- **Transparencia (`alpha`)**: Puedes ajustar el valor `150` a otro valor si deseas que los truenos sean m\'e1s o menos visibles cuando parpadean.\
+\
+- **Frecuencia de Parpadeo**: Las duraciones `1000` y `500` milisegundos corresponden a una vez por segundo y dos veces por segundo, respectivamente. Puedes ajustar estos valores para cambiar la velocidad del parpadeo.\
+\
+### Ejecuci\'f3n\
+\
+Para ejecutar este c\'f3digo:\
+\
+1. Copia el c\'f3digo en el editor de p5.js.\
+2. Ejecuta el sketch.\
+3. Observa c\'f3mo los truenos parpadean con la secuencia deseada en la pantalla.\
+\
+Este c\'f3digo logra un efecto visual interesante con los truenos parpadeando de acuerdo a la secuencia especificada. Si deseas m\'e1s ajustes o mejoras, no dudes en preguntar. \'a1Disfruta de la animaci\'f3n!\
+\
+Para animar el cambio de color de cada tri\'e1ngulo usando los colores de la paleta definida en la constante `colors2`, podemos implementar una transici\'f3n suave de colores. Esto se puede lograr cambiando gradualmente el color de cada tri\'e1ngulo a lo largo del tiempo. Podemos usar la funci\'f3n `lerpColor()` de p5.js para mezclar colores entre un color actual y uno nuevo objetivo de la paleta.\
+\
+Aqu\'ed est\'e1 la versi\'f3n modificada de tu c\'f3digo para lograr este efecto de animaci\'f3n de color:\
+\
+```javascript\
+const numTriangles2 = 96;\
+const colors2 = ['#9C1D00', '#FF5529', '#46389B', '#FFFFFF'];\
+let triangles2 = [];\
+\
+function setup() \{\
+  createCanvas(1920, 1080);\
+  for (let i = 0; i < numTriangles2; i++) \{\
+    triangles2.push(new BreathingTriangle(random(width), random(height)));\
+  \}\
+\}\
+\
+function draw() \{\
+  background('#5E50A0');\
+\
+  for (let t of triangles2) \{\
+    t.update();\
+    t.display();\
+  \}\
+\}\
+\
+class BreathingTriangle \{\
+  constructor(x, y) \{\
+    this.x = x;\
+    this.y = y;\
+    this.baseSize = random(20, 50);\
+    this.size = this.baseSize;\
+    this.growth = random(0.1, 0.5);\
+    this.color = color(random(colors2)); // Convierte el color inicial a formato de color p5.js\
+    this.targetColor = color(random(colors2));\
+    this.colorTransitionSpeed = random(0.01, 0.03); // Velocidad de transici\'f3n de color\
+    this.colorLerpAmount = 0; // Cantidad de interpolaci\'f3n de color\
+  \}\
+\
+  update() \{\
+    // Actualizar el tama\'f1o del tri\'e1ngulo\
+    this.size += this.growth;\
+\
+    if (this.size > this.baseSize + 10 || this.size < this.baseSize - 10) \{\
+      this.growth *= -1;\
+    \}\
+\
+    // Movimiento aleatorio del tri\'e1ngulo\
+    this.x += random(-1, 1);\
+    this.y += random(-1, 1);\
+\
+    if (this.x < 0 || this.x > width) \{\
+      this.x = constrain(this.x, 0, width);\
+    \}\
+    if (this.y < 0 || this.y > height) \{\
+      this.y = constrain(this.y, 0, height);\
+    \}\
+\
+    // Transici\'f3n de color\
+    this.color = lerpColor(this.color, this.targetColor, this.colorTransitionSpeed);\
+    this.colorLerpAmount += this.colorTransitionSpeed;\
+\
+    // Si la transici\'f3n de color ha alcanzado su destino, elige un nuevo color objetivo\
+    if (this.colorLerpAmount >= 1) \{\
+      this.targetColor = color(random(colors2));\
+      this.colorLerpAmount = 0;\
+    \}\
+  \}\
+\
+  display() \{\
+    push();\
+    translate(this.x, this.y);\
+    noFill();\
+    stroke(this.color);\
+    strokeWeight(2);\
+    beginShape();\
+    vertex(-this.size, -this.size);\
+    vertex(this.size, -this.size);\
+    vertex(0, this.size);\
+    endShape(CLOSE);\
+    pop();\
+  \}\
+\}\
+```\
+\
+### Explicaci\'f3n del C\'f3digo\
+\
+1. **Inicializaci\'f3n del Color:**\
+   - En el constructor de la clase `BreathingTriangle`, se convierte el color inicial a un objeto de color de p5.js utilizando `color(random(colors2))`. Esto permite una manipulaci\'f3n f\'e1cil de los colores en p5.js.\
+\
+2. **Transici\'f3n de Color:**\
+   - Se define un color objetivo `this.targetColor` y una velocidad de transici\'f3n `this.colorTransitionSpeed`.\
+   - En cada actualizaci\'f3n (`update`), el color actual del tri\'e1ngulo se mezcla con el color objetivo utilizando `lerpColor(this.color, this.targetColor, this.colorTransitionSpeed)`.\
+   - La cantidad de interpolaci\'f3n de color se incrementa por la velocidad definida.\
+\
+3. **Cambio de Color Objetivo:**\
+   - Una vez que la interpolaci\'f3n ha alcanzado su destino (`if (this.colorLerpAmount >= 1)`), se selecciona un nuevo color objetivo de la paleta y se reinicia la cantidad de interpolaci\'f3n.\
+\
+### Ajustes Personalizados\
+\
+- **Velocidad de Cambio de Color:**\
+  - Puedes ajustar `this.colorTransitionSpeed` para acelerar o ralentizar la transici\'f3n de color.\
+  \
+- **Movimiento del Tri\'e1ngulo:**\
+  - La l\'f3gica de movimiento del tri\'e1ngulo puede modificarse para tener un efecto m\'e1s o menos ca\'f3tico ajustando los valores de `random(-1, 1)`.\
+\
+Este enfoque proporciona una animaci\'f3n fluida donde cada tri\'e1ngulo cambia gradualmente entre los colores especificados en la paleta, creando un efecto visual atractivo.\
+\
+
+\f2 const numTriangles3 = 96;\
+const colors3 = ['#9C1D00', '#FF5529', '#46389B', '#FFFFFF'];\
+let triangles3 = [];\
+\
+function setup() \{\
+  createCanvas(1920, 1080);\
+  for (let i = 0; i < numTriangles3; i++) \{\
+    triangles3.push(new BouncingTriangle(random(width), random(height)));\
+  \}\
+\}\
+\
+function draw() \{\
+  background('#794897');\
+\
+  for (let t of triangles3) \{\
+    t.update();\
+    t.display();\
+  \}\
+\}\
+\
+class BouncingTriangle \{\
+  constructor(x, y) \{\
+    this.x = x;\
+    this.y = y;\
+    this.size = random(48, 96);\
+    this.vx = random(-3, 3);\
+    this.vy = random(-3, 3);\
+    this.color = random(colors3);\
+  \}\
+\
+  update() \{\
+    this.x += this.vx;\
+    this.y += this.vy;\
+\
+    if (this.x < 0 || this.x > width) \{\
+      this.vx *= -1;\
+    \}\
+    if (this.y < 0 || this.y > height) \{\
+      this.vy *= -1;\
+    \}\
+  \}\
+\
+  display() \{\
+    push();\
+    translate(this.x, this.y);\
+    noFill();\
+    stroke(this.color);\
+    strokeWeight(12);\
+    beginShape();\
+    vertex(-this.size, -this.size);\
+    vertex(this.size, -this.size);\
+    vertex(0, this.size);\
+    endShape(CLOSE);\
+    pop();\
+  \}\
+\}\
+\
+const numTriangles4 = 192;\
+const colors4 = ['#9C1D00', '#FF5529', '#46389B', '#FFFFFF'];\
+let triangles4 = [];\
+\
+function setup() \{\
+  createCanvas(1920, 1080);\
+  for (let i = 0; i < numTriangles4; i++) \{\
+    triangles4.push(new ConvergingTriangle(random(width), random(height)));\
+  \}\
+\}\
+\
+function draw() \{\
+  background('#4A1767');\
+\
+  for (let t of triangles4) \{\
+    t.update();\
+    t.display();\
+  \}\
+\}\
+\
+class ConvergingTriangle \{\
+  constructor(x, y) \{\
+    this.x = x;\
+    this.y = y;\
+    this.size = random(96, 192);\
+    this.angle = atan2(height / 2 - this.y, width / 2 - this.x);\
+    this.speed = random(0.6, 3);\
+    this.color = random(colors4);\
+  \}\
+\
+  update() \{\
+    this.x += cos(this.angle) * this.speed;\
+    this.y += sin(this.angle) * this.speed;\
+\
+    // Restablecer la posici\'f3n si el tri\'e1ngulo alcanza el centro\
+    if (dist(this.x, this.y, width / 2, height / 2) < 10) \{\
+      this.x = random(width);\
+      this.y = random(height);\
+      this.angle = atan2(height / 2 - this.y, width / 2 - this.x);\
+    \}\
+  \}\
+\
+  display() \{\
+    push();\
+    translate(this.x, this.y);\
+    noFill();\
+    stroke(this.color);\
+    strokeWeight(18);\
+    beginShape();\
+    vertex(-this.size, -this.size);\
+    vertex(this.size, -this.size);\
+    vertex(0, this.size);\
+    endShape(CLOSE);\
+    pop();\
+  \}\
+\}\
+\
+const numTriangles5 = 24;\
+const colors5 = ['#9C1D00', '#FF5529', '#46389B', '#FFFFFF'];\
+let triangles5 = [];\
+\
+function setup() \{\
+  createCanvas(1920, 1080);\
+  for (let i = 0; i < numTriangles5; i++) \{\
+    triangles5.push(new GrowingTriangle(width / 3, height / 6));\
+  \}\
+\}\
+\
+function draw() \{\
+  background('#DFE4E3');\
+\
+  for (let t of triangles5) \{\
+    t.update();\
+    t.display();\
+  \}\
+\}\
+\
+class GrowingTriangle \{\
+  constructor(x, y) \{\
+    this.x = x;\
+    this.y = y;\
+    this.size = random(24, 96);\
+    this.growthRate = random(0.3, 0.6);\
+    this.color = random(colors5);\
+  \}\
+\
+  update() \{\
+    this.size += this.growthRate;\
+\
+    // Reiniciar si el tama\'f1o supera cierto l\'edmite\
+    if (this.size > 480) \{\
+      this.size = random(12, 96);\
+      this.color = random(colors5);\
+    \}\
+  \}\
+\
+  display() \{\
+    push();\
+    translate(this.x, this.y);\
+    rotate(TWO_PI * (this.size / 192));\
+    noFill();\
+    stroke(this.color);\
+    strokeWeight(2);\
+    beginShape();\
+    vertex(-this.size, -this.size);\
+    vertex(this.size, -this.size);\
+    vertex(0, this.size);\
+    endShape(CLOSE);\
+    pop();\
+  \}\
+\}\
+\
+const numTriangles7 = 70;\
+const colors7 = ['#9C1D00', '#FF5529', '#46389B', '#FFFFFF'];\
+let triangles7 = [];\
+\
+function setup() \{\
+  createCanvas(1920, 1080);\
+  for (let i = 0; i < numTriangles7; i++) \{\
+    triangles7.push(new VortexTriangle(random(width), random(height)));\
+  \}\
+\}\
+\
+function draw() \{\
+  background('#794897');\
+\
+  for (let t of triangles7) \{\
+    t.update();\
+    t.display();\
+  \}\
+\}\
+\
+class VortexTriangle \{\
+  constructor(x, y) \{\
+    this.x = x;\
+    this.y = y;\
+    this.size = random(24, 48);\
+    this.angle = random(TWO_PI);\
+    this.radius = random(192, 384);\
+    this.color = random(colors7);\
+  \}\
+\
+  update() \{\
+    this.angle += 0.01;\
+    this.x = width / 2 + cos(this.angle) * this.radius;\
+    this.y = height / 2 + sin(this.angle) * this.radius;\
+  \}\
+\
+  display() \{\
+    push();\
+    translate(this.x, this.y);\
+    rotate(this.angle);\
+    noFill();\
+    stroke(this.color);\
+    strokeWeight(24);\
+    beginShape();\
+    vertex(-this.size, -this.size);\
+    vertex(this.size, -this.size);\
+    vertex(0, this.size);\
+    endShape(CLOSE);\
+    pop();\
+  \}\
+\}\
+\
+\
+
+\f0 Para cambiar la posici\'f3n de la l\'ednea en p5.js y moverla al centro en el lado derecho, simplemente necesitas ajustar las coordenadas iniciales de donde comienza el punto. Aqu\'ed est\'e1 el c\'f3digo modificado para lograr este efecto:\
+\
+```javascript\
+let x;\
+let y;\
+let move = false; // Controlador para iniciar el movimiento\
+let strokeColor;\
+let timeElapsed = 0;\
+\
+function setup() \{\
+  createCanvas(800, 600);\
+  x = width; // Inicia en el borde derecho del lienzo\
+  y = height / 2; // Inicia en el centro vertical del lienzo\
+  strokeWeight(18);\
+  frameRate(60); // Asegura que la animaci\'f3n sea suave\
+  background('#BDC1C2');\
+\}\
+\
+function draw() \{\
+  if (!move) \{\
+    // Dibuja el punto inicial\
+    strokeColor = color('#EAEEF0');\
+    stroke(strokeColor);\
+    point(x, y);\
+    \
+    // Inicia el movimiento despu\'e9s de 2 milisegundos\
+    if (millis() > 2) \{\
+      move = true;\
+      timeElapsed = millis();\
+    \}\
+  \} else \{\
+    // Cambia el color de la l\'ednea oscilante\
+    if ((frameCount % 60) < 30) \{\
+      strokeColor = color('#EAEEF0');\
+    \} else \{\
+      strokeColor = color('#DFE4E3');\
+    \}\
+    \
+    // Dibuja la l\'ednea en movimiento\
+    stroke(strokeColor);\
+    line(x, y, x - 1, y);\
+    x--; // Mueve el punto hacia la izquierda\
+\
+    // Verifica si el tiempo de animaci\'f3n ha alcanzado 2 milisegundos\
+    if (millis() - timeElapsed >= 2) \{\
+      move = false;\
+    \}\
+  \}\
+\}\
+```\
+\
+### Cambios Realizados:\
+\
+1. **Coordenada Vertical (`y`):**  \
+   La variable `y` se ha ajustado para estar en el centro vertical del lienzo, estableciendo su valor en `height / 2`. Esto mueve la l\'ednea desde el centro del lado derecho.\
+\
+2. **Coordenada Horizontal (`x`):**  \
+   La variable `x` permanece en `width`, asegurando que la l\'ednea comience desde el borde derecho.\
+\
+### Ajustes Adicionales:\
+\
+Si deseas posicionar la l\'ednea en un lugar espec\'edfico, puedes modificar las coordenadas iniciales `x` y `y` en la funci\'f3n `setup()`.\
+\
+### Ejemplos de Posicionamiento:\
+\
+1. **Parte Superior Derecha:**\
+\
+   ```javascript\
+   x = width; // Derecha\
+   y = 0;     // Parte superior\
+   ```\
+\
+2. **Parte Inferior Derecha:**\
+\
+   ```javascript\
+   x = width; // Derecha\
+   y = height; // Parte inferior\
+   ```\
+\
+3. **Centro Superior:**\
+\
+   ```javascript\
+   x = width / 2; // Centro horizontal\
+   y = 0;          // Parte superior\
+   ```\
+\
+### Modificaci\'f3n para Otras Posiciones:\
+\
+Si necesitas mover la l\'ednea a cualquier otra ubicaci\'f3n, solo cambia los valores de `x` y `y` en el bloque de la funci\'f3n `setup()`:\
+\
+```javascript\
+function setup() \{\
+  createCanvas(800, 600);\
+  x = 700; // Ajusta este valor para la posici\'f3n horizontal deseada\
+  y = 300; // Ajusta este valor para la posici\'f3n vertical deseada\
+  strokeWeight(18);\
+  frameRate(60);\
+  background('#BDC1C2');\
+\}\
+```\
+\
+### Explicaci\'f3n Detallada:\
+\
+- **Control de Movimiento (`move`):**  \
+  La variable `move` sigue controlando el inicio del movimiento despu\'e9s de 2 milisegundos, utilizando `millis()` para temporizar el cambio.\
+\
+- **Oscilaci\'f3n de Color:**  \
+  El c\'f3digo mantiene el cambio de color de la l\'ednea entre `#EAEEF0` y `#DFE4E3` cada 30 cuadros.\
+\
+- **Movimiento de la L\'ednea:**  \
+  Se sigue usando `line(x, y, x - 1, y)` para crear la ilusi\'f3n del l\'e1piz movi\'e9ndose hacia la izquierda.\
+\
+### Visualizaci\'f3n:\
+\
+Con esta modificaci\'f3n, el punto y la l\'ednea comenzar\'e1n en el centro del lado derecho del lienzo, simulando el efecto de un l\'e1piz que dibuja un punto y luego una l\'ednea continua.\
+\
+### Ejemplo Visual:\
+\
+![Animaci\'f3n del L\'e1piz en el Centro](https://via.placeholder.com/800x600/BDC1C2/EAEEF0?text=Simulaci\'f3n+de+L\'e1piz)\
+\
+Puedes hacer clic en el lienzo para ejecutar el c\'f3digo y ver c\'f3mo se mueve la l\'ednea.\
+\
+Espero que esto te ayude a posicionar la l\'ednea como desees. Si necesitas m\'e1s ayuda o ajustes adicionales, estar\'e9 encantado de ayudarte.\
+\
+
+\f2 let x;\
+let y;\
+let move = false; // Controlador para iniciar el movimiento\
+let strokeColor;\
+let timeElapsed = 0;\
+\
+function setup() \{\
+  createCanvas(1280, 800);\
+  x = 960; // Inicia en el borde derecho del lienzo\
+  y = height / 2; // Inicia en el centro vertical del lienzo\
+  strokeWeight(960);\
+  frameRate(60); // Asegura que la animaci\'f3n sea suave\
+  background('#BDC1C2');\
+\}\
+\
+function draw() \{\
+  if (!move) \{\
+    // Dibuja el punto inicial\
+    strokeColor = color('#EAEEF0');\
+    stroke(strokeColor);\
+    point(x, y);\
+    \
+    // Inicia el movimiento despu\'e9s de 2 milisegundos\
+    if (millis() > 2) \{\
+      move = true;\
+      timeElapsed = millis();\
+    \}\
+  \} else \{\
+    // Cambia el color de la l\'ednea oscilante\
+    if ((frameCount % 60) < 30) \{\
+      strokeColor = color('#EAEEF0');\
+    \} else \{\
+      strokeColor = color('#DFE4E3');\
+    \}\
+    \
+    // Dibuja la l\'ednea en movimiento\
+    stroke(strokeColor);\
+    line(x, y, x - 1, y);\
+    x++; // Mueve el punto hacia la izquierda\
+\
+    // Verifica si el tiempo de animaci\'f3n ha alcanzado 2 milisegundos\
+    if (millis() - timeElapsed >= 2) \{\
+      move = false;\
+    \}\
+  \}\
+\}\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+function setup() \{\
+  createCanvas(1280, 800);\
+  background("#EAEEF0");\
+  noStroke();\
+  frameRate(12);\
+\}\
+\
+function draw() \{\
+  // Desvanecer gradualmente el fondo\
+  fill("#EAEEF0"); \
+  rect(0, 0, width, height);\
+\
+  // Dibujar 480 tri\'e1ngulos en posiciones aleatorias\
+  for (let i = 0; i < 366; i++) \{\
+    let x1 = random(width);\
+    let y1 = random(height);\
+    let x2 = x1 + random(-96, 288);\
+    let y2 = y1 + random(-96, 288);\
+    let x3 = x1 + random(-96, 288);\
+    let y3 = y1 + random(-96, 288);\
+    \
+    fill("#2696CB");\
+    triangle(x1, y1, x2, y2, x3, y3);\
+  \}\
+\}\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+let numParts = 8;\
+let colors = ['#EAEEF0', '#2696CB', '#7DD1F5'];\
+let points = [];\
+let t = 0;\
+\
+function setup() \{\
+  createCanvas(1280, 800);\
+  // Configuraci\'f3n inicial de puntos\
+  let A = createVector(200, 400);\
+  let B = createVector(1080, 400);\
+  let C = createVector(200, 100);\
+  \
+  // Divisi\'f3n de la semirrecta AC en 8 partes iguales\
+  for (let i = 0; i <= numParts; i++) \{\
+    let pt = p5.Vector.lerp(A, C, i / numParts);\
+    points.push(pt);\
+  \}\
+  \
+  frameRate(30);\
+\}\
+\
+function draw() \{\
+  background(255);\
+  \
+  let A = createVector(200, 400);\
+  let B = createVector(1080, 400);\
+  \
+  // Dibujar el segmento AB\
+  stroke("#2696CB");\
+  strokeWeight(48);\
+  line(A.x, A.y, B.x, B.y);\
+  \
+  // Dibujar segmentos en la semirrecta AC\
+  for (let i = 0; i < numParts; i++) \{\
+    let pt = points[i];\
+    let nextPt = points[i + 1];\
+    stroke(random(colors));\
+    line(pt.x, pt.y, nextPt.x, nextPt.y);\
+  \}\
+  \
+  // Dibujar l\'edneas paralelas\
+  for (let i = 0; i < numParts; i++) \{\
+    let parallelPt = p5.Vector.lerp(A, B, i / numParts);\
+    let pt = points[i];\
+    stroke(random(colors));\
+    line(pt.x, pt.y, parallelPt.x, parallelPt.y);\
+  \}\
+  \
+  // Animaci\'f3n con movimiento de los puntos en la semirrecta AC\
+  t += 0.01;\
+  for (let i = 1; i <= numParts; i++) \{\
+    points[i].y = points[i].y + sin(t + i) * 36;\
+    points[i].x = points[i].x + cos(t + i) * 24;\
+  \}\
+\}\
+\
+******************************************************************************\
+\
+\
+let numParts = 24;\
+let colors = ['#EAEEF0', '#BDC1C2', '#DFE4E3'];\
+let points = [];\
+let t = 0;\
+\
+function setup() \{\
+  createCanvas(1280, 800);\
+  // Configuraci\'f3n inicial de puntos\
+  let A = createVector(200, 400);\
+  let B = createVector(1080, 400);\
+  let C = createVector(200, 100);\
+  \
+  // Divisi\'f3n de la semirrecta AC en 8 partes iguales\
+  for (let i = 0; i <= numParts; i++) \{\
+    let pt = p5.Vector.lerp(A, C, i / numParts);\
+    points.push(pt);\
+  \}\
+  \
+  frameRate(30);\
+\}\
+\
+function draw() \{\
+  background("#2696CB");\
+  \
+  let A = createVector(200, 400);\
+  let B = createVector(1080, 400);\
+  \
+  // Dibujar el segmento AB\
+  stroke("#2696CB");\
+  strokeWeight(24);\
+  line(A.x, A.y, B.x, B.y);\
+  \
+  // Dibujar segmentos en la semirrecta AC\
+  for (let i = 0; i < numParts; i++) \{\
+    let pt = points[i];\
+    let nextPt = points[i + 1];\
+    stroke(random(colors));\
+    line(pt.x, pt.y, nextPt.x, nextPt.y);\
+  \}\
+  \
+  // Dibujar l\'edneas paralelas\
+  for (let i = 0; i < numParts; i++) \{\
+    let parallelPt = p5.Vector.lerp(A, B, i / numParts);\
+    let pt = points[i];\
+    stroke(random(colors));\
+    line(pt.x, pt.y, parallelPt.x, parallelPt.y);\
+  \}\
+  \
+  // Animaci\'f3n con movimiento de los puntos en la semirrecta AC\
+  t += 0.01;\
+  for (let i = 1; i <= numParts; i++) \{\
+    points[i].y = points[i].y + sin(t + i) * 12;\
+    points[i].x = points[i].x + cos(t + i) * 12;\
+  \}\
+\}\
+\
+\
+\
+*******************************************************************************\
+\
+\
+\
+\
+\
+let numParts = 48;\
+let colors = ['#EAEEF0', '#2696CB', '#7DD1F5'];\
+let points = [];\
+let t = 0;\
+let spiralFactor = 1;\
+\
+function setup() \{\
+  createCanvas(1280, 800);\
+  // Configuraci\'f3n inicial de puntos\
+  let A = createVector(200, 400);\
+  let C = createVector(200, 100);\
+  \
+  // Divisi\'f3n inicial de la semirrecta AC en 8 partes iguales\
+  for (let i = 0; i <= numParts; i++) \{\
+    let pt = p5.Vector.lerp(A, C, i / numParts);\
+    points.push(pt);\
+  \}\
+  \
+  frameRate(30);\
+\}\
+\
+function draw() \{\
+  background("#EAEEF0");\
+  \
+  let A = createVector(240, 480);\
+  let B = createVector(1080, 400);\
+  \
+  // Dibujar el segmento AB\
+  stroke("#2696CB");\
+  strokeWeight(192);\
+  line(A.x, A.y, B.x, B.y);\
+  \
+  // Animaci\'f3n de los puntos en AC con espirales\
+  for (let i = 1; i <= numParts; i++) \{\
+    let angle = t + i * (TWO_PI / numParts);\
+    let r = spiralFactor * i * 5;\
+    \
+    points[i].x = A.x + r * cos(angle);\
+    points[i].y = A.y + r * sin(angle);\
+    \
+    stroke(random(colors));\
+    line(points[i].x, points[i].y, points[i - 1].x, points[i - 1].y);\
+  \}\
+  \
+  // Dibujar l\'edneas paralelas din\'e1micas desde los puntos en AC a AB\
+  for (let i = 1; i <= numParts; i++) \{\
+    let parallelPt = p5.Vector.lerp(A, B, i / numParts);\
+    stroke(random(colors));\
+    line(points[i].x, points[i].y, parallelPt.x, parallelPt.y);\
+  \}\
+  \
+  // Actualizaci\'f3n de variables para la animaci\'f3n\
+  t += 0.02;\
+  spiralFactor = 1 + 0.12 * sin(t * 2);\
+\}\
+}
