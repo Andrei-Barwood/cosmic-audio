@@ -5,7 +5,7 @@ let t = 0;
 
 function setup() {
   createCanvas(2560, 1664);
-  // Configuración inicial de 
+  // Configuración inicial de puntos
   let A = createVector(200, 400);
   let B = createVector(1080, 400);
   let C = createVector(200, 100);
