@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+
+.responsive {
+  max-width: 100%;
+  height: auto;
+}
+
 /*
 
 Acorn - Bootstrap 5 Html Laravel 8 .Net 5 Admin Template
