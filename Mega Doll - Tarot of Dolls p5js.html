@@ -186,7 +186,7 @@
               <a href="https://www.youtube.com/channel/UCzOLecdroLmGK_PTV0rBEDg" target="_blank" class="dropdown-item">YouTube</a>
               <a href="https://open.spotify.com/intl-es/artist/48B5tu8noDdmZT5N989lFs" target="_blank" class="dropdown-item">Spotify</a>
               <a href="https://music.apple.com/us/artist/mega-doll/1309458278" target="_blank" class="dropdown-item">AppleMusic</a>
-              
+
             </div>
           </div>
           <!-- Language Switch End -->
@@ -361,7 +361,7 @@
             <ul id="menu" class="menu">
               <li>
                 <a href="#dashboards">
-                  
+
                   <span class="label">mis redes sociales</span>
                 </a>
                 <ul id="dashboards">
@@ -372,7 +372,7 @@
                       <span class="label">instagram</span></a>
                       <a href="mailto:contacto@megadoll.club" target="_blank">
                       <span class="label">email</span></a>
-                      
+
                   </li>
                   <!--
                   <li>
@@ -382,7 +382,7 @@
                   </li> -->
                 </ul>
               </li>
-              <!-- 
+              <!--
                 <li>
                 <a href="#courses">
                   <i data-acorn-icon="online-class" class="icon" data-acorn-size="18"></i>
@@ -536,9 +536,9 @@
               <!-- Top Buttons Start -->
               <div class="col-12 col-sm-6 d-flex align-items-start justify-content-end">
                 <!-- Start Now Start -->
-                
 
-                
+
+
                 </a>
 
 
@@ -561,9 +561,9 @@
               <h2 class="small-title">Processing 5</h2>
               <div class="card mb-5">
                 <div class="card-img-top">
-                  <iframe src="https://editor.p5js.org/MegaDoll/sketches/4V-XpVOHC" width="1048" height="720" class="responsive"></iframe>
+                  <iframe src="https://editor.p5js.org/MegaDoll/sketches/4V-XpVOHC" width="1048" height="720"></iframe>
                   <p></p>
-                  
+
                 </div>
                 <div class="card-body">
                   <h6>The Tarot of Dolls of Dolls consta de las siguientes animaciones desarrolladas con p5js</h6>
@@ -585,7 +585,7 @@
                             </ol></p>
                             <h6 id="destino-1">Al Interior del Marco</h6>
                             <p>Al Interior del Marco es, como todas las animaciones de mega doll, basica en cuanto a su tridimensionalidad y con una expresión profunda en lo personal, en lo geometrico y en su propio existir, me da curiosidad que cuando observamos (yo se leer el tarot egipcio) las cartas el marco, en el caso de algunas versiones del tarot egipcio, porque hay dos versiones, las cartas de la arena y otro mas antiguo tambien muy interesante que lo estoy aprendiendo todavia pero, los marcos de las cartas de arena son de color arena y a veces pienso que son muy acertadas, tienen su forma de coincidir sin necesidad de forzar las cosas, pero tambien pienso en el marco. El otro día estaba caminando por mi granja y me encontré muchos cuarzos, miré al cielo y lo primero que pensé fue: "llueven estrellas" el cuarzo es una estrella, una estrella es una roca que brilla en los cielos mientras esta viva, y cuando explota y su luz se extingue caen a la tierra, desde el cielo, como la lluvia, como el agua, como la luz, como todo, dibujé una estrellita dentro del marco porque cuando invocas las cartas pensando que al interior del marco habita un cuarzo estás ubicando la protección del solicitante, hay casos diferentes y enfoques diferentes con los cuales observar a alguien, hacerse a una idea de quien ese, de donde viene, para donde va y contarle como se ve desde la perspectiva que uno esta leyendo...
-                                
+
   <!-- Primer fragmento de código con un fondo oscuro -->
   <div class="code-container">
     <button class="copy-btn" onclick="copiarCodigo('codigo1')">Copiar</button>
@@ -745,20 +745,20 @@ function draw() {
   background('#46389B'); // Fondo oscuro
   for (let i = 0; i < crosses.length; i++) {
     let cross = crosses[i];
-    
+
     // Ajustar opacidad para simular parpadeo
     cross.opacity += cross.opacityChange;
-    
+
     // Invertir dirección del cambio de opacidad si está fuera de los límites
     if (cross.opacity > 255 || cross.opacity < 50) {
       cross.opacityChange *= -1;
     }
-    
+
     // Cambiar el color intermitente cada ciertos frames
     if (frameCount % 10 === 0) { // Cambia el color cada 10 frames
       cross.colorIndex = (cross.colorIndex + 1) % colors.length; // Oscilar el índice de color
     }
-    
+
     // Asignar el color actual a la cruz
     let currentColor = colors[cross.colorIndex];
     fill(color(currentColor + hex(floor(cross.opacity), 2))); // Añadir transparencia al color
@@ -771,7 +771,7 @@ function draw() {
 function drawCross(x, y, size) {
   // Línea horizontal
   rect(x - size / 2, y - 1, size, 2);
-  
+
   // Línea vertical
   rect(x - 1, y - size / 2, 2, size);
 }    </code></pre>
@@ -1275,7 +1275,7 @@ class VortexTriangle {
 
 <h6 id="destino-9">Destino</h6>
 
-el lado izquierdo de esta animacion se ve gris, la animacion comienza desde el extremo derecho del lienzo. 
+el lado izquierdo de esta animacion se ve gris, la animacion comienza desde el extremo derecho del lienzo.
                                 de ilusión vive el hombre... navegar remando un pequeño bote que me llevará desde el infinito hacia el infinito a través del oceano al interior de alguien que me espera en otro lugar, el bote tiene una llama de fuego en la punta frontal y mi mente, tranquila, lo mantiene encendido, la luna salió mas temprano hoy... deben ser las 5:00 pm pero, porque hay luna llena desde tan temprano? hoy la noche llegá un poco antes, todo ocurre un poco antes, parece una noche extensa
                                 <p></p>
 
@@ -1307,7 +1307,7 @@ function draw() {
     strokeColor = color('#EAEEF0');
     stroke(strokeColor);
     point(x, y);
-    
+
     // Inicia el movimiento después de 2 milisegundos
     if (millis() > 2) {
       move = true;
@@ -1320,7 +1320,7 @@ function draw() {
     } else {
       strokeColor = color('#DFE4E3');
     }
-    
+
     // Dibuja la línea en movimiento
     stroke(strokeColor);
     line(x, y, x - 1, y);
@@ -1333,7 +1333,7 @@ function draw() {
   }
 }
     </code></pre>
-  </div>  
+  </div>
 
 
 
@@ -1372,7 +1372,7 @@ function draw() {
     strokeColor = color('#EAEEF0');
     stroke(strokeColor);
     point(x, y);
-    
+
     // Inicia el movimiento después de 2 milisegundos
     if (millis() > 2) {
       move = true;
@@ -1385,7 +1385,7 @@ function draw() {
     } else {
       strokeColor = color('#DFE4E3');
     }
-    
+
     // Dibuja la línea en movimiento
     stroke(strokeColor);
     line(x, y, x - 1, y);
@@ -1399,7 +1399,7 @@ function draw() {
 }
 
     </code></pre>
-  </div>  
+  </div>
 
 
 <h6 id="destino-11">arbol genealogico de un trueno</h6>
@@ -1423,7 +1423,7 @@ function setup() {
 
 function draw() {
   // Desvanecer gradualmente el fondo
-  fill("#EAEEF0"); 
+  fill("#EAEEF0");
   rect(0, 0, width, height);
 
   // Dibujar 480 triángulos en posiciones aleatorias
@@ -1434,13 +1434,13 @@ function draw() {
     let y2 = y1 + random(-96, 288);
     let x3 = x1 + random(-96, 288);
     let y3 = y1 + random(-96, 288);
-    
+
     fill("#2696CB");
     triangle(x1, y1, x2, y2, x3, y3);
   }
 }
     </code></pre>
-  </div>  
+  </div>
 
 
 
@@ -1454,7 +1454,7 @@ este loop es particularmente especial para mi, pues es parte de un sencillo de t
   <div class="code-container">
     <button class="copy-btn" onclick="copiarCodigo('codigo12')">Copiar</button>
     <pre><code id="codigo12" class="codigo-12">
-// al interior del diamante 
+// al interior del diamante
 
 let numParts = 8;
 let colors = ['#EAEEF0', '#2696CB', '#7DD1F5'];
@@ -1467,27 +1467,27 @@ function setup() {
   let A = createVector(200, 400);
   let B = createVector(1080, 400);
   let C = createVector(200, 100);
-  
+
   // División de la semirrecta AC en 8 partes iguales
   for (let i = 0; i <= numParts; i++) {
     let pt = p5.Vector.lerp(A, C, i / numParts);
     points.push(pt);
   }
-  
+
   frameRate(30);
 }
 
 function draw() {
   background(255);
-  
+
   let A = createVector(200, 400);
   let B = createVector(1080, 400);
-  
+
   // Dibujar el segmento AB
   stroke("#2696CB");
   strokeWeight(48);
   line(A.x, A.y, B.x, B.y);
-  
+
   // Dibujar segmentos en la semirrecta AC
   for (let i = 0; i < numParts; i++) {
     let pt = points[i];
@@ -1495,7 +1495,7 @@ function draw() {
     stroke(random(colors));
     line(pt.x, pt.y, nextPt.x, nextPt.y);
   }
-  
+
   // Dibujar líneas paralelas
   for (let i = 0; i < numParts; i++) {
     let parallelPt = p5.Vector.lerp(A, B, i / numParts);
@@ -1503,7 +1503,7 @@ function draw() {
     stroke(random(colors));
     line(pt.x, pt.y, parallelPt.x, parallelPt.y);
   }
-  
+
   // Animación con movimiento de los puntos en la semirrecta AC
   t += 0.01;
   for (let i = 1; i <= numParts; i++) {
@@ -1512,7 +1512,7 @@ function draw() {
   }
 }
     </code></pre>
-  </div>  
+  </div>
 
 
 <h6 id="destino-13">diamante al interior del oceano</h6>
@@ -1538,27 +1538,27 @@ function setup() {
   let A = createVector(200, 400);
   let B = createVector(1080, 400);
   let C = createVector(200, 100);
-  
+
   // División de la semirrecta AC en 8 partes iguales
   for (let i = 0; i <= numParts; i++) {
     let pt = p5.Vector.lerp(A, C, i / numParts);
     points.push(pt);
   }
-  
+
   frameRate(30);
 }
 
 function draw() {
   background("#2696CB");
-  
+
   let A = createVector(200, 400);
   let B = createVector(1080, 400);
-  
+
   // Dibujar el segmento AB
   stroke("#2696CB");
   strokeWeight(24);
   line(A.x, A.y, B.x, B.y);
-  
+
   // Dibujar segmentos en la semirrecta AC
   for (let i = 0; i < numParts; i++) {
     let pt = points[i];
@@ -1566,7 +1566,7 @@ function draw() {
     stroke(random(colors));
     line(pt.x, pt.y, nextPt.x, nextPt.y);
   }
-  
+
   // Dibujar líneas paralelas
   for (let i = 0; i < numParts; i++) {
     let parallelPt = p5.Vector.lerp(A, B, i / numParts);
@@ -1574,7 +1574,7 @@ function draw() {
     stroke(random(colors));
     line(pt.x, pt.y, parallelPt.x, parallelPt.y);
   }
-  
+
   // Animación con movimiento de los puntos en la semirrecta AC
   t += 0.01;
   for (let i = 1; i <= numParts; i++) {
@@ -1583,12 +1583,12 @@ function draw() {
   }
 }
     </code></pre>
-  </div>  
+  </div>
 
 
 <h6 id="destino-14">de Sorox y otros Planetas</h6>
 
-De los lugares que mas me ha gustado visitar uno que me marco fue un planeta llamado Sorox, es muy curioso porque es redondo como la tierra pero la superficie es agua por todas partes, agua y nubes, no me acerqué mucho porque no se como se la superficie y la verdad quería regresar a ver a valen y a laura, pero si es un planeta especial, tiene muchas nubes, en su momento pensé que ese es el destino del planeta tierra, pero después pense que quizá es un planeta que apenas se está formando, este loop esta diseñado retratando nubes superpuestas en diferentes dimensiones y en diferentes planos multidimensionales y quizá porque no, diferentes planos intergalacticos, la diferencia entre multi dimensional e intergalactico es la siguiente, multidimensional: mismo espacio distinta ubicacion; intergalactico: distinto sistema solar distinta ubicación. Asi pues no sabemos si en otra galaxia existe un planeta cuya ubicación es junto a la luna de nuestro planeta, pero podemos averiguarlo superponiendo capas y leyendo sus resultados si es ruido no hay vida y si es silencio podría ser agua, lo cual implica vida... son nubes de todas partes girando como parte de un mismo origen, el cosmos creador de cada planeta y luna, de cada estrella y cada destino 
+De los lugares que mas me ha gustado visitar uno que me marco fue un planeta llamado Sorox, es muy curioso porque es redondo como la tierra pero la superficie es agua por todas partes, agua y nubes, no me acerqué mucho porque no se como se la superficie y la verdad quería regresar a ver a valen y a laura, pero si es un planeta especial, tiene muchas nubes, en su momento pensé que ese es el destino del planeta tierra, pero después pense que quizá es un planeta que apenas se está formando, este loop esta diseñado retratando nubes superpuestas en diferentes dimensiones y en diferentes planos multidimensionales y quizá porque no, diferentes planos intergalacticos, la diferencia entre multi dimensional e intergalactico es la siguiente, multidimensional: mismo espacio distinta ubicacion; intergalactico: distinto sistema solar distinta ubicación. Asi pues no sabemos si en otra galaxia existe un planeta cuya ubicación es junto a la luna de nuestro planeta, pero podemos averiguarlo superponiendo capas y leyendo sus resultados si es ruido no hay vida y si es silencio podría ser agua, lo cual implica vida... son nubes de todas partes girando como parte de un mismo origen, el cosmos creador de cada planeta y luna, de cada estrella y cada destino
                                 <p></p>
 
 
@@ -1609,52 +1609,52 @@ function setup() {
   // Configuración inicial de puntos
   let A = createVector(200, 400);
   let C = createVector(200, 100);
-  
+
   // División inicial de la semirrecta AC en 8 partes iguales
   for (let i = 0; i <= numParts; i++) {
     let pt = p5.Vector.lerp(A, C, i / numParts);
     points.push(pt);
   }
-  
+
   frameRate(30);
 }
 
 function draw() {
   background("#EAEEF0");
-  
+
   let A = createVector(240, 480);
   let B = createVector(1080, 400);
-  
+
   // Dibujar el segmento AB
   stroke("#2696CB");
   strokeWeight(192);
   line(A.x, A.y, B.x, B.y);
-  
+
   // Animación de los puntos en AC con espirales
   for (let i = 1; i <= numParts; i++) {
     let angle = t + i * (TWO_PI / numParts);
     let r = spiralFactor * i * 5;
-    
+
     points[i].x = A.x + r * cos(angle);
     points[i].y = A.y + r * sin(angle);
-    
+
     stroke(random(colors));
     line(points[i].x, points[i].y, points[i - 1].x, points[i - 1].y);
   }
-  
+
   // Dibujar líneas paralelas dinámicas desde los puntos en AC a AB
   for (let i = 1; i <= numParts; i++) {
     let parallelPt = p5.Vector.lerp(A, B, i / numParts);
     stroke(random(colors));
     line(points[i].x, points[i].y, parallelPt.x, parallelPt.y);
   }
-  
+
   // Actualización de variables para la animación
   t += 0.02;
   spiralFactor = 1 + 0.12 * sin(t * 2);
 }
     </code></pre>
-  </div>  
+  </div>
 
 
 
@@ -1669,23 +1669,23 @@ function draw() {
     function copiarCodigo(id) {
       // Selecciona el código del elemento con el ID proporcionado
       const codigo = document.getElementById(id).innerText;
-      
+
       // Crea un elemento de texto temporal para copiar el contenido
       const tempTextArea = document.createElement('textarea');
       tempTextArea.value = codigo;
       document.body.appendChild(tempTextArea);
-      
+
       // Selecciona y copia el texto
       tempTextArea.select();
       document.execCommand('copy');
-      
+
       // Elimina el elemento de texto temporal
       document.body.removeChild(tempTextArea);
-      
+
       // Cambia el texto del botón a "Copiado!"
       const copyBtn = document.querySelector(`.copy-btn[onclick="copiarCodigo('${id}')"]`);
       copyBtn.innerText = 'Copiado!';
-      
+
       // Vuelve a cambiar el texto del botón después de 2 segundos
       setTimeout(() => {
         copyBtn.innerText = 'Copiar';
@@ -1702,7 +1702,7 @@ function draw() {
 <!--
                   <h6>Cementerio Linaje</h6>
                   <p class="mb-4">
-from Latin aqua ‘water’.                  
+from Latin aqua ‘water’.
 </p>
 <h6>Heartbreak Hotel</h6>
                   <p class="mb-4">
@@ -2310,7 +2310,7 @@ from Latin aqua ‘water’.
               <!-- Tags End -->
 
               <!-- Badges Start -->
-              <!-- 
+              <!--
               <h2 class="small-title">Badges</h2>
               <div class="card mb-2 sh-15">
                 <div class="card-body text-center align-items-center d-flex flex-row">
@@ -2695,7 +2695,7 @@ from Latin aqua ‘water’.
     <!-- Theme Settings Modal End -->
 
     <!-- Niches Modal Start -->
-    <!-- 
+    <!--
     <div
       class="modal fade modal-right scroll-out-negative"
       id="niches"
