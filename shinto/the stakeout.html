@@ -40,6 +40,7 @@
 								<li><a href="#contact">Contact</a></li> -->
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
+							<!-- <ul><li><a href="#work">into the void</a></li></ul> -->
 						</nav>
 					</header>
 
@@ -48,7 +49,7 @@
 
 						<!-- Intro -->
 							<article id="intro">
-								<h2 class="major">Parpadeas y te lo pierdes</h2>
+								<h2 class="major">St. Petersburg Stakeout</h2>
 								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
 								<p>captura la bandera, re-fácil, bien podría hacerlo yo mismo y publicarte los resultados pero eso, si, que seria un error, porque no puedo ignorarte asi nomás, ¿porque? fácil, porque hay cosas que tu desde donde estas ubicada estás observando y yo no, porque estoy en otra ubicación, asi pues lo que comparto aquí son los algoritmos, un poco como los planos pero tu decides DONDE construirlos, para efectos de un ejemplo conciso, remplaza los titulos genericos con nombres espcificos en ocasiones pueden ser urls que siempre se deben expresar de la siguiente manera <pre><code>"/.urls/soyelfrailecarlitos.com"</code></pre>
 								para el caso de que el sitio web del fraile carlitos represente una contravención agravada y escueta, por razones muy obvias tengo que explicarte que esto no tiene nada que ver con snocomm directamente, es mas bien como parte de DED en CONCORD. ¿que es CONCORD?
@@ -1020,10 +1021,460 @@ exit 0
 
 						<!-- Work -->
 							<article id="work">
-								<h2 class="major">Work</h2>
+								<h2 class="major">into the void</h2>
 								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+								<p>algoritmo en tcl que utiliza un bucle for para establecer una variable llamada var1 en la primera iteración,
+ el bucle realiza 10 iteraciones mas y en la ultima iteracion crea una imagen de disco, al interior de la imagen de disco, 
+busca archivos de audio, luego una condicional if, si la imagen de disco contiene archivos de audio, borra el contenido de toda la imagen, 
+al interior del bucle y por fuera de la condicional if otro bucle for que itera 3 veces creando 1 variable en cada iteracion, las variables 
+que crea en cada iteración están asociadas con gestión de entrada de datos por teclado, se cierra el loop:
+</p>
+								<pre><code>
+# Inicialización
+set var1 ""
+
+# Bucle principal
+for {set i 0} {$i <= 10} {incr i} {
+    if {$i == 0} {
+        # Primera iteración: establecer var1
+        set var1 "Variable inicializada en la primera iteración"
+        puts "Iteración $i: $var1"
+    } elseif {$i == 10} {
+        # Última iteración: crear una imagen de disco
+        set disk_image "disk_image.img"
+        puts "Creando imagen de disco: $disk_image"
+        
+        # Simulación de búsqueda de archivos de audio
+        set audio_files [list "song1.mp3" "song2.wav"]
+        puts "Archivos encontrados en la imagen de disco: $audio_files"
+        
+        # Condicional para borrar contenido si hay archivos de audio
+        if {[llength $audio_files] > 0} {
+            puts "La imagen contiene archivos de audio, eliminando contenido..."
+            set audio_files {}
+        } else {
+            puts "No hay archivos de audio en la imagen."
+        }
+    }
+    
+    # Segundo bucle dentro del principal
+    for {set j 0} {$j < 3} {incr j} {
+        set input_var "input_var_$j"
+        puts "Creando variable $input_var para gestión de entrada"
+        set $input_var [gets stdin]
+        puts "Valor de $input_var: [set $input_var]"
+    }
+}
+
+puts "Ejecución completada."
+
+								</code></pre>
+
+<p>Para adaptar la simulación a un entorno más realista en Tcl, podríamos usar **extensiones de Tcl** o **comandos específicos del sistema operativo**. Aunque Tcl por sí solo no tiene funciones directas 
+para detectar hardware, se puede integrar con comandos del sistema operativo mediante `exec` o extensiones como **TclX** o **Tcllib**.
+
+</p>
+
+<p>
+A continuación, propongo un enfoque para la detección del teclado en sistemas basados en Unix/Linux (ajustable para otros entornos):
+</p>
+
+<pre><code>
+# Función realista para detectar si hay teclado disponible
+proc detectKeyboard {} {
+    # Ejecutar un comando del sistema para listar dispositivos de entrada
+    # Esto es específico para sistemas Linux/Unix usando `xinput`
+    if {[catch {exec xinput --list} result]} {
+        # Si falla, asumimos que no se puede detectar el teclado
+        return 0
+    }
+
+    # Buscar en el resultado un dispositivo que sea teclado
+    if {[regexp -nocase "keyboard" $result]} {
+        return 1
+    } else {
+        return 0
+    }
+}
+
+# Función para utilizar las variables creadas
+proc useVariables {vars} {
+    puts "Usando variables dentro de la función:"
+    foreach var $vars {
+        puts "$var: [set $var]"
+    }
+}
+
+# Inicializar lista para las variables
+set variables {}
+
+# Detectar si el teclado está disponible
+set keyboard_available [detectKeyboard]
+puts "Teclado disponible: $keyboard_available"
+
+# Crear un bucle para generar 12 variables si hay teclado
+if {$keyboard_available} {
+    for {set k 0} {$k < 12} {incr k} {
+        set var_name "function_var_$k"
+        set $var_name "Valor generado por la iteración $k"
+        lappend variables $var_name
+        puts "Variable creada: $var_name"
+    }
+
+    # Llamar a la función con las variables creadas
+    useVariables $variables
+} else {
+    puts "No se detectó un teclado disponible. No se crean variables."
+}
+
+puts "Ejecución completada."
+
+</code></pre>
+
+<p>
+	<ol>
+		<li>proc detectKeyboard:
+			<ul>
+				<li>Utiliza el comando `xinput --list`, común en sistemas Linux, para buscar dispositivos de entrada.</li>
+				<li>Detecta si el nombre de algún dispositivo contiene la palabra "keyboard".</li>
+				<li>Si el comando falla (por ejemplo, si no se encuentra `xinput`), asume que no se puede detectar el teclado.</li>
+			</ul></li>
+		<li>Gestión de errores:
+			<ul>
+				<li>Se usa `catch` para manejar errores de ejecución del comando externo.</li>
+			</ul></li>
+		<li>Compatibilidad:
+			<ul>
+				<li>Si estás en Windows o macOS, este método podría no funcionar directamente. Se podrían usar herramientas como PowerShell en Windows o comandos específicos como `ioreg` en macOS.</li>
+			</ul></li>
+		<li>Variables en el bucle:
+			<ul>
+				<li>Se crean con nombres secuenciales y valores personalizados en cada iteración.</li>
+			</ul></li>
+		<li>Uso práctico:
+			<ul>
+				<li>Las variables generadas se pasan a la función `useVariables` para demostración y validación.</li>
+			</ul></li>				
+	</ol>
+
+	<ul><li>Si usas Windows, reemplaza `xinput` con un comando de PowerShell como:
+		<ul><pre><code>
+Get-PnpDevice -FriendlyName "*Keyboard*" | Where-Object { $_.Status -eq "OK" }
+		</code></pre>
+		<li>  y ejecuta el comando desde Tcl con `exec powershell -Command`.</li>
+	</ul>
+	</li></ul>
+</p>
+
+
+
+
+<p><pre><code>
+# Crear dos variables por iteración (12 iteraciones)
+puts "Creando dos variables por iteración:"
+for {set i 0} {$i < 12} {incr i} {
+    set var1 "var1_$i"
+    set var2 "var2_$i"
+    set $var1 "Valor de $var1"
+    set $var2 "Valor de $var2"
+    puts "Iteración $i: $var1=[set $var1], $var2=[set $var2]"
+}
+
+# Crear 11 variables y 3 funciones (11 iteraciones)
+puts "\nCreando variables y funciones:"
+for {set j 0} {$j < 11} {incr j} {
+    set var_name "variable_$j"
+    set $var_name "Valor de $var_name"
+    puts "Variable creada: $var_name=[set $var_name]"
+
+    # Crear funciones ficticias
+    if {$j < 3} {
+        proc "func_$j" {} "puts {Esta es func_$j}"
+        puts "Función creada: func_$j"
+    }
+}
+
+# Simular conexión TCP y fallo
+puts "\nSimulando conexión TCP:"
+set tcp_connection_success 0  ;# Cambiar a 1 si la conexión tiene éxito
+
+if {!$tcp_connection_success} {
+    # Si hay fallo, aniquilar funciones y liberar recursos
+    puts "Conexión TCP fallida. Ejecutando SIGKILL para las funciones."
+    for {set k 0} {$k < 3} {incr k} {
+        catch {rename "func_$k" ""}
+        puts "Función func_$k eliminada."
+    }
+    puts "Recursos liberados."
+} else {
+    puts "Conexión TCP exitosa."
+}
+
+puts "Ejecución completada."
+	
+</code></pre></p>
+
+<p>Explicación del Código</p>
+<ol>
+	<li>Crear dos variables por iteración (12 iteraciones)::
+		<ul>
+			<li>Bucle `for` de 12 iteraciones:** Cada iteración crea dos variables (`var1` y `var2`) con nombres dinámicos y valores asociados.</li>
+			<li>Salida: Se imprimen las variables creadas.</li>
+		</ul></li>
+	<li>Crear 11 variables y 3 funciones (11 iteraciones)::
+		<ul>
+			<li>Bucle `for` de 11 iteraciones:</li>
+			<li>Crea una variable por iteración con un nombre único y un valor.</li>
+			<li>Durante las primeras tres iteraciones, se crean tres funciones (`func_0`, `func_1`, `func_2`), simulando diferentes funcionalidades.</li>
+		</ul></li>
+	<li>Gestión de fallo en conexión TCP::
+		<ul>
+			<li>Simulación de fallo:** La variable `tcp_connection_success` simula el éxito o fallo de la conexión.</li>
+			<li>En caso de fallo:
+				<ul>
+					<li>Se elimina cada función (`func_0`, `func_1`, `func_2`) usando `rename` para redefinirlas como vacías, eliminándolas efectivamente.</li>
+					<li>Mensajes de depuración indican que las funciones han sido "aniquiladas".</li>
+					<li>Imprime un mensaje para confirmar que los recursos han sido liberados.</li>
+				</ul></li>
+		</ul></li>
+	<li>Generalidad y Modularidad::
+		<ul>
+			<li>El código es genérico y puede adaptarse a cualquier caso donde se necesite crear variables, funciones y gestionar fallos.</li>
+		</ul></li>								
+</ol>
+
+<p>Aquí tienes un ejemplo de cómo crear un bucle `for` en Tcl que itera 5 veces y, en cada iteración, crea una función que autoriza o rechaza el acceso a servicios de conectividad vía UDP. Cada función 
+puede simular la validación de credenciales o parámetros específicos:</p>
+
+<pre><code>
+# Función genérica para autorizar o rechazar acceso
+proc authorizeAccess {service_name user_credentials} {
+    if {[string equal $user_credentials "valid"]} {
+        return "Acceso autorizado a $service_name"
+    } else {
+        return "Acceso rechazado a $service_name"
+    }
+}
+
+# Crear funciones específicas en un bucle
+puts "Creando funciones para servicios de conectividad UDP:"
+for {set i 1} {$i <= 5} {incr i} {
+    # Crear el nombre del servicio y la función
+    set service_name "udp_service_$i"
+    set function_name "authorize_$service_name"
+
+    # Definir la función dinámicamente
+    proc $function_name {user_credentials} "
+        return \[authorizeAccess $service_name \$user_credentials\]
+    "
+
+    puts "Función creada: $function_name"
+}
+
+# Simular el uso de las funciones creadas
+puts "\nProbando funciones creadas:"
+foreach service_num {1 2 3 4 5} {
+    set function_name "authorize_udp_service_$service_num"
+    puts "Probando $function_name con credenciales válidas:"
+    puts "Resultado: [$function_name valid]"
+
+    puts "Probando $function_name con credenciales inválidas:"
+    puts "Resultado: [$function_name invalid]"
+}	
+</code></pre>
+
+<p>Explicación del Código</p>
+<ol>
+	<li>Función base `authorizeAccess`: 
+		<ul>
+			<li>Esta función genérica valida si las credenciales del usuario son "valid".</li>
+			<li>Si las credenciales son válidas, autoriza el acceso al servicio especificado.</li>
+			<li>Si no, rechaza el acceso.</li>
+		</ul>
+	</li>
+	<li>Creación dinámica de funciones en el bucle: 
+		<ul>
+			<li>El bucle `for` itera 5 veces y, en cada iteración:
+				<ul>
+					<li>Define un nombre de servicio, por ejemplo, `udp_service_1`, `udp_service_2`, etc.</li>
+					<li>Crea una función específica para cada servicio, como `authorize_udp_service_1`, utilizando `proc`.</li>
+					<li>Cada función específica llama a `authorizeAccess` con el nombre del servicio predefinido.</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>Simulación de uso: 
+		<ul>
+			<li>Se prueban las funciones creadas con credenciales válidas e inválidas.</li>
+			<li>Los resultados de autorización o rechazo se imprimen para cada caso.</li>
+		</ul>
+	</li>
+</ol>
+
+<p>Resultado Esperado</p>
+<pre><code>
+Creando funciones para servicios de conectividad UDP:
+Función creada: authorize_udp_service_1
+Función creada: authorize_udp_service_2
+Función creada: authorize_udp_service_3
+Función creada: authorize_udp_service_4
+Función creada: authorize_udp_service_5
+
+Probando funciones creadas:
+Probando authorize_udp_service_1 con credenciales válidas:
+Resultado: Acceso autorizado a udp_service_1
+Probando authorize_udp_service_1 con credenciales inválidas:
+Resultado: Acceso rechazado a udp_service_1
+...
+Probando authorize_udp_service_5 con credenciales válidas:
+Resultado: Acceso autorizado a udp_service_5
+Probando authorize_udp_service_5 con credenciales inválidas:
+Resultado: Acceso rechazado a udp_service_5	
+</code></pre>
+
+
+<p>Puedes personalizar la lógica de autorización en `authorizeAccess`.</p>
+
+<p>Servidor UDP con Validación de Acceso, Concurrencia y Manejo de Errores</p>
+<p>En este caso, el servidor aceptará conexiones UDP de múltiples clientes, validará si los mensajes contienen credenciales válidas y manejará los errores adecuadamente.</p>
+
+<pre><code>
+package require udp
+
+# Configuración del servidor
+set port 9999  ;# Puerto en el que escuchará el servidor
+set sock [udp_open $port]  ;# Abrir socket UDP en el puerto
+puts "Servidor UDP escuchando en el puerto $port..."
+
+# Función de validación de acceso
+proc validate_access {msg} {
+    # En este caso, asumimos que el mensaje debe ser "valid" para permitir el acceso
+    if {[string equal $msg "valid"]} {
+        return 1  ;# Acceso autorizado
+    } else {
+        return 0  ;# Acceso rechazado
+    }
+}
+
+# Función para manejar mensajes recibidos
+proc handleMessage {sock} {
+    # Leer el mensaje y la dirección del cliente
+    set msg [udp_conf $sock -peek]
+    set client_info [udp_conf $sock -recvfrom]
+
+    # Validar el mensaje recibido
+    if {[validate_access $msg]} {
+        set response "Acceso autorizado"
+    } else {
+        set response "Acceso rechazado"
+    }
+
+    # Enviar la respuesta al cliente
+    udp_sendto $sock $response $client_info
+    puts "Mensaje recibido de $client_info: $msg"
+    puts "Respuesta enviada a $client_info: $response"
+}
+
+# Función para manejar errores en el servidor
+proc handle_error {err_msg} {
+    puts "Error: $err_msg"
+    exit 1
+}
+
+# Configurar evento de lectura para manejar clientes simultáneamente
+fileevent $sock readable [list handleMessage $sock]
+
+# Loop principal del servidor
+vwait forever
+
+# Cerrar el socket al terminar (opcional)
+udp_close $sock
+	
+</code></pre>
+
+<p>Cliente UDP con Manejo de Errores</p>
+<p>El cliente enviará un mensaje y validará la respuesta, manejando también los posibles errores.</p>
+<pre><code>
+package require udp
+
+# Configuración del cliente
+set server_ip "127.0.0.1"  ;# Dirección del servidor (localhost)
+set port 9999              ;# Puerto del servidor
+set sock [udp_open]        ;# Abrir socket UDP para el cliente
+
+# Función para manejar errores en el cliente
+proc handle_error {err_msg} {
+    puts "Error: $err_msg"
+    exit 1
+}
+
+# Mensaje a enviar
+set message "valid"  ;# Enviar "valid" para autorizar el acceso (puedes cambiarlo a otro valor)
+
+# Enviar mensaje al servidor
+catch {udp_sendto $sock $message "$server_ip:$port"} errMsg
+if {$errMsg ne ""} {
+    handle_error "Error al enviar el mensaje: $errMsg"
+}
+puts "Mensaje enviado al servidor: $message"
+
+# Esperar respuesta del servidor
+catch {set response [udp_conf $sock -recvfrom]} errMsg
+if {$errMsg ne ""} {
+    handle_error "Error al recibir la respuesta: $errMsg"
+}
+puts "Respuesta recibida del servidor: $response"
+
+# Cerrar el socket
+udp_close $sock
+</code></pre>
+
+<p>Explicación del Código</p>
+<ol>
+	<li>Servidor UDP::
+		<ul>
+			<li>Validación de acceso:** La función `validate_access` valida si el mensaje contiene la palabra `"valid"`. Si es así, autoriza el acceso; de lo contrario, lo rechaza.</li>
+			<li>Concurrencia con `fileevent`:** Usamos `fileevent` para registrar el socket en modo `readable`. Esto permite que el servidor maneje múltiples clientes simultáneamente sin bloquearse.</li>
+			<li>Manejo de errores:** La función `handle_error` captura y muestra mensajes de error. Si ocurre un problema (por ejemplo, al recibir o enviar datos), el servidor lo maneja y termina la ejecución con 
+un mensaje de error.</li>
+		</ul>
+	</li>
+		<li>Cliente UDP::
+		<ul>
+			<li>Envío de mensaje y manejo de errores:** El cliente envía un mensaje al servidor y usa `catch` para capturar posibles errores al enviar o recibir datos.</li>
+			<li>Recepción de la respuesta:** Después de enviar el mensaje, espera la respuesta del servidor y la imprime en la consola. Si ocurre algún error durante la comunicación, lo maneja con `handle_error`.</li>
+		</ul>
+	</li>
+	<li>Concurrencia:
+		<ul>
+			<li>El servidor está preparado para manejar múltiples clientes sin bloquearse gracias a `fileevent`. Esto significa que puede procesar solicitudes de diferentes clientes de manera concurrente.</li>
+			<li>El cliente envía un mensaje al servidor y espera una respuesta de manera asincrónica.</li>
+		</ul>
+	</li>
+</ol>
+
+<p>Cómo Ejecutar el Servidor y el Cliente</p>
+<ol>
+	<li>Inicia el servidor primero: Abre una terminal y ejecuta el servidor UDP.
+	<ul><pre><code>
+tclsh servidor_udp.tcl		
+	</code></pre></ul>
+</li>
+
+<li>Inicia el cliente después: Abre otra terminal y ejecuta el cliente UDP.
+	<ul><pre><code>
+tclsh cliente_udp.tcl
+	</code></pre></ul>
+</li>
+</ol>
+
+<p>Resultado Esperado</p>
+<ul>
+	<li>Servidor**: Escuchará en el puerto 9999 y responderá con "Acceso autorizado" si el mensaje recibido es `"valid"`, o con "Acceso rechazado" en caso contrario.</li>
+	<li>Cliente**: Enviará un mensaje con el texto `"valid"` al servidor y mostrará la respuesta recibida.</li>
+</ul>
+
+
 							</article>
 
 						<!-- About -->
