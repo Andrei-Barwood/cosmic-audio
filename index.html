@@ -2838,6 +2838,13 @@
 
     <script src="js/common.js"></script>
     <script src="js/scripts.js"></script>
+
+    <!-- script para deshabilitar el uso de click derecho -->
+    <script>
+        document.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+        });
+    </script>
     <!-- Page Specific Scripts End -->
   </body>
 </html>
