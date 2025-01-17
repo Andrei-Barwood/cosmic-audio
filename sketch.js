@@ -28,7 +28,7 @@ function setup() {
 }
 
 function draw() {
-  background("#2696CB");
+  background("#9990F2");
   
   let A = createVector(200, 400);
   let B = createVector(1080, 400);
