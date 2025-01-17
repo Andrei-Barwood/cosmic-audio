@@ -1,0 +1,7 @@
+- bloquear el sistema que deshabilita javascript
+
+- workers on cloudflare
+	- npm run dev presenta fallos (escojer otra opción)
+		• crear con CLI
+	- https://developers.cloudflare.com/pages/configuration/headers/#prevent-your-pagesdev-deployments-showing-in-search-results
+		
