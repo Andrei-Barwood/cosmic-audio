@@ -4,4 +4,4 @@
 	- npm run dev presenta fallos (escojer otra opción)
 		• crear con CLI
 	- https://developers.cloudflare.com/pages/configuration/headers/#prevent-your-pagesdev-deployments-showing-in-search-results
-		
+	- (error) noisy-base was attached and it deployed while disconnected	
