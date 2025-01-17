@@ -2855,6 +2855,14 @@
     });
 </script>
 
+  <!-- bloquear arrastre de imagenes a escritorio o otras apps -->
+  <script>
+    document.addEventListener('dragstart', function(event) {
+        event.preventDefault();
+    });
+</script>
+
+
     <!-- Page Specific Scripts End -->
   </body>
 </html>
