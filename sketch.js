@@ -7,7 +7,7 @@
 // "al interior del cristal" del videoclip "Tarot of Dolls"
 
 let numParts = 24;
-let colors = ['#EAEEF0', '#BDC1C2', '#DFE4E3'];
+let colors = ['#C4BEF7', '#7770B9', '#DFE4E3'];
 let points = [];
 let t = 0;
 
@@ -34,7 +34,7 @@ function draw() {
   let B = createVector(1080, 400);
   
   // Dibujar el segmento AB
-  stroke("#2696CB");
+  stroke("#C4BEF7");
   strokeWeight(24);
   line(A.x, A.y, B.x, B.y);
   
