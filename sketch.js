@@ -1,11 +1,3 @@
-// estoy diseñando el nuevo sitio porque ajá el ramen, 
-// la ropa, una naranja, son temas re personales 
-// con una solucion bastante obvia, cuando actualice algo personal
-// te paso el link pero no publico la pagina, mas facil...
-
-// por ahora dale click a play para ver la animacion
-// "al interior del cristal" del videoclip "Tarot of Dolls"
-
 let numParts = 24;
 let colors = ['#C4BEF7', '#7770B9', '#DFE4E3'];
 let points = [];
