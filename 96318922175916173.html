@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+    <title>Mega Doll - Mantenimiento</title>
+
+    <meta name="title" content="Mega Doll" />
+    <meta name="description" content="music for broken doll aesthetic accidents, evident pizza stains, more accidents and oh yes forgot about music for unintended consequences" />
+
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://megadoll.club/" />
+<meta property="og:title" content="Mega Doll" />
+<meta property="og:description" content="music for broken doll aesthetic accidents, evident pizza stains, more accidents and oh yes forgot about music for unintended consequences" />
+<meta property="og:image" content="img/Mega Doll - Puntiac.jpg" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="https://megadoll.club/" />
+<meta property="twitter:title" content="Mega Doll" />
+<meta property="twitter:description" content="music for broken doll aesthetic accidents, evident pizza stains, more accidents and oh yes forgot about music for unintended consequences" />
+<meta property="twitter:image" content="img/Mega Doll - Puntiac.jpg" />
+
+
+<style>
+  audio {
+    display:none;
+  }
+</style>
+
+
+  </head>
+  <body>
+<audio id="backgroundAudio" autoplay loop>
+  <source src="synth.mp3" type="audio/mp3">
+</audio>
+
+
+
+
+
+
+
+
+
+
+
+    <main>
+    </main>
+    <script src="sketch-one.js"></script>
+
+
+
+
+
+<script>
+  const audio = document.getElementById('backgroundAudio');
+</script>
+
+
+
+
+
+
+
+
+
+    <!-- script para deshabilitar el uso de click derecho -->
+    <script>
+    // Bloquear clic derecho
+    document.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+    });
+
+    // Bloquear combinaciones de teclas (Ctrl+S, Ctrl+U, etc.)
+    document.addEventListener("keydown", (event) => {
+        if ((event.ctrlKey && event.key === 's') || (event.ctrlKey && event.key === 'u') || event.key === 'F12') {
+            event.preventDefault();
+        }
+    });
+</script>
+
+  <!-- bloquear arrastre de imagenes a escritorio o otras apps. -->
+  <script>
+    document.addEventListener('dragstart', function(event) {
+        event.preventDefault();
+    });
+</script>
+
+  </body>
+</html>
