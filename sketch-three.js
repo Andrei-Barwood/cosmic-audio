@@ -1,5 +1,5 @@
 let numParts = 24;
-let colors = ['#5F2F7A', '#E68CE3', '#CB7DD0'];
+let colors = ['#80A4EE', '#AEDEFC', '#E599F2'];
 let points = [];
 let t = 0;
 
@@ -20,13 +20,13 @@ function setup() {
 }
 
 function draw() {
-  background("#D8A0D9");
+  background("#F2C4FD");
   
   let A = createVector(200, 400);
   let B = createVector(1080, 400);
   
   // Dibujar el segmento AB
-  stroke("#282D5A");
+  stroke("#CBF5C0");
   strokeWeight(24);
   line(A.x, A.y, B.x, B.y);
   
