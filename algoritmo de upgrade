@@ -7,6 +7,10 @@
 	- (error) noisy-base was attached and it deployed while disconnected
 
 - limpiar la memoria caché de cloudflare sobre el sitio para resolver el error que no permite ver los cambios en el dominio publico
+- añadir pagina para tests de restricciones desde url en modo global del sitio 
+	- se aplico worker of secrets para restricciones a todo el sitio
+
+
 
 - CUIDADO!
 	- los headers ya se distribuyeron, cuando se restaure el sitio original se deben migrar para no eliminarlos
