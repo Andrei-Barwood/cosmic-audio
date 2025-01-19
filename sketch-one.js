@@ -1,5 +1,5 @@
 let numParts = 24;
-let colors = ['#C4BEF7', '#7770B9', '#DFE4E3'];
+let colors = ['#6E66C0', '#000000', '#DFE4E3'];
 let points = [];
 let t = 0;
 
@@ -20,7 +20,7 @@ function setup() {
 }
 
 function draw() {
-  background("#9990F2");
+  background("#9995BF");
   
   let A = createVector(200, 400);
   let B = createVector(1080, 400);
