@@ -7,3 +7,7 @@
 	- (error) noisy-base was attached and it deployed while disconnected
 
 - limpiar la memoria caché de cloudflare sobre el sitio para resolver el error que no permite ver los cambios en el dominio publico
+
+- CUIDADO!
+	- los headers ya se distribuyeron, cuando se restaure el sitio original se deben migrar para no eliminarlos
+	- radriar contiene la serie de eventos 'worker of secrets', cuando se restaure el sitio original se deben migrar para no eliminarlos
