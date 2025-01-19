@@ -1,4 +1,4 @@
-// sistema operativo inicio...
+// sistema operativo inicio
 
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
