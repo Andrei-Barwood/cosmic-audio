@@ -1,8 +1,0 @@
-name = "radriar"
-main = "src/index.js"
-compatibility_date = "2025-01-09"
-workers_dev = true
-preview_urls = true
-
-[observability]
-enabled = true

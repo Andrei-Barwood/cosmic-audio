@@ -1,13 +1,13 @@
-// sistema operativo inicio
-
-addEventListener("fetch", (event) => {
-  event.respondWith(handleRequest(event.request));
+addEventListener("fetch", event => {
+    event.respondWith(handleRequest(event.request));
 });
 
 async function handleRequest(request) {
-  const userAgent = request.headers.get("user-agent").toLowerCase();
+    const userAgent = request.headers.get("User-Agent") || "";
 
-  let redirectUrl;
+// sistema operativo inicio
+
+ let redirectUrl;
 
   if (userAgent.includes("windows")) {
     redirectUrl = "https://www.google.com";
@@ -24,17 +24,6 @@ async function handleRequest(request) {
 
 
 // sistema operativo fin
-
-
-// restricciones comienzo
-
-
-addEventListener("fetch", event => {
-    event.respondWith(handleRequest(event.request));
-});
-
-async function handleRequest(request) {
-    const userAgent = request.headers.get("User-Agent") || "";
 
     // Bloquear curl y wget
     const blockedAgents = ["curl", "wget"];
@@ -56,12 +45,10 @@ async function handleRequest(request) {
         // Insertar script en el HTML
         const blockScripts = `
             <script>
-                // Bloquear menú contextual
+                console.log('Blocker script cargado');
                 document.addEventListener('contextmenu', event => event.preventDefault());
-
-                // Bloquear acceso al código fuente (Ctrl+U y Ctrl+Shift+I)
                 document.addEventListener('keydown', event => {
-                    if (event.ctrlKey && (event.key === 'u' || event.key === 'U' || event.key === 'i' || event.key === 'I' || event.key === 's' | event.key 'F12')) {
+                    if (event.ctrlKey && (event.key === 'u' || event.key === 'U' || event.key === 'i' || event.key === 'I' || event.key === 's' || event.key === 'F12')) {
                         event.preventDefault();
                     }
                 });
@@ -80,5 +67,3 @@ async function handleRequest(request) {
     // Para otros tipos de contenido, devolver la respuesta original
     return response;
 }
-
-// restricciones fin
