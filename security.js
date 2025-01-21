@@ -31,6 +31,8 @@ function blockAutomatedRequests() {
   }
 }
 
+/*
+
 // Detectar el sistema operativo y redirigir según corresponda
 function redirectByOS() {
   const userAgent = navigator.userAgent.toLowerCase();
@@ -50,7 +52,7 @@ function redirectByOS() {
     window.location.href = osLink;
   }
 }
-
+*/
 // Ejecutar funciones al cargar la página
 blockAutomatedRequests();
 redirectByOS();
