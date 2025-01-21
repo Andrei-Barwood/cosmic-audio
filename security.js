@@ -31,8 +31,6 @@ function blockAutomatedRequests() {
   }
 }
 
-/*
-
 // Detectar el sistema operativo y redirigir según corresponda
 function redirectByOS() {
   const userAgent = navigator.userAgent.toLowerCase();
@@ -40,11 +38,17 @@ function redirectByOS() {
 
   if (userAgent.includes('windows')) {
     osLink = 'https://www.google.com'; // Enlace para Windows
+  } else if (userAgent.includes('mac os') || userAgent.includes('macintosh')) {
+    osLink = './local-docs/index.html'; // Enlace para macOS
   } else if (userAgent.includes('linux')) {
     osLink = 'https://www.google.com'; // Enlace para Linux
   } else if (userAgent.includes('android')) {
     osLink = 'https://www.google.com'; // Enlace para Android
-  } 
+  } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+    osLink = './local-docs/index.html'; // Enlace para iOS
+  } else {
+    osLink = 'https://www.google.com'; // Enlace genérico
+  }
 
   if (osLink) {
     // Redirigir después de un breve mensaje
@@ -52,7 +56,7 @@ function redirectByOS() {
     window.location.href = osLink;
   }
 }
-*/
+
 // Ejecutar funciones al cargar la página
 blockAutomatedRequests();
-redirectByOS();
+// redirectByOS();
