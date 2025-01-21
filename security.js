@@ -38,17 +38,11 @@ function redirectByOS() {
 
   if (userAgent.includes('windows')) {
     osLink = 'https://www.google.com'; // Enlace para Windows
-  } else if (userAgent.includes('mac os') || userAgent.includes('macintosh')) {
-    osLink = 'https://megadoll.club'; // Enlace para macOS
   } else if (userAgent.includes('linux')) {
     osLink = 'https://www.google.com'; // Enlace para Linux
   } else if (userAgent.includes('android')) {
     osLink = 'https://www.google.com'; // Enlace para Android
-  } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
-    osLink = 'https://megadoll.clbu'; // Enlace para iOS
-  } else {
-    osLink = 'https://www.google.com'; // Enlace genérico
-  }
+  } 
 
   if (osLink) {
     // Redirigir después de un breve mensaje
