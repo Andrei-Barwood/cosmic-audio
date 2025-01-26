@@ -25,7 +25,7 @@ function blockAutomatedRequests() {
 
   for (let agent of blockedAgents) {
     if (userAgent.includes(agent)) {
-      document.body.innerHTML = '<h1>Acceso denegado</h1><p>Tu solicitud fue bloqueada.</p>';
+      document.body.innerHTML = '<h1>no...</h1><p>Tu solicitud fue bloqueada.</p>';
       return;
     }
   }
