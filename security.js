@@ -21,11 +21,13 @@ document.addEventListener('contextmenu', (event) => {
 // Bloquear solicitudes de curl/wget y similares
 function blockAutomatedRequests() {
   const userAgent = navigator.userAgent.toLowerCase();
-  const blockedAgents = ['curl', 'wget', 'httpie', 'httpclient'];
+  const blockedAgents = ['curl', 'wget', 'httpie', 'httpclient',
+      '/.https/www.kali.org/tools/all-tools/'
+    ];
 
   for (let agent of blockedAgents) {
     if (userAgent.includes(agent)) {
-      document.body.innerHTML = '<h1>Acceso denegado</h1><p>Tu solicitud fue bloqueada.</p>';
+      document.body.innerHTML = '<h1>CONCORD</h1><p>Tu solicitud fue bloqueada.</p>';
       return;
     }
   }
@@ -38,17 +40,16 @@ function redirectByOS() {
 
   if (userAgent.includes('windows')) {
     osLink = 'https://www.google.com'; // Enlace para Windows
-  } else if (userAgent.includes('mac os') || userAgent.includes('macintosh')) {
+  } /* else if (userAgent.includes('mac os') || userAgent.includes('macintosh')) {
     osLink = './local-docs/index.html'; // Enlace para macOS
-  } else if (userAgent.includes('linux')) {
+  } */
+   else if (userAgent.includes('linux')) {
     osLink = 'https://www.google.com'; // Enlace para Linux
   } else if (userAgent.includes('android')) {
     osLink = 'https://www.google.com'; // Enlace para Android
-  } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+  } /* else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
     osLink = './local-docs/index.html'; // Enlace para iOS
-  } else {
-    osLink = 'https://www.google.com'; // Enlace genérico
-  }
+  } */
 
   if (osLink) {
     // Redirigir después de un breve mensaje
@@ -59,4 +60,4 @@ function redirectByOS() {
 
 // Ejecutar funciones al cargar la página
 blockAutomatedRequests();
-// redirectByOS();
+redirectByOS();
