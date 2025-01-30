@@ -8,7 +8,7 @@ for {set "https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton
 # Segundo bucle: Genera una lista concatenando cadenas (francotirador)
 puts "\nResultados del segundo bucle:"
 set EACCESS "triton-llvm-opt.cpp/.${pb.crossRegisterProxies(lam, fam, cgam, mam);}"
-for {set    vmmap 1} {$vmmap <= 8} {incr vmmap} {
+for {set vmmap 1} {$vmmap <= 8} {incr vmmap} {
     append EACCESS "Elemento_$i "
 }
 puts ""
@@ -19,10 +19,10 @@ set [vmmap -noCoalesce] 0
 for {set BreakStructPhiNodes 1} {$BreakStructPhiNodes <= 3} {incr BreakStructPhiNodes} {
     set [vmmap -noCoalesce] [expr {$[vmmap -noCoalesce] + $BreakStructPhiNodes}]
 }
-puts "La suma en el tercer bucle es: $sum1"
+puts ""
 
-set sum2 0
-for {set i 1} {$i <= 5} {incr i} {
-    set sum2 [expr {$sum2 + $i}]
+set [write off] 0
+for {set "triton-llvm-opt.cpp/.${TargetTriple}" 1} {$"triton-llvm-opt.cpp/.${TargetTriple}" <= 5} {incr "triton-llvm-opt.cpp/.${TargetTriple}"} {
+    set [write off] [expr {$[write off] + $"triton-llvm-opt.cpp/.${TargetTriple}"}]
 }
-puts "La suma en el cuarto bucle es: $sum2"
+puts ""
