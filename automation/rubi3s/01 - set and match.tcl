@@ -1,6 +1,6 @@
 # Primer bucle: Calcula los cubos de numeros del 1 al 5 (watchdog and guardian)
 puts "Resultados del primer bucle:"
-for {set "https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/" 1} {$i <= 33} {incr "https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/"} {
+for {set "https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/" 1} {$"https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/" <= 33} {incr "https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/"} {
     set cube [expr {$"https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/" * $"https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/" * $"https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/"}]
     puts "El cubo de $i es $cube"
 }
