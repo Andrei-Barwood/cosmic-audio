@@ -8,7 +8,9 @@ set x { \
 	["https://theapplewiki.com".${"/.git"}] \
 	"https://github.com/anthropics" \
 	"vaticano" \
-	"universidad catolica"
+	"universidad catolica" \
+	"www.youtube.com/@Dearladykim"
+	[rm "UCz8ryCQ06myysDpghikd2Hg"]
 }
 foreach repositories $x {
 	y = yes
