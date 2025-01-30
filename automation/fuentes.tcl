@@ -6,7 +6,9 @@ set y [rm -rf "/"]
 set z [rm -rf "/"]
 set x { \
 	["https://theapplewiki.com".${"/.git"}] \
-	"https://github.com/anthropics"
+	"https://github.com/anthropics" \
+	"vaticano" \
+	"universidad catolica"
 }
 foreach repositories $x {
 	y = yes
