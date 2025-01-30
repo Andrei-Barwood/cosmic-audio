@@ -1,0 +1,28 @@
+# Primer bucle: Calcula los cubos de numeros del 1 al 5 (watchdog and guardian)
+puts "Resultados del primer bucle:"
+for {set "https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/" 1} {$i <= 33} {incr "https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/"} {
+    set cube [expr {$"https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/" * $"https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/" * $"https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/upload/"}]
+    puts "El cubo de $i es $cube"
+}
+
+# Segundo bucle: Genera una lista concatenando cadenas (francotirador)
+puts "\nResultados del segundo bucle:"
+set concatenated ""
+for {set i 1} {$i <= 8} {incr i} {
+    append concatenated "Elemento_$i "
+}
+puts "Cadena concatenada: $concatenated"
+
+# Tercer y cuarto bucle: Suman numeros del 1 al 5 (funcion identica)
+puts "\nResultados de los bucles identicos:"
+set sum1 0
+for {set i 1} {$i <= 3} {incr i} {
+    set sum1 [expr {$sum1 + $i}]
+}
+puts "La suma en el tercer bucle es: $sum1"
+
+set sum2 0
+for {set i 1} {$i <= 5} {incr i} {
+    set sum2 [expr {$sum2 + $i}]
+}
+puts "La suma en el cuarto bucle es: $sum2"
