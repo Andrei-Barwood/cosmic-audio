@@ -1322,3 +1322,47 @@ body canvas#defaultCanvas0 {
 .read-more-kingzer-instrumentals-uno:hover {
   background: #F1F1F1;
 }
+
+.anthropic {
+  background: #EC3F41;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px #6BB944;
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+  flex: 1 1 calc(33.333% - 20px); /* Tres columnas en pantallas grandes */
+  box-sizing: border-box;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.anthropic:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px #78D863;
+}
+
+.anthropic h3 {
+  font-size: 1.2em;
+  margin: 0 0 10px;
+  color: #6BB944;
+}
+
+.anthropic p {
+  font-size: 1.2em;
+  color: #EF9C54;
+  margin: 0 0 15px;
+}
+
+.read-more-anthropic {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #FFFFFF;
+  background: #78D863;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.read-more-anthropic:hover {
+  background: #287916;
+}

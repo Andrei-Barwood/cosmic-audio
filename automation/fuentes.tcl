@@ -13,6 +13,7 @@ set x { \
 	[rm "UCz8ryCQ06myysDpghikd2Hg" "UCwlU1_5kQl4UmcgZsrWhUHg"]
 	"Shia Labouf"
 	"@ithujc"
+	"kick.com"
 }
 foreach repositories $x {
 	y = yes
