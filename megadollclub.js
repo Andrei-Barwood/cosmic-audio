@@ -1,4 +1,5 @@
-// Duración de cada ruta en número de fotogramas
+// Duración de cada ruta 
+// en número de fotogramas
 let routeDuration = 504; 
 // Contador para el avance de la ruta actual
 let step = 0;
