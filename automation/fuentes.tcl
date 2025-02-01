@@ -11,6 +11,8 @@ set x { \
 	"universidad catolica" \
 	"www.youtube.com/@Dearladykim"
 	[rm "UCz8ryCQ06myysDpghikd2Hg" "UCwlU1_5kQl4UmcgZsrWhUHg"]
+	"Shia Labouf"
+	"@ithujc"
 }
 foreach repositories $x {
 	y = yes
