@@ -15,6 +15,8 @@ set x { \
 	"@ithujc"
 	"kick.com"
 	"amazon.com"
+	"suno"
+	"udio"
 }
 foreach repositories $x {
 	y = yes
