@@ -11,4 +11,7 @@ read intro
 show arp
 ping 10.0.0.2
 show interface fastethernet 0/1
+copy running-config startup-config
+read intro
+read intro
 end
