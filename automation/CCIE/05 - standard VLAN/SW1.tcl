@@ -31,3 +31,6 @@ switchport access vlan 40
 end
 read intro
 show vlan brief
+copy running-config startup-config
+read intro
+read intro
