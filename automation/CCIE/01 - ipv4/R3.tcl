@@ -18,3 +18,6 @@ exit
 read intro
 show ip interface brief
 show interface serial 0/0
+copy running-config startup-config
+read intro
+read intro
