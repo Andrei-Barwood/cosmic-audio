@@ -12,4 +12,7 @@ show arp
 ping 192.168.1.2
 show arp
 show arp
+copy running-config startup-config
+read intro
+read intro
 end
