@@ -11,3 +11,4 @@ read intro
 show arp
 ping 10.0.0.2
 show interface fastethernet 0/1
+end
