@@ -11,3 +11,6 @@ end
 read intro
 show ipv6 interface brief
 show ipv6 interface serial 0/0
+copy running-config startup-config
+read intro
+read intro
