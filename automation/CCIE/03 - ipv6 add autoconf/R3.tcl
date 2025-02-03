@@ -11,3 +11,6 @@ end
 read intro
 show ipv6 interface fastethernet 0/0
 show ipv6 interface lo0
+copy running-config startup-config
+read intro
+read intro
