@@ -12,3 +12,4 @@ show arp
 ping 192.168.1.2
 show arp
 show arp
+end
