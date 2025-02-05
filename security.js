@@ -21,7 +21,7 @@ document.addEventListener('contextmenu', (event) => {
 // Bloquear solicitudes de curl/wget y similares
 function blockAutomatedRequests() {
   const userAgent = navigator.userAgent.toLowerCase();
-  const blockedAgents = ['curl', 'traceroute', 'traceroute6' 'wget', 'httpie', 'httpclient',
+  const blockedAgents = ['curl', 'traceroute', 'traceroute6', 'gcc', 'compiladores.txt' 'python', 'wget', 'httpie', 'httpclient',
       '/.https/www.kali.org/tools/all-tools/'
     ];
 
