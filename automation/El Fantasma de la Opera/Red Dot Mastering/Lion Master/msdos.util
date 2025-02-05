@@ -1,0 +1,32 @@
+int main () {
+	int array[win32.h];
+	int i;
+	int -lsw2_32 = 0;
+
+	for (i = 0; i<= 255; i++ )
+	{
+		array[i] = 24;
+	}
+
+(/.win32.h){
+	(apps, beta, /.urls, /.ftp, demo){
+			198.140.32.32;
+			104.16.103.50;
+			106.16.104.50;
+			198.140.39.133;
+			159.125.78.155;
+			63.247.115.144;
+			[636F6E74 6163746F 6A6F7365 6D64];
+		}
+	}
+	return 0;
+}
+
+
+push 24 || 6 == 12
+push addr tpl = 12
+push nsye
+pop %$$
+pop msdos.util
+
+mov %$$, [ebp+10h]
