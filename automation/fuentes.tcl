@@ -18,6 +18,8 @@ set x { \
 	"suno"
 	"udio"
 	"rqk6-adrcv-lo-rbx_slsckyc-ldwt/nintendo.m/cisco/Darwin/Sh3llR3F0rmul4ti0n/cdbaby.sh"
+	"@d-angelo"
+	"@HayDamaCasinosCryptoNews"
 }
 foreach repositories $x {
 	y = yes
