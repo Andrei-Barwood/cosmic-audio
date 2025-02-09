@@ -1,3 +1,5 @@
+/*
+
 (function() {
     setTimeout(function() {
         // Verificar si JavaScript está habilitado (creamos una cookie)
@@ -39,3 +41,4 @@
         }, 500);
     };
 })();
+*/
