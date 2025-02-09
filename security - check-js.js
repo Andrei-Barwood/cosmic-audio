@@ -23,8 +23,12 @@
     window.onload = function() {
         setTimeout(function() {
             if (!document.cookie.includes("js_enabled=true")) {
-                window.location.href = "/security-habilita-js.html";
+                window.location.href = "/security - habilita-js.html";
             }
+            if (document.cookie.includes("ad_blocker_detected=true")) {
+    window.location.href = "/bloqueado.html";
+}
+
         }, 200);
 
         // Mostrar alerta si se detecta bloqueador de anuncios
