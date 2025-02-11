@@ -17,3 +17,6 @@ switchport trunk native vlan 99
 exit
 exit
 show vlan brief
+copy running-config startup-config
+read intro
+read intro

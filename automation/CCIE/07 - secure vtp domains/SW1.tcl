@@ -3,16 +3,16 @@ configure terminal
 no ip domain-lookup
 hostname SW1
 vlan 10
-name vlan 10
+name vlan_10
 exit
 vlan 20
-name vlan 20
+name vlan_20
 exit
 vlan 30
-name vlan 30
+name vlan_30
 exit
 vlan 40
-name vlan 40
+name vlan_40
 exit
 interface fastethernet 0/5
 switchport mode access
@@ -41,3 +41,8 @@ exit
 interface fastethernet 0/1
 switchport mode trunk
 switchport trunk native vlan 99
+exit
+exit
+copy running-config startup-config
+read intro
+read intro
