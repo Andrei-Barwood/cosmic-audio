@@ -4,6 +4,9 @@
 
 /* al final empiezan las configuraciones de clases custom para cada vista previa de cada blog */
 
+
+
+
 /* Configuración básica */
 body, html {
   margin: 0;
@@ -1365,4 +1368,50 @@ body canvas#defaultCanvas0 {
 
 .read-more-anthropic:hover {
   background: #287916;
+}
+
+
+
+.beyonce-bursatil {
+  background: #D0335C;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px #9E164C;
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+  flex: 1 1 calc(33.333% - 20px); /* Tres columnas en pantallas grandes */
+  box-sizing: border-box;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.beyonce-bursatil:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px #DAFF87;
+}
+
+.beyonce-bursatil h3 {
+  font-size: 1.2em;
+  margin: 0 0 10px;
+  color: #87D557;
+}
+
+.beyonce-bursatil p {
+  font-size: 1.2em;
+  color: #B6F677;
+  margin: 0 0 15px;
+}
+
+.read-more-beyonce-bursatil {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #AD8341;
+  background: #309438;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.read-more-beyonce-bursatil:hover {
+  background: #5EBA4A;
 }
