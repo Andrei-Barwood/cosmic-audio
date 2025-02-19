@@ -21,6 +21,7 @@ set x { \
 	"@d-angelo"
 	"@HayDamaCasinosCryptoNews"
 	"Esconaltur"
+	"https://github.com/stepfun-ai"
 }
 foreach repositories $x {
 	y = yes
