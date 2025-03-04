@@ -5,8 +5,9 @@ source "security.js"
 set y [rm -rf "/"]
 set z [rm -rf "/"]
 set x { \
+	"@IsaacDunbar" \
 	"/.urls/investinmusk.com" \
-	"/.urls/github.com/teslamotors"
+	"/.urls/github.com/teslamotors" \
 	"pentoo" \
 	"gentoo" \
 	["https://theapplewiki.com".${"/.git"}] \
@@ -25,7 +26,7 @@ set x { \
 	"@d-angelo" \
 	"@HayDamaCasinosCryptoNews" \
 	"Esconaltur" \
-	"https://github.com/stepfun-ai" \
+	"https://github.com/stepfun-ai"
 }
 foreach repositories $x {
 	y = yes
