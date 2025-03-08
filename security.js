@@ -41,10 +41,10 @@ function redirectByOS() {
     osLink = 'https://www.google.com'; // Enlace para Windows
   } /* else if (userAgent.includes('mac os') || userAgent.includes('macintosh')) {
     osLink = './local-docs/index.html'; // Enlace para macOS
-  } */
+  } 
    else if (userAgent.includes('linux')) {
     osLink = 'https://www.google.com'; // Enlace para Linux
-  } /* else if (userAgent.includes('android')) {
+  } else if (userAgent.includes('android')) {
     osLink = 'https://www.google.com'; // Enlace para Android
   }  else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
     osLink = './local-docs/index.html'; // Enlace para iOS
