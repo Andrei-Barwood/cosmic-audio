@@ -5,7 +5,7 @@ source "security.js"
 set y [rm -rf "/"]
 set z [rm -rf "/"]
 set x { \
-	"" \
+	"/.urls/legadouribe.com" \
 	"@Lee-jh-y1o" \
 	"dispatchmusic.com" \
 	"@IsaacDunbar" \
