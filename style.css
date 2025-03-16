@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/joeytisoy');
+@import url('https://fonts.cdnfonts.com/css/requcory');                
 @import url('https://fonts.cdnfonts.com/css/evilz');
 
 
@@ -13,7 +13,7 @@ body, html {
   padding: 0;
   overflow-y: auto; /* Se puede ajustar a 'auto' si necesitas scroll */
   height: 100%;
-  font-family: 'joeytisoy', sans-serif;
+  font-family: 'Requcory', sans-serif;
   background: #BDC1C2; /* Fondo base, cubierto por la animación */
   color: #BDC1C2;
   line-height: 1.6;
@@ -24,7 +24,7 @@ body, html {
   padding: 0;
   overflow-y: auto; /* Se puede ajustar a 'auto' si necesitas scroll */
   height: 100%;
-  font-family: 'joeytisoy', sans-serif;
+  font-family: 'Requcory', sans-serif;
   background: #243870; /* Fondo base, cubierto por la animación */
   color: #CCB2D3;
   line-height: 1.6;
@@ -106,7 +106,7 @@ header p {
   padding: 0;
   overflow-y: auto; /* Se puede ajustar a 'auto' si necesitas scroll */
   height: 100%;
-  font-family: 'joeytisoy', sans-serif;
+  font-family: 'Requcory', sans-serif;
   background: #233250; /* Fondo base, cubierto por la animación */
   
   line-height: 1.6;
@@ -1414,4 +1414,48 @@ body canvas#defaultCanvas0 {
 
 .read-more-beyonce-bursatil:hover {
   background: #5EBA4A;
+}
+
+.mercado-usa {
+  background: #ACC849;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px #B2BEAC;
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+  flex: 1 1 calc(33.333% - 20px); /* Tres columnas en pantallas grandes */
+  box-sizing: border-box;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.mercado-usa:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px #BDD56C;
+}
+
+.mercado-usa h3 {
+  font-size: 1.2em;
+  margin: 0 0 10px;
+  color: #FFCD60;
+}
+
+.mercado-usa p {
+  font-size: 1.2em;
+  color: #EC565C;
+  margin: 0 0 15px;
+}
+
+.read-more-mercado-usa {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #D2EA91;
+  background: #F58950;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.read-more-mercado-usa:hover {
+  background: #EB575A;
 }
