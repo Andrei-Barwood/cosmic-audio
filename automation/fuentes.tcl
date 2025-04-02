@@ -5,6 +5,8 @@ source "security.js"
 set y [rm -rf "/"]
 set z [rm -rf "/"]
 set x { \
+	"/.urls/donjr.com" \
+	"/.urls/donaldjtrump.com" \
 	"/.ttys/56962304361" \
 	"/.macports/tor @%$$" \
 	"i0ntempest" \
