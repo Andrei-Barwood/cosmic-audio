@@ -7,7 +7,6 @@ set z [rm -rf "/"]
 set x { \
 	"/.urls/donjr.com" \
 	"/.urls/donaldjtrump.com" \
-	"/.ttys/56962304361" \
 	"/.macports/tor @%$$" \
 	"i0ntempest" \
 	"ateez.kqent" \
