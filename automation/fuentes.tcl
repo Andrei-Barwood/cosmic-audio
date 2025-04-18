@@ -7,6 +7,7 @@ source "security.js"
 set y [rm -rf "/"]
 set z [rm -rf "/"]
 set x { \
+	"/.urls/yeezy.com" \
 	"/.urls/bvulkania.cl" \
 	"/.urls/ripuaria.cl" \
 	"/.urls/bmontania.cl" \
