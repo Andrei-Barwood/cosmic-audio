@@ -15,7 +15,6 @@ set x { \
 	"/.urls/bandinia.cl" \
 	"/.urls/baraucania.cl" \
 	"/.urls/germania-bonn.de" \
-	"/.ttys/56962304361" \
 	"@pastelmint_mrremoved" \
 	"/.urls/donjr.com" \
 	"/.urls/donaldjtrump.com" \
