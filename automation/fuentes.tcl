@@ -7,6 +7,7 @@ source "security.js"
 set y [rm -rf "/"]
 set z [rm -rf "/"]
 set x { \
+	"/.urls/bpoli.duesseldorf@polizei.bund.de" \
 	"cu ~!/.ttys/49.211179276400" \
 	"cu ~/.ttys/31.628319501" \
 	"/.urls/solitudestudios.nl" \
