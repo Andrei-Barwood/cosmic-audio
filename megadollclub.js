@@ -1,182 +1,247 @@
-// Array para almacenar la paleta de colores
-        let palette = [];
+let curves = []; // Array para almacenar todas las curvas
+        let maxCurves = 12; // Número máximo de curvas en pantalla
+        let curveSpawnInterval = 24; // Intervalo de tiempo (en frames) para generar nuevas curvas
+        let lastCurveSpawnTime = 0;
 
-        // Variables para los colores actuales de las líneas (interpolados)
-        let currentLineColor1;
-        let currentLineColor2;
+        // Nueva paleta de colores en RGB
+        const colorPalette = [
+            [199, 172, 189],
+            [188, 114, 143],
+            [135, 127, 130],
+            [1, 0, 0] // Este color se usará principalmente para el fondo, pero también puede aparecer en las curvas
+        ];
 
-        // Variables para los colores de inicio y destino de la interpolación
-        let startLineColor1;
-        let targetLineColor1;
-        let startLineColor2;
-        let targetLineColor2;
+        // Clase para representar una curva individual
+        class Curve {
+            constructor() {
+                this.type = floor(random(3)); // 0: arc, 1: bezier, 2: quadratic
+                this.points = []; // Puntos de control o parámetros para la curva
+                // Selecciona un color aleatorio de la paleta
+                const selectedColor = colorPalette[floor(random(colorPalette.length))];
+                this.color = color(selectedColor[0], selectedColor[1], selectedColor[2]);
+                this.alpha = 0; // Transparencia inicial para el efecto de aparición
+                this.state = 'appearing'; // Estado de la curva: 'appearing', 'visible', 'disappearing'
+                this.lifeSpan = random(300, 800); // Duración total de la curva en frames
+                this.currentLife = 0; // Vida actual de la curva
+                this.connectingLines = []; // Array para almacenar las líneas de conexión
+                this.lineSpawnInterval = 10; // Intervalo para generar nuevas líneas
+                this.lastLineSpawnTime = 0;
+                this.maxConnectingLines = 3; // Máximo de líneas de conexión por curva
 
-        // Variables para el color actual del fondo (interpolado)
-        let currentBackgroundColor;
-        // Variables para el color de inicio y destino del fondo
-        let startBackgroundColor;
-        let targetBackgroundColor;
+                this.initCurve(); // Inicializa los puntos de la curva según su tipo
+            }
 
-        // Variables para las coordenadas actuales del punto de intersección (interpoladas)
-        let currentIntersectionX, currentIntersectionY;
+            // Inicializa los parámetros específicos de la curva
+            initCurve() {
+                let margin = 50; // Margen para que las curvas no se salgan del borde
+                let x1 = random(margin, width - margin);
+                let y1 = random(margin, height - margin);
+                let x2 = random(margin, width - margin);
+                let y2 = random(margin, height - margin);
 
-        // Variables para las coordenadas de inicio y destino del punto de intersección
-        let startIntersectionX, startIntersectionY;
-        let targetIntersectionX, targetIntersectionY;
+                if (this.type === 0) { // Arc
+                    this.points.push(x1, y1); // Centro
+                    this.points.push(random(50, 200)); // Radio
+                    this.points.push(random(TWO_PI)); // Ángulo inicial
+                    this.points.push(random(this.points[2] + PI / 4, this.points[2] + PI * 1.5)); // Ángulo final
+                } else if (this.type === 1) { // Bezier
+                    this.points.push(x1, y1); // Punto inicial
+                    this.points.push(random(width), random(height)); // Punto de control 1
+                    this.points.push(random(width), random(height)); // Punto de control 2
+                    this.points.push(x2, y2); // Punto final
+                } else { // Quadratic
+                    this.points.push(x1, y1); // Punto inicial
+                    this.points.push(random(width), random(height)); // Punto de control
+                    this.points.push(x2, y2); // Punto final
+                }
+            }
 
-        // Variables para los ángulos actuales de las dos líneas (interpolados)
-        let currentAngle1, currentAngle2;
+            // Actualiza el estado de la curva (aparición/desaparición, vida, líneas)
+            update() {
+                this.currentLife++;
 
-        // Variables para los ángulos de inicio y destino de la interpolación
-        let startAngle1, startAngle2;
-        let targetAngle1, targetAngle2;
+                // Lógica de aparición y desaparición
+                if (this.state === 'appearing') {
+                    this.alpha += 5; // Aumenta la transparencia
+                    if (this.alpha >= 255) {
+                        this.alpha = 255;
+                        this.state = 'visible';
+                    }
+                } else if (this.state === 'visible') {
+                    if (this.currentLife > this.lifeSpan * 0.7) { // Empieza a desaparecer al 70% de su vida
+                        this.state = 'disappearing';
+                    }
+                } else if (this.state === 'disappearing') {
+                    this.alpha -= 5; // Disminuye la transparencia
+                    if (this.alpha <= 0) {
+                        this.alpha = 0;
+                        // La curva se eliminará del array 'curves' en el bucle principal
+                    }
+                }
 
-        // Variables para controlar el tiempo de la transición
-        let transitionStartTime = 0;
-        let transitionDuration = 3000; // Duración de la transición en milisegundos (3 segundos)
-        let newTargetInterval = 3000; // Intervalo para elegir nuevos objetivos (3 segundos)
+                // Generar líneas de conexión
+                if (frameCount - this.lastLineSpawnTime > this.lineSpawnInterval && this.connectingLines.length < this.maxConnectingLines) {
+                    this.generateConnectingLines();
+                    this.lastLineSpawnTime = frameCount;
+                }
 
-        /**
-         * Función de configuración de p5.js. Se ejecuta una vez al inicio.
-         */
+                // Eliminar líneas de conexión antiguas
+                if (this.connectingLines.length > 0) {
+                    this.connectingLines.forEach(connLine => connLine.alpha -= 3); // Hacer que las líneas se desvanezcan
+                    this.connectingLines = this.connectingLines.filter(connLine => connLine.alpha > 0);
+                }
+            }
+
+            // Dibuja la curva y sus líneas de conexión
+            display() {
+                push();
+                noFill();
+                stroke(this.color, this.alpha); // Establece el color de la curva con transparencia
+                strokeWeight(random(1, 4)); // Grosor de línea aleatorio
+
+                // Dibuja la curva según su tipo
+                if (this.type === 0) { // Arc
+                    arc(this.points[0], this.points[1], this.points[2] * 2, this.points[2] * 2, this.points[3], this.points[4]);
+                } else if (this.type === 1) { // Bezier
+                    bezier(this.points[0], this.points[1], this.points[2], this.points[3], this.points[4], this.points[5], this.points[6], this.points[7]);
+                } else { // Quadratic
+                    quadraticBezier(this.points[0], this.points[1], this.points[2], this.points[3], this.points[4], this.points[5]);
+                }
+
+                // Dibuja las líneas de conexión
+                this.connectingLines.forEach(connLine => {
+                    stroke(connLine.color, connLine.alpha);
+                    strokeWeight(1);
+                    line(connLine.p1.x, connLine.p1.y, connLine.p2.x, connLine.p2.y);
+                });
+                pop();
+            }
+
+            // Genera una línea de conexión
+            generateConnectingLines() {
+                let p1, p2;
+                let curveSpaceX, curveSpaceY, curveSpaceW, curveSpaceH;
+
+                // Define un espacio aproximado alrededor de la curva para los puntos "internos"
+                // Esto es una simplificación; para una detección precisa, se necesitaría la caja delimitadora real de la curva.
+                if (this.type === 0) { // Arc
+                    curveSpaceX = this.points[0] - this.points[2];
+                    curveSpaceY = this.points[1] - this.points[2];
+                    curveSpaceW = this.points[2] * 2;
+                    curveSpaceH = this.points[2] * 2;
+                } else if (this.type === 1) { // Bezier
+                    let minX = min(this.points[0], this.points[2], this.points[4], this.points[6]);
+                    let maxX = max(this.points[0], this.points[2], this.points[4], this.points[6]);
+                    let minY = min(this.points[1], this.points[3], this.points[5], this.points[7]);
+                    let maxY = max(this.points[1], this.points[3], this.points[5], this.points[7]);
+                    curveSpaceX = minX - 20;
+                    curveSpaceY = minY - 20;
+                    curveSpaceW = (maxX - minX) + 40;
+                    curveSpaceH = (maxY - minY) + 40;
+                } else { // Quadratic
+                    let minX = min(this.points[0], this.points[2], this.points[4]);
+                    let maxX = max(this.points[0], this.points[2], this.points[4]);
+                    let minY = min(this.points[1], this.points[3], this.points[5]);
+                    let maxY = max(this.points[1], this.points[3], this.points[5]);
+                    curveSpaceX = minX - 20;
+                    curveSpaceY = minY - 20;
+                    curveSpaceW = (maxX - minX) + 40;
+                    curveSpaceH = (maxY - minY) + 40;
+                }
+
+                // Asegurar que el espacio de la curva esté dentro de los límites del canvas
+                curveSpaceX = max(0, curveSpaceX);
+                curveSpaceY = max(0, curveSpaceY);
+                curveSpaceW = min(width - curveSpaceX, curveSpaceW);
+                curveSpaceH = min(height - curveSpaceY, curveSpaceH);
+
+                // Punto dentro del espacio de la curva
+                p1 = createVector(random(curveSpaceX, curveSpaceX + curveSpaceW), random(curveSpaceY, curveSpaceY + curveSpaceH));
+
+                // Punto fuera del espacio de la curva
+                let outsideAttempts = 0;
+                do {
+                    p2 = createVector(random(width), random(height));
+                    outsideAttempts++;
+                    // Evitar bucles infinitos si es imposible encontrar un punto fuera
+                    if (outsideAttempts > 1000) break;
+                } while (p2.x > curveSpaceX && p2.x < curveSpaceX + curveSpaceW && p2.y > curveSpaceY && p2.y < curveSpaceY + curveSpaceH);
+
+                // Longitud aleatoria para la línea
+                let desiredLength = random(50, 200);
+                let currentLength = p1.dist(p2);
+
+                if (currentLength > 0) {
+                    // Normalizar el vector y escalarlo a la longitud deseada
+                    let dir = p2.copy().sub(p1).normalize();
+                    p2 = p1.copy().add(dir.mult(desiredLength));
+                }
+
+                // Asegurarse de que p2 esté dentro del canvas
+                p2.x = constrain(p2.x, 0, width);
+                p2.y = constrain(p2.y, 0, height);
+
+                this.connectingLines.push({
+                    p1: p1,
+                    p2: p2,
+                    color: this.color, // Las líneas usan el mismo color de la curva
+                    alpha: 255 // Las líneas empiezan con opacidad total
+                });
+            }
+        }
+
+        // Función auxiliar para dibujar una curva cuadrática (p5.js no tiene una directamente)
+        function quadraticBezier(x1, y1, cx, cy, x2, y2) {
+            beginShape();
+            vertex(x1, y1);
+            quadraticVertex(cx, cy, x2, y2);
+            endShape();
+        }
+
         function setup() {
-            // Crea un canvas que ocupa el 80% del ancho y alto de la ventana
-            createCanvas(windowWidth, windowHeight);
-            // Define la paleta de colores proporcionada
-            palette = [
-                '#AB3266', // Rosa oscuro
-                '#F5415F', // Rosa rojizo brillante
-                '#F6B8D2', // Rosa claro
-                '#BF5D93', // Rosa apagado
-                '#A02699', // Rosa púrpura
-                '#FD41F8'  // Rosa eléctrico
-            ];
-
-            // Inicializa los colores y posiciones de inicio y destino para la primera "transición"
-            // Esto asegura que haya valores válidos al inicio.
-            startLineColor1 = color(palette[0]);
-            startLineColor2 = color(palette[1]);
-            startBackgroundColor = color(palette[2]); // Inicializa el color de fondo
-            currentBackgroundColor = startBackgroundColor; // Establece el color de fondo inicial
-
-            startIntersectionX = width / 2;
-            startIntersectionY = height / 2;
-            startAngle1 = 0;
-            startAngle2 = PI / 2;
-
-            // Llama a la función para establecer los primeros objetivos aleatorios
-            setNewRandomTargets();
+            createCanvas(windowWidth, windowHeight); // Canvas ocupa el 80% del ancho y alto de la ventana
+            background(colorPalette[3][0], colorPalette[3][1], colorPalette[3][2]); // Color de fondo oscuro (1,0,0)
+            angleMode(RADIANS); // Usar radianes para los ángulos
+            frameRate(60); // 60 frames por segundo
+            resetAnimation(); // Inicia la animación
         }
 
-        /**
-         * Función de dibujo de p5.js. Se ejecuta continuamente en un bucle.
-         */
         function draw() {
-            // Calcula el progreso de la transición (0 a 1)
-            let elapsed = millis() - transitionStartTime;
-            let lerpAmount = min(1, elapsed / transitionDuration); // Asegura que no exceda 1
+            // Fondo semi-transparente para crear un efecto de rastro
+            background(colorPalette[3][0], colorPalette[3][1], colorPalette[3][2], 30); // Usar el color 1,0,0 con transparencia
 
-            // Interpola los colores de las líneas
-            currentLineColor1 = lerpColor(startLineColor1, targetLineColor1, lerpAmount);
-            currentLineColor2 = lerpColor(startLineColor2, targetLineColor2, lerpAmount);
-
-            // Interpola el color del fondo
-            currentBackgroundColor = lerpColor(startBackgroundColor, targetBackgroundColor, lerpAmount);
-            background(currentBackgroundColor); // Aplica el color de fondo interpolado
-
-            // Interpola el punto de intersección
-            currentIntersectionX = lerp(startIntersectionX, targetIntersectionX, lerpAmount);
-            currentIntersectionY = lerp(startIntersectionY, targetIntersectionY, lerpAmount);
-
-            // Interpola los ángulos de las líneas
-            currentAngle1 = lerp(startAngle1, targetAngle1, lerpAmount);
-            currentAngle2 = lerp(startAngle2, targetAngle2, lerpAmount);
-
-            // Comprueba si ha pasado el intervalo para elegir nuevos objetivos
-            if (elapsed > newTargetInterval) {
-                setNewRandomTargets(); // Establece nuevos objetivos para la siguiente transición
-                transitionStartTime = millis(); // Reinicia el tiempo de inicio de la transición
+            // Generar nuevas curvas
+            if (frameCount - lastCurveSpawnTime > curveSpawnInterval && curves.length < maxCurves) {
+                curves.push(new Curve());
+                lastCurveSpawnTime = frameCount;
             }
 
-            strokeWeight(4); // Grosor de las líneas
+            // Actualizar y mostrar cada curva
+            for (let i = curves.length - 1; i >= 0; i--) {
+                curves[i].update();
+                curves[i].display();
 
-            // Dibuja la primera línea
-            stroke(currentLineColor1); // Establece el color interpolado de la primera línea
-            // Calcula los puntos de la línea 1 extendiéndose más allá del canvas
-            let x1 = currentIntersectionX + cos(currentAngle1) * max(width, height) * 1.5;
-            let y1 = currentIntersectionY + sin(currentAngle1) * max(width, height) * 1.5;
-            let x2 = currentIntersectionX - cos(currentAngle1) * max(width, height) * 1.5;
-            let y2 = currentIntersectionY - sin(currentAngle1) * max(width, height) * 1.5;
-            line(x1, y1, x2, y2); // Dibuja la línea
-
-            // Dibuja la segunda línea
-            stroke(currentLineColor2); // Establece el color interpolado de la segunda línea
-            // Calcula los puntos de la línea 2 extendiéndose más allá del canvas
-            let x3 = currentIntersectionX + cos(currentAngle2) * max(width, height) * 1.5;
-            let y3 = currentIntersectionY + sin(currentAngle2) * max(width, height) * 1.5;
-            let x4 = currentIntersectionX - cos(currentAngle2) * max(width, height) * 1.5;
-            let y4 = currentIntersectionY - sin(currentAngle2) * max(width, height) * 1.5;
-            line(x3, y3, x4, y4); // Dibuja la línea
-
-            // Dibuja el punto de intersección
-            fill("#EAE28B"); // Color blanco semi-transparente para el punto
-            noStroke(); // Sin borde para el punto
-            ellipse(currentIntersectionX, currentIntersectionY, 384, 384); // Dibuja un círculo en la intersección
-        }
-
-        /**
-         * Función para establecer nuevos objetivos aleatorios para la interpolación.
-         * Los valores actuales se convierten en los valores de inicio para la próxima transición.
-         */
-        function setNewRandomTargets() {
-            // Establece los colores actuales de las líneas como los colores de inicio para la próxima transición
-            startLineColor1 = currentLineColor1 || color(palette[0]); // Usa un valor por defecto si es la primera vez
-            startLineColor2 = currentLineColor2 || color(palette[1]);
-
-            // Elige dos índices de color distintos de la paleta para los nuevos objetivos de línea
-            let idx1 = floor(random(palette.length));
-            let idx2 = floor(random(palette.length));
-            while (idx1 === idx2) { // Asegura que los colores sean diferentes
-                idx2 = floor(random(palette.length));
-            }
-            targetLineColor1 = color(palette[idx1]); // Asigna el primer color objetivo
-            targetLineColor2 = color(palette[idx2]); // Asigna el segundo color objetivo
-
-            // Establece el color de fondo actual como el color de inicio para la próxima transición
-            startBackgroundColor = currentBackgroundColor || color(palette[2]);
-            // Elige un nuevo color de fondo aleatorio de la paleta
-            targetBackgroundColor = color(random(palette));
-
-            // Establece el punto de intersección actual como el punto de inicio para la próxima transición
-            startIntersectionX = currentIntersectionX || width / 2;
-            startIntersectionY = currentIntersectionY || height / 2;
-
-            // Elige un punto de intersección aleatorio dentro de un área central del canvas para el nuevo objetivo
-            targetIntersectionX = random(width * 0.25, width * 0.75);
-            targetIntersectionY = random(height * 0.25, height * 0.75);
-
-            // Establece los ángulos actuales como los ángulos de inicio para la próxima transición
-            startAngle1 = currentAngle1 || 0;
-            startAngle2 = currentAngle2 || PI / 2;
-
-            // Elige dos ángulos aleatorios para las líneas para los nuevos objetivos
-            targetAngle1 = random(TWO_PI);
-            targetAngle2 = random(TWO_PI);
-            // Asegura que los ángulos no sean paralelos o anti-paralelos para evitar líneas superpuestas
-            // y garantizar una intersección clara
-            while (abs(abs(targetAngle1 - targetAngle2) - PI) < 0.1 || abs(targetAngle1 - targetAngle2) < 0.1) {
-                targetAngle2 = random(TWO_PI); // Re-elige el segundo ángulo si es problemático
+                // Eliminar curvas que han desaparecido
+                if (curves[i].alpha <= 0 && curves[i].state === 'disappearing') {
+                    curves.splice(i, 1);
+                }
             }
         }
 
-        /**
-         * Función que se ejecuta cuando la ventana del navegador cambia de tamaño.
-         */
+        // Función para manejar el redimensionamiento de la ventana
         function windowResized() {
-            // Redimensiona el canvas para que se ajuste al 80% del nuevo tamaño de la ventana
             resizeCanvas(windowWidth * 0.8, windowHeight * 0.8);
-            // Vuelve a establecer nuevos objetivos aleatorios para asegurar que las líneas se ajusten y sean visibles
-            // y reinicia la transición para que se adapte al nuevo tamaño.
-            setNewRandomTargets();
-            transitionStartTime = millis();
+            resetAnimation(); // Reinicia la animación al redimensionar
+        }
+
+        // Función para reiniciar la animación
+        function resetAnimation() {
+            curves = []; // Vacía el array de curvas
+            lastCurveSpawnTime = 0;
+            background(colorPalette[3][0], colorPalette[3][1], colorPalette[3][2]); // Limpia el fondo con el color 1,0,0
+        }
+
+        // Reiniciar la animación al presionar cualquier tecla
+        function keyPressed() {
+            resetAnimation();
         }
