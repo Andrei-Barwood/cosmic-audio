@@ -14,7 +14,7 @@ body, html {
   overflow-y: auto; /* Se puede ajustar a 'auto' si necesitas scroll */
   height: 100%;
   font-family: 'Requcory', sans-serif;
-  background: #BDC1C2; /* Fondo base, cubierto por la animación */
+  background: #010000; /* Fondo base, cubierto por la animación */
   color: #BDC1C2;
   line-height: 1.6;
 }
@@ -248,7 +248,7 @@ header p {
 
 .nav-logo {
   font-size: 1.8em;
-  color: #FF5529;
+  color: #010000;
   text-decoration: none;
   font-family: 'Evilz', sans-serif;
                                                 
@@ -268,7 +268,7 @@ header p {
 .nav-links a {
   text-decoration: none;
   font-size: 1em;
-  color: #EAEEF0;
+  color: #010000;
   transition: color 0.2s;
 }
 
