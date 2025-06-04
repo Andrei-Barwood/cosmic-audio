@@ -14,8 +14,8 @@ body, html {
   overflow-y: auto; /* Se puede ajustar a 'auto' si necesitas scroll */
   height: 100%;
   font-family: 'Requcory', sans-serif;
-  background: #010000; /* Fondo base, cubierto por la animación */
-  color: #BDC1C2;
+  background: #eac117; /* Fondo base, cubierto por la animación */
+  color: #eac117;
   line-height: 1.6;
 }
 
@@ -248,7 +248,7 @@ header p {
 
 .nav-logo {
   font-size: 1.8em;
-  color: #010000;
+  color: #4fbcc9;
   text-decoration: none;
   font-family: 'Evilz', sans-serif;
                                                 
@@ -268,12 +268,12 @@ header p {
 .nav-links a {
   text-decoration: none;
   font-size: 1em;
-  color: #010000;
+  color: #ffffff;
   transition: color 0.2s;
 }
 
 .nav-links a:hover {
-  color: #82C1DC;
+  color: #4fbcc9;
 }
 
 /* Botón del menú hamburguesa */
