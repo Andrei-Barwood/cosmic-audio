@@ -5,10 +5,10 @@ let curves = []; // Array para almacenar todas las curvas
 
         // Nueva paleta de colores en RGB
         const colorPalette = [
-            [199, 172, 189],
-            [188, 114, 143],
-            [135, 127, 130],
-            [1, 0, 0] // Este color se usará principalmente para el fondo, pero también puede aparecer en las curvas
+            [79, 188, 201],
+            [234, 193, 23],
+            [70, 36, 22],
+            [97, 195, 206] // Este color se usará principalmente para el fondo, pero también puede aparecer en las curvas
         ];
 
         // Clase para representar una curva individual
@@ -97,7 +97,7 @@ let curves = []; // Array para almacenar todas las curvas
                 push();
                 noFill();
                 stroke(this.color, this.alpha); // Establece el color de la curva con transparencia
-                strokeWeight(random(1, 4)); // Grosor de línea aleatorio
+                strokeWeight(random(3, 6)); // Grosor de línea aleatorio
 
                 // Dibuja la curva según su tipo
                 if (this.type === 0) { // Arc
