@@ -430,6 +430,398 @@ puts "Generated Command: #{safe_grep_command}"</code></pre>
 <p></p>
             </div>
         </div>
+<button class="toggle-button">Strings: untrusted user input</button>
+        <div class="toggle-content">
+            <p>
+When implementing string interpolation in Ruby, especially in a security context, the primary concern is what kind of data you are interpolating and where that string will be used. The feature itself, known as string interpolation ("#{...}"), is a fundamental part of the language and is not inherently insecure.
+</p>
+
+            <p>The security risk arises when you interpolate untrusted user input into strings that are later used in sensitive contexts, such as:</p>
+            <p><ol>
+                <li>Generating HTML (leading to Cross-Site Scripting - XSS)</li>
+                <li>Executing shell commands (leading to Command Injection)</li>
+                <li>Constructing database queries (leading to SQL Injection)</li>
+            </ol></p>
+            <div class="code-container">
+                <button class="copy-button">Copiar</button>
+                <pre><code>
+number = 5
+"The number is #{number}"
+"The number is #{5}."
+"The number after #{number} is #{number.next}."
+"The number prior to #{number} is #{number-1}."
+"We're ##{number}!"
+</code></pre>
+            </div>
+
+<p><b>Introduction to Secure String Interpolation in Ruby</b></p>
+<p>String interpolation in Ruby ("#{...}") is a powerful and convenient feature for embedding expressions and variables into strings. While the mechanism itself is secure, it can become a vector for serious vulnerabilities if used improperly with untrusted data, such as input from a user.</p>
+
+<p>The core principle of secure interpolation is <b>never to directly embed untrusted input into strings that will be interpreted by another system</b>(like a web browser, shell, or database). Instead, you must sanitize or escape the input according to the target system's rules, or use parameterized interfaces that handle this for you.</p>
+
+<p><b>1. Cross-Site Scripting (XSS)</b></p>
+<p>This occurs when user input is interpolated into an HTML response without being properly escaped. An attacker can inject malicious scripts that run in the victim's browser.</p>
+
+<p><b>Vulnerable Example (Sinatra/Web context):</b></p>
+            
+
+            <div class="code-container">
+                <button class="copy-button">Copiar</button>
+                <pre><code>
+# for this example i omitted the script tag at the beginning of each statement
+# and left it only as empty braces <>, because the browser will complain that xss
+# is happening and will reject it, but i want to show the opposite and as an example
+# but eventually it behaves as script inside <>
+
+# An attacker provides: "<>alert('XSS');</>"
+user_comment = params[:comment]
+
+# The script is directly embedded into the HTML
+html_output = "<div>User Comment: #{user_comment}</div>"
+# => "<div>User Comment: <>alert('XSS');</></div>"
+</code></pre>
+            </div>
+
+            <p><b>Secure Solution: Escape HTML</b></p>
+            <p>
+Always escape data that will be rendered as HTML. Most web frameworks provide helpers for this. If you need to do it manually, you can use ERB::Util.html_escape.</p>
+
+            <div class="code-container">
+                <button class="copy-button">Copiar</button>
+                <pre><code>
+require 'erb'
+
+# Attacker input remains the same
+user_comment = params[:comment]
+
+# Escape the input before interpolation
+safe_comment = ERB::Util.html_escape(user_comment)
+
+html_output = "<div>User Comment: #{safe_comment}</div>"
+# => "<div>User Comment: &lt;script&gt;alert(&#39;XSS&#39;);&lt;/script&gt;</div>"                    
+                </code></pre>
+            </div>
+<p>The browser will now render the script as harmless text instead of executing it.</p>
+            
+            <p><b>2. Command Injection</b></p>
+            <p>This is one of the most dangerous vulnerabilities. It happens when user input is interpolated into a string that is executed as a shell command.</p>
+
+<p><b>Vulnerable Example</b></p>
+            <div class="code-container">
+                <button class="copy-button">Copiar</button>
+                <pre><code>
+# An attacker provides: "example.com; rm -rf /"
+hostname = params[:host]
+
+# The malicious command is concatenated and executed
+result = `ping -c 1 #{hostname}`
+                </code></pre>
+            </div>
+            
+<p>This command first pings example.com, then executes rm -rf /, a destructive command.</p>
+
+            <p><b>Secure Solution: Use Parameterized Execution</b></p>
+            <p>Never build shell commands by interpolating raw user input. Use methods like system, Open3.capture3, or Open3.popen3 that allow you to pass command arguments as separate strings. This way, the input is treated as a single, harmless argument, not as code to be executed by the shell.</p>
+            <div class="code-container">
+                <button class="copy-button">Copiar</button>
+                <pre><code>
+require 'open3'
+
+# Attacker input remains the same
+hostname = params[:host]
+
+# The input is passed as a separate argument.
+# The shell will not interpret the semicolon or other special characters.
+stdout, stderr, status = Open3.capture3("ping", "-c", "1", hostname)
+
+# This will safely fail because "example.com; rm -rf /" is not a valid hostname.
+# The `rm` command will never be executed.
+                </code></pre>
+            </div>
+
+            <p><b>3. SQL Injection</b></p>
+            <p>This occurs when user input is interpolated directly into an SQL query, allowing an attacker to alter the query's logic.
+
+</p>
+<p><b>Vulnerable Example</b></p>
+            <div class="code-container">
+                <button class="copy-button">Copiar</button>
+                <pre><code>
+# An attacker provides: "1' OR '1'='1"
+user_id = params[:id]
+
+# The query logic is broken by the injected SQL
+query = "SELECT * FROM users WHERE id = '#{user_id}'"
+# => "SELECT * FROM users WHERE id = '1' OR '1'='1'"
+
+</code></pre>
+<p>This modified query will return all users instead of just one, bypassing authorization.</p>
+
+<p><b>Secure Solution: Use Parameterized Queries (Prepared Statements)</b></p>
+<p>All modern database adapters provide a way to use placeholders (? or named placeholders) for user data. The database driver then safely substitutes the data, ensuring it cannot be interpreted as SQL code.
+
+</p>
+
+<div class="code-container">
+    <button class="copy-button">Copiar</button>
+    <pre><code>
+require 'pg' # Example using the 'pg' gem for PostgreSQL
+
+# Attacker input remains the same
+user_id = params[:id]
+
+conn = PG.connect(dbname: 'test')
+
+# Use a placeholder ($1) for the variable
+# The input is sent separately from the query
+result = conn.exec_params('SELECT * FROM users WHERE id = $1', [user_id])
+
+# The database treats the input as a single value, preventing injection.
+        
+    </code></pre>
+</div>
+
+<p><b>Conclusion: The Golden Rule</b></p>
+<p>The examples from your request are perfectly safe because they only use trusted, hard-coded data:</p>
+<div class="code-container">
+    <button class="copy-button">Copiar</button>
+    <pre><code>
+number = 5
+"The number is #{number}" # Safe - 'number' is a trusted local variable
+"We're ##{number}!"       # Safe - Same reason
+
+    </code></pre>
+</div>
+
+<p>The security risk is introduced the moment a variable contains data from an external, untrusted source. The cybersecurity-focused approach is to <b>always be aware of the data's origin</b> and <b>sanitize or parameterize it</b> before it crosses a trust boundary.</p>
+
+
+<p>The following template encapsulates the secure patterns for handling untrusted data. You can save this as a .rb file (e.g., secure_templates.rb) and require it in your projects, or use it as a guide for implementing these security controls directly in your code.</p>
+
+<div class="code-container">
+    <button class="copy-button">Copiar</button>
+    <pre><code>
+# secure_templates.rb
+#
+# This module provides a set of reusable templates for handling untrusted user
+# input securely in common scenarios. The goal is to prevent vulnerabilities
+# like Cross-Site Scripting (XSS), Command Injection, and SQL Injection.
+#
+# It also includes a higher-level pattern for allowlist-based command execution.
+
+require 'erb'
+require 'open3'
+require 'pg' # Using 'pg' as an example for database interaction.
+             # The principle of parameterized queries is the same for other
+             # gems like 'sqlite3', 'mysql2', etc.
+
+module SecureTemplates
+
+  # --- 1. HTML Generation (Preventing Cross-Site Scripting - XSS) ---
+
+  # Escapes a string for safe inclusion in an HTML body.
+  def safe_html(untrusted_string)
+    return '' if untrusted_string.nil?
+    ERB::Util.html_escape(untrusted_string)
+  end
+
+  # --- 2. Shell Command Execution (Preventing Command Injection) ---
+
+  # [MECHANISM] Safely executes a shell command with untrusted arguments.
+  # This is the low-level, secure mechanism. It ensures arguments are not
+  # interpreted as code by the shell. It does NOT validate the command itself.
+  #
+  # @param command [String] The command to execute (e.g., "ls", "ping").
+  # @param untrusted_args [Array<String>] A list of arguments from an untrusted source.
+  # @return [Hash] A hash containing stdout, stderr, and the exit status.
+  def safe_command(command, *untrusted_args)
+    stdout, stderr, status = Open3.capture3(command, *untrusted_args)
+    {
+      stdout: stdout,
+      stderr: stderr,
+      success: status.success?
+    }
+  rescue Errno::ENOENT => e
+    {
+      stdout: '',
+      stderr: "Error: Command not found - #{e.message}",
+      success: false
+    }
+  end
+
+  # --- 3. Allowlist-Based Command Execution (Layered Security) ---
+
+  # [POLICY] Generates an allowlist of commands based on a keyword search in `man`.
+  # This is used to define the *policy* of what commands are allowed to run.
+  #
+  # @param keyword [String] The keyword to search for (e.g., "network", "file").
+  # @return [Array<String>] An array of allowed command names.
+  def generate_allowlist_from_man(keyword)
+    # This is safe because `keyword` is intended to be a trusted, developer-provided string.
+    raw_output = `man -k #{Shellwords.escape(keyword)}`
+    raw_output.lines.map { |line| line.split(/[(\s,]/).first }.compact.uniq
+  end
+
+  # [POLICY + MECHANISM] Executes a command only if it's in the provided allowlist.
+  # This is the method you should typically use in your application code.
+  # It combines the allowlist policy with the safe execution mechanism.
+  #
+  # @param command [String] The command to execute, from an untrusted source.
+  # @param allowlist [Array<String>] The list of commands that are safe to run.
+  # @param untrusted_args [Array<String>] The arguments for the command.
+  # @return [Hash] The result from safe_command, or an error hash if blocked.
+  def safe_execute_with_allowlist(command, allowlist, *untrusted_args)
+    unless allowlist.include?(command)
+      return {
+        stdout: '',
+        stderr: "Security Error: The command '#{command}' is not in the allowlist.",
+        success: false
+      }
+    end
+    # If the check passes, call the secure low-level mechanism.
+    safe_command(command, *untrusted_args)
+  end
+
+
+  # --- 4. Database Queries (Preventing SQL Injection) ---
+
+  # Executes a parameterized SQL query.
+  def safe_query(db_connection, sql_query, untrusted_params)
+    db_connection.exec_params(sql_query, untrusted_params)
+  rescue PG::Error => e
+    puts "Database query failed: #{e.message}"
+    nil
+  end
+end
+
+# --- Example Usage ---
+if __FILE__ == $0
+  class App
+    include SecureTemplates
+  end
+
+  app = App.new
+
+  puts "--- Section 1: Generating an Allowlist ---"
+  # Let's generate a list of all commands related to "network".
+  NETWORK_COMMANDS_ALLOWLIST = app.generate_allowlist_from_man("network")
+  puts "Successfully generated allowlist for 'network' with #{NETWORK_COMMANDS_ALLOWLIST.length} commands."
+  # puts NETWORK_COMMANDS_ALLOWLIST.inspect # Uncomment to see the full list
+  puts "\n"
+
+
+  puts "--- Section 2: Using the Allowlist Executor ---"
+  puts "Case 1: Attempting to run a blocked command ('rm')."
+  # An attacker tries to have the app run 'rm'.
+  result1 = app.safe_execute_with_allowlist("rm", NETWORK_COMMANDS_ALLOWLIST, "-rf", "/")
+  puts "Command successful: #{result1[:success]}"
+  puts "STDERR: #{result1[:stderr]}"
+  puts "\n"
+
+  puts "Case 2: Attempting to run an allowed command ('ping')."
+  # A legitimate user wants to ping a host (untrusted input).
+  untrusted_host = "127.0.0.1"
+  result2 = app.safe_execute_with_allowlist("ping", NETWORK_COMMANDS_ALLOWLIST, "-c", "1", untrusted_host)
+  puts "Command successful: #{result2[:success]}"
+  puts "STDOUT: #{result2[:stdout].strip}"
+  puts "STDERR: #{result2[:stderr].strip}"
+  puts "\n"
+end
+
+    </code></pre>
+</div>
+
+<p>This module provides you with a concrete implementation of the security principles we've discussed. You can now use these methods as building blocks to ensure that any external data your application handles is processed safely.</p>
+
+<p>That's a very insightful question! It shows you're thinking about how to apply these security principles in a systematic and proactive way.</p>
+
+<p>To answer your question directly: Yes, you can absolutely use the logic of man -k network to inform your security strategy, but it's important to clarify the role of the safe_command method.</p>
+
+<p>The safe_command method doesn't "secure" the commands on your Mac (like ping, netstat, etc.). Instead, it provides a secure way for your Ruby application to execute those commands without creating a command injection vulnerability.</p>
+
+<p>Your idea is the perfect next step: creating an allowlist. You can programmatically get the list of valid network commands and then ensure your application only ever tries to run commands from that list.</p>
+
+<p>Here’s how you could combine your idea with the safe_command template:</p>
+
+<p><b>A Different Approach: Building an Allowlist</b></p>
+
+<p>You can write a script that runs man -k network, parses the output to get the actual command names, and then uses that list to validate any command your application wants to run.</p>
+
+<p>Here is a conceptual example of how you could implement that logic in Ruby:</p>
+
+<div class="code-container">
+    <button class="copy-button">Copiar</button>
+    <pre><code>
+require_relative 'secure_templates' # Assuming the module is in this file
+include SecureTemplates
+
+# --- Step 1: Generate the allowlist from 'man -k' ---
+# This would be done once when your application starts, or periodically.
+def generate_command_allowlist
+  # Run the command and capture its output.
+  # Note: Here we are running a hardcoded, trusted command, so using backticks is safe.
+  raw_output = `man -k network`
+
+  # Parse the output. Each line is like "command (section) - description".
+  # We just want the first word, which is the command.
+  allowed_commands = raw_output.lines.map do |line|
+    line.split(' ').first
+  end
+
+  # Clean up the list by removing nil/empty entries and duplicates.
+  allowed_commands.compact.uniq
+end
+
+# Let's generate our list.
+ALLOWED_NETWORK_COMMANDS = generate_command_allowlist
+puts "Generated Allowlist: #{ALLOWED_NETWORK_COMMANDS.inspect}"
+puts "---"
+
+
+# --- Step 2: Create a secure wrapper function ---
+# This function first checks the allowlist, then uses safe_command.
+def secure_network_executor(command_name, *untrusted_args)
+  # VALIDATE: Is the command in our list of approved network commands?
+  unless ALLOWED_NETWORK_COMMANDS.include?(command_name)
+    puts "SECURITY ALERT: Attempt to run non-whitelisted command '#{command_name}' was blocked."
+    return { success: false, stderr: "Command not allowed." }
+  end
+
+  # EXECUTE: If it's allowed, use the safe_command method to run it securely.
+  puts "Executing allowed command '#{command_name}' with arguments: #{untrusted_args.inspect}"
+  safe_command(command_name, *untrusted_args)
+end
+
+
+# --- Step 3: Use the wrapper in your application ---
+# An attacker tries to inject a malicious command.
+malicious_input_command = "rm"
+malicious_input_args = ["-rf", "/"]
+
+# Our secure wrapper blocks it.
+secure_network_executor(malicious_input_command, *malicious_input_args)
+
+puts "\n"
+
+# A legitimate user runs an allowed command.
+legitimate_command = "ping"
+legitimate_args = ["-c", "1", "localhost"] # Untrusted input from a user form
+
+# Our secure wrapper allows and executes it safely.
+secure_network_executor(legitimate_command, *legitimate_args)
+    </code></pre>
+</div>
+
+<p><ul>
+    <li><b>Your idea is excellent: </b>Using man -k network to build an allowlist is a great security practice.</li>
+    <li>safe_command <b>is the tool for execution:</b> It's the secure "how" once you've decided "what" is okay to run.</li>
+</ul>
+
+By combining these two concepts, you create a very robust defense: you not only prevent command injection in the arguments, but you also strictly limit which commands can be run in the first place.
+</p>
+
+            </div>
+        </div>        
     </div>
 
 
