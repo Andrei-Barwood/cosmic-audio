@@ -14,8 +14,8 @@ body, html {
   overflow-y: auto; /* Se puede ajustar a 'auto' si necesitas scroll */
   height: 100%;
   font-family: 'Requcory', sans-serif;
-  background: #eac117; /* Fondo base, cubierto por la animación */
-  color: #eac117;
+  background: #9C9AAD; /* Fondo base, cubierto por la animación */
+  color: #FFFFFF;
   line-height: 1.6;
 }
 
@@ -49,6 +49,7 @@ header h1 {
   font-size: 3em;
   font-weight: bold;
   margin: 0;
+  color: #43558C;
 }
 
 header p {
@@ -59,7 +60,7 @@ header p {
 /* Contenido principal y blog */
 .content, .blog-content {
   position: relative; /* Para superponerse al fondo animado */
-  max-width: 800px;
+  max-width: responsive;
   margin: 40px auto;
   background: #EAEEF0; /* Fondo coat de rarity "fill" */
   border-radius: 10px;
@@ -92,7 +93,7 @@ header p {
 
 .snocomm {
   position: relative; /* Para superponerse al fondo animado */
-  max-width: 800px;
+  max-width: responsive;
   margin: 40px auto;
   background: #132248; /* Fondo mane de twilight "outline" */
   border-radius: 10px;
@@ -173,7 +174,7 @@ header p {
 }
 
 /* Ajustes para dispositivos pequeños */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: responsive) {
   .content, .blog-content {
     margin: 20px;
     padding: 15px;
@@ -192,7 +193,7 @@ header p {
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: responsive) {
   .blog-entry {
     flex: 1 1 100%; /* Una columna en pantallas pequeñas */
   }
@@ -204,7 +205,7 @@ header p {
 .responsive {
   position: relative;
   width: 100%;
-  max-width: 800px; /* Ajusta el tamaño máximo según sea necesario */
+  max-width: responsive; /* Ajusta el tamaño máximo según sea necesario */
   margin: 20px auto;
   overflow: hidden;
   border-radius: 10px; /* Bordes redondeados opcionales */
@@ -229,13 +230,13 @@ header p {
 
 .navbar {
   width: 100%;
-  /* background-color: #7DD1F5; */
+   background-color: #F1F1F1;
   padding: 10px 20px;
-  /* box-shadow: 0 4px 6px #DFE4E3; */
+  box-shadow: 0 4px 6px #6698CA;
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: background-color 1s ease; /* Agrega suavizado a los cambios de color */
+  transition: background-color 3s ease; /* Agrega suavizado a los cambios de color */
 }
 
 .navbar-container {
@@ -248,7 +249,7 @@ header p {
 
 .nav-logo {
   font-size: 1.8em;
-  color: #4fbcc9;
+  color: #ED6C9C;
   text-decoration: none;
   font-family: 'Evilz', sans-serif;
                                                 
@@ -287,9 +288,9 @@ header p {
 
 .hamburger {
   display: block;
-  width: 25px;
+  width: 15px;
   height: 3px;
-  background: #EAEEF0;
+  background: #63D1E9;
   border-radius: 5px;
   position: relative;
 }
@@ -299,7 +300,7 @@ header p {
   content: '';
   width: 25px;
   height: 3px;
-  background: #EAEEF0;
+  background: #63D1E9;
   border-radius: 5px;
   position: absolute;
   left: 0;
@@ -327,10 +328,10 @@ header p {
 }
 
 /* Estilo para dispositivos pequeños */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: responsive) {
   .nav-links {
     flex-direction: column;
-    background-color: #2696CB;
+    background-color: #63D1E9;
     position: absolute;
     top: 50px;
     right: 20px;
@@ -1296,7 +1297,7 @@ body canvas#defaultCanvas0 {
 
 .kingzer-instrumentals-uno:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 15px #233250;
+  box-shadow: 0 6px 15px #6698CA;
 }
 
 .kingzer-instrumentals-uno h3 {
@@ -1323,7 +1324,7 @@ body canvas#defaultCanvas0 {
 }
 
 .read-more-kingzer-instrumentals-uno:hover {
-  background: #F1F1F1;
+  background: #6698CA;
 }
 
 .anthropic {
