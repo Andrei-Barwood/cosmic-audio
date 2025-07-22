@@ -7,10 +7,10 @@ let palette = [];
 function setup() {
   createCanvas(displayWidth, displayHeight, WEBGL);
   palette = [
-    color(-9, 32, 63),       // Azul oscuro
-    color(167, 147, 60),    // Amarillo/marrón
-    color("#f0dda4"),    // Verde/azulado
-    color(-244, 233, 222)    // Rosa claro
+    color("#9291A3"),       // Azul oscuro
+    color("#F1F1F1"),    // Amarillo/marrón
+    color("#233250"),    // Verde/azulado
+    color("#E8F8F9")    // Rosa claro
   ];
   
   // Ajustamos los colores negativos a valores válidos
