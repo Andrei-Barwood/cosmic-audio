@@ -821,7 +821,146 @@ By combining these two concepts, you create a very robust defense: you not only 
 </p>
 
             </div>
-        </div>        
+        </div> 
+<button class="toggle-button">Strings: i plan to substitute values into the string later, possibly multiple times with different values each time</button>
+        <div class="toggle-content">
+            <p>
+                I made this program to test my cybersecurity glossary knowledge but i don't really know if eval will make it vulnerable</p>
+            <div class="code-container">
+                <button class="copy-button">Copiar</button>
+                <pre><code>
+class String
+def substitute(binding=TOP_LEVEL_BINDING)
+    eval(%{"#{self}}, binding)
+    end
+end
+
+template = %q{Chunky #{food}!}
+
+food = 'bacon'
+template.substitute(binding)
+food = 'peanut butter'
+template.substitute(binding)
+
+food = '#{system("dir")}'
+puts template.substitute(binding)
+                </code></pre>  
+            </div>
+<p>This is a fantastic question because it gets to the very heart of injection vulnerabilities. The code you've written is a perfect, textbook example of why <b>eval</b> is often called "evil" in security circles. You've correctly identified that it's a potential problem, and you've even created the exact payload that demonstrates the vulnerability. That's top-tier defensive thinking!</p>
+
+<p>Let's break down why your original code is insecure and then build a robust, secure replacement.</p>
+
+<p>The core security flaw is this line:</p>
+<div class="code-container">
+    <button class="copy-button">Copiar</button>
+    <pre><code>
+eval(%{"#{self}}, binding)
+    </code></pre>
+</div>
+
+<p>This code tells Ruby: "Take the string <b>self</b> (the template), re-process it as if it were brand new Ruby code, and execute any <b>#{...}</b> expressions you find."</p>
+
+<p>When <b>food</b> is <b>'bacon'</b>, the result is harmless. But when <b>food</b> is <b>'#{system("dir")}'</b>, the eval call becomes:</p>
+
+<div class="code-container">
+    <button class="copy-button">Copiar</button>
+    <pre><code>
+eval(%{"Chunky #{#{system("dir")}}!"})        
+    </code></pre>
+</div>
+
+<p>Ruby executes the inner <b>#{system("dir")}</b> first, running the <b>dir</b> command on the operating system, and then embeds the output of that command into the string. This is a classic Arbitrary Code Execution vulnerability.</p>
+
+<p>To fix this, we need to use a method that performs substitution, not evaluation. The goal is to replace placeholders with data, never to execute that data as code.</p>
+
+<div class="code-container">
+    <button class="copy-button">Copiar</button>
+    <pre><code>
+# secure_templating_module.rb
+#
+# This module provides a secure alternative to eval-based string templating.
+# It avoids executing code and instead safely substitutes data into placeholders.
+
+module SecureTemplating
+
+  # Safely substitutes values into a template string using named placeholders.
+  # This method uses the built-in `String#%` operator, which is designed for
+  # safe formatting and does NOT execute code. It is the recommended way to
+  # handle string templates that involve external or untrusted data.
+  #
+  # @param template [String] A string with named placeholders, e.g., "Hello, %{name}!"
+  # @param substitutions [Hash] A hash where keys match the placeholder names.
+  # @return [String] The template with values safely substituted.
+  def safe_substitute(template, substitutions)
+    # The '%' operator performs safe substitution. It treats the values in the
+    # hash strictly as data, not as executable code.
+    template % substitutions
+  rescue KeyError => e
+    # This is good practice: handle cases where the template expects a key
+    # that wasn't provided in the substitutions hash.
+    "Error: Substitution key not found in template - #{e.message}"
+  end
+
+end
+
+# --- Example Usage ---
+
+# First, let's include the module to make the method available.
+include SecureTemplating
+
+puts "--- Step 1: Define a Secure Template ---"
+# Note the change in syntax from `#{...}` to `%{...}`.
+# This tells Ruby to expect a named placeholder for formatting.
+template = 'Chunky %{food}!'
+puts "Template: #{template}"
+puts "\n"
+
+
+puts "--- Step 2: Perform Safe Substitutions ---"
+# We provide the values in a hash, where the keys match the placeholders.
+values1 = { food: 'bacon' }
+puts "Substitution -> #{safe_substitute(template, values1)}"
+
+values2 = { food: 'peanut butter' }
+puts "Substitution -> #{safe_substitute(template, values2)}"
+puts "\n"
+
+
+puts "--- Step 3: Demonstrate Security Against Code Injection ---"
+# Here is the critical test. We use the same malicious string from your example.
+malicious_value = '#{system("dir")}'
+puts "Malicious Input: '#{malicious_value}'"
+
+values3 = { food: malicious_value }
+
+# The `safe_substitute` method will treat the malicious input as a literal string.
+# It will NOT execute the system("dir") command.
+result = safe_substitute(template, values3)
+
+puts "Result -> #{result}"
+puts "\n"
+
+puts "Verification: Was the code executed?"
+if result.include?("total") || result.include?("Directory")
+  puts "FAIL: The output suggests a command was executed."
+else
+  puts "SUCCESS: The output is the literal string. No code was executed."
+end
+        
+    </code></pre>
+</div>
+<p>This is a much more secure and robust solution. Here's a summary of the key improvements:
+<ol>
+    <li><b>No</b> <b>eval</b>: We've completely removed the <b>eval</b> call, which was the source of the vulnerability.</li>
+    <li><b>Safe Substitution Operator (%)</b>: We are now using Ruby's built-in <b>String#%</b> method with named placeholders (<b>%{food}</b>). This tool is specifically designed for safe formatting and will never execute code from its inputs.</li>
+    <li><b>Data as Data, Not Code</b>: The most important principle here is that the malicious string <b>#{system("dir")}</b> is always treated as simple text data. It gets placed into the template, but it never gets a chance to be interpreted as a command.</li>
+</ol>
+</p>
+
+<p>By making this change, you've successfully closed a critical security hole. This is exactly the kind of refactoring that strengthens an application and embodies the "Becoming a Defender" mindset. Fantastic work!</p>
+
+
+        </div>           
     </div>
 
 
