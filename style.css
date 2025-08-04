@@ -4,7 +4,19 @@
 
 /* al final empiezan las configuraciones de clases custom para cada vista previa de cada blog */
 
+/* gurmukhi */
 
+.tiro-gurmukhi-regular {
+  font-family: "Tiro Gurmukhi", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tiro-gurmukhi-regular-italic {
+  font-family: "Tiro Gurmukhi", serif;
+  font-weight: 400;
+  font-style: italic;
+}
 
 
 /* Configuración básica */
