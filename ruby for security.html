@@ -958,9 +958,368 @@ end
 </p>
 
 <p>By making this change, you've successfully closed a critical security hole. This is exactly the kind of refactoring that strengthens an application and embodies the "Becoming a Defender" mindset. Fantastic work!</p>
-
-
         </div>           
+
+<button class="toggle-button">Strings: Reversing a String</button>
+<div class="toggle-content">
+    <p>There are several real-life scenarios in Ruby where reversing a string is needed, and a handful of cases where you might need to protect the string reversal operation:</p>
+
+<p><b>Real-Life Use Cases for String Reversal in Ruby</b></p>
+<p><ul>
+    <li><b>Checking Palindromes:</b> Determining if a word or phrase is the same forward as backward requires reversing the string and comparing</li>
+    <li><b>Bioinformatics:</b> In DNA or RNA sequence analysis, reversing strings is crucial for operations like finding complementary strands</li>
+    <li><b>Text Manipulation:</b> Reversing strings is used in simple encryption or obfuscation, creating secret messages, generating unique identifiers, or formatting output for visual tricks</li>
+    <li><b>Word/Sentence Reordering:</b> Applications might reverse the order of words in a sentence for formatting or language processing tasks</li>
+    <li><b>Algorithm Design/Practice:</b> String reversal is a classic problem in interviews to test understanding of data structures, mutability, and algorithmic efficiency</li>
+    <li>Signal or Audio Processing: Certain algorithms (like circular shifts) use string or buffer reversal as part of their process</li>
+    <li><b>Legacy Interfacing:</b> Some legacy formats or encodings might require reversed string processing</li>
+</ul></p>
+
+<p><b>When Is It Important to Protect String Reversal in Ruby?</b></p>
+
+<p>In most cases, reversing a string itself isn’t a vector for attack; however, the context in which string reversal is used might create security concerns:</p>
+
+<p><ul>
+    <li><b>Obfuscation for Sensitive Data:</b> If you use string reversal as a (weak) encoding method for sensitive information (passwords, tokens), never rely on it as your only security measure. Proper cryptography should be used, and you should ensure the reversed version isn't exposed via logs, URLs, or user interfaces</li>
+    <li><b>Dynamic Code Execution:</b> If the result of a reversed string is later used as code (for example, passed to eval, send, or for method names), and any portion of the string comes from user input, attackers could manipulate the reversal to inject malicious code, leading to vulnerabilities like code injection or remote code execution</li>
+    <li><b>File Path Manipulation:</b> Using reversed strings as part of dynamically generated filenames or paths could introduce directory traversal or overwriting risks if not properly sanitized</li>
+    <li><b>User Input Handling:</b> Any time user input is reversed and then subsequently used for commands, method calls, or as part of any security logic, you must carefully validate and sanitize the input, as reversal alone does not prevent injection or bypass attacks</li>
+</ul></p>
+
+    <div class="code-container">
+        <button class="copy-button">Copiar</button>
+        <pre>
+            <code>
+s = "sdrawkcab"
+s.reverse
+
+            </code>
+        </pre>
+    </div>
+<p>The given Ruby program simply reverses a string</p>
+
+<p>It takes the string "sdrawkcab" (which itself is "backwards" spelled backwards) and returns "backwards".</p>
+
+<p><b>How to Reimplement This Ruby Program With a Cybersecurity Focus</b></p>
+<p>Instead of a trivial reverse, a cybersecurity-focused version might:</p>
+<ul>
+    <li>Treat the input string as an encrypted or obfuscated message</li>
+    <li>Use secure techniques to decrypt or validate the message</li>
+    <li>Implement defensive programming to avoid tampering or attacks (e.g., input validation, avoiding unsafe monkey patching</li>
+    <li>Employ secure coding principles to ensure integrity and confidentiality</li>
+</ul>
+
+<p>For example, rather than just reversing, the program could interpret the string as input to a secure decoding function and add integrity checks or encryption handling</p>
+
+<p><b>Real-Life Renewable Energy Industry Use Cases for a Secure Version</b></p>
+
+<p>The renewable energy sector increasingly relies on digital/control systems, IoT devices, and communication networks to operate solar panels, wind turbines, energy storage, and smart grids. These systems process and exchange critical data, which must be protected from cyber threats.</p>
+
+<p>Possible scenarios applying a "secure string processing" concept like the reverse operation, but in a more cybersecurity-aware manner</p>
+
+<ol>
+    <li><b>Secure Device Communication and Command Validation</b>
+        <ul>
+            <li>Commands sent to solar inverters, wind turbines, or energy storage units might be encoded, encrypted, or obfuscated as strings.</li>
+            <li>Reversing a string could represent decoding a command or validation token</li>
+            <li>Secure implementation would include cryptographic validation (digital signatures, encryption) instead of simple reversal</li>
+            <li>Defensive code prevents command injection or tampering, ensuring only authorized control operations happen</li>
+        </ul>
+    </li>
+    <li><b>Secure Logging and Audit Trails</b>
+        <ul>
+            <li>Logs from devices may encode or hash sensitive information</li>
+            <li>String manipulations (like reverse or decrypt) used alongside cryptographic validation enable secure audit trails that detect tampering</li>
+            <li>Integrity checks ensure logs reflect real operations, critical during post-incident investigations</li>
+        </ul>
+    </li>
+    <li><b>Data Integrity and Validation of Sensor Data</b>
+        <ul>
+            <li>Sensor data transmitted by renewable energy assets may be encoded</li>
+            <li>Reversing strings or more complex decoding functions are part of data validation to ensure authenticity</li>
+            <li>Secure implementations prevent attackers from injecting false data that could disrupt grid operations</li>
+        </ul>
+    </li>
+    <li><b>Device Authentication and Firmware Security</b>
+        <ul>
+            <li>Firmware updates or authentication tokens could use encoded strings where reversal is part of the integrity check</li>
+            <li>Secure code verifies encoded tokens strictly without exposing vulnerabilities to manipulation or replay attacks</li>
+        </ul>
+    </li>
+</ol>
+
+<p>Here is a simple example of how you can reimplement your original Ruby program in a more secure way with a cybersecurity focus. This example adds basic input validation, error handling, and simulates a more secure "decode" operation (still using reverse but wrapped with validation and integrity check):</p>
+
+    <div class="code-container">
+        <button class="copy-button">Copiar</button>
+        <pre>
+            <code>
+require 'digest'
+
+class SecureStringProcessor
+  def initialize(secret_key)
+    @secret_key = secret_key
+  end
+
+  # Validates input to only allow safe characters (letters and digits for example)
+  def valid_input?(input)
+    /\A[a-zA-Z0-9]+\z/.match?(input)
+  end
+
+  # Generates a simple integrity hash for the input concatenated with the secret key
+  def integrity_hash(input)
+    Digest::SHA256.hexdigest(input + @secret_key)
+  end
+
+  # Securely 'decode' by reversing the string only after input validation
+  # Throws error if invalid input or integrity check fails
+  def secure_decode(input, provided_hash)
+    raise "Invalid input detected" unless valid_input?(input)
+
+    calculated_hash = integrity_hash(input)
+    raise "Integrity check failed" unless calculated_hash == provided_hash
+
+    input.reverse
+  end
+end
+
+# Usage example:
+secret_key = "very_secret_key"
+processor = SecureStringProcessor.new(secret_key)
+input = "sdrawkcab"
+hash = processor.integrity_hash(input) # Normally provided alongside input by a trusted party
+
+begin
+  output = processor.secure_decode(input, hash)
+  puts "Decoded output: #{output}"
+rescue => e
+  puts "Error: #{e.message}"
+end
+
+            </code>
+        </pre>
+    </div>
+
+<ol>
+    <b>Key Points</b>
+    <li><b>Input validation</b> Only allow alphanumeric strings, preventing injection or harmful input</li>
+    <li><b>Integrity check</b> Uses SHA-256 hash with a secret key to ensure input wasn't tampered with</li>
+    <li><b>Error handling</b> Raises exceptions for invalid input or integrity failures</li>
+    <li><b>Encapsulation</b> Wraps logic in a class to manage secret key securely</li>
+</ol>
+
+<p>This is a simple demonstration of how you might start converting a trivial string reversal into a safer operation that could fit in cybersecurity-aware contexts like command or data validation in renewable energy systems or similar applications.</p>
+
+<p>Let's extend the previous Ruby program to include secure encryption and decryption in addition to the input validation and integrity checks we already have. For this, we'll use the openssl library to implement AES symmetric encryption with authentication (AES-256-GCM), which provides confidentiality and integrity.</p>
+
+        <div class="code-container">
+        <button class="copy-button">Copiar</button>
+        <pre>
+            <code>
+require 'openssl'
+require 'base64'
+require 'digest'
+
+class SecureStringProcessor
+  CIPHER_TYPE = 'aes-256-gcm'
+
+  def initialize(secret_key)
+    # Derive a fixed-length key from the secret_key (using SHA256)
+    @key = Digest::SHA256.digest(secret_key)
+  end
+
+  # Validates input to only allow safe characters (letters and digits)
+  def valid_input?(input)
+    /\A[a-zA-Z0-9]+\z/.match?(input)
+  end
+
+  # Encrypts the plaintext string, returns a Base64 encoded cipher bundle
+  # The bundle consists of: encrypted data + nonce + auth_tag
+  def encrypt(plaintext)
+    raise "Invalid input detected" unless valid_input?(plaintext)
+
+    cipher = OpenSSL::Cipher.new(CIPHER_TYPE)
+    cipher.encrypt
+    cipher.key = @key
+    nonce = cipher.random_iv
+    cipher.iv = nonce
+
+    encrypted = cipher.update(plaintext) + cipher.final
+    auth_tag = cipher.auth_tag
+
+    # Bundle all parts and Base64 encode for safe string transmission/storage
+    Base64.strict_encode64(nonce + auth_tag + encrypted)
+  end
+
+  # Decrypts the Base64 encoded cipher bundle, returning the original plaintext
+  def decrypt(encoded_ciphertext)
+    decoded = Base64.strict_decode64(encoded_ciphertext)
+
+    # Extract nonce, auth_tag, and encrypted data from the decoded bundle
+    nonce = decoded[0...12]           # GCM nonce is 12 bytes by default
+    auth_tag = decoded[12...28]       # Auth tag is 16 bytes
+    encrypted = decoded[28..-1]
+
+    cipher = OpenSSL::Cipher.new(CIPHER_TYPE)
+    cipher.decrypt
+    cipher.key = @key
+    cipher.iv = nonce
+    cipher.auth_tag = auth_tag
+
+    plaintext = cipher.update(encrypted) + cipher.final
+
+    # Validate the decrypted plaintext to ensure safe content
+    raise "Invalid decrypted content" unless valid_input?(plaintext)
+
+    plaintext
+  rescue OpenSSL::Cipher::CipherError
+    raise "Decryption failed or integrity check failed"
+  end
+end
+
+# Usage example:
+secret_key = "very_secret_key"
+processor = SecureStringProcessor.new(secret_key)
+input = "sdrawkcab"
+
+begin
+  encrypted = processor.encrypt(input)
+  puts "Encrypted data: #{encrypted}"
+
+  decrypted = processor.decrypt(encrypted)
+  puts "Decrypted output: #{decrypted} (reversed: #{decrypted.reverse})"
+rescue => e
+  puts "Error: #{e.message}"
+end
+
+            </code>
+        </pre>
+    </div>
+<ul>
+    <li>We use AES-256-GCM symmetric encryption to encrypt and decrypt strings securely. It provides authenticated encryption: the encrypted data cannot be tampered with without detection</li>
+    <li>The encryption function generates a secure random nonce (IV), encrypts the plaintext, and obtains the authentication tag</li>
+    <li>These parts (nonce + auth_tag + ciphertext) are concatenated and Base64 encoded so they can be easily transmitted as a string</li>
+    <li>The decrypt function reverses this process and verifies the auth tag during decryption</li>
+    <li>Input validation guards both plaintext and decrypted outputs, ensuring only expected safe characters</li>
+    <li>The example encrypts "sdrawkcab", prints the encrypted output, then decrypts it back and prints the original string plus its reversal</li>
+    <li>If decryption or validation fails, an exception is raised with an informative error message</li>
+</ul>
+
+<p>Let's take the previous secure string processor and integrate it with simple network communication to simulate secure command or data exchange, as commonly needed in cybersecurity for the renewable energy sector, IoT, or industrial control systems</p>
+
+<p>Below is an example of how you could use Ruby sockets for network transport, transmitting commands (encrypted and validated as before) between a client and server on the same machine. This demonstrates secure encrypted communication, integrity validation, and safe decoding of commands:</p>
+        <div class="code-container">
+        <button class="copy-button">Copiar</button>
+        <pre>
+            <code>
+require 'openssl'
+require 'base64'
+require 'digest'
+require 'socket'
+require 'timeout'
+
+class SecureStringProcessor
+  CIPHER_TYPE = 'aes-256-gcm'
+
+  def initialize(secret_key)
+    @key = Digest::SHA256.digest(secret_key)
+  end
+
+  def valid_input?(input)
+    /\A[a-zA-Z0-9]+\z/.match?(input)
+  end
+
+  def encrypt(plaintext)
+    raise "Invalid input detected" unless valid_input?(plaintext)
+    cipher = OpenSSL::Cipher.new(CIPHER_TYPE)
+    cipher.encrypt
+    cipher.key = @key
+    nonce = cipher.random_iv
+    cipher.iv = nonce
+    encrypted = cipher.update(plaintext) + cipher.final
+    auth_tag = cipher.auth_tag
+    Base64.strict_encode64(nonce + auth_tag + encrypted)
+  end
+
+  def decrypt(encoded_ciphertext)
+    decoded = Base64.strict_decode64(encoded_ciphertext)
+    nonce = decoded[0...12]
+    auth_tag = decoded[12...28]
+    encrypted = decoded[28..-1]
+    cipher = OpenSSL::Cipher.new(CIPHER_TYPE)
+    cipher.decrypt
+    cipher.key = @key
+    cipher.iv = nonce
+    cipher.auth_tag = auth_tag
+    plaintext = cipher.update(encrypted) + cipher.final
+    raise "Invalid decrypted content" unless valid_input?(plaintext)
+    plaintext
+  rescue OpenSSL::Cipher::CipherError
+    raise "Decryption failed or integrity check failed"
+  end
+end
+
+# --- Secure Command Server ---
+def start_server(secret_key, port = 4567)
+  processor = SecureStringProcessor.new(secret_key)
+  server = TCPServer.new('127.0.0.1', port)
+  puts "Secure command server started on port #{port}"
+
+  loop do
+    client = server.accept
+    data = client.gets
+    begin
+      decrypted = processor.decrypt(data.strip)
+      puts "Received valid command: #{decrypted} (reversed: #{decrypted.reverse})"
+      client.puts "Command accepted. Decoded: #{decrypted.reverse}"
+    rescue => e
+      client.puts "Error: #{e.message}"
+    end
+    client.close
+  end
+end
+
+# --- Secure Command Client ---
+def send_command(secret_key, plaintext, port = 4567)
+  processor = SecureStringProcessor.new(secret_key)
+  encrypted = processor.encrypt(plaintext)
+  socket = TCPSocket.new('127.0.0.1', port)
+  socket.puts encrypted
+  response = socket.gets
+  puts "Server response: #{response}"
+  socket.close
+end
+
+# --- Usage Example ---
+# Start the server in one terminal:
+# start_server("very_secret_key")
+#
+# In another terminal, send a command (e.g., "sdrawkcab"):
+# send_command("very_secret_key", "sdrawkcab")
+
+
+            </code>
+        </pre>
+    </div>
+<p><b>Key Concepts Illustrated</b></p>
+<ul>
+    <li><b>Confidentiality</b> is ensured by AES-256-GCM encryption</li>
+    <li><b>Integrity</b> is checked through GCM authentication tags</li>
+    <li><b>Input/output validation</b> prevents unsafe or unexpected commands on the server</li>
+    <li><b>Network communication</b> is secured end-to-end</li>
+</ul>
+<p>This pattern is analogous to remote command/control in renewable grid components, secure firmware update delivery, or authenticated device telemetry. A real system would expand on this with authentication, user/role access, message sequencing, and broader error handling.</p>
+
+<p><b>You can use these functions in two Ruby processes/terminals</b></p>
+<ul>
+    <li>Run start_server("very_secret_key") to launch the secure server</li>
+    <li>Run send_command("very_secret_key", "sdrawkcab") as the client.
+You'll see the decoded response only if the transmission is authentic and untampered.</li>
+</ul>
+</div>
+
+
+
     </div>
 
 
