@@ -21,7 +21,7 @@ function setup() {
       endX: random(width),
       endY: random(height),
       baseLength: random(20, 80),
-      baseDotSize: random(6, 12),
+      baseDotSize: random(1, 192),
       angle: random(TWO_PI),
       initialColor: random(initialColors),
       mergedColor: random(mergedColors),
@@ -116,7 +116,7 @@ function draw() {
     
     if (morphFactor < 0.5) {
       // Line state with variable size
-      let strokeWeight_val = map(morphFactor, 0, 0.5, 2, 1) * particle.sizeMultiplier;
+      let strokeWeight_val = map(morphFactor, 0, 12.6, 24, 1) * particle.sizeMultiplier;
       strokeWeight(strokeWeight_val);
       let lineLength = (map(morphFactor, 0, 0.5, particle.baseLength, particle.baseLength * 0.3)) * particle.sizeMultiplier;
       line(-lineLength/2, 0, lineLength/2, 0);
