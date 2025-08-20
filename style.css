@@ -57,6 +57,27 @@ header {
   color: #662F89;
 }
 
+.header-chrysallis {
+  text-align: center;
+  padding: 200px;
+  background: #2D89AD;
+  color: #1E5972;
+}
+
+header-chrysallis p {
+  font-size: 1.5em;
+  margin: 10px 0 0;
+  background: #2D89AD;
+  color: #1E5972;
+}
+
+header-chrysallis h1 {
+  font-size: 3em;
+  font-weight: bold;
+  margin: 0;
+  color: #00F600;
+}
+
 header h1 {
   font-size: 3em;
   font-weight: bold;
@@ -130,6 +151,68 @@ header p {
   padding: 200px;
   background: #243871;
   color: #E8F8F9;
+}
+
+/* Estilos para las vistas de chrysallis */
+
+.chrysallis-main {
+  position: relative; /* Para superponerse al fondo animado */
+  max-width: responsive;
+  margin: 40px auto;
+  background: #132248; /* Fondo mane de twilight "outline" */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 15px #EA428B;
+  z-index: 10; /* Sobre la animación */
+}
+
+.body-chrysallis {
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Se puede ajustar a 'auto' si necesitas scroll */
+  height: 100%;
+  font-family: 'Requcory', sans-serif;
+  background: #141414; /* Fondo base, cubierto por la animación */
+  
+  line-height: 1.6;
+}
+
+.header-chrysallis {
+  text-align: center;
+  padding: 200px;
+  background: #141414;
+  color: #00F600;
+}
+
+/* Contenido principal y blog */
+.content-chrysallis, .blog-content-chrysallis {
+  position: relative; /* Para superponerse al fondo animado */
+  max-width: responsive;
+  margin: 40px auto;
+  background: #2A2A2A; /* Fondo coat de rarity "fill" */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 15px #B8FFFA;
+  z-index: 10; /* Sobre la animación */
+}
+
+
+
+.content-chrysallis {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: #3F3F3F; /* Fondo gris oscuro */
+  padding: 10px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px #252525; /* Sombra */
+}
+
+.blog-content-chrysallis {
+  font-size: 1.2em;
+  line-height: 1.8;
 }
 
 /* Estilo para las vistas previas del blog */
@@ -1605,3 +1688,49 @@ body canvas#defaultCanvas0 {
 .read-more-prince-blueblood-dos:hover {
   background: #DEDDFA;
 }
+
+.chrysallis {
+  background: #141414;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px #47C4CA;
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+  flex: 1 1 calc(33.333% - 20px); /* Tres columnas en pantallas grandes */
+  box-sizing: border-box;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chrysallis:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px #A6A4D7;
+}
+
+.chrysallis h3 {
+  font-size: 1.2em;
+  margin: 0 0 10px;
+  color: #CDE67E;
+}
+
+.chrysallis p {
+  font-size: 1.2em;
+  color: #B3ECD8;
+  margin: 0 0 15px;
+}
+
+.read-more-chrysallis {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #4AC1D4;
+  background: #82FF65;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.read-more-chrysallis:hover {
+  background: #00F600;
+}
+
+
