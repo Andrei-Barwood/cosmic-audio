@@ -325,9 +325,9 @@ header p {
 
 .navbar {
   width: 100%;
-   background-color: #F1F1F1;
+   background-color: #FFFFFF;
   padding: 10px 20px;
-  box-shadow: 0 4px 6px #6698CA;
+  box-shadow: 0 4px 6px #771A0D;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -344,7 +344,7 @@ header p {
 
 .nav-logo {
   font-size: 1.8em;
-  color: #ED6C9C;
+  color: #FFFFFF;
   text-decoration: none;
   font-family: 'Evilz', sans-serif;
                                                 
@@ -364,7 +364,7 @@ header p {
 .nav-links a {
   text-decoration: none;
   font-size: 1em;
-  color: #ffffff;
+  color: #6FEFEC;
   transition: color 0.2s;
 }
 

@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Función para cambiar el color de fondo de la barra de navegación
   function changeNavbarColor() {
-    const colors = ['#111B26', '#243871', '#243871']; // Colores predefinidos
+    const colors = ["#EA3323"]; // Colores predefinidos
     const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Selecciona un color aleatorio
     document.querySelector('.navbar').style.backgroundColor = randomColor; // Cambia el color de fondo
   }
