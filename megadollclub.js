@@ -1,5 +1,5 @@
 let butterflies = [];
-let maxButterflies = 4096;
+let maxButterflies = 6;
 let colors = [
   [121, 115, 166],
   [75, 67, 170],
@@ -10,15 +10,15 @@ let colors = [
 function setup() {
   createCanvas(displayWidth, displayHeight);
   noFill();
-  strokeWeight(6);
+  strokeWeight(36);
 }
 
 function draw() {
-  background("#FFFFFF");
+  background(255, 255, 255);
   
   // Add new butterflies when mouse is moving
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-    if (dist(mouseX, mouseY, pmouseX, pmouseY) > 16 && butterflies.length < maxButterflies) {
+    if (dist(mouseX, mouseY, pmouseX, pmouseY) > 2 && butterflies.length < maxButterflies) {
       butterflies.push(new Butterfly(mouseX, mouseY));
     }
   }
@@ -38,13 +38,13 @@ function draw() {
 class Butterfly {
   constructor(x, y) {
     this.pos = createVector(x, y);
-    this.vel = createVector(random(-2, 8), random(-12, 2));
+    this.vel = createVector(random(-24, 72), random(-100, 2));
     this.acc = createVector(-8, 0);
     this.life = 255;
     this.maxLife = 255;
     this.wingPhase = random(TWO_PI);
-    this.wingSpeed = random(0.12, 2);
-    this.size = random(4, 96);
+    this.wingSpeed = random(12, 244);
+    this.size = random(64, 192);
     
     // Ensure we get a valid color array
     let colorIndex = floor(random(colors.length));
@@ -52,7 +52,7 @@ class Butterfly {
     this.colorG = colors[colorIndex][1];
     this.colorB = colors[colorIndex][2];
     
-    this.scatterForce = random(12, 192);
+    this.scatterForce = random(0.002, 12);
   }
   
   update() {
@@ -72,12 +72,12 @@ class Butterfly {
     
     // Apply physics
     this.vel.add(this.acc);
-    this.vel.limit(0.192);
+    this.vel.limit(1);
     this.pos.add(this.vel);
-    this.acc.mult(12);
+    this.acc.mult(2);
     
     // Fade out over time
-    this.life -= 1.96;
+    this.life -= 3.4;
     
     // Update wing animation
     this.wingPhase += this.wingSpeed;
@@ -166,8 +166,8 @@ function mouseMoved() {
     for (let i = 0; i < 3; i++) {
       if (butterflies.length < maxButterflies) {
         butterflies.push(new Butterfly(
-          mouseX + random(-384, 672), 
-          mouseY + random(-512, 1048)
+          mouseX + random(-192, 192), 
+          mouseY + random(-192, 192)
         ));
       }
     }
