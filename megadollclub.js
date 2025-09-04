@@ -23,7 +23,7 @@ function setup() {
   rows = floor(height / w);
   
   initializeMaze();
-  frameRate(12); // Velocidad más lenta para mejor control
+  frameRate(6); // Velocidad más lenta para mejor control
 }
 
 function draw() {
