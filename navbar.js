@@ -31,12 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Función para cambiar el color de fondo de la barra de navegación
   function changeNavbarColor() {
-    const colors = ["#EA3323"]; // Colores predefinidos
+    const colors = ["#8CC7E7", "#5C96C9"]; // Colores predefinidos
     const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Selecciona un color aleatorio
     document.querySelector('.navbar').style.backgroundColor = randomColor; // Cambia el color de fondo
   }
 
   // Cambiar el color de la barra de navegación cada 2 segundos
-  setInterval(changeNavbarColor, 2000); // Puedes ajustar el intervalo si lo deseas
+  setInterval(changeNavbarColor, 3000); // Puedes ajustar el intervalo si lo deseas
 
 });

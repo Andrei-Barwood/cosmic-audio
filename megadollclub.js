@@ -1,287 +1,330 @@
-// Interactive 3D Train Animation with Heart Wheels - FIXED
-let train;
-let hearts = [];
-let backgroundColors, trainColors;
-let currentBg;
-let lastBgChange = 0;
-let trainLines = [];
-let visibleLines = [];
-let rotationX = 0, rotationY = 0;
+// Paleta de colores especificada
+const colors = {
+  darkPurple: '#580D36',
+  magenta: '#BC1D75', 
+  pink: '#D9539D',
+  lightPink: '#FCB6DF'
+};
+
+let cols, rows;
+let w = 20; // Tamaño de cada celda
+let grid = [];
+let current;
+let stack = [];
+let animating = true;
+let directionBias = null; // Dirección preferida
+let obstacles = []; // Array de obstáculos
+let obstacleCount = 0;
 
 function setup() {
-  createCanvas(displayWidth, displayHeight, WEBGL);
+  createCanvas(displayWidth, displayHeight);
   
-  // Properly initialize color arrays using color() function
-  backgroundColors = [
-    color(255, 255, 255),    // #FFFFFF
-    color(119, 38, 47),      // #77262F
-    color(159, 238, 223)     // #9FEEDF
-  ];
+  cols = floor(width / w);
+  rows = floor(height / w);
   
-  trainColors = [
-    color(123, 251, 238),    // #7BFBEE
-    color(208, 47, 30),      // #D02F1E
-    color(53, 5, 14),        // #35050E
-    color(62, 16, 48)        // #3E1030
-  ];
-  
-  // Initialize background
-  currentBg = random(backgroundColors);
-  
-  // Create train line visibility array
-  initializeTrainLines();
-  
-  // Initialize heart wheels
-  initializeHearts();
+  initializeMaze();
+  frameRate(12); // Velocidad más lenta para mejor control
 }
 
 function draw() {
-  background("#FFFFFF");
+  background(colors.darkPurple);
   
-  // Change background randomly every 2-4 seconds
-  if (millis() - lastBgChange > random(2000, 4000)) {
-    currentBg = random(backgroundColors);
-    lastBgChange = millis();
+  // Mostrar obstáculos
+  drawObstacles();
+  
+  // Mostrar todas las celdas
+  for (let i = 0; i < grid.length; i++) {
+    grid[i].show();
   }
   
-  // Mouse interaction for rotation
-  rotationY = map(92, 0, width, -PI/4, PI/4);
-  rotationX = map(12, 0, height, -PI/6, PI/6);
+  if (animating && current) {
+    current.visited = true;
+    current.highlight();
+    
+    // Buscar siguiente celda con bias direccional
+    let next = current.checkNeighbors(directionBias);
+    
+    if (next) {
+      next.visited = true;
+      stack.push(current);
+      removeWalls(current, next);
+      current = next;
+      
+      // Generar obstáculo aleatorio ocasionalmente
+      if (random() < 0.08 && obstacleCount < 15) {
+        createRandomObstacle();
+      }
+    } else if (stack.length > 0) {
+      current = stack.pop();
+    } else {
+      // Laberinto completado
+      setTimeout(() => {
+        resetMaze();
+      }, 3000);
+    }
+  }
   
-  // Apply transformations
-  rotateX(rotationX);
-  rotateY(rotationY);
-  
-  // Mouse hover interaction - randomly hide train lines
-  updateLineVisibility();
-  
-  // Draw the train
-  drawTrain();
-  
-  // Draw heart wheels
-  drawHeartWheels();
+  // Mostrar instrucciones
+  showInstructions();
 }
 
-function initializeTrainLines() {
-  // Create array to track which train lines should be visible
-  for (let i = 0; i < 20; i++) {
-    visibleLines[i] = true;
+function initializeMaze() {
+  grid = [];
+  stack = [];
+  obstacles = [];
+  obstacleCount = 0;
+  
+  // Crear grid de celdas
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
+      let cell = new Cell(i, j);
+      grid.push(cell);
+    }
+  }
+  
+  current = grid[0];
+  
+  // Generar algunos obstáculos iniciales
+  generateInitialObstacles();
+}
+
+function generateInitialObstacles() {
+  let initialObstacles = random(5, 12);
+  for (let i = 0; i < initialObstacles; i++) {
+    createRandomObstacle();
   }
 }
 
-function initializeHearts() {
-  // Create heart wheel positions
-  hearts = [
-    {x: -120, y: 60, z: 0, rotation: 0},
-    {x: -60, y: 60, z: 0, rotation: 0},
-    {x: 60, y: 60, z: 0, rotation: 0},
-    {x: 120, y: 60, z: 0, rotation: 0}
-  ];
+function createRandomObstacle() {
+  let x = floor(random(1, cols - 1));
+  let y = floor(random(1, rows - 1));
+  let size = floor(random(1, 4)); // Tamaño del obstáculo
+  
+  obstacles.push({
+    x: x,
+    y: y,
+    size: size,
+    type: floor(random(3)) // Diferentes tipos de obstáculos
+  });
+  
+  obstacleCount++;
 }
 
-function updateLineVisibility() {
-  // Mouse hover effect - randomly hide lines when mouse moves
-  if (mouseX > -width/2 && mouseX < width/2 && mouseY > -height/2 && mouseY < height/2) {
-    if (frameCount % 10 === 0) { // Update every 10 frames
-      for (let i = 0; i < visibleLines.length; i++) {
-        if (random() < 0.1) { // 10% chance to toggle visibility
-          visibleLines[i] = !visibleLines[i];
-        }
+function drawObstacles() {
+  for (let obs of obstacles) {
+    let x = obs.x * w;
+    let y = obs.y * w;
+    
+    noStroke();
+    
+    switch(obs.type) {
+      case 0: // Obstáculo sólido
+        fill(colors.magenta);
+        rect(x, y, w * obs.size, w * obs.size);
+        break;
+      case 1: // Obstáculo circular
+        fill(colors.pink);
+        ellipse(x + w/2, y + w/2, w * obs.size);
+        break;
+      case 2: // Obstáculo en forma de cruz
+        fill(colors.lightPink);
+        rect(x, y + w/4, w * obs.size, w/2);
+        rect(x + w/4, y, w/2, w * obs.size);
+        break;
+    }
+  }
+}
+
+function index(i, j) {
+  if (i < 0 || j < 0 || i > cols - 1 || j > rows - 1) {
+    return -1;
+  }
+  return i + j * cols;
+}
+
+function Cell(i, j) {
+  this.i = i;
+  this.j = j;
+  this.walls = [true, true, true, true]; // top, right, bottom, left
+  this.visited = false;
+  
+  // Verificar si hay obstáculo en esta celda
+  this.hasObstacle = function() {
+    for (let obs of obstacles) {
+      if (this.i >= obs.x && this.i < obs.x + obs.size &&
+          this.j >= obs.y && this.j < obs.y + obs.size) {
+        return true;
       }
     }
-  } else {
-    // Restore lines when mouse is not hovering
-    if (frameCount % 30 === 0) {
-      for (let i = 0; i < visibleLines.length; i++) {
-        if (random() < 0.2) {
-          visibleLines[i] = true;
+    return false;
+  };
+  
+  // Verificar vecinos con bias direccional
+  this.checkNeighbors = function(bias = null) {
+    let neighbors = [];
+    
+    let top = grid[index(i, j - 1)];
+    let right = grid[index(i + 1, j)];
+    let bottom = grid[index(i, j + 1)];
+    let left = grid[index(i - 1, j)];
+    
+    // Agregar vecinos válidos (no visitados y sin obstáculos)
+    if (top && !top.visited && !top.hasObstacle()) {
+      neighbors.push({cell: top, direction: 'UP'});
+    }
+    if (right && !right.visited && !right.hasObstacle()) {
+      neighbors.push({cell: right, direction: 'RIGHT'});
+    }
+    if (bottom && !bottom.visited && !bottom.hasObstacle()) {
+      neighbors.push({cell: bottom, direction: 'DOWN'});
+    }
+    if (left && !left.visited && !left.hasObstacle()) {
+      neighbors.push({cell: left, direction: 'LEFT'});
+    }
+    
+    if (neighbors.length > 0) {
+      // Si hay bias direccional, preferir esa dirección
+      if (bias) {
+        let biasedNeighbors = neighbors.filter(n => n.direction === bias);
+        if (biasedNeighbors.length > 0 && random() < 0.7) {
+          return biasedNeighbors[0].cell;
         }
       }
+      
+      // Selección aleatoria con peso hacia la dirección actual
+      let r = floor(random(0, neighbors.length));
+      return neighbors[r].cell;
+    } else {
+      return undefined;
     }
+  };
+  
+  this.highlight = function() {
+    let x = this.i * w;
+    let y = this.j * w;
+    noStroke();
+    
+    // Efecto pulsante para la celda actual
+    let pulse = sin(frameCount * 0.2) * 20 + 235;
+    fill(red(color(colors.lightPink)), green(color(colors.lightPink)), 
+         blue(color(colors.lightPink)), pulse);
+    rect(x, y, w, w);
+  };
+  
+  this.show = function() {
+    let x = this.i * w;
+    let y = this.j * w;
+    
+    // No dibujar si hay obstáculo
+    if (this.hasObstacle()) return;
+    
+    stroke(colors.magenta);
+    strokeWeight(3); // Líneas más gruesas para mejor visualización
+    
+    if (this.walls[0]) {
+      line(x, y, x + w, y); // Top
+    }
+    if (this.walls[1]) {
+      line(x + w, y, x + w, y + w); // Right
+    }
+    if (this.walls[2]) {
+      line(x + w, y + w, x, y + w); // Bottom
+    }
+    if (this.walls[3]) {
+      line(x, y + w, x, y); // Left
+    }
+    
+    if (this.visited) {
+      noStroke();
+      fill(colors.pink + '30'); // Mayor transparencia
+      rect(x, y, w, w);
+    }
+  };
+}
+
+function removeWalls(a, b) {
+  let x = a.i - b.i;
+  if (x === 1) {
+    a.walls[3] = false;
+    b.walls[1] = false;
+  } else if (x === -1) {
+    a.walls[1] = false;
+    b.walls[3] = false;
+  }
+  
+  let y = a.j - b.j;
+  if (y === 1) {
+    a.walls[0] = false;
+    b.walls[2] = false;
+  } else if (y === -1) {
+    a.walls[2] = false;
+    b.walls[0] = false;
   }
 }
 
-function drawTrain() {
-  strokeWeight(3);
+function resetMaze() {
+  initializeMaze();
+  animating = true;
+  directionBias = null;
+}
+
+function showInstructions() {
+  fill(colors.lightPink);
+  textSize(14);
+  textAlign(LEFT);
+  text("Controles:", 10, 20);
+  text("↑↓←→ : Dirigir creación", 10, 40);
+  text("ESPACIO: Pausar/Reanudar", 10, 60);
+  text("R: Reiniciar", 10, 80);
+  text("O: Añadir obstáculo", 10, 100);
   
-  // Main train body (locomotive)
-  if (visibleLines[0]) {
-    stroke(trainColors);
-    fill(trainColors);
-    push();
-    translate(-80, 0, 0);
-    box(80, 40, 30);
-    pop();
-  }
-  
-  // Train cabin
-  if (visibleLines[1]) {
-    stroke(trainColors[1]);
-    fill(trainColors[1]);
-    push();
-    translate(-80, -30, 0);
-    box(60, 20, 25);
-    pop();
-  }
-  
-  // Smokestack
-  if (visibleLines) {
-    stroke(trainColors);
-    fill(trainColors);
-    push();
-    translate(-100, -40, 0);
-    cylinder(6, 30);
-    pop();
-  }
-  
-  // Train cars
-  for (let i = 0; i < 3; i++) {
-    if (visibleLines[3 + i]) {
-      stroke(trainColors[i % 4]);
-      fill(trainColors[i % 4]);
-      push();
-      translate(40 + i * 60, 0, 0);
-      box(50, 35, 28);
-      pop();
-    }
-  }
-  
-  // Connecting rods between cars
-  for (let i = 0; i < 2; i++) {
-    if (visibleLines[6 + i]) {
-      stroke(trainColors[3]);
-      strokeWeight(4);
-      push();
-      translate(15 + i * 60, 0, 0);
-      box(20, 5, 5);
-      pop();
-    }
-  }
-  
-  // Train track rails
-  if (visibleLines) {
-    stroke(color(51, 51, 51)); // #333333
-    strokeWeight(6);
-    push();
-    translate(0, 80, -20);
-    box(400, 4, 8);
-    pop();
-  }
-  
-  if (visibleLines) {
-    stroke(color(51, 51, 51)); // #333333
-    strokeWeight(6);
-    push();
-    translate(0, 80, 20);
-    box(400, 4, 8);
-    pop();
-  }
-  
-  // Railroad ties
-  for (let i = 0; i < 8; i++) {
-    if (visibleLines[10 + i]) {
-      stroke(color(139, 69, 19)); // #8B4513 brown
-      fill(color(139, 69, 19));
-      push();
-      translate(-150 + i * 40, 85, 0);
-      box(8, 6, 50);
-      pop();
-    }
-  }
-  
-  // Train details - windows
-  if (visibleLines[18]) {
-    stroke(trainColors);
-    fill(color(135, 206, 235)); // Light blue for windows
-    push();
-    translate(-80, -10, 16);
-    box(15, 15, 2);
-    pop();
-  }
-  
-  if (visibleLines) {
-    stroke(trainColors);
-    fill(color(135, 206, 235)); // Light blue for windows
-    push();
-    translate(-80, -10, -16);
-    box(15, 15, 2);
-    pop();
+  // Mostrar dirección actual
+  if (directionBias) {
+    fill(colors.magenta);
+    text("Dirección: " + directionBias, 10, 130);
   }
 }
 
-function drawHeartWheels() {
-  // Update heart rotation
-  for (let heart of hearts) {
-    heart.rotation += 0.05;
-  }
-  
-  // Draw each heart wheel
-  for (let i = 0; i < hearts.length; i++) {
-    let heart = hearts[i];
-    
-    push();
-    translate(heart.x, heart.y, heart.z);
-    rotateZ(heart.rotation);
-    
-    // Draw 3D heart shape as wheel
-    stroke(trainColors[i % 4]);
-    fill(trainColors[i % 4]);
-    
-    drawHeart3D(20);
-    
-    pop();
-  }
-}
-
-function drawHeart3D(size) {
-  // Create a 3D heart shape using multiple heart cross-sections
-  let layers = 8;
-  
-  for (let z = -layers/2; z < layers/2; z++) {
-    push();
-    translate(0, 0, z * 3);
-    
-    // Scale heart based on layer position for 3D effect
-    let scale = map(abs(z), 0, layers/2, 1, 0.3);
-    
-    beginShape();
-    for (let a = 0; a < TWO_PI; a += 0.1) {
-      // Heart equation in parametric form
-      let x = size * scale * (16 * pow(sin(a), 3));
-      let y = -size * scale * (13 * cos(a) - 5 * cos(2*a) - 2 * cos(3*a) - cos(4*a));
-      vertex(x/16, y/16);
-    }
-    endShape(CLOSE);
-    
-    pop();
-  }
-}
-
-// Mouse interaction functions
-function mouseMoved() {
-  // Additional mouse interaction - create ripple effect
-  if (random() < 0.3) {
-    let randomLine = floor(random(visibleLines.length));
-    visibleLines[randomLine] = false;
-    
-    // Restore line after short delay
-    setTimeout(() => {
-      visibleLines[randomLine] = true;
-    }, random(500, 1500));
-  }
-}
-
-// Keyboard controls for additional interactivity
+// Control con teclas de flecha y funciones adicionales
 function keyPressed() {
-  if (key === 'r' || key === 'R') {
-    // Reset all lines to visible
-    for (let i = 0; i < visibleLines.length; i++) {
-      visibleLines[i] = true;
-    }
+  // Control direccional
+  if (keyCode === UP_ARROW) {
+    directionBias = 'UP';
+  } else if (keyCode === DOWN_ARROW) {
+    directionBias = 'DOWN';
+  } else if (keyCode === LEFT_ARROW) {
+    directionBias = 'LEFT';
+  } else if (keyCode === RIGHT_ARROW) {
+    directionBias = 'RIGHT';
   }
   
-  if (key === 'b' || key === 'B') {
-    // Change background manually
-    currentBg = random(backgroundColors);
+  // Controles adicionales
+  if (key === ' ') {
+    animating = !animating;
+  }
+  if (key === 'r' || key === 'R') {
+    resetMaze();
+  }
+  if (key === 'o' || key === 'O') {
+    createRandomObstacle();
+  }
+  if (key === 'c' || key === 'C') {
+    directionBias = null; // Limpiar bias direccional
+  }
+}
+
+// Función para añadir obstáculo con clic del mouse
+function mousePressed() {
+  let gridX = floor(mouseX / w);
+  let gridY = floor(mouseY / w);
+  
+  if (gridX >= 0 && gridX < cols && gridY >= 0 && gridY < rows) {
+    obstacles.push({
+      x: gridX,
+      y: gridY,
+      size: 1,
+      type: floor(random(3))
+    });
+    obstacleCount++;
   }
 }
