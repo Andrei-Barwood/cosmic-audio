@@ -325,7 +325,7 @@ header p {
 
 .navbar {
   width: 100%;
-   background-color: #FFFFFF;
+   background-color: #1B98D1;
   padding: 10px 20px;
   box-shadow: 0 4px 6px #771A0D;
   position: sticky;
@@ -364,12 +364,12 @@ header p {
 .nav-links a {
   text-decoration: none;
   font-size: 1em;
-  color: #6FEFEC;
+  color: #FAF5AB;
   transition: color 0.2s;
 }
 
 .nav-links a:hover {
-  color: #4fbcc9;
+  color: #FFFFFF;
 }
 
 /* Botón del menú hamburguesa */
