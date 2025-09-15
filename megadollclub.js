@@ -5,6 +5,7 @@ let gameActive = true;
 let gameOver = false;
 let gameWon = false;
 let particles = [];
+let keys = [];
 let flameGif;
 let envelopesBurned = 0;
 let totalEnvelopes = 0;
@@ -22,7 +23,7 @@ function setup() {
     x: width/2,
     y: height - 50,
     size: 120, // Bigger flame
-    speed: 6
+    speed: 10  // Increased speed from 6 to 10
   };
   
   // Start spawning envelopes
@@ -37,32 +38,16 @@ function draw() {
   rect(0, 0, width, height);
   
   if (gameActive) {
-    // AI: Flame moves horizontally to chase the nearest envelope
-    if (envelopes.length > 0) {
-      // Find the nearest envelope
-      let nearestEnvelope = null;
-      let minDist = Infinity;
-      
-      for (let envelope of envelopes) {
-        let d = dist(flame.x, flame.y, envelope.x, envelope.y);
-        if (d < minDist) {
-          minDist = d;
-          nearestEnvelope = envelope;
-        }
-      }
-      
-      // Move flame horizontally towards the nearest envelope
-      if (nearestEnvelope) {
-        if (flame.x < nearestEnvelope.x) {
-          flame.x += flame.speed;
-        } else if (flame.x > nearestEnvelope.x) {
-          flame.x -= flame.speed;
-        }
-      }
+    // Player controls: Move flame horizontally with arrow keys
+    if (keys[LEFT_ARROW]) {
+      flame.x -= flame.speed;
+    }
+    if (keys[RIGHT_ARROW]) {
+      flame.x += flame.speed;
     }
     
     // Constrain flame to horizontal movement at the bottom
-    flame.x = constrain(flame.x, 20, width - 20);
+    flame.x = constrain(flame.x, 30, width - 30);
     // flame.y stays fixed at height - 50
     
     // Update and display envelopes
@@ -181,7 +166,7 @@ function draw() {
   
   // Game over message (loss)
   if (gameOver) {
-    fill("#CE2B5D");
+    fill(255, 100, 100);
     textSize(48);
     textAlign(CENTER, CENTER);
     text("GAME OVER", width/2, height/2 - 50);
@@ -190,19 +175,21 @@ function draw() {
     textSize(24);
     text("The envelopes reached the bottom!", width/2, height/2);
     text("Envelopes burned: " + envelopesBurned, width/2, height/2 + 40);
+    text("Press 'R' to Play Again", width/2, height/2 + 80);
   }
   
   // Game won message (win)
   if (gameWon) {
-    fill("#F5E832");
+    fill(100, 255, 100);
     textSize(48);
     textAlign(CENTER, CENTER);
     text("VICTORY!", width/2, height/2 - 50);
     
     fill(119, 199, 217); // #77C7D9
     textSize(24);
-    text("Flame successfully burned 30 envelopes!", width/2, height/2);
+    text("You burned 30 envelopes!", width/2, height/2);
     text("Final score: " + score, width/2, height/2 + 40);
+    text("Press 'R' to Play Again", width/2, height/2 + 80);
   }
 }
 
@@ -243,10 +230,16 @@ function createParticles(x, y) {
 }
 
 function keyPressed() {
+  keys[keyCode] = true;
+  
   // Restart game
   if (key === 'r' || key === 'R') {
     resetGame();
   }
+}
+
+function keyReleased() {
+  keys[keyCode] = false;
 }
 
 function resetGame() {
