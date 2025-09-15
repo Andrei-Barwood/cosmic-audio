@@ -1,366 +1,264 @@
-let maze = [];
-let player;
-let treasure;
-let mazeSize = 21; // Odd number for proper maze generation
-let cellSize = 20;
+let envelopes = [];
+let score = 0;
+let flame;
+let gameActive = true;
+let gameOver = false;
 let gameWon = false;
-let mazeUpdateTimer = 0;
-let mazeUpdateInterval = 60000; // 10 seconds
-let treasureFound = false;
-let moveTimer = 0;
-let moveSpeed = 100;
+let particles = [];
+let flameGif;
+let envelopesBurned = 0;
+let totalEnvelopes = 0;
 
-// Color palette
-const colors = {
-  wall: '#1E093C',      // Dark purple
-  path: '#662F89',      // Medium purple
-  player: '#EA428B',    // Pink
-  treasure: '#BF89D1',  // Light purple
-  visited: '#8D5DA4',   // Medium-light purple
-  background: '#CCB2D3', // Light background
-  text: '#FFFFFF'       // White
-};
+function preload() {
+  // Load the flame GIF
+  flameGif = loadImage('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd24xbGpudXU2dDN4czk0bjVvcWg0MmU3MjA1ZnNkYjNibmg5aDNxeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AHeTfHgVFPHgs/giphy.gif');
+}
 
 function setup() {
-  // Use full display dimensions
   createCanvas(displayWidth, displayHeight);
   
-  // Calculate optimal cell size based on display dimensions
-  let availableWidth = displayWidth - 250; // Leave space for UI panel
-  let availableHeight = displayHeight - 100; // Leave space for margins
-  
-  // Calculate cell size to fit the maze optimally
-  cellSize = min(floor(availableWidth / mazeSize), floor(availableHeight / mazeSize));
-  
-  // Ensure minimum cell size for playability
-  cellSize = max(cellSize, 15);
-  
-  // Initialize player position
-  player = {
-    x: 1,
-    y: 1,
-    trail: []
+  // Initialize flame at the bottom center (only moves horizontally)
+  flame = {
+    x: width/2,
+    y: height - 50,
+    size: 120, // Bigger flame
+    speed: 6
   };
   
-  generateMaze();
-  placeTreasure();
+  // Start spawning envelopes
+  spawnEnvelopes();
 }
 
 function draw() {
-  background(colors.background);
+  background(20, 30, 50);
   
-  // Handle continuous movement for faster controls
-  handleMovement();
+  // Draw sky background with blue gradient
+  fill(79, 163, 208, 100); // #4FA3D0
+  rect(0, 0, width, height);
   
-  // Update maze periodically
-  mazeUpdateTimer += deltaTime;
-  if (mazeUpdateTimer > mazeUpdateInterval && !treasureFound) {
-    generateMaze();
-    placeTreasure();
-    // Reset player position
-    player.x = 1;
-    player.y = 1;
-    player.trail = [];
-    mazeUpdateTimer = 0;
-  }
-  
-  drawMaze();
-  drawPlayer();
-  drawTreasure();
-  drawUI();
-  
-  checkWinCondition();
-}
-
-function handleMovement() {
-  if (treasureFound) return;
-  
-  moveTimer += deltaTime;
-  
-  // Check if enough time has passed for next move
-  if (moveTimer >= moveSpeed) {
-    let moved = false;
-    let newX = player.x;
-    let newY = player.y;
-    
-    // Check which keys are currently pressed
-    if (keyIsDown(UP_ARROW)) {
-      newY--;
-      moved = true;
-    } else if (keyIsDown(DOWN_ARROW)) {
-      newY++;
-      moved = true;
-    } else if (keyIsDown(LEFT_ARROW)) {
-      newX--;
-      moved = true;
-    } else if (keyIsDown(RIGHT_ARROW)) {
-      newX++;
-      moved = true;
-    }
-    
-    // Move if valid position and a key was pressed
-    if (moved && isValidMove(newX, newY)) {
-      player.x = newX;
-      player.y = newY;
-      moveTimer = 0; // Reset timer
-    } else if (moved) {
-      // Reset timer even if move was invalid to prevent stuttering
-      moveTimer = 0;
-    }
-  }
-}
-
-function isValidMove(x, y) {
-  // Check if new position is valid (within bounds and not a wall)
-  return x >= 0 && x < mazeSize && 
-         y >= 0 && y < mazeSize && 
-         maze[y][x] === 1;
-}
-
-function generateMaze() {
-  // Initialize maze with walls
-  maze = [];
-  for (let y = 0; y < mazeSize; y++) {
-    maze[y] = [];
-    for (let x = 0; x < mazeSize; x++) {
-      maze[y][x] = 0; // 0 = wall, 1 = path
-    }
-  }
-  
-  // Generate maze using recursive backtracking
-  let stack = [];
-  let current = {x: 1, y: 1};
-  maze[current.y][current.x] = 1;
-  
-  while (true) {
-    let neighbors = getUnvisitedNeighbors(current.x, current.y);
-    
-    if (neighbors.length > 0) {
-      let next = neighbors[floor(random(neighbors.length))];
+  if (gameActive) {
+    // AI: Flame moves horizontally to chase the nearest envelope
+    if (envelopes.length > 0) {
+      // Find the nearest envelope
+      let nearestEnvelope = null;
+      let minDist = Infinity;
       
-      // Remove wall between current and next
-      let wallX = current.x + (next.x - current.x) / 2;
-      let wallY = current.y + (next.y - current.y) / 2;
-      maze[wallY][wallX] = 1;
-      maze[next.y][next.x] = 1;
+      for (let envelope of envelopes) {
+        let d = dist(flame.x, flame.y, envelope.x, envelope.y);
+        if (d < minDist) {
+          minDist = d;
+          nearestEnvelope = envelope;
+        }
+      }
       
-      stack.push(current);
-      current = next;
-    } else if (stack.length > 0) {
-      current = stack.pop();
-    } else {
-      break;
-    }
-  }
-}
-
-function getUnvisitedNeighbors(x, y) {
-  let neighbors = [];
-  let directions = [
-    {x: 0, y: -2}, // Up
-    {x: 2, y: 0},  // Right
-    {x: 0, y: 2},  // Down
-    {x: -2, y: 0}  // Left
-  ];
-  
-  for (let dir of directions) {
-    let newX = x + dir.x;
-    let newY = y + dir.y;
-    
-    if (newX > 0 && newX < mazeSize - 1 && 
-        newY > 0 && newY < mazeSize - 1 && 
-        maze[newY][newX] === 0) {
-      neighbors.push({x: newX, y: newY});
-    }
-  }
-  
-  return neighbors;
-}
-
-function placeTreasure() {
-  // Place treasure in a random path cell (not at player start)
-  let pathCells = [];
-  for (let y = 0; y < mazeSize; y++) {
-    for (let x = 0; x < mazeSize; x++) {
-      if (maze[y][x] === 1 && !(x === 1 && y === 1)) {
-        pathCells.push({x: x, y: y});
+      // Move flame horizontally towards the nearest envelope
+      if (nearestEnvelope) {
+        if (flame.x < nearestEnvelope.x) {
+          flame.x += flame.speed;
+        } else if (flame.x > nearestEnvelope.x) {
+          flame.x -= flame.speed;
+        }
       }
     }
-  }
-  
-  if (pathCells.length > 0) {
-    let randomCell = pathCells[floor(random(pathCells.length))];
-    treasure = {x: randomCell.x, y: randomCell.y, visible: false};
     
-    // Make treasure "hidden in plain sight" - sometimes visible
-    setTimeout(() => {
-      treasure.visible = random() > 0.3; // 70% chance to be visible
-    }, random(2000, 5000)); // Appear after 2-5 seconds
-  }
-}
-
-function drawMaze() {
-  // Center the maze on screen
-  let mazeWidth = mazeSize * cellSize;
-  let mazeHeight = mazeSize * cellSize;
-  let offsetX = (displayWidth - mazeWidth - 250) / 2; // Account for UI panel
-  let offsetY = (displayHeight - mazeHeight) / 2;
-  
-  push();
-  translate(offsetX, offsetY);
-  
-  for (let y = 0; y < mazeSize; y++) {
-    for (let x = 0; x < mazeSize; x++) {
-      let cellX = x * cellSize;
-      let cellY = y * cellSize;
+    // Constrain flame to horizontal movement at the bottom
+    flame.x = constrain(flame.x, 20, width - 20);
+    // flame.y stays fixed at height - 50
+    
+    // Update and display envelopes
+    for (let i = envelopes.length - 1; i >= 0; i--) {
+      let envelope = envelopes[i];
       
-      // Check if player has been near this cell
-      let playerNear = player.trail.some(pos => 
-        abs(pos.x - x) <= 1 && abs(pos.y - y) <= 1
-      );
+      // Update envelope position - move toward center horizontally
+      envelope.y += envelope.speed;
       
-      if (maze[y][x] === 0) {
-        fill(colors.wall);
-      } else if (playerNear || (abs(player.x - x) <= 1 && abs(player.y - y) <= 1)) {
-        fill(colors.visited);
+      // Add slight horizontal movement toward center for more dynamic motion
+      if (envelope.x < width/2) {
+        envelope.x += 0.3;
       } else {
-        fill(colors.path);
+        envelope.x -= 0.3;
       }
       
+      // Check if envelope is burned by flame
+      let d = dist(envelope.x, envelope.y, flame.x, flame.y);
+      if (d < flame.size/2 + envelope.size/2) {
+        envelopes.splice(i, 1);
+        score += 10;
+        envelopesBurned++;
+        // Create burning particles
+        createParticles(envelope.x, envelope.y);
+        continue;
+      }
+      
+      // Check if envelope reached the bottom
+      if (envelope.y > height + 50) {
+        gameOver = true;
+        gameActive = false;
+      }
+    }
+    
+    // Update and display particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      let p = particles[i];
+      p.y -= p.speed;
+      p.x += random(-1, 1);
+      p.life -= 2;
+      
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+        continue;
+      }
+      
+      fill(p.r, p.g, p.b, p.life);
       noStroke();
-      rect(cellX, cellY, cellSize, cellSize);
+      ellipse(p.x, p.y, p.size);
+    }
+    
+    // Draw flame GIF (fixed at bottom, moving horizontally)
+    if (flameGif) {
+      imageMode(CENTER);
+      image(flameGif, flame.x, flame.y, flame.size, flame.size);
+    }
+    
+    // Spawn new envelopes less frequently
+    if (frameCount % 90 === 0) {
+      spawnEnvelopes();
+    }
+    
+    // Check for win condition
+    if (envelopesBurned >= 30) {
+      gameWon = true;
+      gameActive = false;
     }
   }
-  pop();
-}
-
-function drawPlayer() {
-  // Center the maze on screen
-  let mazeWidth = mazeSize * cellSize;
-  let offsetX = (displayWidth - mazeWidth - 250) / 2;
-  let offsetY = (displayHeight - mazeSize * cellSize) / 2;
   
-  fill(colors.player);
-  noStroke();
-  ellipse(offsetX + player.x * cellSize + cellSize/2, 
-          offsetY + player.y * cellSize + cellSize/2, 
-          cellSize * 0.7, cellSize * 0.7);
-  
-  // Add player to trail
-  if (frameCount % 30 === 0) {
-    player.trail.push({x: player.x, y: player.y});
-    if (player.trail.length > 50) {
-      player.trail.shift();
-    }
-  }
-}
-
-function drawTreasure() {
-  if (treasure && treasure.visible && !treasureFound) {
-    // Center the maze on screen
-    let mazeWidth = mazeSize * cellSize;
-    let offsetX = (displayWidth - mazeWidth - 250) / 2;
-    let offsetY = (displayHeight - mazeSize * cellSize) / 2;
+  // Draw envelopes
+  for (let envelope of envelopes) {
+    push();
+    translate(envelope.x, envelope.y);
+    rotate(frameCount * 0.02);
     
-    // Draw treasure chest with a subtle glow effect
-    let treasureX = offsetX + treasure.x * cellSize + cellSize/2;
-    let treasureY = offsetY + treasure.y * cellSize + cellSize/2;
-    
-    // Glow effect
-    for (let i = 5; i > 0; i--) {
-      fill(red(colors.treasure), green(colors.treasure), blue(colors.treasure), 30);
-      ellipse(treasureX, treasureY, cellSize * i * 0.3, cellSize * i * 0.3);
-    }
-    
-    // Treasure chest
-    fill(colors.treasure);
-    stroke(colors.text);
+    // Envelope body
+    fill(envelope.color);
+    stroke(119, 199, 217); // #77C7D9
     strokeWeight(2);
-    rect(treasureX - cellSize/4, treasureY - cellSize/4, 
-         cellSize/2, cellSize/2, 3);
+    rectMode(CENTER);
+    rect(0, 0, envelope.size, envelope.size/1.5);
     
-    // Chest details
-    line(treasureX - cellSize/4, treasureY, treasureX + cellSize/4, treasureY);
-    ellipse(treasureX, treasureY - cellSize/8, 4, 4);
+    // Envelope flap
+    fill(envelope.flapColor);
+    stroke(119, 199, 217); // #77C7D9
+    strokeWeight(2);
+    triangle(
+      -envelope.size/2, -envelope.size/3,
+      envelope.size/2, -envelope.size/3,
+      0, -envelope.size/1.5
+    );
+    
+    pop();
+  }
+  
+  // Draw score indicator
+  fill(119, 199, 217); // #77C7D9
+  noStroke();
+  ellipse(30, 30, 20, 20);
+  fill(255);
+  ellipse(30, 30, 10, 10);
+  
+  // Draw score bars
+  fill(133, 228, 255); // #85E4FF
+  noStroke();
+  let barCount = min(score / 10, 20);
+  for (let i = 0; i < barCount; i++) {
+    rect(60 + i * 5, 20, 3, 20);
+  }
+  
+  // Draw reset instructions (top right)
+  fill(119, 199, 217); // #77C7D9
+  textSize(16);
+  textAlign(RIGHT, TOP);
+  text("Press 'R' to Reset", width - 20, 20);
+  
+  // Game over message (loss)
+  if (gameOver) {
+    fill("#CE2B5D");
+    textSize(48);
+    textAlign(CENTER, CENTER);
+    text("GAME OVER", width/2, height/2 - 50);
+    
+    fill(119, 199, 217); // #77C7D9
+    textSize(24);
+    text("The envelopes reached the bottom!", width/2, height/2);
+    text("Envelopes burned: " + envelopesBurned, width/2, height/2 + 40);
+  }
+  
+  // Game won message (win)
+  if (gameWon) {
+    fill("#F5E832");
+    textSize(48);
+    textAlign(CENTER, CENTER);
+    text("VICTORY!", width/2, height/2 - 50);
+    
+    fill(119, 199, 217); // #77C7D9
+    textSize(24);
+    text("Flame successfully burned 30 envelopes!", width/2, height/2);
+    text("Final score: " + score, width/2, height/2 + 40);
   }
 }
 
-function drawUI() {
-  // Position UI panel on the right side of screen
-  let panelX = displayWidth - 230;
-  let panelY = 20;
-  let panelWidth = 200;
-  let panelHeight = 200;
-  
-  // Game info panel
-  fill(colors.wall);
-  noStroke();
-  rect(panelX, panelY, panelWidth, panelHeight, 10);
-  
-  fill(colors.text);
-  textAlign(LEFT);
-  textSize(16);
-  text("TREASURE HUNT", panelX + 15, panelY + 25);
-  
-  textSize(12);
-  text("Use arrow keys to move", panelX + 15, panelY + 50);
-  text("Hold keys for fast move!", panelX + 15, panelY + 70);
-  
-  // Display screen info
-  text("Screen: " + displayWidth + "x" + displayHeight, panelX + 15, panelY + 95);
-  text("Cell size: " + cellSize + "px", panelX + 15, panelY + 115);
-  
-  // Timer until next maze update
-  let timeLeft = (mazeUpdateInterval - mazeUpdateTimer) / 1000;
-  text("Next maze: " + ceil(timeLeft) + "s", panelX + 15, panelY + 140);
-  
-  if (treasure && treasure.visible) {
-    fill(colors.treasure);
-    text("✨ Treasure visible!", panelX + 15, panelY + 160);
-  }
-  
-  if (treasureFound) {
-    fill(colors.player);
-    textSize(16);
-    text("🏆 TREASURE FOUND!", panelX + 15, panelY + 180);
-    
-    fill(colors.text);
-    textSize(12);
-    text("Press R to restart", panelX + 15, panelY + 200);
+function spawnEnvelopes() {
+  // Create envelopes that start from the top
+  totalEnvelopes += 1;
+  envelopes.push({
+    x: random(100, width - 100), // Start closer to center horizontally
+    y: -50,
+    size: random(30, 50),
+    speed: random(1, 3),
+    color: color(
+      random(69, 133),   // R: #458FB2 to #4FA3D0 range
+      random(143, 163),  // G: #458FB2 to #4FA3D0 range
+      random(178, 208)   // B: #458FB2 to #4FA3D0 range
+    ),
+    flapColor: color(
+      random(119, 133),  // R: #77C7D9 to #458FB2 range
+      random(199, 228),  // G: #77C7D9 to #85E4FF range
+      random(217, 255)   // B: #77C7D9 to #85E4FF range
+    )
+  });
+}
+
+function createParticles(x, y) {
+  for (let i = 0; i < 10; i++) {
+    particles.push({
+      x: x + random(-10, 10),
+      y: y + random(-10, 10),
+      size: random(2, 6),
+      speed: random(1, 5),
+      life: random(50, 100),
+      r: random(200, 255),
+      g: random(100, 200),
+      b: random(0, 100)
+    });
   }
 }
 
 function keyPressed() {
-  if (treasureFound && (key === 'r' || key === 'R')) {
-    // Restart game
-    treasureFound = false;
-    gameWon = false;
-    player.x = 1;
-    player.y = 1;
-    player.trail = [];
-    mazeUpdateTimer = 0;
-    generateMaze();
-    placeTreasure();
-    return;
+  // Restart game
+  if (key === 'r' || key === 'R') {
+    resetGame();
   }
 }
 
-function checkWinCondition() {
-  if (treasure && treasure.visible && 
-      player.x === treasure.x && player.y === treasure.y && 
-      !treasureFound) {
-    treasureFound = true;
-    gameWon = true;
-  }
-}
-
-// Handle window resizing
-function windowResized() {
-  resizeCanvas(displayWidth, displayHeight);
-  
-  // Recalculate cell size for new dimensions
-  let availableWidth = displayWidth - 250;
-  let availableHeight = displayHeight - 100;
-  cellSize = min(floor(availableWidth / mazeSize), floor(availableHeight / mazeSize));
-  cellSize = max(cellSize, 15); // Minimum cell size
+function resetGame() {
+  envelopes = [];
+  particles = [];
+  score = 0;
+  envelopesBurned = 0;
+  totalEnvelopes = 0;
+  flame.x = width/2;
+  flame.y = height - 50; // Fixed at bottom
+  gameActive = true;
+  gameOver = false;
+  gameWon = false;
+  spawnEnvelopes();
 }
