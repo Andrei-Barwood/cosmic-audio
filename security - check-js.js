@@ -1,5 +1,3 @@
-/*
-
 (function() {
     setTimeout(function() {
         // Verificar si JavaScript está habilitado (creamos una cookie)
@@ -28,17 +26,16 @@
                 window.location.href = "/security - habilita-js.html";
             }
             if (document.cookie.includes("ad_blocker_detected=true")) {
-    window.location.href = "/bloqueado.html";
+    window.location.href = "/security - habilita-js.html";
 }
 
         }, 200);
 
         // Mostrar alerta si se detecta bloqueador de anuncios
-        setTimeout(function() {
+       /* setTimeout(function() {
             if (document.cookie.includes("ad_blocker_detected=true")) {
                 alert("Detectamos un bloqueador de anuncios. Algunas funciones pueden no funcionar.");
             }
-        }, 500);
+        }, 500); */
     };
 })();
-*/
