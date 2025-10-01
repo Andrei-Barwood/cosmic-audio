@@ -1,41 +1,32 @@
 (function() {
-    setTimeout(function() {
-        // Verificar si JavaScript está habilitado (creamos una cookie)
-        document.cookie = "js_enabled=true; path=/";
+    // First, check if we're being redirected back (to prevent infinite loops)
+    const currentPage = window.location.pathname;
+    if (currentPage.includes('security') || currentPage.includes('habilita-js')) {
+        return; // Don't run detection on the error page itself
+    }
 
-        // Intentamos detectar bloqueadores de anuncios
+    // Immediately set the cookie (don't wait)
+    document.cookie = "js_enabled=true; path=/; max-age=3600"; // Expires in 1 hour
+
+    // Ad blocker detection (optional - keep if you need it)
+    setTimeout(function() {
         let adTest = document.createElement("div");
         adTest.innerHTML = "&nbsp;";
         adTest.className = "adsbox";
-        adTest.style.display = "none";
+        adTest.style.cssText = "position: absolute; width: 1px; height: 1px; visibility: hidden;";
         document.body.appendChild(adTest);
 
         setTimeout(function() {
-            if (adTest.offsetHeight === 0) {
-                // Bloqueador detectado
-                document.cookie = "ad_blocker_detected=true; path=/";
+            if (adTest.offsetHeight === 0 || window.getComputedStyle(adTest).display === "none") {
+                document.cookie = "ad_blocker_detected=true; path=/; max-age=3600";
                 console.warn("Bloqueador de anuncios detectado.");
             }
+            // Clean up
+            document.body.removeChild(adTest);
         }, 100);
     }, 100);
 
-    // Redirección si JavaScript está deshabilitado
-    window.onload = function() {
-        setTimeout(function() {
-            if (!document.cookie.includes("js_enabled=true")) {
-                window.location.href = "/security - habilita-js.html";
-            }
-            if (document.cookie.includes("ad_blocker_detected=true")) {
-    window.location.href = "/security - habilita-js.html";
-}
+    // Remove the window.onload redirect - it's causing the problem
+    // JavaScript is clearly enabled if this code is running!
 
-        }, 200);
-
-        // Mostrar alerta si se detecta bloqueador de anuncios
-       /* setTimeout(function() {
-            if (document.cookie.includes("ad_blocker_detected=true")) {
-                alert("Detectamos un bloqueador de anuncios. Algunas funciones pueden no funcionar.");
-            }
-        }, 500); */
-    };
 })();
