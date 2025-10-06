@@ -1422,6 +1422,50 @@ body canvas#defaultCanvas0 {
   background: #6698CA;
 }
 
+.kingzer-instrumentals-dos {
+  background: #F1F1F1;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px #FFFFFF;
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+  flex: 1 1 calc(33.333% - 20px); /* Tres columnas en pantallas grandes */
+  box-sizing: border-box;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kingzer-instrumentals-dos:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px #9291A3;
+}
+
+.kingzer-instrumentals-dos h3 {
+  font-size: 1.2em;
+  margin: 0 0 10px;
+  color: #ED6C9C;
+}
+
+.kingzer-instrumentals-dos p {
+  font-size: 1.2em;
+  color: #9291A3;
+  margin: 0 0 15px;
+}
+
+.read-more-kingzer-instrumentals-dos {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #FFFFFF;
+  background: #233250;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.read-more-kingzer-instrumentals-dos:hover {
+  background: #57C4DD;
+}
+
 .anthropic {
   background: #EC3F41;
   border-radius: 10px;
@@ -1734,3 +1778,65 @@ body canvas#defaultCanvas0 {
 }
 
 
+#electrical-gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#electrical-gallery h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.image-container:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.1);
+}
+
+/* Responsive para tablets */
+@media screen and (max-width: 768px) {
+  .image-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* Responsive para móviles */
+@media screen and (max-width: 480px) {
+  .image-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  #electrical-gallery {
+    padding: 1rem;
+  }
+}
