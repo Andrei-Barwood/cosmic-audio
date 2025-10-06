@@ -1,0 +1,44 @@
+c89(1)                   - standard C language compiler
+c99(1)                   - standard C language compiler
+clang(1)                 - the Clang C, C++, and Objective-C compiler
+migcom(1)                - Mach Interface Generator COMpiler
+rpcgen(1)                - Remote Procedure Call (RPC) protocol compiler
+OPENSSL_Applink(3ssl)    - glue between OpenSSL BIO and Win32 compiler run-time
+g-ir-compiler(1)         - Typelib compiler
+valac(1)                 - compiler that translates Vala source code into C source and header files
+CVMCompiler(8)           - Mac OS X Core Virtual Machine Compiler
+cfront(n), fileutil::magic::cfront(n) - Generator core for compiler of magic(5) files
+cgen(n), fileutil::magic::cgen(n) - Generator core for compiler of magic(5) files
+cups-config(1)           - get cups api, compiler, directory, and link information
+dtrace(1)                - dynamic tracing compiler and tracing utility
+gencat(1)                - NLS catalog compiler
+pcap-config(1)           - write libpcap compiler and linker flags to standard output
+ppdc(1)                  - cups ppd compiler (deprecated)
+ppdcfile(5)              - cups ppd compiler source file format (deprecated)
+tic(1m)                  - the terminfo entry-description compiler
+treereg(1)               - Compiler for Tree Regular Expressions
+xsubpp(1)                - compiler to convert Perl XS code into C code
+zic(8)                   - timezone compiler
+B(3pm)                   - The Perl Compiler Backend
+B::Deparse(3pm)          - Perl compiler backend to produce perl code
+CVMCompiler(8)           - Mac OS X Core Virtual Machine Compiler
+List::Util::XS(3pm)      - Indicate if List::Util was compiled with a C compiler
+Module::Install::Compiler(3pm) - Commands for interacting with the C compiler
+O(3pm)                   - Generic interface to Perl Compiler backends
+Params::ValidationCompiler(3pm) - Build an optimized subroutine parameter validator once, use it forever
+Params::ValidationCompiler::Compiler(3pm) - Object that implements the check subroutine compilation
+Params::ValidationCompiler::Exceptions(3pm) - Defines exceptions thrown by Params::ValidationCompiler
+Pegex::Bootstrap(3pm)    - Bootstrapping Compiler for a Pegex Grammar
+Pegex::Compiler(3pm)     - Pegex Compiler
+cfront(n), fileutil::magic::cfront(n) - Generator core for compiler of magic(5) files
+cgen(n), fileutil::magic::cgen(n) - Generator core for compiler of magic(5) files
+cups-config(1)           - get cups api, compiler, directory, and link information
+dtrace(1)                - dynamic tracing compiler and tracing utility
+gencat(1)                - NLS catalog compiler
+pcap-config(1)           - write libpcap compiler and linker flags to standard output
+ppdc(1)                  - cups ppd compiler (deprecated)
+ppdcfile(5)              - cups ppd compiler source file format (deprecated)
+tic(1m)                  - the terminfo entry-description compiler
+treereg(1)               - Compiler for Tree Regular Expressions
+xsubpp(1)                - compiler to convert Perl XS code into C code
+zic(8)                   - timezone compiler

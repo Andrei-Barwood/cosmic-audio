@@ -1,0 +1,73 @@
+<!-- temporary storage for in progress updates -->
+
+<button class="toggle-button">Strings: Reversing a String</button>
+<div class="toggle-content">
+    <p>There are several real-life scenarios in Ruby where reversing a string is needed, and a handful of cases where you might need to protect the string reversal operation:</p>
+
+<p><b>Real-Life Use Cases for String Reversal in Ruby</b></p>
+<p><ul>
+    <li><b>Checking Palindromes:</b> Determining if a word or phrase is the same forward as backward requires reversing the string and comparing</li>
+    <li><b>Bioinformatics:</b> In DNA or RNA sequence analysis, reversing strings is crucial for operations like finding complementary strands</li>
+    <li><b>Text Manipulation:</b> Reversing strings is used in simple encryption or obfuscation, creating secret messages, generating unique identifiers, or formatting output for visual tricks</li>
+    <li><b>Word/Sentence Reordering:</b> Applications might reverse the order of words in a sentence for formatting or language processing tasks</li>
+    <li><b>Algorithm Design/Practice:</b> String reversal is a classic problem in interviews to test understanding of data structures, mutability, and algorithmic efficiency</li>
+    <li>Signal or Audio Processing: Certain algorithms (like circular shifts) use string or buffer reversal as part of their process</li>
+    <li><b>Legacy Interfacing:</b> Some legacy formats or encodings might require reversed string processing</li>
+</ul></p>
+
+<p><b>When Is It Important to Protect String Reversal in Ruby?</b></p>
+
+<p>In most cases, reversing a string itself isn’t a vector for attack; however, the context in which string reversal is used might create security concerns:</p>
+
+<p><ul>
+    <li><b>Obfuscation for Sensitive Data:</b> If you use string reversal as a (weak) encoding method for sensitive information (passwords, tokens), never rely on it as your only security measure. Proper cryptography should be used, and you should ensure the reversed version isn't exposed via logs, URLs, or user interfaces</li>
+    <li><b>Dynamic Code Execution:</b> If the result of a reversed string is later used as code (for example, passed to eval, send, or for method names), and any portion of the string comes from user input, attackers could manipulate the reversal to inject malicious code, leading to vulnerabilities like code injection or remote code execution</li>
+    <li><b>File Path Manipulation:</b> Using reversed strings as part of dynamically generated filenames or paths could introduce directory traversal or overwriting risks if not properly sanitized</li>
+    <li><b>User Input Handling:</b> Any time user input is reversed and then subsequently used for commands, method calls, or as part of any security logic, you must carefully validate and sanitize the input, as reversal alone does not prevent injection or bypass attacks</li>
+</ul></p>
+
+    <div class="code-container">
+        <button class="copy-button">Copiar</button>
+        <pre>
+            <code>
+s = "sdrawkcab"
+s.reverse
+
+            </code>
+        </pre>
+    </div>
+<p>The given Ruby program simply reverses a string</p>
+
+<p>It takes the string "sdrawkcab" (which itself is "backwards" spelled backwards) and returns "backwards".</p>
+
+
+    <div class="code-container">
+        <button class="copy-button">Copiar</button>
+        <pre>
+            <code>
+
+            </code>
+        </pre>
+    </div>
+
+
+        <div class="code-container">
+        <button class="copy-button">Copiar</button>
+        <pre>
+            <code>
+
+            </code>
+        </pre>
+    </div>
+
+
+        <div class="code-container">
+        <button class="copy-button">Copiar</button>
+        <pre>
+            <code>
+
+            </code>
+        </pre>
+    </div>
+
+</div>

@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos Interactivos p5.js</title>
+    
+    <!-- Agregar favicon para evitar error -->
+    <link rel="icon" href=",">
+    
+    <!-- Google Fonts como alternativa más confiable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- p5.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+    
+    <style>
+        /* Reset y configuración base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #093534 0%, #00383B 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(15, 81, 80, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header h1 {
+            text-align: center;
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #E7F800;
+            text-shadow: 0 0 20px rgba(231, 248, 0, 0.3);
+        }
+
+        .header p {
+            text-align: center;
+            margin-top: 0.5rem;
+            color: #AEF504;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        .nav {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .nav-button {
+            background: linear-gradient(45deg, #0F5150, #00383B);
+            color: #E7F800;
+            border: 2px solid #AEF504;
+            padding: 0.8rem 1.5rem;
+            margin: 0 0.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(45deg, #AEF504, #E7F800);
+            color: #093534;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(174, 245, 4, 0.3);
+        }
+
+        .nav-button.active {
+            background: #E7F800;
+            color: #093534;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: rgba(15, 81, 80, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(174, 245, 4, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(231, 248, 0, 0.5);
+        }
+
+        .project-title {
+            font-family: 'Orbitron', monospace;
+            color: #E7F800;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .project-description {
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        /* Canvas Container */
+        .canvas-container {
+            background: rgba(9, 53, 52, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-container canvas {
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Project Controls */
+        .project-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .control-button {
+            background: rgba(174, 245, 4, 0.2);
+            color: #AEF504;
+            border: 1px solid #AEF504;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .control-button:hover {
+            background: #AEF504;
+            color: #093534;
+        }
+
+        /* Instructions */
+        .instructions {
+            background: rgba(0, 56, 59, 0.3);
+            border-left: 4px solid #E7F800;
+            padding: 1rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .instructions h3 {
+            font-family: 'Orbitron', monospace;
+            color: #E7F800;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .instructions p {
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(174, 245, 4, 0.2);
+            background: rgba(9, 53, 52, 0.2);
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .project-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(174, 245, 4, 0.3);
+            border-radius: 50%;
+            border-top-color: #AEF504;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Project Status Indicators */
+        .status-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #AEF504;
+            box-shadow: 0 0 10px rgba(174, 245, 4, 0.5);
+        }
+
+        .status-indicator.error {
+            background: #ff4444;
+            box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+        }
+
+        .status-indicator.loading {
+            background: #ffaa00;
+            box-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>Proyectos Interactivos p5.js</h1>
+            <p>Explorando conceptos científicos y tecnológicos a través del arte generativo</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav container">
+        <button class="nav-button active" onclick="showCategory('all')">Todos</button>
+        <button class="nav-button" onclick="showCategory('physics')">Física</button>
+        <button class="nav-button" onclick="showCategory('electronics')">Electrónica</button>
+        <button class="nav-button" onclick="showCategory('energy')">Energías</button>
+        <button class="nav-button" onclick="showCategory('simulation')">Simulaciones</button>
+    </nav>
+
+    <!-- Instructions -->
+    <div class="container">
+        <div class="instructions">
+            <h3>📚 Cómo usar esta página</h3>
+            <p>Cada proyecto es interactivo. Utiliza el mouse, teclado, o los controles específicos de cada proyecto para explorar los conceptos. Los proyectos se cargan automáticamente y puedes navegar entre diferentes categorías usando los botones superiores.</p>
+        </div>
+    </div>
+
+    <!-- Projects Container -->
+    <main class="container">
+        <div class="projects-grid" id="projects-grid">
+            
+            <!-- PROYECTO 1: Aislantes Eléctricos -->
+            <div class="project-card" data-category="electronics">
+                <h2 class="project-title">🔌 Aislantes Eléctricos</h2>
+                <p class="project-description">
+                    Explora las propiedades de los materiales aislantes y su aplicación en energías renovables. 
+                    Incluye simulación de flujo de electrones y comparación de materiales.
+                </p>
+                <div class="canvas-container">
+                    <div class="status-indicator loading" id="status-aislantes"></div>
+                    <div id="aislantes-canvas"></div>
+                </div>
+                <div class="project-controls">
+                    <button class="control-button" onclick="restartAislantes()">🔄 Reiniciar</button>
+                    <button class="control-button" onclick="pauseAislantes()">⏸️ Pausa</button>
+                </div>
+            </div>
+
+            <!-- TEMPLATE PARA NUEVO PROYECTO -->
+            <div class="project-card" data-category="template" style="display: none;">
+                <h2 class="project-title">🔬 [Título del Proyecto]</h2>
+                <p class="project-description">
+                    [Descripción del proyecto y conceptos que explora]
+                </p>
+                <div class="canvas-container">
+                    <div class="status-indicator loading" id="status-template"></div>
+                    <div id="template-canvas"></div>
+                </div>
+                <div class="project-controls">
+                    <button class="control-button" onclick="restartTemplate()">🔄 Reiniciar</button>
+                    <button class="control-button" onclick="pauseTemplate()">⏸️ Pausa</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 - Proyectos Educativos Interactivos | Desarrollado con p5.js</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript para Navigation y Management -->
+    <script>
+        // Sistema de navegación por categorías
+        function showCategory(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.nav-button');
+            
+            // Actualizar botones activos
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Mostrar/ocultar proyectos
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Variables globales para control de sketches
+        let aislantesPaused = false;
+        let aislantesSketches = null;
+        
+        // Control functions para Aislantes
+        function restartAislantes() {
+            if (aislantesSketches && typeof aislantesSketches.resetSketch === 'function') {
+                aislantesSketches.resetSketch();
+                setProjectStatus('aislantes', '');
+                console.log('🔄 Sketch reiniciado');
+            }
+        }
+        
+        function pauseAislantes() {
+            if (aislantesSketches) {
+                aislantesPaused = !aislantesPaused;
+                const pauseBtn = document.querySelector('[onclick="pauseAislantes()"]');
+                if (aislantesPaused) {
+                    aislantesSketches.noLoop();
+                    if (pauseBtn) pauseBtn.innerHTML = '▶️ Reanudar';
+                } else {
+                    aislantesSketches.loop();
+                    if (pauseBtn) pauseBtn.innerHTML = '⏸️ Pausa';
+                }
+            }
+        }
+
+        // Sistema de carga de proyectos
+        function setProjectStatus(projectId, status) {
+            const indicator = document.getElementById(`status-${projectId}`);
+            if (indicator) {
+                indicator.className = `status-indicator ${status}`;
+            }
+        }
+
+        // Inicialización de la página
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Página de proyectos p5.js cargada correctamente');
+            setProjectStatus('aislantes', 'loading');
+        });
+    </script>
+
+    <!-- SKETCH: Aislantes Eléctricos -->
+    <script>
+        // Sketch de Aislantes usando Instance Mode
+        const aislanteSketch = function(p) {
+            // Variables del sketch
+            let slideIndex = 0;
+            let totalSlides = 5;
+            let electronParticles = [];
+            let timeCounter = 0;
+            
+            // Paleta de colores
+            let colorScheme = {
+                primary: '#0F5150',
+                secondary: '#093534',
+                tertiary: '#00383B',
+                accent1: '#E7F800',
+                accent2: '#AEF504'
+            };
+
+            p.setup = function() {
+                let canvas = p.createCanvas(800, 500);
+                canvas.parent('aislantes-canvas');
+                
+                // Inicializar partículas
+                initializeParticles();
+                
+                // Marcar como cargado exitosamente
+                setProjectStatus('aislantes', '');
+                console.log('✅ Sketch de Aislantes cargado correctamente');
+            };
+
+            // Función para inicializar partículas
+            function initializeParticles() {
+                electronParticles = [];
+                for (let i = 0; i < 20; i++) {
+                    electronParticles.push(new ElectronParticle());
+                }
+            }
+
+            // Función para reiniciar el sketch - se asigna después de setup
+            function resetSketch() {
+                slideIndex = 0;
+                initializeParticles();
+                console.log('🔄 Variables del sketch reiniciadas');
+            }
+
+            p.draw = function() {
+                p.background(colorScheme.secondary);
+                timeCounter += 0.02;
+                
+                // IMPORTANTE: Eliminar stroke para todo el texto
+                p.noStroke();
+                
+                // Título con fuente web-safe
+                p.textFont('Orbitron, monospace');
+                p.fill(colorScheme.accent1);
+                p.textAlign(p.CENTER);
+                p.textSize(18);
+                p.text("Aislantes Eléctricos en Energías Renovables", p.width/2, 30);
+                
+                // Navegación
+                p.textFont('Exo 2, sans-serif');
+                p.fill(colorScheme.accent2);
+                p.textSize(10);
+                p.text(`Slide ${slideIndex + 1}/${totalSlides} - Clic izq./der. para navegar`, p.width/2, p.height - 15);
+                
+                // Contenido dinámico
+                switch(slideIndex) {
+                    case 0: showDefinition(); break;
+                    case 1: showProperties(); break;
+                    case 2: showElectronSimulation(); break;
+                    case 3: showRenewableApplications(); break;
+                    case 4: showMaterials(); break;
+                }
+            };
+
+            function showDefinition() {
+                p.noStroke();
+                p.textFont('Orbitron, monospace');
+                p.textAlign(p.LEFT);
+                p.textSize(14);
+                p.fill(colorScheme.accent1);
+                p.text("¿Qué son los Aislantes Eléctricos?", 30, 70);
+                
+                p.textFont('Exo 2, sans-serif');
+                p.textSize(11);
+                p.fill(255);
+                let definitionText = `Un aislante eléctrico es un material cuyas cargas eléctricas
+internas no pueden moverse, causando una escasa magnitud
+de corriente eléctrica bajo la influencia de un campo eléctrico.
+
+Características principales:
+• Alta resistividad eléctrica
+• Impiden el flujo no deseado de electricidad
+• Protegen equipos y personas
+• Evitan cortocircuitos`;
+                
+                p.text(definitionText, 30, 90, 400, 200);
+                
+                // Dibujo visual
+                p.stroke(colorScheme.accent2);
+                p.strokeWeight(2);
+                p.fill(colorScheme.primary);
+                p.rect(450, 200, 150, 15);
+                p.fill(colorScheme.tertiary);
+                p.rect(447, 197, 156, 21);
+                
+                p.noStroke();
+                p.fill(colorScheme.accent1);
+                p.textAlign(p.CENTER);
+                p.textSize(10);
+                p.text("Conductor", 525, 235);
+                p.text("Aislante", 525, 250);
+            }
+
+            function showProperties() {
+                p.noStroke();
+                p.textFont('Orbitron, monospace');
+                p.textAlign(p.LEFT);
+                p.textSize(14);
+                p.fill(colorScheme.accent1);
+                p.text("Propiedades de los Aislantes", 30, 70);
+                
+                p.textFont('Exo 2, sans-serif');
+                p.textSize(11);
+                p.fill(255);
+                let propertiesText = `Propiedades Eléctricas:
+• Resistividad > 10⁸ Ω·m
+• Rigidez dieléctrica elevada
+• Baja conductividad eléctrica
+
+Propiedades Mecánicas:
+• Resistencia mecánica
+• Durabilidad ambiental
+• Estabilidad dimensional
+
+Propiedades Térmicas:
+• Resistencia térmica
+• Baja conductividad térmica
+• Estabilidad química`;
+                
+                p.text(propertiesText, 30, 90, 280, 300);
+                
+                // Gráfico simple
+                displaySimpleChart();
+            }
+
+            function displaySimpleChart() {
+                let chartX = 350;
+                let chartY = 100;
+                let materials = ["Cobre", "Vidrio", "Teflón"];
+                let values = [20, 150, 200];
+                let barColors = [colorScheme.primary, colorScheme.accent1, colorScheme.accent2];
+                
+                p.noStroke();
+                for (let i = 0; i < materials.length; i++) {
+                    let barHeight = values[i];
+                    let barX = chartX + i * 60;
+                    let barY = chartY + 200 - barHeight;
+                    
+                    p.fill(barColors[i]);
+                    p.rect(barX, barY, 40, barHeight);
+                    
+                    p.fill(255);
+                    p.textAlign(p.CENTER);
+                    p.textFont('Exo 2, sans-serif');
+                    p.textSize(9);
+                    p.text(materials[i], barX + 20, chartY + 220);
+                }
+                
+                p.textFont('Orbitron, monospace');
+                p.fill(colorScheme.accent1);
+                p.textAlign(p.CENTER);
+                p.textSize(11);
+                p.text("Resistividad Comparativa", chartX + 90, chartY - 10);
+            }
+
+            function showElectronSimulation() {
+                p.noStroke();
+                p.textFont('Orbitron, monospace');
+                p.textAlign(p.LEFT);
+                p.textSize(14);
+                p.fill(colorScheme.accent1);
+                p.text("Simulación: Flujo de Electrones", 30, 70);
+                
+                // Conductor
+                p.stroke(colorScheme.accent2);
+                p.strokeWeight(2);
+                p.fill(colorScheme.primary);
+                p.rect(80, 150, 200, 40);
+                
+                p.noStroke();
+                p.fill(colorScheme.accent1);
+                p.textAlign(p.CENTER);
+                p.textSize(10);
+                p.text("Conductor", 180, 140);
+                
+                // Aislante
+                p.stroke(colorScheme.accent2);
+                p.strokeWeight(2);
+                p.fill(colorScheme.tertiary);
+                p.rect(350, 150, 200, 40);
+                
+                p.noStroke();
+                p.fill(colorScheme.accent1);
+                p.text("Aislante", 450, 140);
+                
+                // Animar partículas SOLO en el slide 2
+                if (slideIndex === 2) {
+                    for (let particle of electronParticles) {
+                        particle.update();
+                        particle.display();
+                    }
+                }
+            }
+
+            function showRenewableApplications() {
+                p.noStroke();
+                p.textFont('Orbitron, monospace');
+                p.textAlign(p.LEFT);
+                p.textSize(14);
+                p.fill(colorScheme.accent1);
+                p.text("Aplicaciones en Energías Renovables", 30, 70);
+                
+                p.textFont('Exo 2, sans-serif');
+                p.textSize(11);
+                p.fill(255);
+                let applicationsText = `Energía Solar:
+• Transformadores de inversor
+• Protección de paneles
+• Cables de alta tensión
+
+Energía Eólica:
+• Torres de transmisión
+• Transformadores elevadores
+• Protección de generadores`;
+                
+                p.text(applicationsText, 30, 90, 250, 300);
+                
+                // Diagrama simple
+                drawSimpleDiagram();
+            }
+
+            function drawSimpleDiagram() {
+                let startX = 320;
+                let startY = 120;
+                
+                // Panel solar
+                p.noStroke();
+                p.fill(colorScheme.primary);
+                p.rect(startX, startY, 60, 45);
+                p.fill(colorScheme.accent1);
+                p.textAlign(p.CENTER);
+                p.textFont('Exo 2, sans-serif');
+                p.textSize(8);
+                p.text("Panel\nSolar", startX + 30, startY + 20);
+                
+                // Transformador
+                p.fill(colorScheme.tertiary);
+                p.rect(startX + 100, startY + 10, 45, 25);
+                p.fill(colorScheme.accent1);
+                p.text("Transform.", startX + 122, startY + 18);
+                
+                // Torre
+                p.stroke(colorScheme.accent2);
+                p.strokeWeight(2);
+                p.line(startX + 180, startY + 35, startX + 200, startY);
+                p.line(startX + 220, startY + 35, startX + 200, startY);
+                p.line(startX + 190, startY + 15, startX + 210, startY + 15);
+                
+                p.noStroke();
+                p.fill(colorScheme.accent1);
+                p.ellipse(startX + 185, startY + 15, 6, 6);
+                p.ellipse(startX + 215, startY + 15, 6, 6);
+            }
+
+            function showMaterials() {
+                p.noStroke();
+                p.textFont('Orbitron, monospace');
+                p.textAlign(p.LEFT);
+                p.textSize(14);
+                p.fill(colorScheme.accent1);
+                p.text("Materiales Aislantes Comunes", 30, 70);
+                
+                p.textFont('Exo 2, sans-serif');
+                p.textSize(11);
+                p.fill(255);
+                let materialsText = `Tradicionales:
+• Porcelana: Líneas AT
+• Vidrio: Distribución
+• Caucho: Cables BT
+
+Modernos:
+• Teflón: Alta temperatura
+• Polietileno: Submarinos
+• Cerámica: Especiales
+
+Renovables:
+• Resistencia UV
+• Durabilidad extrema
+• Bajo mantenimiento`;
+                
+                p.text(materialsText, 30, 90, 200, 300);
+                
+                // Tabla simple
+                displayMaterialTable();
+            }
+
+            function displayMaterialTable() {
+                let tableX = 280;
+                let tableY = 100;
+                
+                p.noStroke();
+                p.fill(colorScheme.primary, 100);
+                p.rect(tableX, tableY, 200, 150);
+                
+                p.textFont('Orbitron, monospace');
+                p.fill(colorScheme.accent1);
+                p.textAlign(p.CENTER);
+                p.textSize(10);
+                p.text("Propiedades", tableX + 100, tableY + 20);
+                
+                let materials = ["Porcelana", "Vidrio", "Teflón"];
+                let temps = ["1000°C", "500°C", "260°C"];
+                
+                for (let i = 0; i < materials.length; i++) {
+                    let rowY = tableY + 50 + i * 25;
+                    p.fill(255);
+                    p.textAlign(p.LEFT);
+                    p.textFont('Exo 2, sans-serif');
+                    p.textSize(9);
+                    p.text(materials[i], tableX + 20, rowY);
+                    p.text(temps[i], tableX + 120, rowY);
+                }
+            }
+
+            // Clase Electron mejorada
+            class ElectronParticle {
+                constructor() {
+                    this.reset();
+                }
+                
+                reset() {
+                    this.posX = 80;
+                    this.posY = p.random(155, 185);
+                    this.velocity = p.random(1, 2);
+                }
+                
+                update() {
+                    // Solo actualizar si estamos en el slide de simulación
+                    if (slideIndex === 2) {
+                        this.posX += this.velocity;
+                        if (this.posX > 280) {
+                            this.reset();
+                        }
+                    }
+                }
+                
+                display() {
+                    // Solo mostrar si estamos en el slide de simulación
+                    if (slideIndex === 2) {
+                        p.noStroke();
+                        p.fill(colorScheme.accent1);
+                        p.ellipse(this.posX, this.posY, 4, 4);
+                        
+                        p.fill(colorScheme.accent2, 100);
+                        p.ellipse(this.posX - 8, this.posY, 2, 2);
+                    }
+                }
+            }
+
+            // Navegación mejorada con validación
+            function changeSlide(direction) {
+                let newSlide = slideIndex + direction;
+                
+                if (newSlide >= 0 && newSlide < totalSlides) {
+                    slideIndex = newSlide;
+                    
+                    // Reiniciar partículas cuando llegamos al slide 2
+                    if (slideIndex === 2) {
+                        for (let particle of electronParticles) {
+                            particle.reset();
+                        }
+                    }
+                    
+                    console.log(`📍 Navegando a slide ${slideIndex + 1}`);
+                }
+            }
+
+            p.mousePressed = function() {
+                // Verificar que el clic está dentro del canvas
+                if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
+                    if (p.mouseX < p.width/2) {
+                        changeSlide(-1); // Izquierda
+                    } else {
+                        changeSlide(1);  // Derecha
+                    }
+                    return false; // Prevenir comportamiento por defecto
+                }
+            };
+
+            p.keyPressed = function() {
+                if (p.keyCode === p.LEFT_ARROW) {
+                    changeSlide(-1);
+                } else if (p.keyCode === p.RIGHT_ARROW) {
+                    changeSlide(1);
+                }
+                return false; // Prevenir comportamiento por defecto
+            };
+
+            // ASIGNAR REFERENCIA GLOBAL DESPUÉS DE QUE TODAS LAS FUNCIONES ESTÉN DEFINIDAS
+            // Esto se ejecuta después de setup()
+            setTimeout(function() {
+                aislantesSketches = p;
+                aislantesSketches.resetSketch = resetSketch;
+                console.log('🔗 Referencias globales asignadas correctamente');
+            }, 100);
+        };
+
+        // Inicializar el sketch de Aislantes después de que se cargue el DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                new p5(aislanteSketch);
+                console.log('✅ p5.js sketch inicializado correctamente');
+            } catch (error) {
+                console.error('❌ Error al inicializar el sketch:', error);
+                setProjectStatus('aislantes', 'error');
+            }
+        });
+    </script>
+</body>
+</html>
