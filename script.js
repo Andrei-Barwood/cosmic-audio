@@ -92,21 +92,28 @@ if (contactForm) {
 // sharing to social media
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Only run if share buttons exist on this page
+    if (!document.querySelector('.share-btn')) return;
+    
     const currentUrl = encodeURIComponent(window.location.href);
     const currentTitle = encodeURIComponent(document.title);
     const shareText = encodeURIComponent('Check out this awesome underground DJ site! #techno #dj');
 
     // Update Twitter link
-    document.querySelector('.share-btn.twitter').href = `https://twitter.com/intent/tweet?url=${currentUrl}&text=${shareText}`;
+    const twitterBtn = document.querySelector('.share-btn.twitter');
+    if (twitterBtn) twitterBtn.href = `https://twitter.com/intent/tweet?url=${currentUrl}&text=${shareText}`;
 
     // Update Facebook link
-    document.querySelector('.share-btn.facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+    const facebookBtn = document.querySelector('.share-btn.facebook');
+    if (facebookBtn) facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
 
     // Update Reddit link
-    document.querySelector('.share-btn.reddit').href = `https://reddit.com/submit?url=${currentUrl}&title=${currentTitle}`;
+    const redditBtn = document.querySelector('.share-btn.reddit');
+    if (redditBtn) redditBtn.href = `https://reddit.com/submit?url=${currentUrl}&title=${currentTitle}`;
 
     // Update WhatsApp link
-    document.querySelector('.share-btn.whatsapp').href = `whatsapp://send?text=${shareText} ${currentUrl}`;
+    const whatsappBtn = document.querySelector('.share-btn.whatsapp');
+    if (whatsappBtn) whatsappBtn.href = `whatsapp://send?text=${shareText} ${currentUrl}`;
 });
 
 // copy to clipboard

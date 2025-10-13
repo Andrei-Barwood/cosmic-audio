@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Community feed - Underground thoughts and updates">
+    <title>Community Feed | Mega Doll</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="feed-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- JavaScript Detection - Required for all pages -->
+<noscript>
+    <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
+        <div style="text-align: center; padding: 2rem; max-width: 600px;">
+            <h1 style="color: #AEF504; font-family: 'Space Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem;">⚠️ JavaScript Required</h1>
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">This underground DJ site requires JavaScript for full functionality.</p>
+            <a href="/security - habilita-js.html" style="color: #121312; background: #AEF504; text-decoration: none; padding: 1rem 2rem; display: inline-block; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Enable JavaScript</a>
+        </div>
+    </div>
+</noscript>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">Mega Doll</div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#music" class="nav-link">Music</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="feed.html" class="nav-link">Feed</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+<!-- Auth Modal -->
+<div class="auth-modal" id="authModal">
+    <div class="auth-modal-content">
+        <button class="auth-modal-close" id="closeAuthModal">×</button>
+        
+        <!-- Login Form -->
+        <div class="auth-form" id="loginForm">
+            <h2>Welcome Back</h2>
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button class="btn-auth" id="loginBtn">Log In</button>
+            <p class="auth-switch">Don't have an account? <a href="#" id="showRegister">Sign up</a></p>
+        </div>
+
+        <!-- Register Form -->
+        <div class="auth-form" id="registerForm" style="display: none;">
+            <h2>Join the Underground</h2>
+            <input type="text" id="registerUsername" placeholder="Username" required>
+            <input type="email" id="registerEmail" placeholder="Email" required>
+            <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required>
+            <button class="btn-auth" id="registerBtn">Sign Up</button>
+            <p class="auth-switch">Already have an account? <a href="#" id="showLogin">Log in</a></p>
+        </div>
+
+        <div id="authError" class="auth-error"></div>
+    </div>
+</div>
+
+<!-- User Menu (when logged in) -->
+<div class="user-menu" id="userMenu" style="display: none;">
+    <img src="" alt="User" class="user-menu-avatar" id="userAvatar">
+    <span class="user-menu-name" id="userName"></span>
+    <button class="btn-logout" id="logoutBtn">Logout</button>
+</div>
+
+
+    <!-- Feed Section -->
+    <section class="feed-section">
+        <div class="container">
+            <div class="feed-layout">
+                <!-- Main Feed Column -->
+                <div class="feed-main">
+                    <!-- Feed Header -->
+                    <div class="feed-header">
+                        <h1 class="feed-title">DollCore Feed</h1>
+                        <p class="feed-subtitle">Thoughts from the scene</p>
+                    </div>
+
+                    <!-- Post Composer -->
+                    <div class="post-composer">
+                        <div class="composer-avatar">
+                            <img src="img/14.jpg" alt="DJ Avatar">
+                        </div>
+                        <div class="composer-content">
+                            <textarea 
+                                id="postInput" 
+                                class="composer-textarea" 
+                                placeholder="What's happening in the underground?"
+                                maxlength="500"
+                            ></textarea>
+                            <div class="composer-footer">
+                                <div class="composer-tools">
+                                    <button class="composer-tool" title="Add emoji">😎</button>
+                                    <button class="composer-tool" title="Add link">🔗</button>
+                                    <button class="composer-tool" title="Add hashtag">#</button>
+                                </div>
+                                <div class="composer-actions">
+                                    <span class="char-count" id="charCount">0/500</span>
+                                    <button class="btn-post" id="postBtn">Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feed Filter -->
+                    <div class="feed-filter">
+                        <button class="filter-btn active" data-filter="all">All Posts</button>
+                        <button class="filter-btn" data-filter="scene">Scene Reports</button>
+                        <button class="filter-btn" data-filter="thoughts">Thoughts</button>
+                        <button class="filter-btn" data-filter="music">Music</button>
+                    </div>
+
+                    <!-- Posts Feed -->
+                    <div class="posts-feed" id="postsFeed">
+                        <!-- Posts will be dynamically inserted here -->
+                        
+                        <!-- Example Post (remove in production - this is just a template) -->
+                        
+
+                        <!-- Another Example Post -->
+                        <!--
+                        <article class="feed-post" data-category="music">
+                            <div class="post-avatar">
+                                <img src="dj-photo.jpg" alt="DJ Name">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-header">
+                                    <div class="post-author">
+                                        <span class="author-name">DJ NAME</span>
+                                        <span class="author-handle">@djname</span>
+                                        <span class="post-badge">Music</span>
+                                    </div>
+                                    <span class="post-time">5h ago</span>
+                                </div>
+                                <div class="post-body">
+                                    <p>New tracks from emerging artists hitting different this week. Support underground labels, support the culture. Drop your favorite underground releases below 👇</p>
+                                </div>
+                                <div class="post-footer">
+                                    <button class="post-action like-btn">
+                                        <span class="action-icon">♥</span>
+                                        <span class="action-count">87</span>
+                                    </button>
+                                    <button class="post-action reply-btn">
+                                        <span class="action-icon">💬</span>
+                                        <span class="action-count">23</span>
+                                    </button>
+                                    <button class="post-action share-btn">
+                                        <span class="action-icon">↗</span>
+                                        <span class="action-count">15</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                        -->
+                        <!-- Thoughts Post -->
+                        <!--
+                        <article class="feed-post" data-category="thoughts">
+                            <div class="post-avatar">
+                                <img src="img/16.jpeg" alt="DJ Name">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-header">
+                                    <div class="post-author">
+                                        <span class="author-name">DJ NAME</span>
+                                        <span class="author-handle">@djname</span>
+                                        <span class="post-badge">Thoughts</span>
+                                    </div>
+                                    <span class="post-time">1d ago</span>
+                                </div>
+                                <div class="post-body">
+                                    <p>The underground isn't a place, it's a mindset. It's about staying true to the sound, rejecting commercialization, and building community over clout. Never forget why we started this.</p>
+                                </div>
+                                <div class="post-footer">
+                                    <button class="post-action like-btn active">
+                                        <span class="action-icon">♥</span>
+                                        <span class="action-count">156</span>
+                                    </button>
+                                    <button class="post-action reply-btn">
+                                        <span class="action-icon">💬</span>
+                                        <span class="action-count">34</span>
+                                    </button>
+                                    <button class="post-action share-btn">
+                                        <span class="action-icon">↗</span>
+                                        <span class="action-count">45</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </article> -->
+                    </div>
+
+                    <!-- Load More -->
+                    <div class="load-more">
+                        <button class="btn-load-more">Load More Posts</button>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="feed-sidebar">
+                    <!-- Trending Section -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Trending in the Scene</h3>
+                        <div class="trending-list">
+                            <div class="trending-item">
+                                <span class="trending-rank">1</span>
+                                <div class="trending-info">
+                                    <span class="trending-tag">#O2Arena</span>
+                                    <span class="trending-count">2.4K posts</span>
+                                </div>
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-rank">2</span>
+                                <div class="trending-info">
+                                    <span class="trending-tag">#BerlinScene</span>
+                                    <span class="trending-count">1.8K posts</span>
+                                </div>
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-rank">3</span>
+                                <div class="trending-info">
+                                    <span class="trending-tag">#NewReleases</span>
+                                    <span class="trending-count">1.2K posts</span>
+                                </div>
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-rank">4</span>
+                                <div class="trending-info">
+                                    <span class="trending-tag">#CocaColaPeopleMultiplier</span>
+                                    <span class="trending-count">987 posts</span>
+                                </div>
+                            </div>
+                            <div class="trending-item">
+                                <span class="trending-rank">5</span>
+                                <div class="trending-info">
+                                    <span class="trending-tag">#LiveSets</span>
+                                    <span class="trending-count">756 posts</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Who to Follow -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Underground Artists</h3>
+                        <div class="follow-list">
+                            <div class="follow-item">
+                                <img src="img/17.jpeg" alt="Artist" class="follow-avatar">
+                                <div class="follow-info">
+                                    <span class="follow-name">Zorry Vix</span>
+                                    <span class="follow-handle">@sehrvix</span>
+                                </div>
+                                <button class="btn-follow">Follow</button>
+                            </div>
+                            <div class="follow-item">
+                                <img src="img/16.jpeg" alt="Artist" class="follow-avatar">
+                                <div class="follow-info">
+                                    <span class="follow-name">Andrew Kaamo</span>
+                                    <span class="follow-handle">@KaamoStation</span>
+                                </div>
+                                <button class="btn-follow">Follow</button>
+                            </div>
+                            <div class="follow-item">
+                                <img src="img/15.jpeg" alt="Artist" class="follow-avatar">
+                                <div class="follow-info">
+                                    <span class="follow-name">Yui Tanaka</span>
+                                    <span class="follow-handle">@yukitafrita</span>
+                                </div>
+                                <button class="btn-follow">Follow</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Quick Links</h3>
+                        <div class="quick-links">
+                            <a href="index.html#events">Upcoming Events</a>
+                            <a href="blog.html">Blog</a>
+                            <a href="index.html#music">Latest Releases</a>
+                            <a href="index.html#contact">Get in Touch</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Andrew Walter III Kaamo 'D La Simmetrie. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+     </footer>
+
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <!-- 1. FIREBASE SDKS FIRST -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- 2. FIREBASE CONFIGURATION -->
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBDWdoC8egiR8aQZM2-Jgf39xRETPmMxdU",
+            authDomain: "megadoll-feed.firebaseapp.com",
+            projectId: "megadoll-feed",
+            storageBucket: "megadoll-feed.firebasestorage.app",
+            messagingSenderId: "1075700513799",
+            appId: "1:1075700513799:web:1a529de975eff659fb3ea2"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        console.log('✅ Firebase initialized successfully');
+    </script>
+
+    <!-- 3. YOUR SCRIPTS LAST -->
+    <script src="script.js"></script>
+    <script src="feed.js"></script>
+
+</body>
+</html>
