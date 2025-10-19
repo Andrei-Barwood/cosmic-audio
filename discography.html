@@ -1,0 +1,172 @@
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mega Doll | Discography</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script language="javascript" type="text/javascript" src="security.js"></script>
+  <style>
+    /* Extra quick glitch example if you want more than your main CSS includes */
+    .glitch {
+      color: var(--primary-color);
+      position: relative;
+      display: inline-block;
+      font-family: 'Arial', monospace, sans-serif;
+      text-shadow:
+        2px 0 var(--secondary-color),
+        -2px 0 var(--tertiary-color),
+        1px 3px var(--dark-bg),
+        1px -3px var(--olive-accent);
+      animation: glitch-anim 1.4s infinite linear alternate-reverse;
+    }
+    @keyframes glitch-anim {
+      0% {transform:translate(0, 0);}
+      20% {transform:translate(-1px, 1px);}
+      40% {transform:translate(-3px, 0);}
+      60% {transform:translate(2px, 1px);}
+      80% {transform:translate(-1px, -1px);}
+      100% {transform:translate(0, 0);}
+    }
+    .music-card-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: linear-gradient(135deg, #222 60%, #444 100%);
+      border-radius: 10px 10px 0 0;
+      display: block;
+      object-fit: cover;
+      margin-bottom: 0.5em;
+      border: 2px solid var(--primary-color);
+      box-shadow: 0 2px 8px #000a;
+    }
+    .direct-download {
+      display:inline-block;
+      margin: 0.6em 0 0 0;
+      font-size: 0.93em;
+      letter-spacing: 0.5px;
+      color: var(--success-color);
+      text-decoration: underline wavy var(--secondary-color);
+      font-weight: bold;
+      transition: color .15s;
+      filter: drop-shadow(0px 1px 3px var(--secondary-color));
+    }
+    .direct-download:hover {
+      color: var(--tertiary-color);
+      text-decoration-color: var(--olive-accent);
+    }
+  </style>
+
+</head>
+<body>
+<noscript>
+    <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
+        <div style="text-align: center; padding: 2rem; max-width: 600px;">
+            <h1 style="color: #AEF504; font-family: 'Space Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem;">⚠️ JavaScript Required</h1>
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">This underground DJ site requires JavaScript for full functionality.</p>
+            <a href="/security - habilita-js.html" style="color: #121312; background: #AEF504; text-decoration: none; padding: 1rem 2rem; display: inline-block; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Enable JavaScript</a>
+        </div>
+    </div>
+</noscript>
+
+
+<!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">Mega Doll</div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#music" class="nav-link">Music</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="feed.html" class="nav-link">Feed</a></li>
+                <li><a href="#" class="nav-link">Discography</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="glitch evilz-heart" data-text="Mega Doll">f</h1>
+      <p class="hero-subtitle">Discography & Artistic Journey</p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-primary">Listen Now</a>
+        <a href="#" class="btn btn-outline">About Mega Doll</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span></span>
+    </div>
+  </section>
+
+  <section class="section section-dark fade-in">
+    <h2 class="section-title">Discography</h2>
+    <div class="music-grid">
+      <!-- Album Cards Start, each image is a placeholder. Name images like honey_and_the_go_dark.jpg -->
+      <div class="music-card">
+        <img class="music-card-img" src="img/discography/01_honey_&_and_then_go_dark.jpg" alt="Honey and the Go Dark cover" loading="lazy"/>
+        <div class="music-card-info">
+          <h3 >Honey and the Go Dark</h3>
+          <a href="downloads/honey_and_the_go_dark.zip" class="direct-download">direct download</a>
+        </div>
+      </div>
+      <div class="music-card">
+        <img class="music-card-img" src="img/discography/kawaii_nightmares.jpg" alt="Kawaii Nightmares cover" loading="lazy"/>
+        <div class="music-card-info">
+          <h3 >Kawaii Nightmares</h3>
+          <a href="downloads/kawaii_nightmares.zip" class="direct-download">direct download</a>
+        </div>
+      </div>
+      <div class="music-card">
+        <img class="music-card-img" src="img/discography/El_Valle_de_las_Arenas_Rojas.jpg" alt="El Valle de las Arenas Rojas cover" loading="lazy"/>
+        <div class="music-card-info">
+          <h3 >El Valle de las Arenas Rojas</h3>
+          <a href="downloads/El_Valle_de_las_Arenas_Rojas.zip" class="direct-download">direct download</a>
+        </div>
+      </div>
+      <div class="music-card">
+        <img class="music-card-img" src="img/discography/An_Insane_Alice.jpg" alt="An Insane Alice cover" loading="lazy"/>
+        <div class="music-card-info">
+          <h3 >An Insane Alice</h3>
+          <a href="downloads/An_Insane_Alice.zip" class="direct-download">direct download</a>
+        </div>
+      </div>
+      <!-- CONTINUE like this for the remaining albums; here are generic examples for copy-paste.
+           Sanitize/slugify titles for filenames as needed.
+           <div class="music-card">
+             <img class="music-card-img" src="img/discography/ALBUM_FILENAME.jpg" alt="ALBUM TITLE cover" loading="lazy"/>
+             <div class="music-card-info">
+               <h3 >ALBUM TITLE</h3>
+               <a href="downloads/ALBUM_FILENAME.zip" class="direct-download">direct download</a>
+             </div>
+           </div>
+        -->
+      <!-- Album Cards End -->
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Mega Doll. All Rights Reserved.</p>
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+        <a href="#">Bandcamp</a>
+      </div>
+    </div>
+  </footer>
+  
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8679;</button>
+</body>
+</html>
