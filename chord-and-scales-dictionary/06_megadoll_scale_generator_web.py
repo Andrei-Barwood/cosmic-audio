@@ -1,3 +1,12 @@
+
+# steps for installing and running the web app version offline:
+
+# Install Flask first
+# pip3 install flask
+# Run the web app
+# python3 scale_chord_web.py
+
+
 from flask import Flask, render_template_string, request
 from music21 import note, interval, chord
 
