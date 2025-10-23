@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Underground DJ & Music Producer - Live Sets, Events & Releases">
+    <title>Mega Doll | Musical Artist </title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script language="javascript" type="text/javascript" src="security.js"></script>
+
+      <link href="https://fonts.cdnfonts.com/css/evilz" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+  <noscript>
+    <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
+        <div style="text-align: center; padding: 2rem; max-width: 600px;">
+            <h1 style="color: #AEF504; font-family: 'Space Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem;">⚠️ JavaScript Required</h1>
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">This underground DJ site requires JavaScript for full functionality.</p>
+            <a href="/security - habilita-js.html" style="color: #121312; background: #AEF504; text-decoration: none; padding: 1rem 2rem; display: inline-block; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Enable JavaScript</a>
+        </div>
+    </div>
+</noscript>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">Mega Doll</div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#music" class="nav-link">Music</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="discography.html" class="nav-link">Discography</a></li>
+                <li><a href="feed.html" class="nav-link">Feed</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+<!-- Chord Generator Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <!--<div class="about-image">
+                    <img src="img/03 - andrew kaamo.jpg" alt="DJ Photo">
+                </div> -->
+                <div class="about-content">
+                    <div class="container">
+    <h1>Scale & Chord Generator</h1>
+    <form id="generator-form">
+        <h5>harmony and voice leading the mega doll way</h5>
+      <h5>you can use hashtag '#' for sharps and 'b' for flats</h5>
+      <label for="scale">Select Scale:</label>
+      <select id="scale">
+        <option value="hungarian_minor">Hungarian Minor</option>
+        <option value="phrygian_dominant">Phrygian Dominant</option>
+        <option value="augmented">Augmented</option>
+      </select>
+      <label>Chord Type:</label>
+      <label><input type="radio" name="chord_type" value="seventh" checked>Seventh</label>
+      <label><input type="radio" name="chord_type" value="ninth">Ninth</label>
+      <label><input type="radio" name="chord_type" value="suspended">Suspended</label>
+      <label for="root">Root Note:</label>
+      <input type="text" id="root" value="C">
+      <button type="submit">Generate</button>
+    </form>
+    <div id="output" class="results"></div>
+  </div>
+  <script src="scale_chord.js"></script>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section>
+    
+</section>
+  
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Andrew Walter III Kaamo 'D La Simmetrie. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
