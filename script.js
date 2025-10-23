@@ -121,3 +121,41 @@ document.addEventListener('DOMContentLoaded', function() {
 function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
 }
+
+// DYNAMIC FAVICON
+
+// Color palette: change/add hex codes for your moods/seasons!
+const colors = [
+  "#731D26", "#B62645", "#541D1D", "#292C30", "#000000", "#212226",
+  "#46474B", "#565656", "#000000", "#FFFF00", "#D0D2D6", "#242623", "#B7B8BA", "#98999A"
+];
+
+// Your Evilz heart SVG path data
+const heartPath = `M491 551q-7 0 -16 11.5t-9 22.5q0 19 26 19q22 0 22 -17q0 -11 -7.5 -23.5t-15.5 -12.5zM577 408q-24 0 -41 20t-17 49q0 28 17 48.5t41 20.5q25 0 42 -20.5t17 -48.5q0 -29 -17 -49t-42 -20zM401 408q-25 0 -42 20t-17 49q0 28 17 48.5t42 20.5q24 0 41 -20.5t17 -48.5
+q0 -29 -17 -49t-41 -20zM492 223q-87 -137 -213 -137q-85 0 -144 65q-61 68 -57 171q11 76 55 161q106 204 359 423q252 -219 358 -423q44 -85 55 -161q4 -114 -68.5 -182t-168.5 -51q-104 19 -176 134zM577 635v7q0 16 -11 28.5t-27 13.5q-16 2 -24 -5q-12 9 -26 9
+q-16 0 -28 -10q-8 8 -25 6q-15 -1 -26.5 -13.5t-11.5 -28.5v-9q-121 -36 -121 -140q0 -85 66 -143q62 -56 149 -56q85 0 149.5 57t64.5 142q0 50 -33.5 88t-95.5 54z`;
+
+function setFavicon(color) {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="-10 0 999 1000">
+      <path fill="${color}" d="${heartPath}" />
+    </svg>
+  `;
+  // Encode SVG as base64
+  const url = 'data:image/svg+xml;base64,' + btoa(svg);
+  let link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'icon';
+    document.head.appendChild(link);
+  }
+  link.href = url;
+}
+
+let colorIndex = 0;
+function cycleFavicon() {
+  setFavicon(colors[colorIndex]);
+  colorIndex = (colorIndex + 1) % colors.length;
+}
+cycleFavicon(); // Set immediately on page load
+setInterval(cycleFavicon, 4000); // Change every 4 seconds
