@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 # --- Configuration ---
 html_filename = 'discography.html'
-img_dir = 'img/directory'
+img_dir = 'img/discography'
 artist_name = 'Mega Doll'
 # ----------------------
 
