@@ -1,0 +1,4 @@
+Open($1)              # Open the font file supplied as a command-line argument
+Select('f')           # Select the glyph for 'f'
+Export('evilz-heart-f.svg')  # Export selected glyph as SVG
+Quit()                # Exit FontForge
