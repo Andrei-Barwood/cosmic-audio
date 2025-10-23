@@ -4,7 +4,7 @@
 # Install Flask first
 # pip3 install flask
 # Run the web app
-# python3 scale_chord_web.py
+# python3 06_megadoll_scale_generator_web.py
 
 
 from flask import Flask, render_template_string, request
