@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMARR ORACLE - Technical Specifications Datasheet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="blog-styles.css">
+</head>
+<body>
+    <div class="hero" style="min-height: 60vh;">
+        <div class="hero-content">
+            <h1 class="glitch">ORACLE</h1>
+            <p class="hero-subtitle">Amarr Empire Attack Battlecruiser - Class IV</p>
+            <div class="post-badge">CLASSIFIED: TIER-3 BATTLECRUISER</div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Electrical Power Systems Datasheet</h2>
+            
+            <div class="blog-layout">
+                <div class="blog-main">
+                    <!-- Primary Specifications -->
+                    <div class="featured-post" style="margin-bottom: 3rem;">
+                        <div class="blog-post-content">
+                            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">Primary Power Grid Specifications</h3>
+                            
+                            <div class="quick-facts" style="margin: 2rem 0;">
+                                <div class="fact-item">
+                                    <div class="fact-icon">⚡</div>
+                                    <div class="fact-content">
+                                        <h4>Powergrid Output</h4>
+                                        <p style="font-size: 1.5rem; color: var(--primary-color); font-family: 'Space Mono', monospace;">1,375 MW</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="fact-item">
+                                    <div class="fact-icon">🔋</div>
+                                    <div class="fact-content">
+                                        <h4>Capacitor Capacity</h4>
+                                        <p style="font-size: 1.5rem; color: var(--primary-color); font-family: 'Space Mono', monospace;">3,500 GJ</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="quick-facts" style="margin: 2rem 0;">
+                                <div class="fact-item">
+                                    <div class="fact-icon">⏱️</div>
+                                    <div class="fact-content">
+                                        <h4>Capacitor Recharge Time</h4>
+                                        <p style="font-size: 1.5rem; color: var(--secondary-color); font-family: 'Space Mono', monospace;">875 seconds</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="fact-item">
+                                    <div class="fact-icon">💻</div>
+                                    <div class="fact-content">
+                                        <h4>CPU Output</h4>
+                                        <p style="font-size: 1.5rem; color: var(--secondary-color); font-family: 'Space Mono', monospace;">345 Tf</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Electrical Engineering Calculations -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">01</div>
+                            <h2>Power Distribution Analysis</h2>
+                        </div>
+                        
+                        <div class="concept-box">
+                            <h4>Estimated Operating Voltage</h4>
+                            <p>Based on naval vessel standards for high-power systems, the Oracle operates on a 3-phase AC distribution system at an estimated <strong>6.6 kV - 11 kV</strong> for main power bus.</p>
+                            <p style="margin-top: 1rem;">Using the formula: <code style="background: var(--darker-bg); padding: 0.5rem;">V = P / (√3 × I × PF)</code></p>
+                        </div>
+
+                        <div class="info-card" style="margin: 2rem 0;">
+                            <h3>Current Capacity Calculation</h3>
+                            <p><strong>Power (P):</strong> 1,375 MW = 1.375 × 10⁹ W</p>
+                            <p><strong>Assumed Voltage (V):</strong> 6.6 kV (6,600 V)</p>
+                            <p><strong>Power Factor (PF):</strong> 0.9 (typical for inductive loads)</p>
+                            <p style="margin-top: 1rem; padding: 1rem; background: var(--darker-bg); font-family: 'Space Mono', monospace;">
+                                I = P / (√3 × V × PF)<br>
+                                I = 1.375 × 10⁹ / (1.732 × 6,600 × 0.9)<br>
+                                I ≈ <span style="color: var(--primary-color); font-size: 1.3rem;">133,900 A</span>
+                            </p>
+                        </div>
+
+                        <div class="info-card" style="margin: 2rem 0; border-left-color: var(--secondary-color);">
+                            <h3>Alternative at 11 kV Distribution</h3>
+                            <p style="padding: 1rem; background: var(--darker-bg); font-family: 'Space Mono', monospace;">
+                                I = 1.375 × 10⁹ / (1.732 × 11,000 × 0.9)<br>
+                                I ≈ <span style="color: var(--secondary-color); font-size: 1.3rem;">80,400 A</span>
+                            </p>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">Higher voltage reduces current requirements and transmission losses through ship circuits. Remember that high current creates risk of fire when there's low voltage stock, but too much voltage stock and little stock current can damage equipment from under currents, find the optimal balance of operational efficiency, and keep the operating factors always over 0.9 to 1.0 (Security Posture star systems ring a bell here) aim at level 1.0</p>
+                        </div>
+                    </div>
+
+                    <!-- Fundamental Formulas Section -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">02</div>
+                            <h2>Core Electrical Formulas</h2>
+                        </div>
+
+                        <div class="layer-breakdown">
+                            <div class="layer">
+                                <h4>Ohm's Law</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem; margin-top: 0.5rem;">
+                                    I = E / R<br>
+                                    E = I × R<br>
+                                    R = E / I
+                                </p>
+                                <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Where: I = Current (Amperes), E = Voltage (Volts), R = Resistance (Ohms)</p>
+                            </div>
+
+                            <div class="layer">
+                                <h4>Power Calculations</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem; margin-top: 0.5rem;">
+                                    P = V × I<br>
+                                    P = V² / R<br>
+                                    P = I² × R
+                                </p>
+                                <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Where: P = Power (Watts), V = Voltage (Volts), I = Current (Amperes)</p>
+                            </div>
+
+                            <div class="layer">
+                                <h4>Current & Charge</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem; margin-top: 0.5rem;">
+                                    I = Q / t<br>
+                                    Q = I × t<br>
+                                    t = Q / I
+                                </p>
+                                <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Where: Q = Charge (Coulombs), t = Time (seconds)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Circuit Analysis -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">03</div>
+                            <h2>Capacitor Circuit Analysis</h2>
+                        </div>
+
+                        <div class="comparison-box">
+                            <div class="comparison-column">
+                                <h4>Series Circuits</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem; font-size: 0.9rem;">
+                                    R<sub>T</sub> = R₁ + R₂ + R₃ + ... + R<sub>N</sub>
+                                </p>
+                                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">Total resistance is the sum of all resistances</p>
+                                <p style="margin-top: 1rem;"><strong>Voltage Divider:</strong></p>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 0.5rem; font-size: 0.85rem;">
+                                    V<sub>x</sub> = (R<sub>x</sub> / R<sub>T</sub>) × E
+                                </p>
+                            </div>
+
+                            <div class="comparison-column">
+                                <h4>Parallel Circuits</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem; font-size: 0.9rem;">
+                                    R<sub>T</sub> = (R₁ × R₂) / (R₁ + R₂)
+                                </p>
+                                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">For two resistors in parallel</p>
+                                <p style="margin-top: 1rem;"><strong>Current Divider:</strong></p>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 0.5rem; font-size: 0.85rem;">
+                                    I₂ = I<sub>T</sub> × (R₁ / (R₁ + R₂))
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="pro-tip" style="margin-top: 2rem;">
+                            <h4>Oracle Capacitor Recharge Rate</h4>
+                            <p>The capacitor recharges at <strong>peak efficiency around 25-35%</strong> charge level, following a non-linear recharge curve. Full recharge from empty takes <strong>875 seconds</strong> (≈14.6 minutes).</p>
+                            <p style="margin-top: 1rem;">Average recharge rate: <code>3,500 GJ / 875 s = 4.0 GJ/s</code></p>
+                        </div>
+                    </div>
+
+                    <!-- AC Power Systems -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">04</div>
+                            <h2>AC Power & Impedance</h2>
+                        </div>
+
+                        <div class="layer-breakdown">
+                            <div class="layer">
+                                <h4>Sinusoidal Current & Voltage</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem;">
+                                    i = I<sub>m</sub> × sin(ωt)<br>
+                                    e = E<sub>m</sub> × sin(ωt)<br>
+                                    ω = 2π × f
+                                </p>
+                                <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Where: ω = angular frequency (rad/s), f = frequency (Hz)</p>
+                            </div>
+
+                            <div class="layer">
+                                <h4>Total Impedance (RLC Circuits)</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem;">
+                                    Z = R + j(X<sub>L</sub> - X<sub>C</sub>)
+                                </p>
+                                <p style="margin-top: 0.5rem;">Where:</p>
+                                <ul style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                                    <li>R = Resistance (real component)</li>
+                                    <li>X<sub>L</sub> = Inductive reactance (positive imaginary)</li>
+                                    <li>X<sub>C</sub> = Capacitive reactance (negative imaginary)</li>
+                                </ul>
+                            </div>
+
+                            <div class="layer">
+                                <h4>Capacitive Reactance</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem;">
+                                    X<sub>C</sub> = 1 / (ωC)<br>
+                                    C = 1 / (ωX<sub>C</sub>)
+                                </p>
+                                <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Result in microfarads (μF)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ship Structural Specifications -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">05</div>
+                            <h2>Structural & Defense Systems</h2>
+                        </div>
+
+                        <div class="player-stats" style="margin: 2rem 0;">
+                            <div class="stat">
+                                <span class="stat-label">Shield HP</span>
+                                <span class="stat-value">1,575</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Armor HP</span>
+                                <span class="stat-value">2,160</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Structure HP</span>
+                                <span class="stat-value">1,980</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Total HP</span>
+                                <span class="stat-value" style="color: var(--secondary-color);">5,715</span>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Physical Characteristics</h3>
+                            <p><strong>Mass:</strong> 14,760,000 kg (14,760 metric tons)</p>
+                            <p><strong>Volume:</strong> 234,000 m³</p>
+                            <p><strong>Cargo Capacity:</strong> 500 m³</p>
+                            <p><strong>Maximum Velocity:</strong> 200 m/s</p>
+                            <p><strong>Warp Speed:</strong> 3.5 AU/s</p>
+                        </div>
+                    </div>
+
+                    <!-- Weapon Systems -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">06</div>
+                            <h2>Large Energy Turret Systems</h2>
+                        </div>
+
+                        <div class="technique-breakdown">
+                            <div class="technique-step">
+                                <span class="technique-icon">🔫</span>
+                                <h4>High Slots</h4>
+                                <p>8 Turret Hardpoints</p>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem;">For Large Beam/Pulse Lasers</p>
+                            </div>
+
+                            <div class="technique-step">
+                                <span class="technique-icon">⚙️</span>
+                                <h4>Mid Slots</h4>
+                                <p>3 Module Slots</p>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem;">Tracking/Range enhancers</p>
+                            </div>
+
+                            <div class="technique-step">
+                                <span class="technique-icon">🛡️</span>
+                                <h4>Low Slots</h4>
+                                <p>6 Module Slots</p>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem;">Heat sinks/Tank modules</p>
+                            </div>
+                        </div>
+
+                        <div class="warning-box">
+                            <h4>⚠️ Critical Operating Notes</h4>
+                            <p>The Oracle features <strong>95% reduction in Large Energy Turret powergrid requirement</strong> and <strong>50% reduction in activation cost</strong>, allowing unprecedented laser battery firepower.</p>
+                            <p style="margin-top: 1rem;">However, defensive systems are minimal - the ship relies on range and firepower over durability. Optimal engagement range: <strong>60-250 km</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Targeting Systems -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">07</div>
+                            <h2>Sensor & Targeting Systems</h2>
+                        </div>
+
+                        <div class="timing-grid">
+                            <div class="timing-option">
+                                <h4>Max Lock Targets</h4>
+                                <p style="font-size: 2rem; color: var(--primary-color);">6</p>
+                            </div>
+
+                            <div class="timing-option">
+                                <h4>Target Range</h4>
+                                <p style="font-size: 2rem; color: var(--primary-color);">65 km</p>
+                            </div>
+
+                            <div class="timing-option">
+                                <h4>Scan Resolution</h4>
+                                <p style="font-size: 2rem; color: var(--primary-color);">220 mm</p>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Sensor Array</h3>
+                            <p><strong>Radar Sensors:</strong> 18 points</p>
+                            <p><strong>Signature Radius:</strong> 210 m</p>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">Uses Amarr radar-based targeting systems for precision long-range fire control.</p>
+                        </div>
+                    </div>
+
+                    <!-- Key Takeaways -->
+                    <div class="key-takeaways">
+                        <h3>Oracle Engineering Summary</h3>
+                        <ul>
+                            <li>Operates on estimated <strong>6.6-11 kV 3-phase AC</strong> main power distribution</li>
+                            <li>Current capacity ranges from <strong>80,400 A to 133,900 A</strong> depending on voltage level</li>
+                            <li>Capacitor bank provides <strong>3,500 GJ</strong> energy storage with 875-second full recharge cycle</li>
+                            <li>Specialized for <strong>long-range energy weapon deployment</strong> with reduced power requirements</li>
+                            <li>Glass cannon design: <strong>devastating firepower, minimal tank</strong></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar -->
+                <div class="blog-sidebar">
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Quick Reference</h3>
+                        <div class="category-list">
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--primary-color);">⚡</span>
+                                    <strong>Power:</strong> 1,375 MW
+                                </li>
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--primary-color);">🔋</span>
+                                    <strong>Capacitor:</strong> 3,500 GJ
+                                </li>
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--primary-color);">⏱️</span>
+                                    <strong>Recharge:</strong> 875 sec
+                                </li>
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--secondary-color);">📊</span>
+                                    <strong>Current:</strong> ~80-134 kA
+                                </li>
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--secondary-color);">⚡</span>
+                                    <strong>Voltage:</strong> 6.6-11 kV
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget" style="background: linear-gradient(135deg, var(--teal-darker), var(--darker-bg)); border-color: var(--primary-color);">
+                        <h3 class="widget-title">Ship Classification</h3>
+                        <div style="text-align: center;">
+                            <p style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">TIER-3</p>
+                            <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">Attack Battlecruiser</p>
+                            <p style="color: var(--text-secondary);">Amarr Empire</p>
+                            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--card-bg);">
+                                <p style="font-size: 0.9rem; margin: 0; color: var(--text-secondary);">"A work of Divine Grace for the Empire, and retribution to our enemies."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Formula Categories</h3>
+                        <div class="tag-cloud">
+                            <span class="tag">Ohm's Law</span>
+                            <span class="tag">Power Calc</span>
+                            <span class="tag">AC Circuits</span>
+                            <span class="tag">Impedance</span>
+                            <span class="tag">Capacitance</span>
+                            <span class="tag">3-Phase</span>
+                            <span class="tag">RLC</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Bonuses</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                            <span style="color: var(--success-color);">+5%</span> Large Energy Turret Damage
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                            <span style="color: var(--success-color);">-10%</span> Turret Activation Cost
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                            <span style="color: var(--success-color);">-95%</span> Turret Powergrid Req
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                            <span style="color: var(--success-color);">-50%</span> Turret CPU Req
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container" style="text-align: center;">
+            <p>&copy; YC 125 Amarr Empire Naval Engineering Corps | Classified Document</p>
+            <p style="margin-top: 0.5rem; color: var(--primary-color); font-size: 0.9rem;">Based on EVE Online Oracle Specifications & Electrical Engineering Principles</p>
+        </div>
+    </footer>
+</body>
+</html>
