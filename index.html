@@ -1,202 +1,271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Underground DJ & Music Producer - Live Sets, Events & Releases">
-    <title>Mega Doll | Musical Artist </title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script language="javascript" type="text/javascript" src="security.js"></script>
+    <title>Life is Fragile...</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+        :root {
+            --color-white: rgba(255, 255, 255, 1);
+            --color-background: rgba(252, 252, 249, 1);
+            --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
 
-      <link href="https://fonts.cdnfonts.com/css/evilz" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: var(--font-family-base);
+            background-color: var(--color-white);
+        }
 
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
 
+        .content {
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
 
+        .hero {
+            text-align: center;
+            color: rgba(19, 52, 59, 0.9);
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(33, 128, 141, 0.9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            pointer-events: all;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: rgba(29, 116, 128, 1);
+            transform: translateY(-2px);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: rgba(31, 33, 33, 1);
+            }
+            
+            .hero {
+                color: rgba(245, 245, 245, 0.9);
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- JavaScript Detection - Required for all pages -->
-<noscript>
-    <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
-        <div style="text-align: center; padding: 2rem; max-width: 600px;">
-            <h1 style="color: #AEF504; font-family: 'Space Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem;">⚠️ JavaScript Required</h1>
-            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">This underground DJ site requires JavaScript for full functionality.</p>
-            <a href="/security - habilita-js.html" style="color: #121312; background: #AEF504; text-decoration: none; padding: 1rem 2rem; display: inline-block; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Enable JavaScript</a>
-        </div>
-    </div>
-</noscript>
+    
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="nav-brand">Mega Doll</div>
-            <button class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#music" class="nav-link">Music</a></li>
-                <li><a href="#events" class="nav-link">Events</a></li>
-                <li><a href="blog.html" class="nav-link">Blog</a></li>
-                <li><a class="nav-link" href="discography.html">Discography</a></li>
-                <li><a href="feed.html" class="nav-link">Feed</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <script>
+        let butterflies = [];
+        let maxButterflies = 192;
+        let colors = [
+            [121, 115, 166],
+            [75, 67, 170],
+            [79, 74, 172],
+            [57, 56, 120]
+        ];
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <a class="glitch evilz-heart" data-text="🍭">🍭</a>
-            <p class="hero-subtitle">L-Pop • LolliPop Core • BreakCore</p>
-            <div class="hero-cta">
-                <a href="#music" class="btn btn-primary">Listen Now</a>
-                <a href="megadoll_scale_generator.html" class="btn btn-outline">chord and scales generator</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span></span>
-        </div>
-    </section>
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            noFill();
+            strokeWeight(36);
+        }
 
-    <!-- Music Section -->
-    <section class="section" id="music">
-        <div class="container">
-            <h2 class="section-title">Latest Releases</h2>
-            <div class="music-grid">
-                <div class="music-card">
-                    <div class="music-card-image">
-                        <img src="img/01 - Mega Doll - Dec Bad Moon Rising.jpg" alt="Mega Doll">
-                        <div class="play-overlay">
-                            <button class="play-btn">▶</button>
-                        </div>
-                    </div>
-                    <div class="music-card-info">
-                        <h3>Curved Candy</h3>
-                        <p>Bad Moon Rising • 2025</p>
-                        <div class="music-links">
-                            <a href="https://megadoll.bandcamp.com/album/bad-moon-rising" class="music-link" target="_blank">Bandcamp</a>
-                            <a href="https://www.youtube.com/watch?v=ZiLJCRweRvk&list=PLvaNWUMdzweZtYSTIoeFJ3jzwyWK-T-KJ" class="music-link" target="_blank">YouTube</a>
-                            <!-- <a href="#" class="music-link">Spotify</a> -->
-                        </div>
-                    </div>
-                </div>
-                <!-- Repeat music-card as needed -->
-                <div class="music-card">
-                    <div class="music-card-image">
-                        <img src="img/02 - mega doll - licor peligroso.jpeg" alt="Mega Doll">
-                        <div class="play-overlay">
-                            <button class="play-btn">▶</button>
-                        </div>
-                    </div>
-                    <div class="music-card-info">
-                        <h3>Smells like Yogurt Spirit</h3>
-                        <p>Liquor Danger • 2025</p>
-                        <div class="music-links">
-                            <a href="https://megadoll.bandcamp.com/album/licor-peligro" class="music-link" target="_blank">Bandcamp</a>
-                            <a href="https://youtube.com/playlist?list=PLvaNWUMdzweZ6IVwLgRogCFZlhRCRALua&si=nWQ3HQ4uHd93rmli" class="music-link" target="_blank">YouTube</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Events Section -->
-    <section class="section section-dark" id="events">
-        <div class="container">
-            <h2 class="section-title">Upcoming Events</h2>
-            <div class="events-list">
-                <div class="event-card">
-                    <div class="event-date">
-                        <span class="day">25</span>
-                        <span class="month">OCT</span>
-                    </div>
-                    <div class="event-info">
-                        <h3>Satanic Lawyer Lesli, Law & Justice Conglomerate</h3>
-                        <p class="event-venue">Dark Heart Bacinilla • Christie's Manor (Basement)</p>
-                        <p class="event-time">23:00 - 06:00</p>
-                    </div>
-                    <a href="#" class="btn btn-small">Tickets</a>
-                </div>
+        function draw() {
+            background(255, 255, 255);
+            
+            // Add new butterflies when mouse is moving
+            if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+                if (dist(mouseX, mouseY, pmouseX, pmouseY) > 2 && butterflies.length < maxButterflies) {
+                    butterflies.push(new Butterfly(mouseX, mouseY));
+                }
+            }
+            
+            // Update and display butterflies
+            for (let i = butterflies.length - 1; i >= 0; i--) {
+                butterflies[i].update();
+                butterflies[i].display();
                 
-                <div class="hero-cta">
-                <a href="live_events_archive.html" class="btn btn-outline">Archive of Events</a>
-            </div>
-            </div>
-        </div>
-    </section>
+                // Remove dead butterflies
+                if (butterflies[i].isDead()) {
+                    butterflies.splice(i, 1);
+                }
+            }
+        }
 
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="img/03 - andrew kaamo.jpg" alt="DJ Photo">
-                </div>
-                <div class="about-content">
-                    <h2 class="section-title">About</h2>
-                    <p>Underground DJ and producer pushing the boundaries of electronic music. Specializing in dark torture for dolls, breakcore sounds, and experimental beats.</p>
-                    <p>Resident at Milk Pukarz Studio, recently i bought a big part of the stock market activity of the Sweet Dolls City Complex (The Mansion, The Studios and the Auditions Program), if you ever have doubts, a suggestion, a request related to Sweet Dolls City, you can contact me on my social media, links are below, if not and you wanna apply you can contact me, or if you are part of the crew i have certain responsibilities there so yeah you can team up with me too, there is a dedicated section on this website in the blog section for the most common situations, issues, requests and do's and dont's about us, so yeah, feel at home, it's yours bro.</p>
-                    <p>kiss</p>
-                    <div class="social-links">
-                        <a href="https://soundcloud.com/megadoll" class="social-link" aria-label="SoundCloud" target="_blank">SC</a>
-                        <a href="http://instagram.com/megadollbreakcore" class="social-link" aria-label="Instagram" target="_blank">IG</a>
-                        <a href="https://megadoll.bandcamp.com" class="social-link" aria-label="Bandcamp" target="_blank">BC</a>
-                        <a href="https://open.spotify.com/artist/48B5tu8noDdmZT5N989lFs" class="social-link" aria-label="Spotify" target="_blank">SP</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+        }
 
-    <!-- Contact Section -->
-    <section class="section section-dark" id="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Bookings</h3>
-                    <p>contacto@megadoll.club</p>
-                    
-                    <h3>Management</h3>
-                    <p>contacto@megadoll.club</p>
-                    
-                    <h3>Press</h3>
-                    <p>contacto@megadoll.club</p>
-                </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Message" rows="5" required></textarea>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+        class Butterfly {
+            constructor(x, y) {
+                this.pos = createVector(x, y);
+                this.vel = createVector(random(-24, 72), random(-100, 2));
+                this.acc = createVector(0, 0);
+                this.life = 255;
+                this.maxLife = 255;
+                this.wingPhase = random(TWO_PI);
+                this.wingSpeed = random(0.72, 6);
+                this.size = random(2, 6);
+                
+                // Ensure we get a valid color array
+                let colorIndex = floor(random(colors.length));
+                this.colorR = colors[colorIndex][0];
+                this.colorG = colors[colorIndex][1];
+                this.colorB = colors[colorIndex][2];
+                
+                this.scatterForce = random(0.2, 12);
+            }
+            
+            update() {
+                // Add some randomness to movement
+                this.acc.add(random(-0.1, 0.1), random(-0.1, 0.1));
+                
+                // Scatter away from mouse when close
+                let mousePos = createVector(mouseX, mouseY);
+                let distToMouse = p5.Vector.dist(this.pos, mousePos);
+                
+                if (distToMouse < 3) {
+                    let scatter = p5.Vector.sub(this.pos, mousePos);
+                    scatter.normalize();
+                    scatter.mult(this.scatterForce);
+                    this.acc.add(scatter);
+                }
+                
+                // Apply physics
+                this.vel.add(this.acc);
+                this.vel.limit(3);
+                this.pos.add(this.vel);
+                this.acc.mult(0);
+                
+                // Fade out over time
+                this.life -= 12.72;
+                
+                // Update wing animation
+                this.wingPhase += this.wingSpeed;
+            }
+            
+            display() {
+                push();
+                translate(this.pos.x, this.pos.y);
+                
+                // Calculate alpha and ensure it's a valid number
+                let opacity = map(this.life, 0, this.maxLife, 0, 255);
+                opacity = constrain(opacity, 0, 255);
+                
+                // Ensure all color values are valid numbers
+                if (isNaN(this.colorR) || isNaN(this.colorG) || isNaN(this.colorB) || isNaN(opacity)) {
+                    stroke(121, 115, 166, 255);
+                } else {
+                    stroke(this.colorR, this.colorG, this.colorB, opacity);
+                }
+                
+                // Wing flap animation
+                let wingFlap = sin(this.wingPhase) * 0.3 + 1;
+                
+                // Draw butterfly body
+                strokeWeight(3);
+                line(0, -this.size * 0.4, 0, this.size * 0.4);
+                
+                // Draw wings
+                strokeWeight(2);
+                
+                // Upper wings
+                push();
+                scale(wingFlap, 1);
+                ellipse(-this.size * 0.3, -this.size * 0.2, this.size * 0.6, this.size * 0.4);
+                ellipse(this.size * 0.3, -this.size * 0.2, this.size * 0.6, this.size * 0.4);
+                pop();
+                
+                // Lower wings
+                push();
+                scale(wingFlap * 0.8, 1);
+                ellipse(-this.size * 0.25, this.size * 0.1, this.size * 0.4, this.size * 0.3);
+                ellipse(this.size * 0.25, this.size * 0.1, this.size * 0.4, this.size * 0.3);
+                pop();
+                
+                // Wing details
+                strokeWeight(1);
+                push();
+                scale(wingFlap, 1);
+                // Upper wing patterns
+                ellipse(-this.size * 0.3, -this.size * 0.2, this.size * 0.3, this.size * 0.2);
+                ellipse(this.size * 0.3, -this.size * 0.2, this.size * 0.3, this.size * 0.2);
+                // Lower wing patterns
+                ellipse(-this.size * 0.25, this.size * 0.1, this.size * 0.2, this.size * 0.15);
+                ellipse(this.size * 0.25, this.size * 0.1, this.size * 0.2, this.size * 0.15);
+                pop();
+                
+                // Antennae
+                strokeWeight(1);
+                line(-2, -this.size * 0.4, -4, -this.size * 0.5);
+                line(2, -this.size * 0.4, 4, -this.size * 0.5);
+                circle(-4, -this.size * 0.5, 2);
+                circle(4, -this.size * 0.5, 2);
+                
+                pop();
+            }
+            
+            isDead() {
+                return this.life <= 0;
+            }
+        }
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Andrew Walter III Kaamo 'D La Simmetrie. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">↑</button>
-
-    <script src="script.js"></script>
-
+        // Optional: Add some sparkle effect
+        function mouseMoved() {
+            // Create a small burst of butterflies on rapid mouse movement
+            if (dist(mouseX, mouseY, pmouseX, pmouseY) > 2) {
+                for (let i = 0; i < 3; i++) {
+                    if (butterflies.length < maxButterflies) {
+                        butterflies.push(new Butterfly(
+                            mouseX + random(-192, 192), 
+                            mouseY + random(-192, 192)
+                        ));
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
