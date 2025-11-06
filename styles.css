@@ -11,28 +11,28 @@
 
 :root {
     /* Primary Brand Colors */
-    --primary-color: #AEF504;        /* Lime green - main accent */
-    --secondary-color: #E7F800;      /* Yellow - secondary accent */
-    --tertiary-color: #9DE209;       /* Bright lime - highlights */
-    --success-color: #00F200;        /* Bright green - CTAs */
-    --olive-accent: #5B9E00;         /* Olive green - subtle accent */
+    --primary-color: #F2A0BA;        /* Lime green - main accent */
+    --secondary-color: #F7918F;      /* Yellow - secondary accent */
+    --tertiary-color: #CF7692;       /* Bright lime - highlights */
+    --success-color: #5FB4C9;        /* Bright green - CTAs */
+    --olive-accent: #E25227;         /* Olive green - subtle accent */
     
     /* Teal Accents */
-    --teal-dark: #00383B;            /* Dark teal - borders */
-    --teal-darker: #093534;          /* Darker teal - backgrounds */
-    --teal-medium: #0F5150;          /* Medium teal - hover states */
+    --teal-dark: #7FCADB;            /* Dark teal - borders */
+    --teal-darker: #8C2A0A;          /* Darker teal - backgrounds */
+    --teal-medium: #5FB4C9;          /* Medium teal - hover states */
     
     /* Background Colors */
-    --dark-bg: #121312;              /* Almost black - main bg */
-    --darker-bg: #0E1111;            /* Very dark gray - sections */
-    --card-bg: #252525;              /* Medium dark gray - cards */
-    --card-hover-bg: #292929;        /* Dark gray - hover */
+    --dark-bg: #F9EFD9;              /* Almost black - main bg */
+    --darker-bg: #FBFBE6;            /* Very dark gray - sections */
+    --card-bg: #FBD7D2;              /* Medium dark gray - cards */
+    --card-hover-bg: #E2C1BC;        /* Dark gray - hover */
     
     /* Text & Borders */
-    --text-primary: #B2E5F2;         /* Light blue - main text color */
-    --text-secondary: #3D3E3D;       /* Medium gray - secondary text */
-    --border-color: #292929;
-    --border-accent: #0F5150;
+    --text-primary: #8C2A0A;         /* Light blue - main text color */
+    --text-secondary: #B9AB75;       /* Medium gray - secondary text */
+    --border-color: #DD8280;
+    --border-accent: #7FCADB;
     
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -61,7 +61,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(18, 19, 18, 0.95);
+    background: rgba(249, 239, 217, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
     transition: var(--transition);
@@ -81,7 +81,7 @@ body {
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--primary-color);
-    text-shadow: 0 0 20px rgba(174, 245, 4, 0.5);
+    text-shadow: 0 0 20px rgba(242, 160, 186, 0.5);
 }
 
 .nav-menu {
@@ -100,19 +100,19 @@ body {
 
 @keyframes navColorCycle {
     0% {
-        color: #B2E5F2;  /* Light blue */
+        color: #8C2A0A;  /* Light blue */
     }
     25% {
-        color: #249BA7;  /* Cyan */
+        color: #5FB4C9;  /* Cyan */
     }
     50% {
-        color: #0C526A;  /* Dark blue */
+        color: #7FCADB;  /* Dark blue */
     }
     75% {
-        color: #2196A3;  /* Teal blue */
+        color: #97D5E3;  /* Teal blue */
     }
     100% {
-        color: #B2E5F2;  /* Back to light blue */
+        color: #8C2A0A;  /* Back to light blue */
     }
 }
 
@@ -173,9 +173,9 @@ body {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(174, 245, 4, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(231, 248, 0, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 50% 20%, rgba(15, 81, 80, 0.2) 0%, transparent 60%);
+        radial-gradient(circle at 20% 50%, rgba(242, 160, 186, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(247, 145, 143, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(127, 202, 219, 0.2) 0%, transparent 60%);
     animation: pulse 10s ease-in-out infinite;
 }
 
@@ -210,7 +210,7 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: glitch-skew 2s infinite;
-    filter: drop-shadow(0 0 30px rgba(174, 245, 4, 0.5));
+    filter: drop-shadow(0 0 30px rgba(242, 160, 186, 0.5));
 }
 
 @keyframes glitch-skew {
@@ -223,11 +223,11 @@ body {
 
 .hero-subtitle {
     font-size: 1.2rem;
-    color: #29C2DA;  /* Cyan blue color */
+    color: #98DDED;  /* Cyan blue color */
     margin-bottom: 2rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(41, 194, 218, 0.4);  /* Optional glow effect */
+    text-shadow: 0 0 20px rgba(152, 221, 237, 0.4);  /* Optional glow effect */
 }
 
 
@@ -256,13 +256,13 @@ body {
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
     color: var(--dark-bg);
-    box-shadow: 0 0 20px rgba(174, 245, 4, 0.3);
+    box-shadow: 0 0 20px rgba(242, 160, 186, 0.3);
 }
 
 .btn-primary:hover {
     background: linear-gradient(135deg, var(--tertiary-color), var(--success-color));
     transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(174, 245, 4, 0.5);
+    box-shadow: 0 10px 40px rgba(242, 160, 186, 0.5);
 }
 
 .btn-outline {
@@ -274,13 +274,13 @@ body {
 .btn-outline:hover {
     background: var(--primary-color);
     color: var(--dark-bg);
-    box-shadow: 0 0 30px rgba(174, 245, 4, 0.5);
+    box-shadow: 0 0 30px rgba(242, 160, 186, 0.5);
 }
 
 .btn-small {
     padding: 0.5rem 1.5rem;
     font-size: 0.8rem;
-    color: #AEF504;
+    color: #F2A0BA;
 }
 
 /* Scroll Indicator */
@@ -325,7 +325,7 @@ body {
     text-align: center;
     letter-spacing: 3px;
     color: var(--primary-color);
-    text-shadow: 0 0 30px rgba(174, 245, 4, 0.3);
+    text-shadow: 0 0 30px rgba(242, 160, 186, 0.3);
 }
 
 /* Music Grid */
@@ -345,7 +345,7 @@ body {
 .music-card:hover {
     border-color: var(--primary-color);
     transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(174, 245, 4, 0.2);
+    box-shadow: 0 10px 40px rgba(242, 160, 186, 0.2);
 }
 
 .music-card-image {
@@ -371,7 +371,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(9, 53, 52, 0.9);
+    background: rgba(140, 42, 10, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -393,7 +393,7 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     transition: var(--transition);
-    box-shadow: 0 0 30px rgba(174, 245, 4, 0.6);
+    box-shadow: 0 0 30px rgba(242, 160, 186, 0.6);
 }
 
 .play-btn:hover {
@@ -588,7 +588,7 @@ body {
     background: var(--primary-color);
     color: var(--dark-bg);
     border-color: var(--primary-color);
-    box-shadow: 0 0 20px rgba(174, 245, 4, 0.5);
+    box-shadow: 0 0 20px rgba(242, 160, 186, 0.5);
     transform: translateY(-3px);
 }
 
@@ -635,7 +635,7 @@ body {
 .contact-form textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 15px rgba(174, 245, 4, 0.2);
+    box-shadow: 0 0 15px rgba(242, 160, 186, 0.2);
 }
 
 .contact-form input::placeholder,
@@ -692,7 +692,7 @@ body {
     visibility: hidden;
     transition: var(--transition);
     z-index: 999;
-    box-shadow: 0 0 30px rgba(174, 245, 4, 0.5);
+    box-shadow: 0 0 30px rgba(242, 160, 186, 0.5);
 }
 
 .back-to-top.visible {
@@ -716,7 +716,7 @@ body {
         top: 100%;
         left: 0;
         width: 100%;
-        background: rgba(18, 19, 18, 0.98);
+        background: rgba(249, 239, 217, 0.98);
         flex-direction: column;
         padding: 2rem;
         gap: 1rem;
@@ -801,7 +801,7 @@ body {
 
 @keyframes heartColorCycle {
     0% {
-        color: #00F200;  /* Bright green */
+        color: #5FB4C9;  /* Bright green */
     }
     25% {
         color: #A4FF8E;  /* Light mint green */
@@ -813,7 +813,7 @@ body {
         color: #30FF00;  /* Neon green */
     }
     100% {
-        color: #00F200;  /* Back to bright green */
+        color: #5FB4C9;  /* Back to bright green */
     }
 }
 

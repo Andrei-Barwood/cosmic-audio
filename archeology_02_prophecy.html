@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMARR PROPHECY - Combat Battlecruiser Technical Manual</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="blog-styles.css">
+</head>
+<body>
+    <div class="blog-hero">
+        <div class="hero-content">
+            <h1 class="blog-hero-title">PROPHECY</h1>
+            <p class="blog-hero-subtitle">Amarr Empire Combat Battlecruiser - Drone Warfare Platform</p>
+            <div class="post-badge" style="background: var(--tertiary-color); color: var(--dark-bg);">DRONEBOAT CLASSIFICATION</div>
+        </div>
+    </div>
+
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-layout">
+                <div class="blog-main">
+                    
+                    <!-- Featured Intro -->
+                    <div class="featured-post">
+                        <div class="blog-post-content">
+                            <h2 style="color: var(--secondary-color); margin-bottom: 1rem;">Combat Systems Overview</h2>
+                            <p style="font-size: 1.1rem; line-height: 1.7;">The Prophecy represents Amarr's doctrine of combining heavy armor with autonomous drone warfare. Unlike traditional energy weapon platforms, this battlecruiser emphasizes <strong>drone control systems</strong> with robust defensive capabilities, earning its nickname as the "Space Turkey" for its resilience in sustained engagements.</p>
+                            
+                            <div class="timing-grid" style="margin-top: 2rem;">
+                                <div class="timing-option">
+                                    <h4 style="color: var(--primary-color);">Powergrid</h4>
+                                    <p style="font-size: 2rem; color: var(--text-primary); margin: 0;">1,100 MW</p>
+                                </div>
+                                <div class="timing-option">
+                                    <h4 style="color: var(--primary-color);">Capacitor</h4>
+                                    <p style="font-size: 2rem; color: var(--text-primary); margin: 0;">3,200 GJ</p>
+                                </div>
+                                <div class="timing-option">
+                                    <h4 style="color: var(--primary-color);">CPU</h4>
+                                    <p style="font-size: 2rem; color: var(--text-primary); margin: 0;">360 Tf</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Power System Analysis -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">01</div>
+                            <h2>Electrical Power Distribution</h2>
+                        </div>
+
+                        <div class="concept-box">
+                            <h3>3-Phase AC Power System Configuration</h3>
+                            <p>The Prophecy's reduced power requirements (1,100 MW vs Oracle's 1,375 MW) suggest a <strong>5.5-8 kV distribution system</strong>, optimized for drone bay energy allocation and capacitor warfare modules.</p>
+                            
+                            <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--darker-bg); border-left: 4px solid var(--tertiary-color);">
+                                <h4 style="margin-bottom: 1rem;">Current Capacity Analysis</h4>
+                                <p><strong>Given:</strong></p>
+                                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                                    <li>Power (P) = 1,100 MW = 1.1 × 10⁹ W</li>
+                                    <li>Voltage (V) = 6.6 kV = 6,600 V</li>
+                                    <li>Power Factor (PF) = 0.88 (drone systems + armor)</li>
+                                </ul>
+                                
+                                <p style="margin-top: 1rem; font-family: 'Space Mono', monospace; background: var(--card-bg); padding: 1rem; border-radius: 6px;">
+                                    <strong>Formula:</strong> I = P / (√3 × V × PF)<br><br>
+                                    I = 1.1 × 10⁹ / (1.732 × 6,600 × 0.88)<br>
+                                    I = 1.1 × 10⁹ / 10,059.46<br>
+                                    <span style="color: var(--tertiary-color); font-size: 1.2rem;">I ≈ 109,400 A</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="comparison-box" style="margin-top: 2rem;">
+                            <div class="comparison-column">
+                                <h4>At 5.5 kV Distribution</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem;">
+                                    I = 1.1×10⁹ / (1.732×5,500×0.88)<br>
+                                    <span style="color: var(--secondary-color); font-size: 1.3rem;">I ≈ 131,300 A</span>
+                                </p>
+                                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">Higher current requires thicker conductors but simpler transformer systems</p>
+                            </div>
+
+                            <div class="comparison-column">
+                                <h4>At 8 kV Distribution</h4>
+                                <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1rem;">
+                                    I = 1.1×10⁹ / (1.732×8,000×0.88)<br>
+                                    <span style="color: var(--secondary-color); font-size: 1.3rem;">I ≈ 90,200 A</span>
+                                </p>
+                                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">Lower current reduces I²R losses through ship circuits</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fundamental Electrical Laws -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">02</div>
+                            <h2>Core Circuit Equations</h2>
+                        </div>
+
+                        <div class="layer-breakdown">
+                            <div class="layer">
+                                <h4>⚡ Ohm's Law - Fundamental Relationships</h4>
+                                <div style="background: var(--darker-bg); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                                    <p style="font-family: 'Space Mono', monospace; font-size: 1.1rem; margin-bottom: 1rem;">
+                                        <strong style="color: var(--primary-color);">I = E / R</strong><br>
+                                        <strong style="color: var(--primary-color);">E = I × R</strong><br>
+                                        <strong style="color: var(--primary-color);">R = E / I</strong>
+                                    </p>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
+                                        I = Current (Amperes) | E = Voltage (Volts) | R = Resistance (Ohms)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="layer">
+                                <h4>⚡ Power Formulas - Energy Transfer</h4>
+                                <div style="background: var(--darker-bg); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                                    <p style="font-family: 'Space Mono', monospace; font-size: 1.1rem;">
+                                        <strong style="color: var(--secondary-color);">P = V × I</strong> (Basic Power)<br>
+                                        <strong style="color: var(--secondary-color);">P = V² / R</strong> (Voltage-based)<br>
+                                        <strong style="color: var(--secondary-color);">P = I² × R</strong> (Current-based)
+                                    </p>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 0 0;">
+                                        P = Power (Watts)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="layer">
+                                <h4>⚡ Charge & Current Relationships</h4>
+                                <div style="background: var(--darker-bg); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                                    <p style="font-family: 'Space Mono', monospace; font-size: 1.1rem;">
+                                        <strong style="color: var(--tertiary-color);">I = Q / t</strong><br>
+                                        <strong style="color: var(--tertiary-color);">Q = I × t</strong><br>
+                                        <strong style="color: var(--tertiary-color);">t = Q / I</strong>
+                                    </p>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 0 0;">
+                                        Q = Charge (Coulombs) | t = Time (seconds)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capacitor Analysis -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">03</div>
+                            <h2>Capacitor Energy Storage System</h2>
+                        </div>
+
+                        <div class="info-card" style="border-left-color: var(--tertiary-color);">
+                            <h3>Capacitor Specifications</h3>
+                            <div class="player-stats" style="margin: 1.5rem 0;">
+                                <div class="stat">
+                                    <span class="stat-label">Capacity</span>
+                                    <span class="stat-value">3,200 GJ</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Recharge Time</span>
+                                    <span class="stat-value">800 sec</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Avg Rate</span>
+                                    <span class="stat-value">4.0 GJ/s</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="concept-box">
+                            <h4>Energy & Voltage Calculations</h4>
+                            <p style="font-family: 'Space Mono', monospace; background: var(--darker-bg); padding: 1.5rem; margin-top: 1rem; border-radius: 6px;">
+                                <strong>Voltage from Energy:</strong><br>
+                                V = W / Q<br><br>
+                                <strong>Energy from Charge:</strong><br>
+                                W = Q × V<br><br>
+                                <strong>Charge from Energy:</strong><br>
+                                Q = W / V
+                            </p>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">Where: W = Energy (Joules), V = Voltage (Volts), Q = Charge (Coulombs)</p>
+                        </div>
+
+                        <div class="pro-tip" style="margin-top: 2rem;">
+                            <h4>💡 Capacitor Warfare Optimization</h4>
+                            <p>The Prophecy excels with <strong>Nosferatu and Energy Neutralizer modules</strong> in high slots, leveraging its robust capacitor to drain enemy ships while maintaining drone operations. Peak recharge efficiency occurs at <strong>25-35% charge level</strong>.</p>
+                            <p style="margin-top: 1rem;">Calculation: <code style="background: var(--darker-bg); padding: 0.3rem 0.6rem;">3,200 GJ / 800 s = 4.0 GJ/s average</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Series and Parallel Circuits -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">04</div>
+                            <h2>Resistance Circuit Configurations</h2>
+                        </div>
+
+                        <div class="comparison-box">
+                            <div class="comparison-column">
+                                <h4>Series Circuits</h4>
+                                <div style="background: var(--darker-bg); padding: 1.5rem; border-radius: 6px; margin-top: 1rem;">
+                                    <p style="font-family: 'Space Mono', monospace; margin-bottom: 1rem;">
+                                        R<sub>T</sub> = R₁ + R₂ + R₃ + ... + R<sub>N</sub>
+                                    </p>
+                                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Total resistance is the sum of all components</p>
+                                    
+                                    <p style="margin-bottom: 0.5rem;"><strong style="color: var(--primary-color);">Voltage Divider Rule:</strong></p>
+                                    <p style="font-family: 'Space Mono', monospace; background: var(--card-bg); padding: 1rem; border-radius: 4px;">
+                                        V<sub>x</sub> = (R<sub>x</sub> / R<sub>T</sub>) × E
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="comparison-column">
+                                <h4>Parallel Circuits</h4>
+                                <div style="background: var(--darker-bg); padding: 1.5rem; border-radius: 6px; margin-top: 1rem;">
+                                    <p style="font-family: 'Space Mono', monospace; margin-bottom: 1rem;">
+                                        R<sub>T</sub> = (R₁ × R₂) / (R₁ + R₂)
+                                    </p>
+                                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">For two resistors in parallel</p>
+                                    
+                                    <p style="margin-bottom: 0.5rem;"><strong style="color: var(--secondary-color);">Current Divider Rule:</strong></p>
+                                    <p style="font-family: 'Space Mono', monospace; background: var(--card-bg); padding: 1rem; border-radius: 4px;">
+                                        I₂ = I<sub>T</sub> × (R₁ / (R₁ + R₂))
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-card" style="margin-top: 2rem;">
+                            <h3>Armor Resistance Network</h3>
+                            <p>The Prophecy's <strong>4% armor resistance bonus per Amarr BC level</strong> creates a parallel resistance network across damage types:</p>
+                            <div class="player-stats" style="margin: 1.5rem 0;">
+                                <div class="stat">
+                                    <span class="stat-label">EM Resist</span>
+                                    <span class="stat-value">50%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Thermal</span>
+                                    <span class="stat-value">35%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Kinetic</span>
+                                    <span class="stat-value">25%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Explosive</span>
+                                    <span class="stat-value">10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AC Systems -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">05</div>
+                            <h2>AC Power & Complex Impedance</h2>
+                        </div>
+
+                        <div class="layer-breakdown">
+                            <div class="layer">
+                                <h4>Sinusoidal Waveforms</h4>
+                                <div style="background: var(--darker-bg); padding: 1.5rem; border-radius: 6px; margin-top: 1rem;">
+                                    <p style="font-family: 'Space Mono', monospace; font-size: 1rem;">
+                                        <strong>Current:</strong> i = I<sub>m</sub> × sin(ωt)<br>
+                                        <strong>Voltage:</strong> e = E<sub>m</sub> × sin(ωt)<br>
+                                        <strong>Angular Freq:</strong> ω = 2π × f
+                                    </p>
+                                    <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+                                        Where: I<sub>m</sub>, E<sub>m</sub> = peak amplitudes | f = frequency (Hz)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="layer">
+                                <h4>RLC Circuit Impedance</h4>
+                                <div style="background: var(--darker-bg); padding: 1.5rem; border-radius: 6px; margin-top: 1rem;">
+                                    <p style="font-family: 'Space Mono', monospace; font-size: 1.1rem; margin-bottom: 1rem;">
+                                        <strong style="color: var(--primary-color);">Z = R + j(X<sub>L</sub> - X<sub>C</sub>)</strong>
+                                    </p>
+                                    <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                                        <li><strong>R</strong> = Resistance (real component, Ohms)</li>
+                                        <li><strong>X<sub>L</sub></strong> = Inductive reactance (positive imaginary)</li>
+                                        <li><strong>X<sub>C</sub></strong> = Capacitive reactance (negative imaginary)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="layer">
+                                <h4>Capacitive Reactance</h4>
+                                <div style="background: var(--darker-bg); padding: 1.5rem; border-radius: 6px; margin-top: 1rem;">
+                                    <p style="font-family: 'Space Mono', monospace; font-size: 1rem;">
+                                        X<sub>C</sub> = 1 / (ωC)<br>
+                                        C = 1 / (ωX<sub>C</sub>)
+                                    </p>
+                                    <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+                                        Result typically in microfarads (μF)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Structural Specifications -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">06</div>
+                            <h2>Hull & Defense Architecture</h2>
+                        </div>
+
+                        <div class="info-card" style="border-left-color: var(--secondary-color);">
+                            <h3>Defensive Layer Analysis</h3>
+                            <div class="player-stats" style="margin: 1.5rem 0;">
+                                <div class="stat">
+                                    <span class="stat-label">Shield HP</span>
+                                    <span class="stat-value">1,425</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Armor HP</span>
+                                    <span class="stat-value">4,950</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Structure HP</span>
+                                    <span class="stat-value">4,000</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Total EHP</span>
+                                    <span class="stat-value" style="color: var(--tertiary-color);">10,375</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="technique-breakdown" style="margin-top: 2rem;">
+                            <div class="technique-step">
+                                <span class="technique-icon" style="font-size: 2rem;">📐</span>
+                                <h4>Physical Characteristics</h4>
+                                <p><strong>Mass:</strong> 15,300,000 kg</p>
+                                <p><strong>Volume:</strong> 234,000 m³</p>
+                                <p><strong>Cargo:</strong> 500 m³</p>
+                            </div>
+
+                            <div class="technique-step">
+                                <span class="technique-icon" style="font-size: 2rem;">🚀</span>
+                                <h4>Propulsion Systems</h4>
+                                <p><strong>Max Velocity:</strong> 190 m/s</p>
+                                <p><strong>Inertia Mod:</strong> 0.54×</p>
+                                <p><strong>Warp Speed:</strong> 3.5 AU/s</p>
+                            </div>
+
+                            <div class="technique-step">
+                                <span class="technique-icon" style="font-size: 2rem;">📡</span>
+                                <h4>Sensor Suite</h4>
+                                <p><strong>Targeting:</strong> 65 km range</p>
+                                <p><strong>Max Targets:</strong> 6</p>
+                                <p><strong>Signature:</strong> 275 m</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drone Systems -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">07</div>
+                            <h2>Autonomous Drone Control Systems</h2>
+                        </div>
+
+                        <div class="featured-post" style="background: linear-gradient(135deg, var(--teal-darker), var(--darker-bg)); border-color: var(--tertiary-color);">
+                            <div class="blog-post-content">
+                                <h3 style="color: var(--tertiary-color);">Primary Weapon System: Drones</h3>
+                                <p style="margin-top: 1rem; font-size: 1.05rem;">Unlike traditional Amarr laser platforms, the Prophecy is a <strong>pure droneboat</strong> with no weapon system bonuses. All damage output comes from autonomous combat drones.</p>
+                                
+                                <div class="timing-grid" style="margin-top: 2rem;">
+                                    <div class="timing-option">
+                                        <h4 style="color: var(--primary-color);">Drone Bandwidth</h4>
+                                        <p style="font-size: 1.8rem; margin: 0;">75 Mbit/sec</p>
+                                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">5× Heavy or 15× Light drones</p>
+                                    </div>
+                                    <div class="timing-option">
+                                        <h4 style="color: var(--primary-color);">Drone Bay</h4>
+                                        <p style="font-size: 1.8rem; margin: 0;">125 m³</p>
+                                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">25× Light or 5× Heavy capacity</p>
+                                    </div>
+                                    <div class="timing-option">
+                                        <h4 style="color: var(--primary-color);">Damage Bonus</h4>
+                                        <p style="font-size: 1.8rem; margin: 0;">10%/level</p>
+                                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Per Amarr BC skill</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="warning-box" style="margin-top: 2rem;">
+                            <h4>⚠️ Tactical Configuration Notes</h4>
+                            <p>With <strong>4 high slots</strong> (no turret/launcher bonuses), optimal fitting prioritizes:</p>
+                            <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                                <li><strong>Energy Neutralizers</strong> - Drain enemy capacitor</li>
+                                <li><strong>Nosferatu modules</strong> - Sustain your own capacitor</li>
+                                <li><strong>Utility modules</strong> - Remote repair, sensor boosters</li>
+                            </ul>
+                            <p style="margin-top: 1rem;">The 7 low slots accommodate heavy armor tanking with resistance modules and damage control systems.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slot Layout -->
+                    <div class="tutorial-section">
+                        <div class="step-header">
+                            <div class="step-number">08</div>
+                            <h2>Module Fitting Architecture</h2>
+                        </div>
+
+                        <div class="layer-breakdown">
+                            <div class="layer">
+                                <h4>High Slots: 4</h4>
+                                <p style="color: var(--text-secondary); margin-top: 0.5rem;">No turret hardpoints, 2 launcher hardpoints</p>
+                                <p style="margin-top: 1rem; padding: 1rem; background: var(--darker-bg); border-radius: 6px;">
+                                    <strong>Recommended:</strong> 2× Nosferatu + 2× Energy Neutralizer<br>
+                                    <em style="color: var(--text-secondary); font-size: 0.9rem;">Or substitute with remote armor repairers for fleet support</em>
+                                </p>
+                            </div>
+
+                            <div class="layer">
+                                <h4>Medium Slots: 4</h4>
+                                <p style="color: var(--text-secondary); margin-top: 0.5rem;">Propulsion, electronic warfare, capacitor modules</p>
+                                <p style="margin-top: 1rem; padding: 1rem; background: var(--darker-bg); border-radius: 6px;">
+                                    <strong>Typical Fit:</strong> Afterburner/MWD + Cap Recharger + 2× Omnidirectional Tracking Links
+                                </p>
+                            </div>
+
+                            <div class="layer">
+                                <h4>Low Slots: 7</h4>
+                                <p style="color: var(--text-secondary); margin-top: 0.5rem;">Armor tank, damage control, resistance modules</p>
+                                <p style="margin-top: 1rem; padding: 1rem; background: var(--darker-bg); border-radius: 6px;">
+                                    <strong>Tank Configuration:</strong> 2× Armor Repairer + Damage Control + 4× Resistance Hardeners/Plates
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Engineering Summary -->
+                    <div class="key-takeaways">
+                        <h3>Prophecy Engineering Summary</h3>
+                        <ul>
+                            <li>Operates on <strong>5.5-8 kV 3-phase AC</strong> distribution with current capacity of <strong>90-131 kA</strong></li>
+                            <li>Capacitor provides <strong>3,200 GJ</strong> with 800-second recharge cycle (<strong>4.0 GJ/s average</strong>)</li>
+                            <li><strong>Pure droneboat</strong> with 75 Mbit/sec bandwidth and 125 m³ drone bay</li>
+                            <li><strong>10% drone damage bonus</strong> per Amarr Battlecruiser skill level</li>
+                            <li><strong>4% armor resistance bonus</strong> per level across all damage types</li>
+                            <li>Heavy armor tank with <strong>4,950 base armor HP</strong> and 7 low slots</li>
+                            <li>Excels at <strong>capacitor warfare</strong> with Nosferatu/Neut high slot configuration</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar -->
+                <div class="blog-sidebar">
+                    <div class="sidebar-widget" style="background: linear-gradient(135deg, var(--darker-bg), var(--teal-darker)); border: 2px solid var(--tertiary-color);">
+                        <h3 class="widget-title">Ship Classification</h3>
+                        <div style="text-align: center;">
+                            <p style="font-size: 1.8rem; color: var(--tertiary-color); margin-bottom: 0.5rem;">COMBAT BC</p>
+                            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Drone Warfare Platform</p>
+                            <p style="color: var(--text-secondary); font-size: 0.95rem;">Amarr Empire</p>
+                            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--card-bg); border-radius: 6px;">
+                                <p style="font-size: 0.85rem; margin: 0; color: var(--text-secondary); font-style: italic;">"Even the humblest proxy is elevated by a divine purpose."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Quick Reference</h3>
+                        <div class="category-list">
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--tertiary-color);">⚡</span>
+                                    <strong>Power:</strong> 1,100 MW
+                                </li>
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--tertiary-color);">🔋</span>
+                                    <strong>Capacitor:</strong> 3,200 GJ
+                                </li>
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--tertiary-color);">⏱️</span>
+                                    <strong>Recharge:</strong> 800 sec
+                                </li>
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--secondary-color);">📊</span>
+                                    <strong>Current:</strong> ~90-131 kA
+                                </li>
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--secondary-color);">⚡</span>
+                                    <strong>Voltage:</strong> 5.5-8 kV
+                                </li>
+                                <li style="margin-bottom: 0.75rem;">
+                                    <span style="color: var(--primary-color);">🤖</span>
+                                    <strong>Drones:</strong> 75 Mbit/s
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Ship Bonuses</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                            <span style="color: var(--success-color);">+10%</span> Drone HP & Damage
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                            <span style="color: var(--success-color);">+4%</span> All Armor Resists
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                            <span style="color: var(--success-color);">75</span> Mbit/sec Bandwidth
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                            <span style="color: var(--success-color);">125 m³</span> Drone Bay
+                        </p>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem; font-style: italic;">
+                            Per Amarr Battlecruiser skill level
+                        </p>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Formula Categories</h3>
+                        <div class="tag-cloud">
+                            <span class="tag">Ohm's Law</span>
+                            <span class="tag">Power Calc</span>
+                            <span class="tag">AC Circuits</span>
+                            <span class="tag">Impedance</span>
+                            <span class="tag">Series/Parallel</span>
+                            <span class="tag">Capacitance</span>
+                            <span class="tag">3-Phase</span>
+                            <span class="tag">RLC</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget" style="background: var(--card-hover-bg); border-color: var(--secondary-color);">
+                        <h3 class="widget-title">Tactical Role</h3>
+                        <p style="font-size: 0.9rem; line-height: 1.6;">
+                            <strong style="color: var(--secondary-color);">Primary:</strong> Drone DPS platform<br>
+                            <strong style="color: var(--secondary-color);">Secondary:</strong> Cap warfare & fleet support<br>
+                            <strong style="color: var(--secondary-color);">Tank:</strong> Heavy armor with resistance bonuses<br>
+                            <strong style="color: var(--secondary-color);">Range:</strong> 0-60km optimal
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container" style="text-align: center;">
+            <p>&copy; YC 125 Amarr Imperial Navy Engineering Division | Technical Specification Document</p>
+            <p style="margin-top: 0.5rem; color: var(--tertiary-color); font-size: 0.9rem;">Based on EVE Online Prophecy Specifications & Electrical Engineering Principles</p>
+        </div>
+    </footer>
+</body>
+</html>
