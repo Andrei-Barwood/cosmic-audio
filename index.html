@@ -1,24 +1,126 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life is Fragile...</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <title>Life is fragile...</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="security.js"></script>
     <style>
+        :root {
+            --color-white: rgba(255, 255, 255, 1);
+            --color-background: rgba(252, 252, 249, 1);
+            --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background: #ffffff;
+            font-family: var(--font-family-base);
+            background-color: var(--color-white);
         }
+
         canvas {
             display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            color: rgba(19, 52, 59, 0.9);
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(33, 128, 141, 0.9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            pointer-events: all;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: rgba(29, 116, 128, 1);
+            transform: translateY(-2px);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: rgba(31, 33, 33, 1);
+            }
+            
+            .hero {
+                color: rgba(245, 245, 245, 0.9);
+            }
         }
     </style>
 </head>
 <body>
-    <script>
+      <!-- JavaScript Detection - Required for all pages -->
+<noscript>
+    <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
+        <div style="text-align: center; padding: 2rem; max-width: 600px;">
+            <h1 style="color: #AEF504; font-family: 'Space Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem;">⚠️ JavaScript Required</h1>
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">This underground DJ site requires JavaScript for full functionality.</p>
+            <a href="/security - habilita-js.html" style="color: #121312; background: #AEF504; text-decoration: none; padding: 1rem 2rem; display: inline-block; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Enable JavaScript</a>
+        </div>
+    </div>
+</noscript>
+
+    <div class="content">
+        <div class="hero">
+            <h1>sorry for the inconvenient interruption</h1>
+            <h4>the last week my daughter passed away because she thought the taste of the energy drink was good and she had an overdose which killed her mind. We are processing the lawsuit against red bull and monster. so you don't have to suffer the same nightmare we went through because of their open market of gyms and their cocktail of anabolics, red bull, steroids, monster and hormone manipulation that convinces little kids that it is good to intervene the human health to destroy nature and "look funnier and more social"</h4>
+
+            <h4>sorry we have to interrupt the sections you use the most and the ones which bring joy to your heart</h4>
+
+            <h4>this weeks have been full of shit and i had to go to the office with a lumber face like nothing's wrong when of course everything is falling apart because of red bull and the death of this very special human being, as promised we are working and finishing touches in our hydroplant so, if you arre planning to come live in our small town we are breaking the ground to organize the new trnasportation of electricity to your future house, our neighbors and family have all being active in the construction and in the electrical processes and affairs, so yeah click the link bellow to see a small report on how it is being finished</h>
+
+            <h4>by the way if you're not neighbor of us quick update, we organized a neighborhood residents' organization to decide how to update our electrical grid and we came up with a solution of hiring our own neighbors and fund it ourselves, and make the management of all this, the authorizations from local governments and authorities to allow this to happen and so far we're almost finished, you should do the same, is truly cool and upgrading from nuclear old power feels way better, than having to stand cancer for the next 100 million years</h4>
+            <a href="family_thing.html" class="cta-button">Comenzar</a>
+        </div>
+    </div>
+
+        <script>
         let butterflies = [];
         let maxButterflies = 6;
         let colors = [
@@ -195,5 +297,6 @@
           }
         }
     </script>
+
 </body>
 </html>
