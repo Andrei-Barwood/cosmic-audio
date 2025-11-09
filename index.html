@@ -1,302 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life is fragile...</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-    <script language="javascript" type="text/javascript" src="security.js"></script>
-    <style>
-        :root {
-            --color-white: rgba(255, 255, 255, 1);
-            --color-background: rgba(252, 252, 249, 1);
-            --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome back</title>
+    <style>body {margin:0; overflow:hidden; background:#2d060d;}</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  </head>
+  <body>
+    <script>
+      // Paleta de colores extraída
+      const palette = {
+        oscuro: "#2d060d",
+        crema: "#e0e6e0",
+        violeta: "#5a454e",
+        rojo: "#ae2f2d",
+        burdeos: "#63161b",
+        beige: "#9a847f"
+      };
+
+      let tentacles = [];
+      const numTentacles = 8;
+      let heartVisible = true;
+      let beatCount = 0;
+      let beating = true;
+      let fade = 255;
+      let heartTimer = 0;
+      let lastBeat = 0;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        angleMode(DEGREES);
+
+        for (let i = 0; i < numTentacles; i++) {
+          tentacles.push(new Tentacle(
+            width/2, height/2,
+            random(120, 220),
+            random(7, 11),
+            random(7, 17),
+            i * (360/numTentacles)
+          ));
+        }
+      }
+
+      function draw() {
+        background(palette.oscuro);
+
+        // Dibujar tentáculos
+        for (let t of tentacles) {
+          t.update();
+          t.display();
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        // Animación del corazón
+        if (heartVisible) {
+          animateHeart();
+        }
+      }
+
+      function animateHeart() {
+        // Tres latidos muy lentos (3 segundos por latido)
+        let now = millis();
+        if (beating && now - lastBeat > 3000) {
+          beatCount++;
+          lastBeat = now;
+        }
+        if (beatCount > 3) {
+          beating = false;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: var(--font-family-base);
-            background-color: var(--color-white);
+        // Escala del corazón
+        let beatScale = 12;
+        if (beating) {
+          let phase = ((now - lastBeat) % 3000) / 3000.0;
+          beatScale = 1 + 0.15 * sin(phase * 360);
+        } 
+
+        if (!beating) {
+          // Empieza a desvanecerse
+          fade -= 1.2;
+          if (fade <= 0) {
+            heartVisible = false;
+          }
         }
 
-        canvas {
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1;
+        push();
+        translate(width/2, height/2);
+        scale(beatScale);
+        drawHeart(fade);
+        pop();
+      }
+
+      function drawHeart(alpha = 255) {
+        noStroke();
+        // Sombra
+        fill(0, 70);
+        ellipse(0, 22, 70, 20);
+
+        // Cuerpo del corazón
+        fill(color(palette.rojo + hex(floor(alpha), 2))); // Gradual alpha
+        beginShape();
+        vertex(0, 0);
+        bezierVertex(-44, -36, -60, 18, 0, 40);
+        bezierVertex(60, 18, 44, -36, 0, 0);
+        endShape(CLOSE);
+
+        // Reflejo suave
+        fill(255, 160, 160, alpha * 0.25);
+        ellipse(-14, -7, 15, 8);
+
+        // Detalle central (luz)
+        fill(palette.crema + hex(floor(alpha * 0.7), 2));
+        ellipse(0, 6, 10, 5);
+      }
+
+      class Tentacle {
+        constructor(x, y, len, segments, amp, startAngle) {
+          this.base = createVector(x, y);
+          this.len = len;
+          this.segments = segments;
+          this.amp = amp;
+          this.startAngle = startAngle;
+          this.offset = random(1000);
+          this.colors = [
+            palette.burdeos,
+            palette.violeta,
+            palette.beige,
+            palette.oscuro
+          ];
         }
 
-        .content {
-            position: relative;
-            z-index: 2;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
+        update() {
+          this.offset += 0.01 + random(0.005);
         }
 
-        .hero {
-            text-align: center;
-            color: rgba(19, 52, 59, 0.9);
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            margin-bottom: 2rem;
-            opacity: 0.8;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: rgba(33, 128, 141, 0.9);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            pointer-events: all;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            background: rgba(29, 116, 128, 1);
-            transform: translateY(-2px);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: rgba(31, 33, 33, 1);
-            }
-            
-            .hero {
-                color: rgba(245, 245, 245, 0.9);
-            }
-        }
-    </style>
-</head>
-<body>
-      <!-- JavaScript Detection - Required for all pages -->
-<noscript>
-    <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
-        <div style="text-align: center; padding: 2rem; max-width: 600px;">
-            <h1 style="color: #AEF504; font-family: 'Space Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem;">⚠️ JavaScript Required</h1>
-            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">This underground DJ site requires JavaScript for full functionality.</p>
-            <a href="/security - habilita-js.html" style="color: #121312; background: #AEF504; text-decoration: none; padding: 1rem 2rem; display: inline-block; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Enable JavaScript</a>
-        </div>
-    </div>
-</noscript>
-
-    <div class="content">
-        <div class="hero">
-            <h1>sorry for the inconvenient interruption</h1>
-            <h4>the last week my daughter passed away because she thought the taste of the energy drink was good and she had an overdose which killed her mind. We are processing the lawsuit against red bull and monster. so you don't have to suffer the same nightmare we went through because of their open market of gyms and their cocktail of anabolics, red bull, steroids, monster and hormone manipulation that convinces little kids that it is good to intervene the human health to destroy nature and "look funnier and more social"</h4>
-
-            <h4>sorry we have to interrupt the sections you use the most and the ones which bring joy to your heart</h4>
-
-            <h4>this weeks have been full of shit and i had to go to the office with a lumber face like nothing's wrong when of course everything is falling apart because of red bull and the death of this very special human being, as promised we are working and finishing touches in our hydroplant so, if you arre planning to come live in our small town we are breaking the ground to organize the new trnasportation of electricity to your future house, our neighbors and family have all being active in the construction and in the electrical processes and affairs, so yeah click the link bellow to see a small report on how it is being finished</h>
-
-            <h4>by the way if you're not neighbor of us quick update, we organized a neighborhood residents' organization to decide how to update our electrical grid and we came up with a solution of hiring our own neighbors and fund it ourselves, and make the management of all this, the authorizations from local governments and authorities to allow this to happen and so far we're almost finished, you should do the same, is truly cool and upgrading from nuclear old power feels way better, than having to stand cancer for the next 100 million years</h4>
-            <a href="family_thing.html" class="cta-button">Comenzar</a>
-        </div>
-    </div>
-
-        <script>
-        let butterflies = [];
-        let maxButterflies = 6;
-        let colors = [
-          [121, 115, 166],
-          [75, 67, 170],
-          [79, 74, 172],
-          [57, 56, 120]
-        ];
-
-        function setup() {
-          createCanvas(displayWidth, displayHeight);
+        display() {
+          push();
+          translate(this.base.x, this.base.y);
+          let angleStep = 30;
+          let px = 0, py = 0;
+          strokeWeight(15);
           noFill();
-          strokeWeight(36);
+          for (let i = 0; i < this.segments; i++) {
+            let theta = this.startAngle + sin(frameCount*0.8 + this.offset*60 + i*15) * this.amp;
+            let lenStep = this.len / this.segments;
+            let nx = px + cos(theta) * lenStep;
+            let ny = py + sin(theta) * lenStep;
+            stroke(color(this.colors[i % this.colors.length]));
+            line(px, py, nx, ny);
+            // aros decorativos de color crema
+            if (i % 2 === 0 && random(1) > 0.8) {
+              stroke(palette.crema + '55');
+              strokeWeight(5);
+              ellipse(nx, ny, 12, 4);
+              strokeWeight(15);
+              stroke(color(this.colors[i % this.colors.length]));
+            }
+            px = nx;
+            py = ny;
+          }
+          pop();
         }
+      }
 
-        function draw() {
-          background(255, 255, 255);
-          
-          // Add new butterflies when mouse is moving
-          if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-            if (dist(mouseX, mouseY, pmouseX, pmouseY) > 2 && butterflies.length < maxButterflies) {
-              butterflies.push(new Butterfly(mouseX, mouseY));
-            }
-          }
-          
-          // Update and display butterflies
-          for (let i = butterflies.length - 1; i >= 0; i--) {
-            butterflies[i].update();
-            butterflies[i].display();
-            
-            // Remove dead butterflies
-            if (butterflies[i].isDead()) {
-              butterflies.splice(i, 1);
-            }
-          }
-        }
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
 
-        class Butterfly {
-          constructor(x, y) {
-            this.pos = createVector(x, y);
-            this.vel = createVector(random(-24, 72), random(-100, 2));
-            this.acc = createVector(-8, 0);
-            this.life = 255;
-            this.maxLife = 255;
-            this.wingPhase = random(TWO_PI);
-            this.wingSpeed = random(12, 244);
-            this.size = random(64, 192);
-            
-            // Ensure we get a valid color array
-            let colorIndex = floor(random(colors.length));
-            this.colorR = colors[colorIndex][0];
-            this.colorG = colors[colorIndex][1];
-            this.colorB = colors[colorIndex][2];
-            
-            this.scatterForce = random(0.002, 12);
-          }
-          
-          update() {
-            // Add some randomness to movement
-            this.acc.add(random(-0.1, 0.1), random(-0.1, 0.1));
-            
-            // Scatter away from mouse when close
-            let mousePos = createVector(mouseX, mouseY);
-            let distToMouse = p5.Vector.dist(this.pos, mousePos);
-            
-            if (distToMouse < 1) {
-              let scatter = p5.Vector.sub(this.pos, mousePos);
-              scatter.normalize();
-              scatter.mult(this.scatterForce);
-              this.acc.add(scatter);
-            }
-            
-            // Apply physics
-            this.vel.add(this.acc);
-            this.vel.limit(1);
-            this.pos.add(this.vel);
-            this.acc.mult(2);
-            
-            // Fade out over time
-            this.life -= 3.4;
-            
-            // Update wing animation
-            this.wingPhase += this.wingSpeed;
-          }
-          
-          display() {
-            push();
-            translate(this.pos.x, this.pos.y);
-            
-            // Calculate opacity and ensure it's a valid number
-            let opacity = map(this.life, 0, this.maxLife, 0, 255);
-            opacity = constrain(opacity, 0, 255);
-            
-            // Ensure all color values are valid numbers
-            if (isNaN(this.colorR) || isNaN(this.colorG) || isNaN(this.colorB) || isNaN(opacity)) {
-              stroke(121, 115, 166, 255);
-            } else {
-              stroke(this.colorR, this.colorG, this.colorB, opacity);
-            }
-            
-            // Wing flap animation
-            let wingFlap = sin(this.wingPhase) * 0.36 + 1;
-            
-            // Draw butterfly body
-            strokeWeight(3);
-            line(0, -this.size * 0.4, 0, this.size * 0.4);
-            
-            // Draw wings as rhombus shapes
-            strokeWeight(2);
-            
-            // Upper wings - rhombus shapes
-            push();
-            scale(wingFlap, 1);
-            this.drawRhombus(-this.size * 0.3, -this.size * 0.2, this.size * 0.3, this.size * 0.2);
-            this.drawRhombus(this.size * 0.3, -this.size * 0.2, this.size * 0.3, this.size * 0.2);
-            pop();
-            
-            // Lower wings - smaller rhombus shapes
-            push();
-            scale(wingFlap * 0.8, 1);
-            this.drawRhombus(-this.size * 0.25, this.size * 0.1, this.size * 0.2, this.size * 0.15);
-            this.drawRhombus(this.size * 0.25, this.size * 0.1, this.size * 0.2, this.size * 0.15);
-            pop();
-            
-            // Wing detail patterns - smaller inner rhombus
-            strokeWeight(1);
-            push();
-            scale(wingFlap, 1);
-            // Upper wing patterns
-            this.drawRhombus(-this.size * 0.3, -this.size * 0.2, this.size * 0.15, this.size * 0.1);
-            this.drawRhombus(this.size * 0.3, -this.size * 0.2, this.size * 0.15, this.size * 0.1);
-            // Lower wing patterns
-            this.drawRhombus(-this.size * 0.25, this.size * 0.1, this.size * 0.1, this.size * 0.075);
-            this.drawRhombus(this.size * 0.25, this.size * 0.1, this.size * 0.1, this.size * 0.075);
-            pop();
-            
-            // Antennae
-            strokeWeight(1);
-            line(-2, -this.size * 0.4, -4, -this.size * 0.5);
-            line(2, -this.size * 0.4, 4, -this.size * 0.5);
-            circle(-4, -this.size * 0.5, 2);
-            circle(4, -this.size * 0.5, 2);
-            
-            pop();
-          }
-          
-          // Helper function to draw a rhombus (diamond shape)
-          drawRhombus(centerX, centerY, halfWidth, halfHeight) {
-            quad(
-              centerX, centerY - halfHeight,        // Top point
-              centerX + halfWidth, centerY,         // Right point
-              centerX, centerY + halfHeight,        // Bottom point
-              centerX - halfWidth, centerY          // Left point
-            );
-          }
-          
-          isDead() {
-            return this.life <= 0;
-          }
-        }
-
-        // Optional: Add some sparkle effect
-        function mouseMoved() {
-          // Create a small burst of butterflies on rapid mouse movement
-          if (dist(mouseX, mouseY, pmouseX, pmouseY) > 2) {
-            for (let i = 0; i < 3; i++) {
-              if (butterflies.length < maxButterflies) {
-                butterflies.push(new Butterfly(
-                  mouseX + random(-192, 192), 
-                  mouseY + random(-192, 192)
-                ));
-              }
-            }
-          }
-        }
     </script>
-
-</body>
+  </body>
 </html>
