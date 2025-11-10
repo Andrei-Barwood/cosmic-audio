@@ -11,28 +11,28 @@
 
 :root {
     /* Primary Brand Colors */
-    --primary-color: #F2A0BA;        /* Lime green - main accent */
-    --secondary-color: #F7918F;      /* Yellow - secondary accent */
-    --tertiary-color: #CF7692;       /* Bright lime - highlights */
-    --success-color: #5FB4C9;        /* Bright green - CTAs */
-    --olive-accent: #E25227;         /* Olive green - subtle accent */
+    --primary-color: #284B76;        /* Lime green - main accent */
+    --secondary-color: #2D7FB5;      /* Yellow - secondary accent */
+    --tertiary-color: #23436A;       /* Bright lime - highlights */
+    --success-color: #FFFF5D;        /* Bright green - CTAs */
+    --olive-accent: #2E5A95;         /* Olive green - subtle accent */
     
     /* Teal Accents */
-    --teal-dark: #7FCADB;            /* Dark teal - borders */
-    --teal-darker: #8C2A0A;          /* Darker teal - backgrounds */
-    --teal-medium: #5FB4C9;          /* Medium teal - hover states */
+    --teal-dark: #A5BCDB;            /* Dark teal - borders */
+    --teal-darker: #DBE9FF;          /* Darker teal - backgrounds */
+    --teal-medium: #FFFF5D;          /* Medium teal - hover states */
     
     /* Background Colors */
-    --dark-bg: #F9EFD9;              /* Almost black - main bg */
-    --darker-bg: #FBFBE6;            /* Very dark gray - sections */
-    --card-bg: #FBD7D2;              /* Medium dark gray - cards */
-    --card-hover-bg: #E2C1BC;        /* Dark gray - hover */
+    --dark-bg: #DBE9FF;              /* Almost black - main bg */
+    --darker-bg: #C3A9DD;            /* Very dark gray - sections */
+    --card-bg: #EEEED1;              /* Medium dark gray - cards */
+    --card-hover-bg: #C3A9DD;        /* Dark gray - hover */
     
     /* Text & Borders */
-    --text-primary: #8C2A0A;         /* Light blue - main text color */
-    --text-secondary: #B9AB75;       /* Medium gray - secondary text */
-    --border-color: #DD8280;
-    --border-accent: #7FCADB;
+    --text-primary: #234D87;         /* Light blue - main text color */
+    --text-secondary: #0A1422;       /* Medium gray - secondary text */
+    --border-color: #0C2951;
+    --border-accent: #1F467A;
     
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }

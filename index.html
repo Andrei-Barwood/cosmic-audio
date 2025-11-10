@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Welcome back</title>
-    <style>body {margin:0; overflow:hidden; background:#2d060d;}</style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Underground DJ & Music Producer - Live Sets, Events & Releases">
+    <title>Mega Doll | Musical Artist </title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script language="javascript" type="text/javascript" src="security.js"></script>
-  </head>
-  <body>
-        <!-- JavaScript Detection - Required for all pages -->
+
+      <link href="https://fonts.cdnfonts.com/css/evilz" rel="stylesheet">
+
+
+
+
+</head>
+<body>
+    <!-- JavaScript Detection - Required for all pages -->
 <noscript>
     <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
         <div style="text-align: center; padding: 2rem; max-width: 600px;">
@@ -19,165 +29,174 @@
     </div>
 </noscript>
 
-    <script>
-      // Paleta de colores extraída
-      const palette = {
-        oscuro: "#2d060d",
-        crema: "#e0e6e0",
-        violeta: "#5a454e",
-        rojo: "#ae2f2d",
-        burdeos: "#63161b",
-        beige: "#9a847f"
-      };
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">Mega Doll</div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#music" class="nav-link">Music</a></li>
+                <li><a href="#events" class="nav-link">Events</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a class="nav-link" href="discography.html">Discography</a></li>
+                <li><a href="feed.html" class="nav-link">Feed</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-      let tentacles = [];
-      const numTentacles = 8;
-      let heartVisible = true;
-      let beatCount = 0;
-      let beating = true;
-      let fade = 255;
-      let heartTimer = 0;
-      let lastBeat = 0;
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <a class="glitch evilz-heart" data-text="🍭">🍭</a>
+            <p class="hero-subtitle">L-Pop • LolliPop Core • BreakCore</p>
+            <div class="hero-cta">
+                <a href="#music" class="btn btn-primary">Listen Now</a>
+                <a href="megadoll_scale_generator.html" class="btn btn-outline">chord and scales generator</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
 
-      function setup() {
-        createCanvas(windowWidth, windowHeight);
-        angleMode(DEGREES);
+    <!-- Music Section -->
+    <section class="section" id="music">
+        <div class="container">
+            <h2 class="section-title">Latest Releases</h2>
+            <div class="music-grid">
+                <div class="music-card">
+                    <div class="music-card-image">
+                        <img src="img/01 - Mega Doll - Dec Bad Moon Rising.jpg" alt="Mega Doll">
+                        <div class="play-overlay">
+                            <button class="play-btn">▶</button>
+                        </div>
+                    </div>
+                    <div class="music-card-info">
+                        <h3>Curved Candy</h3>
+                        <p>Bad Moon Rising • 2025</p>
+                        <div class="music-links">
+                            <a href="https://megadoll.bandcamp.com/album/bad-moon-rising" class="music-link" target="_blank">Bandcamp</a>
+                            <a href="https://www.youtube.com/watch?v=ZiLJCRweRvk&list=PLvaNWUMdzweZtYSTIoeFJ3jzwyWK-T-KJ" class="music-link" target="_blank">YouTube</a>
+                            <!-- <a href="#" class="music-link">Spotify</a> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat music-card as needed -->
+                <div class="music-card">
+                    <div class="music-card-image">
+                        <img src="img/02 - mega doll - licor peligroso.jpeg" alt="Mega Doll">
+                        <div class="play-overlay">
+                            <button class="play-btn">▶</button>
+                        </div>
+                    </div>
+                    <div class="music-card-info">
+                        <h3>Smells like Yogurt Spirit</h3>
+                        <p>Liquor Danger • 2025</p>
+                        <div class="music-links">
+                            <a href="https://megadoll.bandcamp.com/album/licor-peligro" class="music-link" target="_blank">Bandcamp</a>
+                            <a href="https://youtube.com/playlist?list=PLvaNWUMdzweZ6IVwLgRogCFZlhRCRALua&si=nWQ3HQ4uHd93rmli" class="music-link" target="_blank">YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        for (let i = 0; i < numTentacles; i++) {
-          tentacles.push(new Tentacle(
-            width/2, height/2,
-            random(120, 220),
-            random(7, 11),
-            random(7, 17),
-            i * (360/numTentacles)
-          ));
-        }
-      }
+    <!-- Events Section -->
+    <section class="section section-dark" id="events">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-list">
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">25</span>
+                        <span class="month">OCT</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>Satanic Lawyer Lesli, Law & Justice Conglomerate</h3>
+                        <p class="event-venue">Dark Heart Bacinilla • Christie's Manor (Basement)</p>
+                        <p class="event-time">23:00 - 06:00</p>
+                    </div>
+                    <a href="#" class="btn btn-small">Tickets</a>
+                </div>
+                
+                <div class="hero-cta">
+                <a href="live_events_archive.html" class="btn btn-outline">Archive of Events</a>
+            </div>
+            </div>
+        </div>
+    </section>
 
-      function draw() {
-        background(palette.oscuro);
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="img/03 - andrew kaamo.jpg" alt="DJ Photo">
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">About</h2>
+                    <p>Underground DJ and producer pushing the boundaries of electronic music. Specializing in dark torture for dolls, breakcore sounds, and experimental beats.</p>
+                    <p>Resident at Milk Pukarz Studio, recently i bought a big part of the stock market activity of the Sweet Dolls City Complex (The Mansion, The Studios and the Auditions Program), if you ever have doubts, a suggestion, a request related to Sweet Dolls City, you can contact me on my social media, links are below, if not and you wanna apply you can contact me, or if you are part of the crew i have certain responsibilities there so yeah you can team up with me too, there is a dedicated section on this website in the blog section for the most common situations, issues, requests and do's and dont's about us, so yeah, feel at home, it's yours bro.</p>
+                    <p>kiss</p>
+                    <div class="social-links">
+                        <a href="https://soundcloud.com/megadoll" class="social-link" aria-label="SoundCloud" target="_blank">SC</a>
+                        <a href="http://instagram.com/megadollbreakcore" class="social-link" aria-label="Instagram" target="_blank">IG</a>
+                        <a href="https://megadoll.bandcamp.com" class="social-link" aria-label="Bandcamp" target="_blank">BC</a>
+                        <a href="https://open.spotify.com/artist/48B5tu8noDdmZT5N989lFs" class="social-link" aria-label="Spotify" target="_blank">SP</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Dibujar tentáculos
-        for (let t of tentacles) {
-          t.update();
-          t.display();
-        }
+    <!-- Contact Section -->
+    <section class="section section-dark" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Bookings</h3>
+                    <p>contacto@megadoll.club</p>
+                    
+                    <h3>Management</h3>
+                    <p>contacto@megadoll.club</p>
+                    
+                    <h3>Press</h3>
+                    <p>contacto@megadoll.club</p>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Message" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-        // Animación del corazón
-        if (heartVisible) {
-          animateHeart();
-        }
-      }
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Andrew Walter III Kaamo 'D La Simmetrie. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+    </footer>
 
-      function animateHeart() {
-        // Tres latidos muy lentos (3 segundos por latido)
-        let now = millis();
-        if (beating && now - lastBeat > 3000) {
-          beatCount++;
-          lastBeat = now;
-        }
-        if (beatCount > 3) {
-          beating = false;
-        }
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">↑</button>
 
-        // Escala del corazón
-        let beatScale = 12;
-        if (beating) {
-          let phase = ((now - lastBeat) % 3000) / 3000.0;
-          beatScale = 1 + 0.15 * sin(phase * 360);
-        } 
+    <script src="script.js"></script>
 
-        if (!beating) {
-          // Empieza a desvanecerse
-          fade -= 1.2;
-          if (fade <= 0) {
-            heartVisible = false;
-          }
-        }
-
-        push();
-        translate(width/2, height/2);
-        scale(beatScale);
-        drawHeart(fade);
-        pop();
-      }
-
-      function drawHeart(alpha = 255) {
-        noStroke();
-        // Sombra
-        fill(0, 70);
-        ellipse(0, 22, 70, 20);
-
-        // Cuerpo del corazón
-        fill(color(palette.rojo + hex(floor(alpha), 2))); // Gradual alpha
-        beginShape();
-        vertex(0, 0);
-        bezierVertex(-44, -36, -60, 18, 0, 40);
-        bezierVertex(60, 18, 44, -36, 0, 0);
-        endShape(CLOSE);
-
-        // Reflejo suave
-        fill(255, 160, 160, alpha * 0.25);
-        ellipse(-14, -7, 15, 8);
-
-        // Detalle central (luz)
-        fill(palette.crema + hex(floor(alpha * 0.7), 2));
-        ellipse(0, 6, 10, 5);
-      }
-
-      class Tentacle {
-        constructor(x, y, len, segments, amp, startAngle) {
-          this.base = createVector(x, y);
-          this.len = len;
-          this.segments = segments;
-          this.amp = amp;
-          this.startAngle = startAngle;
-          this.offset = random(1000);
-          this.colors = [
-            palette.burdeos,
-            palette.violeta,
-            palette.beige,
-            palette.oscuro
-          ];
-        }
-
-        update() {
-          this.offset += 0.01 + random(0.005);
-        }
-
-        display() {
-          push();
-          translate(this.base.x, this.base.y);
-          let angleStep = 30;
-          let px = 0, py = 0;
-          strokeWeight(15);
-          noFill();
-          for (let i = 0; i < this.segments; i++) {
-            let theta = this.startAngle + sin(frameCount*0.8 + this.offset*60 + i*15) * this.amp;
-            let lenStep = this.len / this.segments;
-            let nx = px + cos(theta) * lenStep;
-            let ny = py + sin(theta) * lenStep;
-            stroke(color(this.colors[i % this.colors.length]));
-            line(px, py, nx, ny);
-            // aros decorativos de color crema
-            if (i % 2 === 0 && random(1) > 0.8) {
-              stroke(palette.crema + '55');
-              strokeWeight(5);
-              ellipse(nx, ny, 12, 4);
-              strokeWeight(15);
-              stroke(color(this.colors[i % this.colors.length]));
-            }
-            px = nx;
-            py = ny;
-          }
-          pop();
-        }
-      }
-
-      function windowResized() {
-        resizeCanvas(windowWidth, windowHeight);
-      }
-
-    </script>
-  </body>
+</body>
 </html>
