@@ -14,6 +14,7 @@
       <link href="https://fonts.cdnfonts.com/css/evilz" rel="stylesheet">
 
 
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
 
 
 </head>
@@ -61,9 +62,27 @@
                 <a href="megadoll_scale_generator.html" class="btn btn-outline">chord and scales generator</a>
             </div>
         </div>
+
+        
+
         <div class="scroll-indicator">
             <span></span>
         </div>
+    </section>
+    <section class="hero" id="home">
+        <div class="sidebar-widget" style="background: linear-gradient(135deg, var(--teal-darker), var(--darker-bg)); border-color: var(--primary-color);">
+    <h3 class="widget-title">Arcade Game of this Season</h3>
+    <div style="text-align: center;">
+        <p style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">L-POP</p>
+        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">yes it means fried butter</p>
+        <p style="color: var(--text-secondary);">Mega Doll Arcade</p>
+        <div style="margin-top: 1.5rem; padding: 1rem; background: var(--card-bg);">
+            <p style="font-size: 0.9rem; margin: 0; color: var(--text-secondary);">"Fench Butter matharfackar"</p>
+        </div>
+        <!-- Game Canvas -->
+        <div id="gameCanvas" style="margin-top: 1rem;"></div>
+    </div>
+</div>
     </section>
 
     <!-- Music Section -->
@@ -197,6 +216,159 @@
     <button class="back-to-top" id="backToTop">↑</button>
 
     <script src="script.js"></script>
+
+<!-- season game -->
+
+<script>
+function sketch_snake(p) {
+    let colors = [
+        "#501A14", "#AE2C1A", "#C6A933", "#E9DF3B", "#806D29", "#FFF98D", "#FFFF5D"
+    ];
+    let messages = [
+        "i can fuck around",
+        "i'm getting this",
+        "bitch! im getting this",
+        "sluts poison level bro ",
+        "stretch yo ass fucker"
+    ];
+    let currentMessage = "", lastMessageScore = 0;
+    let scl = 20, dirX = 0, dirY = 0, snake = [{x: 7, y: 5}], food = {x: 10, y: 7};
+    let score = 0, cols, rows, gameOver = false, started = false;
+
+    p.setup = function() {
+        p.createCanvas(280, 200).parent('gameCanvas');
+        cols = Math.floor(p.width/scl);
+        rows = Math.floor(p.height/scl);
+        p.frameRate(2);
+        placeFood();
+    };
+
+    function resetGame() {
+        dirX = 0; dirY = 0;
+        snake = [{x: 7, y: 5}];
+        food = {x: 10, y: 7};
+        score = 0;
+        gameOver = false;
+        started = false;
+        currentMessage = "";
+        lastMessageScore = 0;
+        placeFood();
+    }
+
+    function placeFood(){
+        let valid = false;
+        while (!valid) {
+            food.x = Math.floor(p.random(cols));
+            food.y = Math.floor(p.random(rows));
+            valid = !snake.some(s => s.x === food.x && s.y === food.y);
+        }
+    }
+
+    p.draw = function() {
+        p.background(colors[0]);
+        p.stroke(colors[4]);
+        for (let i = 0; i < cols; i++) p.line(i*scl, 0, i*scl, p.height);
+        for (let j = 0; j < rows; j++) p.line(0, j*scl, p.width, j*scl);
+
+        if (gameOver) {
+            p.noStroke();
+            p.fill(colors[1]);
+            p.textSize(22);
+            p.textAlign(p.CENTER, p.CENTER);
+            p.text("GAME OVER", p.width/2, p.height/2-26);
+            p.fill(colors[5]);
+            p.textSize(16);
+            p.text("Score: "+score, p.width/2, p.height/2+0);
+            p.fill(colors[6]);
+            p.textSize(10);
+            p.text("Snake Arcade", p.width/2, p.height/2+22);
+            p.textSize(12);
+            p.text("Press SPACE to restart", p.width/2, p.height/2+40);
+            return;
+        }
+
+        if (started) {
+            let head = {x: snake[0].x + dirX, y: snake[0].y + dirY};
+            if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows) gameOver = true;
+            for (let i = 0; i < snake.length; i++)
+                if (snake[i].x === head.x && snake[i].y === head.y) gameOver = true;
+            if (gameOver) return;
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y){ 
+                score++; 
+                placeFood(); 
+                if (score % 3 === 0) {
+                    let randIdx = Math.floor(Math.random() * messages.length);
+                    currentMessage = messages[randIdx];
+                    lastMessageScore = score;
+                }
+            } else {
+                snake.pop();
+            }
+        }
+
+        p.noStroke();
+        p.fill(colors[3]);
+        p.rect(food.x * scl, food.y * scl, scl, scl);
+        for (let i = snake.length - 1; i >= 0; i--) {
+            p.fill(i === 0 ? colors[1] : colors[2]);
+            p.rect(snake[i].x * scl, snake[i].y * scl, scl, scl);
+        }
+
+        p.fill(colors[5]);
+        p.textSize(16);
+        p.textAlign(p.LEFT, p.TOP);
+        p.text('Score: ' + score, 6, 6);
+
+        p.fill(colors[6]);
+        p.textSize(8);
+        p.text('Snake Arcade', 6, 22);
+
+        if (currentMessage && score === lastMessageScore) {
+            p.fill(colors[6]);
+            p.textSize(10);
+            p.textAlign(p.CENTER, p.TOP);
+            p.text(currentMessage, p.width/2, 34);
+        }
+
+        if (!started && !gameOver) {
+            p.fill(colors[6]);
+            p.textSize(10);
+            p.text("Press arrows to start!", 80, p.height-18);
+        }
+    };
+
+    p.keyPressed = function() {
+        if (gameOver && p.key === " ") {
+            resetGame();
+            return;
+        }
+        if (!gameOver) {
+            if (p.keyCode === p.UP_ARROW && dirY !== 1)     { dirX = 0; dirY = -1; started = true; }
+            else if (p.keyCode === p.DOWN_ARROW && dirY !== -1){ dirX = 0; dirY = 1; started = true; }
+            else if (p.keyCode === p.LEFT_ARROW && dirX !== 1) { dirX = -1; dirY = 0; started = true; }
+            else if (p.keyCode === p.RIGHT_ARROW && dirX !== -1){ dirX = 1; dirY = 0; started = true; }
+        }
+    };
+}
+new p5(sketch_snake, 'gameCanvas');
+</script>
+
+
+
+<script>
+document.addEventListener('keydown', function(event) {
+  // Block arrow keys and spacebar
+  if (
+    ["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(event.key)
+  ) {
+    event.preventDefault();
+  }
+}, false);
+</script>
+
+
 
 </body>
 </html>
