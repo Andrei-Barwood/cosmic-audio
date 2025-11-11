@@ -15,61 +15,7 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
-<style>
-    
-#gameCanvas.active {
-  touch-action: none;      /* Prevent pinch and pan */
-  overscroll-behavior: contain; /* Prevent scroll chaining */
-}
 
-
-.snake-btn {
-  font-family: 'Space Mono', monospace;
-  font-size: 1.7rem;
-  margin: 2px;
-  width: 54px;
-  height: 54px;
-  border-radius: 12px;
-  border: 2px solid #806D29;      /* Accent brown */
-  background: linear-gradient(135deg, #501A14 40%, #AE2C1A 100%);
-  color: #FFF98D;                 /* Bright yellow */
-  box-shadow: 0 2px 10px #501A1440;
-  transition: box-shadow 0.2s, border 0.2s;
-  outline: none;
-}
-
-.snake-btn:active, .snake-btn:focus {
-  border: 2px solid #E9DF3B;      /* Yellow accent */
-  box-shadow: 0 0 12px #E9DF3B90;
-  background: linear-gradient(135deg, #C6A933 10%, #FFFF5D 90%);
-  color: #501A14;
-}
-
-.snake-btn-restart {
-  width: 108px;
-  background: linear-gradient(135deg, #AE2C1A 10%, #FFF98D 100%);
-  color: #501A14;
-  font-size: 1.3rem;
-  font-weight: bold;
-  border: 2px solid #E9DF3B;
-}
-
-.snake-btn-up, .snake-btn-down { font-size:2.2rem; }
-.snake-btn-left, .snake-btn-right { font-size:2.2rem; }
-
-#mobileControls {
-  margin-bottom: 12px;
-  user-select: none;
-}
-
-
-.snake-btn:active {
-  transform: scale(0.95);
-}
-
-
-
-</style>
 
 </head>
 <body>
@@ -135,15 +81,6 @@
         </div>
         <!-- Game Canvas -->
         <div id="gameCanvas" style="margin-top: 1rem;"></div>
-<div id="mobileControls" style="text-align:center; margin-top:8px;">
-  <button class="snake-btn snake-btn-up"   onclick="window.snakeControl('UP')">↑</button>
-  <button class="snake-btn snake-btn-left" onclick="window.snakeControl('LEFT')">←</button>
-  <button class="snake-btn snake-btn-down" onclick="window.snakeControl('DOWN')">↓</button>
-  <button class="snake-btn snake-btn-right" onclick="window.snakeControl('RIGHT')">→</button>
-  <button class="snake-btn snake-btn-restart" onclick="window.snakeControl('RESTART')">Restart</button>
-</div>
-</div>
-
     </div>
 </div>
     </section>
@@ -284,16 +221,21 @@
 
 <script>
 function sketch_snake(p) {
-    window._p5jsInstance = p;  // Save the instance reference globally for buttons
     let colors = [
-        "#501A14", "#AE2C1A", "#C6A933", "#E9DF3B", "#806D29", "#FFF98D", "#FFFF5D"
+        "#0E1111", "#E7F800", "#00383B", "#093534", "#0F5150", "#B2E5F2", "#5B9E00"
     ];
     let messages = [
-        "i can fuck around",
-        "i'm getting this",
-        "bitch! im getting this",
+        "breakfast in the pool",
+        "school of manners to serve milk",
+        "Milk Enema Studios Represent",
         "sluts poison level bro ",
-        "stretch yo ass fucker"
+        "I DO NOT CARE!!",
+        "stretch yo ass girl",
+        "i wanna eat like them",
+        "give me shards",
+        "give me the damn job",
+        "blow me...",
+        "HA! HA! HA! 😈"
     ];
     let currentMessage = "", lastMessageScore = 0;
     let scl = 20, dirX = 0, dirY = 0, snake = [{x: 7, y: 5}], food = {x: 10, y: 7};
@@ -303,7 +245,7 @@ function sketch_snake(p) {
         p.createCanvas(280, 200).parent('gameCanvas');
         cols = Math.floor(p.width/scl);
         rows = Math.floor(p.height/scl);
-        p.frameRate(2);
+        p.frameRate(3);
         placeFood();
     };
 
@@ -339,13 +281,13 @@ function sketch_snake(p) {
             p.fill(colors[1]);
             p.textSize(22);
             p.textAlign(p.CENTER, p.CENTER);
-            p.text("GAME OVER", p.width/2, p.height/2-26);
+            p.text("HA! HA! HA! 😈", p.width/2, p.height/2-26);
             p.fill(colors[5]);
             p.textSize(16);
             p.text("Score: "+score, p.width/2, p.height/2+0);
             p.fill(colors[6]);
             p.textSize(10);
-            p.text("Snake Arcade", p.width/2, p.height/2+22);
+            p.text("Las Vegas kind of Buffet", p.width/2, p.height/2+22);
             p.textSize(12);
             p.text("Press SPACE to restart", p.width/2, p.height/2+40);
             return;
@@ -362,7 +304,7 @@ function sketch_snake(p) {
             if (head.x === food.x && head.y === food.y){ 
                 score++; 
                 placeFood(); 
-                if (score % 3 === 0) {
+                if (score % 2 === 0) {
                     let randIdx = Math.floor(Math.random() * messages.length);
                     currentMessage = messages[randIdx];
                     lastMessageScore = score;
@@ -387,7 +329,7 @@ function sketch_snake(p) {
 
         p.fill(colors[6]);
         p.textSize(8);
-        p.text('Snake Arcade', 6, 22);
+        p.text('Stairway to Hell', 6, 22);
 
         if (currentMessage && score === lastMessageScore) {
             p.fill(colors[6]);
@@ -417,26 +359,8 @@ function sketch_snake(p) {
     };
 }
 new p5(sketch_snake, 'gameCanvas');
-window.snakeControl = function(command) {
-  let sketch = window._p5jsInstance; // The instance reference set during setup
-  if (command === "UP" && sketch.dirY !== 1)      { sketch.dirX = 0; sketch.dirY = -1; sketch.started = true; }
-  else if (command === "DOWN" && sketch.dirY !== -1){ sketch.dirX = 0; sketch.dirY = 1; sketch.started = true; }
-  else if (command === "LEFT" && sketch.dirX !== 1) { sketch.dirX = -1; sketch.dirY = 0; sketch.started = true; }
-  else if (command === "RIGHT" && sketch.dirX !== -1){ sketch.dirX = 1; sketch.dirY = 0; sketch.started = true; }
-  else if (command === "RESTART" && sketch.gameOver) { sketch.resetGame(); }
-};
-
 </script>
 
-<script>
-const gameCanvasEl = document.getElementById('gameCanvas');
-gameCanvasEl.addEventListener('touchstart', function() {
-    gameCanvasEl.classList.add('active');
-});
-gameCanvasEl.addEventListener('touchend', function() {
-    setTimeout(() => gameCanvasEl.classList.remove('active'), 300); // Remove lock slightly after touch
-});
-</script>
 
 
 <script>
