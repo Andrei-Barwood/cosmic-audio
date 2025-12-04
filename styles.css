@@ -11,30 +11,79 @@
 
 :root {
     /* Primary Brand Colors */
-    --primary-color: #F7F3D3;        /* Lime green - main accent */
-    --secondary-color: #7DB6D5;      /* Yellow - secondary accent */
-    --tertiary-color: #CAF3F2;       /* Bright lime - highlights */
-    --success-color: #EAE13D;        /* Bright green - CTAs */
-    --olive-accent: #439939;         /* Olive green - subtle accent */
+    --primary-color: #282D5A;        /* Lime green - main accent */
+    --secondary-color: #090E1D;      /* Yellow - secondary accent */
+    --tertiary-color: #9995BF;       /* Bright lime - highlights */
+    --success-color: #7770B9;        /* Bright green - CTAs */
+    --olive-accent: #9CFBFF;         /* Olive green - subtle accent */
     
     /* Teal Accents */
-    --teal-dark: #439939;            /* Dark teal - borders */
-    --teal-darker: #5F5D87;          /* Darker teal - backgrounds */
-    --teal-medium: #88682A;          /* Medium teal - hover states */
+    --teal-dark: #844FDE;            /* Dark teal - borders */
+    --teal-darker: #4B37CA;          /* Darker teal - backgrounds */
+    --teal-medium: #1C4CC2;          /* Medium teal - hover states */
     
     /* Background Colors */
-    --dark-bg: #2E270F;              /* Almost black - main bg */
-    --darker-bg: #563F27;            /* Very dark gray - sections */
-    --card-bg: #65423B;              /* Medium dark gray - cards */
-    --card-hover-bg: #B99C1A;        /* Dark gray - hover */
+    --dark-bg: #6E66C0;              /* Almost black - main bg */
+    --darker-bg: #FFFFFF;            /* Very dark gray - sections */
+    --card-bg: #000000;              /* Medium dark gray - cards */
+    --card-hover-bg: #5684E5;        /* Dark gray - hover */
     
     /* Text & Borders */
-    --text-primary: #E8B4D3;         /* Light blue - main text color */
-    --text-secondary: #FFB8C6;       /* Medium gray - secondary text */
-    --border-color: #E7B4D5;
-    --border-accent: #FFFFFF;
+    --text-primary: #67E6D0;         /* Light blue - main text color */
+    --text-secondary: #0C6182;       /* Medium gray - secondary text */
+    --border-color: #9990F2;
+    --border-accent: #C4BEF7;
     
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Add these animations to your styles.css file */
+
+@keyframes starPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+        box-shadow: 0 0 30px rgba(247, 243, 211, 0.7),
+                    inset 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.6;
+    }
+    33% {
+        transform: translateY(-10px) translateX(5px);
+        opacity: 0.8;
+    }
+    66% {
+        transform: translateY(5px) translateX(-5px);
+        opacity: 0.7;
+    }
+}
+
+@keyframes scrollMatrix {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Optional: Hover effect for the thumbnail */
+.geometric-thumbnail:hover {
+    border-color: #F7F3D3 !important;
+}
+
+.geometric-thumbnail:hover > div:first-child {
+    animation: starPulse 1s ease-in-out infinite !important;
 }
 
 
@@ -50,6 +99,9 @@ body {
     overflow-x: hidden;
 }
 
+
+
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -61,7 +113,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(249, 239, 217, 0.95);
+    background: rgba(86, 132, 229, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
     transition: var(--transition);
@@ -81,7 +133,7 @@ body {
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--primary-color);
-    text-shadow: 0 0 20px rgba(242, 160, 186, 0.5);
+    text-shadow: 0 0 20px rgba(119, 150, 236, 0.5);
 }
 
 .nav-menu {

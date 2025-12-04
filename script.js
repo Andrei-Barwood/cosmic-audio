@@ -31,9 +31,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+        navbar.style.background = 'rgba(119, 150, 236, 0.98)';
     } else {
-        navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+        navbar.style.background = 'rgba(119, 150, 236, 0.95)';
     }
 });
 
@@ -126,8 +126,8 @@ function copyLink() {
 
 // Color palette: change/add hex codes for your moods/seasons!
 const colors = [
-  "#731D26", "#B62645", "#541D1D", "#292C30", "#000000", "#212226",
-  "#46474B", "#565656", "#000000", "#FFFF00", "#D0D2D6", "#242623", "#B7B8BA", "#98999A"
+  "#0C6182", "#00B6A3", "#67E6D0", "#9CFBFF", "#7796EC", "#9990F2",
+  "#5684E5", "#6E66C0", "#C4BEF7", "#7770B9", "#9995BF"
 ];
 
 // Your Evilz heart SVG path data
