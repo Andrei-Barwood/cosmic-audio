@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script language="javascript" type="text/javascript" src="security.js"></script>
+
 <!-- inicio Prevenir la desactivacion de JavaScript -->
 <script src="security - check-js.js"></script>
     <noscript>
@@ -90,6 +91,54 @@
                     <div class="blog-grid">
                         
                         <!-- Blog Posts -->
+
+
+<article class="blog-post fade-in">
+    <div class="blog-post-image">
+        <!-- Contenedor para el canvas de p5.js -->
+        <div id="flashback-thumbnail" style="
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: linear-gradient(135deg, #2E270F 0%, #5F5D87 100%);
+            border-bottom: 2px solid #844FDE;
+            overflow: hidden;
+        "></div>
+    </div>
+    
+    <div class="blog-post-content">
+        <div class="blog-post-content">
+        <div class="post-meta">
+            <span class="post-category" style="background: linear-gradient(135deg, #E8B4D3, #FFB8C6); color: #2E270F;">Temporal Theory</span>
+            <span class="post-date">📅 2147-11-07</span>
+            <span class="post-reading-time">⏱️ 14 min read</span>
+        </div>
+        
+        <h3 class="post-title">
+            <a href="gal_02_magicurl_filia.html">The Temporal Geometry of Flash Back</a>
+        </h3>
+        
+        <p class="post-excerpt">
+            Explore how Magicurl Filia's ability manifests as temporal fractals—where every blocked attack creates a 
+            double helix of time-streams, enabling simultaneous past and future states through spiritual minimalism.
+        </p>
+        
+        <div style="margin: 1rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(232, 180, 211, 0.15); color: #E8B4D3; border-radius: 3px; border: 1px solid rgba(232, 180, 211, 0.3);">#TemporalGeometry</span>
+            <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(127, 202, 219, 0.15); color: #7DB6D5; border-radius: 3px; border: 1px solid rgba(127, 202, 219, 0.3);">#DualConsciousness</span>
+            <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(202, 243, 242, 0.15); color: #CAF3F2; border-radius: 3px; border: 1px solid rgba(202, 243, 242, 0.3);">#TimeFractals</span>
+        </div>
+        
+        <a href="gal_02_magicurl_filia.html" class="read-more">
+            Navigate Temporal Streams →
+        </a>
+    </div>
+    </div>
+</article>
+
+
+
+
 <article class="blog-post">
     <div class="blog-post-image">
         <!-- Geometric Thumbnail -->
@@ -429,5 +478,159 @@
     <button class="back-to-top" id="backToTop">↑</button>
 
     <script src="script.js"></script>
+
+
+<!-- Incluir p5.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
+<!-- Script específico para la animación -->
+<script>
+new p5(function(p) {
+    const colors = {
+        purpleLight: '#844FDE',
+        purpleMedium: '#4B37CA',
+        blueDark: '#1C4CC2',
+        white: '#FFFFFF'
+    };
+    
+    let time = 0;
+    let centerX, centerY;
+    
+    p.setup = function() {
+        const container = document.getElementById('flashback-thumbnail');
+        const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
+        canvas.parent('flashback-thumbnail');
+        p.pixelDensity(1);
+        
+        centerX = p.width / 2;
+        centerY = p.height / 2;
+    };
+    
+    p.draw = function() {
+        time += 0.02;
+        
+        // Fondo con gradiente
+        p.background(46, 39, 15, 20);
+        
+        // Doble espiral temporal
+        drawDualSpiral();
+        
+        // Símbolo central
+        drawCentralSymbol();
+        
+        // Partículas flotantes
+        drawFloatingParticles();
+    };
+    
+    function drawDualSpiral() {
+        p.push();
+        p.translate(centerX, centerY);
+        
+        // Primera espiral (Presente)
+        p.stroke(colors.purpleLight);
+        p.strokeWeight(2);
+        p.noFill();
+        p.beginShape();
+        for (let i = 0; i < p.TWO_PI * 2; i += 0.1) {
+            let r = 25 + 10 * p.sin(i * 2 + time);
+            let x = r * p.cos(i + time);
+            let y = r * p.sin(i + time);
+            p.vertex(x, y);
+        }
+        p.endShape();
+        
+        // Segunda espiral (Futuro) - desfasada
+        p.stroke(colors.blueDark);
+        p.beginShape();
+        for (let i = 0; i < p.TWO_PI * 2; i += 0.1) {
+            let r = 40 + 10 * p.sin(i * 2 - time);
+            let x = r * p.cos(i - time);
+            let y = r * p.sin(i - time);
+            p.vertex(x, y);
+        }
+        p.endShape();
+        
+        p.pop();
+    }
+    
+    function drawCentralSymbol() {
+        p.push();
+        p.translate(centerX, centerY);
+        
+        // Anillo exterior pulsante
+        p.noFill();
+        p.stroke(colors.white);
+        p.strokeWeight(1);
+        let pulse = 15 + p.sin(time * 3) * 3;
+        p.circle(0, 0, pulse * 2);
+        
+        // Símbolo de flecha doble
+        p.strokeWeight(2);
+        
+        // Flecha derecha (futuro)
+        p.stroke(colors.purpleLight);
+        drawSimpleArrow(8, 0, 1.0);
+        
+        // Flecha izquierda (presente)
+        p.stroke(colors.blueDark);
+        drawSimpleArrow(-8, 0, -1.0);
+        
+        // Punto central
+        p.fill(colors.white);
+        p.noStroke();
+        p.circle(0, 0, 6);
+        
+        p.pop();
+    }
+    
+    function drawSimpleArrow(x, y, direction) {
+        p.push();
+        p.translate(x, y);
+        
+        // Cuerpo de flecha
+        p.line(0, 0, 6 * direction, 0);
+        
+        // Punta
+        p.beginShape();
+        if (direction > 0) {
+            p.vertex(6, 0);
+            p.vertex(3, -3);
+            p.vertex(3, 3);
+        } else {
+            p.vertex(-6, 0);
+            p.vertex(-3, -3);
+            p.vertex(-3, 3);
+        }
+        p.endShape(p.CLOSE);
+        
+        p.pop();
+    }
+    
+    function drawFloatingParticles() {
+        for (let i = 0; i < 20; i++) {
+            let angle = time + i * 0.3;
+            let distance = 50 + p.sin(angle) * 20;
+            let x = centerX + p.cos(angle) * distance;
+            let y = centerY + p.sin(angle) * distance;
+            
+            // Alternar colores
+            let color = i % 2 === 0 ? colors.purpleLight : colors.blueDark;
+            
+            p.fill(color);
+            p.noStroke();
+            let size = 2 + p.sin(angle * 2) * 1;
+            p.circle(x, y, size);
+        }
+    }
+    
+    p.windowResized = function() {
+        const container = document.getElementById('flashback-thumbnail');
+        p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+        centerX = p.width / 2;
+        centerY = p.height / 2;
+    };
+}, 'flashback-thumbnail');
+</script>
+
 </body>
 </html>

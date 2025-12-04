@@ -1,5 +1,79 @@
 /* Blog Specific Styles */
 
+
+
+
+/* Ensure consistent thumbnail height */
+.blog-post-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    border-bottom: 1px solid var(--teal-dark);
+}
+
+/* Make sure thumbnail content fills the container */
+.blog-post-image > div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Category styling */
+.post-category {
+    background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+    color: var(--dark-bg);
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 2px;
+}
+
+/* Reading time styling */
+.post-reading-time {
+    color: var(--secondary-color);
+    font-size: 0.85rem;
+}
+
+/* Hover effect for consistency */
+.blog-post:hover .blog-post-image {
+    border-bottom-color: var(--primary-color);
+}
+
+/* Tag styling */
+.post-tags {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    padding: 0.3rem 0.7rem;
+    background: rgba(127, 202, 219, 0.1);
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    border-radius: 3px;
+    border: 1px solid rgba(127, 202, 219, 0.3);
+}
+
+/* Add subtle scale animation on hover */
+.blog-post:hover .blog-post-image {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+/* If using the complex thumbnail with the star */
+@keyframes starSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.blog-post:hover .blog-post-image .star {
+    animation: starSpin 20s linear infinite;
+}
+
 /* Blog Hero */
 .blog-hero {
     padding: 150px 0 80px;
