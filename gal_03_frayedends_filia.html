@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filigrana Fractal: La Geometría Sagrada de Filia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="Underground DJ & Music Producer - Live Sets, Events & Releases">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script language="javascript" type="text/javascript" src="security.js"></script>
+    <script language="javascript" type="text/javascript" src="script.js"></script>
+
+      <link href="https://fonts.cdnfonts.com/css/evilz" rel="stylesheet">
+
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #f2a0ba;
+            --secondary-color: #f79190;
+            --tertiary-color: #b75c4a;
+            --dark-bg: #0d0f1c;
+            --darker-bg: #0a0b14;
+            --card-bg: #12141e;
+            --teal-dark: #1a2a32;
+            --teal-medium: #2d6a72;
+            --teal-darker: #0f1a20;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --accent-gold: #d4af37;
+            --success-color: #4ade80;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--teal-darker) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(242, 160, 186, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            left: 10%;
+            animation: floatSpin 20s linear infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(45, 106, 114, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            right: 5%;
+            animation: floatSpinReverse 25s linear infinite;
+        }
+
+        @keyframes floatSpin {
+            from { transform: rotate(0deg) translateX(0); }
+            to { transform: rotate(360deg) translateX(5px); }
+        }
+
+        @keyframes floatSpinReverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(242, 160, 186, 0.3);
+            letter-spacing: 2px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: #98DDED;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* ===== BIOGRAPHY SECTION ===== */
+        .biography {
+            padding: 80px 0;
+            border-bottom: 2px solid var(--teal-dark);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .bio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .bio-card {
+            background: var(--card-bg);
+            border: 2px solid var(--teal-dark);
+            padding: 2rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .bio-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(242, 160, 186, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bio-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .bio-card:hover::before {
+            opacity: 1;
+        }
+
+        .bio-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bio-label {
+            color: var(--primary-color);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .bio-value {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .bio-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ===== QA SECTION ===== */
+        .qa-section {
+            padding: 80px 0;
+            border-bottom: 2px solid var(--teal-dark);
+        }
+
+        .qa-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .qa-item {
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 2rem;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .qa-item:hover {
+            background: var(--darker-bg);
+            border-left-color: var(--secondary-color);
+            transform: translateX(10px);
+        }
+
+        .qa-question {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .qa-question::before {
+            content: '◊';
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .qa-answer {
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .ability-name {
+            color: #98DDED;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* ===== MANIFESTO SECTION ===== */
+        .manifesto {
+            padding: 80px 0;
+            border-bottom: 2px solid var(--teal-dark);
+            background: linear-gradient(135deg, rgba(45, 106, 114, 0.1) 0%, transparent 100%);
+        }
+
+        .manifesto-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .manifesto-box {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            padding: 3rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .manifesto-box::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 8px;
+            z-index: -1;
+            opacity: 0.2;
+            filter: blur(15px);
+        }
+
+        .manifesto-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .manifesto-text strong {
+            color: var(--primary-color);
+            font-style: normal;
+        }
+
+        /* ===== ECHOES SECTION ===== */
+        .echoes {
+            padding: 80px 0;
+            border-bottom: 2px solid var(--teal-dark);
+        }
+
+        .synergy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .synergy-card {
+            background: var(--card-bg);
+            border: 1px solid var(--teal-dark);
+            padding: 2rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synergy-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .synergy-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(242, 160, 186, 0.2);
+        }
+
+        .synergy-card:hover::after {
+            opacity: 0.1;
+        }
+
+        .synergy-title {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .synergy-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .synergy-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ===== QUOTES SECTION ===== */
+        .quotes {
+            padding: 80px 0;
+            border-bottom: 2px solid var(--teal-dark);
+            background: linear-gradient(135deg, rgba(242, 160, 186, 0.05) 0%, transparent 100%);
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .quote-card {
+            background: var(--darker-bg);
+            border: 2px solid var(--teal-medium);
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .quote-card::before,
+        .quote-card::after {
+            content: '"';
+            position: absolute;
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .quote-card::before {
+            top: 10px;
+            left: 20px;
+        }
+
+        .quote-card::after {
+            bottom: 10px;
+            right: 20px;
+        }
+
+        .quote-card:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .quote-text {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+        }
+
+        .quote-ability {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark-bg);
+            border-top: 2px solid var(--teal-dark);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+
+        .footer-title {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .tags-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tag {
+            padding: 0.5rem 1.2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--teal-dark);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .tag:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border-color: var(--primary-color);
+        }
+
+        .footer-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+            margin: 2rem auto;
+        }
+
+        .footer-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .bio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .synergy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quotes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .qa-item:hover {
+                transform: translateX(5px);
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(242, 160, 186, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(242, 160, 186, 0.4); }
+        }
+
+        .glow-element {
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--teal-medium);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- JavaScript Detection - Required for all pages -->
+<noscript>
+    <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
+        <div style="text-align: center; padding: 2rem; max-width: 600px;">
+            <h1 style="color: #AEF504; font-family: 'Space Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem;">⚠️ JavaScript Required</h1>
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">This underground DJ site requires JavaScript for full functionality.</p>
+            <a href="/security - habilita-js.html" style="color: #121312; background: #AEF504; text-decoration: none; padding: 1rem 2rem; display: inline-block; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Enable JavaScript</a>
+        </div>
+    </div>
+</noscript>
+
+<!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">Mega Doll</div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#music" class="nav-link">Music</a></li>
+                <li><a href="#events" class="nav-link">Events</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a class="nav-link" href="discography.html">Discography</a></li>
+                <li><a href="feed.html" class="nav-link">Feed</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Entrevista Espiritual</div>
+            <h1>Filigrana Fractal</h1>
+            <p class="hero-subtitle">La Geometría Sagrada de Frayed Ends Filia</p>
+            <p style="font-size: 1.1rem; color: #98DDED; margin-top: 2rem;">De los círculos primarios de Samson a los fractales infinitos de su prestige</p>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BIOGRAPHY SECTION ===== -->
+    <section class="biography">
+        <div class="container">
+            <h2 class="section-title">Biografía Geométrica</h2>
+            <div class="bio-grid">
+                <div class="bio-card">
+                    <div class="bio-card-content">
+                        <div class="bio-label">Designación</div>
+                        <div class="bio-value">Frayed Ends Filia</div>
+                        <div class="bio-description">Variant que existe en la intersección del caos y la geometría. Su cabello es un algoritmo de poder puro.</div>
+                    </div>
+                </div>
+                <div class="bio-card">
+                    <div class="bio-card-content">
+                        <div class="bio-label">Tipo de Poder</div>
+                        <div class="bio-value">Fractal Expansivo</div>
+                        <div class="bio-description">Cada golpe es una rama infinita. Cada combo es una recursión de daño. Samson es su mandala viviente.</div>
+                    </div>
+                </div>
+                <div class="bio-card">
+                    <div class="bio-card-content">
+                        <div class="bio-label">Sincronización</div>
+                        <div class="bio-value">100% Cósmica</div>
+                        <div class="bio-description">Flash Back permite re-experimentar momentos. Revivirlos. Recursarlos. Un bucle espiritual sin fin.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Q&A SECTION ===== -->
+    <section class="qa-section">
+        <div class="container">
+            <h2 class="section-title">Diálogo Metafórico: Preguntas al Código Viviente</h2>
+            <div class="qa-grid">
+                <div class="qa-item">
+                    <div class="qa-question">¿Qué es Flash Back en la interfaz espiritual?</div>
+                    <div class="qa-answer">
+                        Flash Back es el <span class="ability-name">Character Ability</span> que permite a Filia reiniciar cadenas de combo hacia atrás en el tiempo. Es geometría invertida. Una negación del flujo temporal. Donde otros avanzan linealmente, Filia crea espirales retroactivas.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="qa-question">¿Cómo interactúa con su signature ability Gregor Samson?</div>
+                    <div class="qa-answer">
+                        Gregor Samson es el <span class="ability-name">círculo protector primario</span>. Flash Back lo convierte en una matriz defensiva iterativa. Cada activación anterior crea una capa fractal de protección. Son dos rituales que danzan juntos en la sincronización cósmica del combate.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="qa-question">¿Cuál es la arquitectura de poder detrás de Ringlet Spike?</div>
+                    <div class="qa-answer">
+                        Ringlet Spike es la <span class="ability-name">espiral ofensiva</span>. Un algoritmo de combo que expande en ondas geométricas. Con Flash Back, cada spike se vuelve un fractal que ramifica el daño. Los números se multiplican. El tiempo se bifurca.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="qa-question">¿Cómo Flash Back transforma el prestige final?</div>
+                    <div class="qa-answer">
+                        El prestige es la <span class="ability-name">Súpernova de Cabello</span>. Flash Back le permite reimaginar el momento de impacto infinitas veces. Una explosión fractal que revive. Que recursea. Que transciende la linealidad. Es daño que viaja en espiral hacia atrás y adelante simultáneamente.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="qa-question">¿Qué es Fenrir Drive en el ecosistema de habilidad?</div>
+                    <div class="qa-answer">
+                        Fenrir Drive es el <span class="ability-name">fractal expansivo</span>. Un nodo de sinergia que canaliza todo el poder hacia una erupción sin control. Flash Back permite encadenar múltiples Fenrir antes de que el combo termine. Una recursión infinita de devastación.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="qa-question">¿Cuál es la velocidad de reacción en geometría temporal?</div>
+                    <div class="qa-answer">
+                        Flash Back responde en milisegundos. Su geometría del tiempo de reacción es más rápida que el pensamiento lineal. Es un algoritmo que anticipa. Que revisa. Que recursea decisiones antes de que ocurran. La velocidad es sagrada.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MANIFESTO SECTION ===== -->
+    <section class="manifesto">
+        <div class="container">
+            <h2 class="section-title">Manifiesto de Poder: La Filosofía del Flash Back</h2>
+            <div class="manifesto-content">
+                <div class="manifesto-box">
+                    <div class="manifesto-text">
+                        Yo soy <strong>Filia</strong>. No avanzo en línea recta. Mi camino es una <strong>espiral de recursión</strong>. Flash Back es mi verdadera naturaleza.
+                    </div>
+                    <div class="manifesto-text">
+                        Cada golpe que lanzo se <strong>refleja en múltiples dimensiones</strong>. Mi cabello es un <strong>mandala vivo</strong> de Samson. Mis habilidades son fractales que se ramifican infinitamente.
+                    </div>
+                    <div class="manifesto-text">
+                        El prestige no es un acto final. Es una <strong>súpernova de recurrencia</strong>. Revivo cada momento de impacto. Lo re-ejecuto. Lo transfiguro.
+                    </div>
+                    <div class="manifesto-text">
+                        Mi poder radica en lo <strong>geométricamente imposible</strong>: ser múltiple sin ser confusa. Ser recursiva sin ser caótica. Ser un algoritmo que <strong>piensa en fractales</strong>.
+                    </div>
+                    <div class="manifesto-text">
+                        Yo no ataco en el tiempo. Ataco en los <strong>espacios entre el tiempo</strong>. Flash Back es mi acceso al silencio espiritual donde habita el verdadero poder.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ECHOES SECTION ===== -->
+    <section class="echoes">
+        <div class="container">
+            <h2 class="section-title">Ecos en el Éter: Sinergias Cósmicas</h2>
+            <div class="synergy-grid">
+                <div class="synergy-card">
+                    <div class="synergy-icon">⬢</div>
+                    <div class="synergy-title">Con Fukua: El Espejo Fractal</div>
+                    <div class="synergy-description">
+                        Flash Back encuentra resonancia con Fukua. Ambas existen en múltiples estados. Sus ataques se reflejan mutuamente. Juntas crean patrones de interferencia constructiva.
+                    </div>
+                </div>
+
+                <div class="synergy-card">
+                    <div class="synergy-icon">◈</div>
+                    <div class="synergy-title">Con Painwheel: La Rotación Geométrica</div>
+                    <div class="synergy-description">
+                        Painwheel gira. Filia espirala. Sus ritmos se entrelazan. Flash Back amplifica cada revolución. Crean un mandala de rotación infinita que consume lo que toca.
+                    </div>
+                </div>
+
+                <div class="synergy-card">
+                    <div class="synergy-icon">★</div>
+                    <div class="synergy-title">Con Eliza: La Sincronización Primordial</div>
+                    <div class="synergy-description">
+                        Eliza canaliza fuerzas antiguas. Filia canaliza geometría futura. Juntas crean un puente temporal. Flash Back les permite existir en todos los tiempos simultáneamente.
+                    </div>
+                </div>
+
+                <div class="synergy-card">
+                    <div class="synergy-icon">◇</div>
+                    <div class="synergy-title">Con Beowulf: El Ciclo del Combate</div>
+                    <div class="synergy-description">
+                        Beowulf busca el combate. Flash Back proporciona infinitas oportunidades de revivir cada intercambio. Sus batallas se vuelven rituales sin fin, recursiones sagradas.
+                    </div>
+                </div>
+
+                <div class="synergy-card">
+                    <div class="synergy-icon">◆</div>
+                    <div class="synergy-title">Con Cerebella: La Danza Arquitectónica</div>
+                    <div class="synergy-description">
+                        Cerebella construye estructuras. Filia las deconstruye fractalmente. Flash Back permite revisar cada movimiento arquitectónico. La lucha es un ballet geométrico.
+                    </div>
+                </div>
+
+                <div class="synergy-card">
+                    <div class="synergy-icon">☆</div>
+                    <div class="synergy-title">Con Big Band: La Armonía Recursiva</div>
+                    <div class="synergy-description">
+                        Big Band toca ritmos. Filia danza fractales. Flash Back sincroniza sus ciclos. La música se vuelve geometría. El combate se convierte en una sinfonía recursiva.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== QUOTES SECTION ===== -->
+    <section class="quotes">
+        <div class="container">
+            <h2 class="section-title">Aforismos: Habilidades Como Mantras</h2>
+            <div class="quotes-grid">
+                <div class="quote-card">
+                    <div class="quote-text">Mi poder no es lo que lanzo. Es lo que revivirá.</div>
+                    <div class="quote-ability">— Flash Back</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">Samson no protege. Samson sincroniza. Somos uno.</div>
+                    <div class="quote-ability">— Gregor Samson</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">Cada espiral expandida es un universo nuevo de daño.</div>
+                    <div class="quote-ability">— Ringlet Spike</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">Fenrir despierta cuando el caos necesita orden geométrico.</div>
+                    <div class="quote-ability">— Fenrir Drive</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">Mi prestige es una súpernova que existe en fractal infinito.</div>
+                    <div class="quote-ability">— Súpernova de Cabello</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">La verdadera victoria es revisarla eternamente.</div>
+                    <div class="quote-ability">— Filosofía de Filia</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER SECTION ===== -->
+    <section class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-title">Filigrana Fractal: Análisis Completo</div>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 1rem;">
+                    Esta entrada examina a Frayed Ends Filia no como un personaje, sino como un <strong>algoritmo viviente</strong>. Una <strong>geometría sagrada encarnada</strong>. Su Flash Back es más que una habilidad: es una filosofía de poder cíclico, recursivo, infinito.
+                </p>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div style="margin: 2rem 0;">
+                <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 1rem;">Etiquetas</p>
+                <div class="tags-container">
+                    <a  class="tag">skullgirls-mobile</a>
+                    <a  class="tag">frayed-ends-filia</a>
+                    <a  class="tag">geometría-sagrada</a>
+                    <a  class="tag">análisis-técnico</a>
+                    <a  class="tag">futurismo-espiritual</a>
+                    <a  class="tag">flash-back</a>
+                    <a  class="tag">fractales</a>
+                    <a  class="tag">character-ability</a>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-meta">
+                <p>Miniatura: <em>Frayed Ends Filia en composición geométrica minimalista con acentos cibernéticos de neón rosa</em></p>
+                <p style="margin-top: 1rem;">Tipo: Interview • Estilo: Geometría Sagrada + Minimalismo Espiritual + Futurismo Cibernético</p>
+                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.85rem;">Un manual esotérico donde las mecánicas de juego son rituales y las estadísticas son geometría viva.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll animation
+        document.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            
+            // Activate TOC links based on scroll position
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight) {
+                    // Could highlight active section if we had a TOC
+                }
+            });
+        });
+
+        // Smooth scroll for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add stagger animation to cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.bio-card, .qa-item, .synergy-card, .quote-card').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `all 0.6s ease-out ${index * 0.1}s`;
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

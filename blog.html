@@ -18,6 +18,11 @@
         <meta http-equiv="refresh" content="0;url=/security - habilita-js.html">
     </noscript>
 <!-- fin Prevenir la desactivacion de JavaScript -->
+
+
+
+
+
 </head>
 <body>
     <!-- JavaScript Detection - Required for all pages -->
@@ -91,6 +96,145 @@
                     <div class="blog-grid">
                         
                         <!-- Blog Posts -->
+
+<article class="blog-post">
+    <div class="blog-post-image">
+        <div id="p5-sketch-filia" style="
+            width: 100%; 
+            height: 250px; 
+            aspect-ratio: 16/9;
+            position: relative;
+            background: linear-gradient(135deg, #0d0f1c 0%, #2E270F 100%);
+            overflow: hidden;
+            border-radius: 8px;
+        ">
+            <!-- Canvas se crea aquí automáticamente -->
+        </div>
+    </div>
+    
+    <div class="blog-post-content">
+        <div class="post-meta">
+            <span class="post-category">Interview</span>
+            <span class="post-date">December 5, 2025</span>
+        </div>
+        <h3 class="post-title">
+            <a href="gal_03_frayedends_filia.html">Filigrana Fractal: Entrevista a Frayed Ends Filia</a>
+        </h3>
+        <p class="post-excerpt">
+            Filia revela cómo Flash Back teje espirales temporales, convirtiendo combos en rituales recursivos de geometría sagrada.
+        </p>
+        <a href="gal_03_frayedends_filia.html" class="read-more">Explora los Fractales →</a>
+    </div>
+
+    <!-- p5.js + Script full-fix -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+    <style>
+        #p5-sketch-filia canvas {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            display: block !important;
+        }
+    </style>
+    <script>
+        let myp5;
+
+        let sketch = function(p) {
+            let particles = [];
+            let time = 0;
+            let firstDraw = true;
+
+            p.setup = function() {
+                let container = document.getElementById('p5-sketch-filia');
+                // Delay para medir tamaño real
+                setTimeout(() => {
+                    p.createCanvas(container.offsetWidth, container.offsetHeight);
+                    p.frameRate(45);
+                    p.pixelDensity(1.5);
+                    p.background('#0d0f1c');
+                    initParticles();
+                }, 50);
+            };
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < 80; i++) {
+                    particles.push({
+                        x: p.random(p.width),
+                        y: p.random(p.height),
+                        vx: p.random(-1.5, 1.5),
+                        vy: p.random(-1.5, 1.5),
+                        life: p.random(100)
+                    });
+                }
+            }
+
+            p.windowResized = function() {
+                let container = document.getElementById('p5-sketch-filia');
+                p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+                p.background('#0d0f1c');
+                initParticles(); // Reinicia partículas
+            };
+
+            p.draw = function() {
+                // Fallback primera frame
+                if (firstDraw || p.width === 0 || p.height === 0) {
+                    p.background('#0d0f1c');
+                    firstDraw = false;
+                    return;
+                }
+
+                p.background(13, 15, 28, 30); // Fade suave
+
+                // Partículas
+                p.blendMode(p.SCREEN);
+                for (let i = 0; i < particles.length; i++) {
+                    let part = particles[i];
+                    let cycle = (p.frameCount + i * 2) % 240;
+                    if (cycle < 120) {
+                        part.x += part.vx; part.y += part.vy;
+                    } else {
+                        part.x -= part.vx; part.y -= part.vy;
+                    }
+                    part.x = (part.x + p.width) % p.width;
+                    part.y = (part.y + p.height) % p.height;
+
+                    p.fill(232 + p.sin(time*0.05 + i)*20, 180, 211, 150);
+                    p.noStroke();
+                    p.circle(part.x, part.y, 4);
+                    part.life -= 0.4;
+                    if (part.life < 0) part.life = 100;
+                }
+
+                // Espiral sagrada
+                p.blendMode(p.BLEND);
+                p.stroke(232, 180, 211, 130);
+                p.strokeWeight(1.3);
+                p.noFill();
+                p.push();
+                p.translate(p.width * 0.5, p.height * 0.5);
+                for (let r = 20; r < 100; r += 5) {
+                    let ang = (time * 0.04 + r * 0.09) % p.TWO_PI;
+                    p.point(p.cos(ang) * r, p.sin(ang * 1.1) * r * 0.65);
+                }
+                p.pop();
+
+                time += 1;
+            };
+        };
+
+        // Inicializa después de load
+        window.addEventListener('load', () => {
+            myp5 = new p5(sketch, 'p5-sketch-filia');
+        });
+    </script>
+</article>
+
+
+
+
 
 
 <article class="blog-post fade-in">
