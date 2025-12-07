@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="blog-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>La Pasajera de Torenza: El Portal Olvidado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Variables - Assumed from typical theme */
+        :root {
+            --primary-color: #F2A0BA;
+            --secondary-color: #F7918F;
+            --tertiary-color: #97D5E3;
+            --success-color: #10B981;
+            --dark-bg: #0E1111;
+            --darker-bg: #0A0D0D;
+            --card-bg: rgba(14, 17, 17, 0.8);
+            --teal-dark: #1E3A5F;
+            --teal-darker: #0F172A;
+            --teal-medium: #334155;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Embedded blog-styles.css (partial - key sections for post-single) */
+        .blog-hero {
+            padding: 150px 0 80px;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--teal-darker) 100%);
+            text-align: center;
+            border-bottom: 1px solid var(--teal-dark);
+        }
+        .blog-hero-title {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(242, 160, 186, 0.3);
+        }
+        .blog-hero-subtitle {
+            font-size: 1.2rem;
+            color: #98DDED;
+            letter-spacing: 1px;
+        }
+        .post-single {
+            padding-top: 80px;
+        }
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .post-header {
+            padding: 60px 0 40px;
+        }
+        .back-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+        .post-single-title {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--primary-color);
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+        .post-featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .post-content {
+            padding-bottom: 4rem;
+        }
+        .post-content h2 {
+            font-family: 'Space Mono', monospace;
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem;
+            text-shadow: 0 0 10px rgba(242, 160, 186, 0.5);
+        }
+        .post-content h3 {
+            font-family: 'Space Mono', monospace;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1rem;
+        }
+        .post-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .post-content blockquote {
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            font-style: italic;
+            box-shadow: inset 0 0 20px rgba(242, 160, 186, 0.1);
+        }
+        .mystery-box {
+            padding: 2rem;
+            margin: 2rem 0;
+            background: linear-gradient(135deg, rgba(242, 160, 186, 0.1), rgba(247, 145, 143, 0.1));
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .mystery-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(242, 160, 186, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(10px, -10px) rotate(120deg); }
+            66% { transform: translate(-10px, 10px) rotate(240deg); }
+        }
+        .post-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--teal-dark);
+            text-align: center;
+        }
+        .tag {
+            padding: 0.3rem 0.7rem;
+            background: rgba(127, 202, 219, 0.1);
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+            border-radius: 3px;
+            border: 1px solid rgba(127, 202, 219, 0.3);
+            margin: 0 0.5rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+    <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
+        <div style="text-align: center; padding: 2rem; max-width: 600px;">
+            <h1 style="color: #AEF504; font-family: 'Space Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem;">⚠️ JavaScript Required</h1>
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">This underground DJ site requires JavaScript for full functionality.</p>
+            <a href="/security - habilita-js.html" style="color: #121312; background: #AEF504; text-decoration: none; padding: 1rem 2rem; display: inline-block; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Enable JavaScript</a>
+        </div>
+    </div>
+</noscript>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">Mega Doll</div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#music" class="nav-link">Music</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a class="nav-link" href="discography.html">Discography</a></li>
+                <li><a href="feed.html" class="nav-link">Feed</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <header class="blog-hero">
+        <div class="container">
+            <h1 class="blog-hero-title">La Pasajera de Torenza</h1>
+            <p class="blog-hero-subtitle">El susurro de un mundo que no existe... ¿o sí?</p>
+        </div>
+    </header>
+
+    <main class="post-single">
+        <div class="container-narrow">
+            <div class="post-header">
+                <a href="blog.html" class="back-link">← Regresar al blog</a>
+                <h1 class="post-single-title">La Pasajera de Torenza: Cuando las Puertas del Aeropuerto se Abrieron al Vacío</h1>
+            </div>
+
+            <figure class="post-featured-image">
+                <img src="https://images.unsplash.com/photo-1511528664788-b3934567b5aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Niebla en aeropuerto JFK bajo luna espectral" loading="lazy">
+            </figure>
+
+            <article class="post-content">
+                <p>Era una noche de octubre de 2025 en el aeropuerto JFK. La niebla se arremolinaba como dedos fantasmales alrededor de las terminales, y un frío antinatural se filtraba desde las puertas de desembarque del vuelo desde Tokio. Los guardias de seguridad, acostumbrados a las multitudes agotadas, sintieron un escalofrío colectivo cuando ella apareció: una anciana de ojos hundidos como pozos infinitos, envuelta en un abrigo raído que olía a tierra húmeda y flores marchitas de un jardín olvidado.</p>
+
+                <h2>El Pasaporte Prohibido</h2>
+                <div class="mystery-box">
+                    <p>En sus manos temblorosas, un pasaporte de tapa carmesí desvaída. "Torenza", rezaba el sello dorado, con coordenadas imposibles: entre el Cáucaso y las sombras de dimensiones plegadas. El escáner pitó en rojo sangre, y al abrirlo, las fotos mostraban paisajes de torres retorcidas bajo cielos violetas perpetuos. "¿De dónde viene?", balbuceó un agente, pero ella solo sonrió, sus labios agrietados susurrando en un idioma que hacía vibrar el aire como un zumbido de abejas en agonía.</p>
+                </div>
+
+                <h3>La Interrogación en la Sombra</h3>
+                <p>La llevaron a una sala de seguridad mal iluminada, donde el zumbido de las luces fluorescentes parecía sincronizarse con su respiración entrecortada. Sus ojos, de un gris neblinoso, reflejaban mapas estelares desconocidos. "Este no es mi mundo", murmuró en español perfecto, su voz un eco cavernoso que erizaba la piel. El aire se enfrió diez grados; los agentes juraron ver vapor formándose en sus alientos, y un olor a ozono quemado impregnó la habitación. En el pasaporte, su foto: más joven, rodeada de niebla viviente que parecía moverse.</p>
+
+                <blockquote>"Las puertas se abrieron... y yo caí a través del velo. Torenza llora por los perdidos." <cite>— Sus últimas palabras, grabadas en video borroso</cite></blockquote>
+
+                <h2>La Desaparición Espectral</h2>
+                <p>Por un instante, la cámara de vigilancia capturó el clímax: un remolino de niebla plateada surgió del suelo, envolviéndola como amantes etéreos. Sus dedos se disolvieron en humo, dejando solo el pasaporte flotando en el vacío. Cuando la niebla se disipó, nada. Solo un eco de risas lejanas y un mapa garabateado en el suelo: continentes imposibles, ríos de mercurio, Torenza en el centro, pulsando como un corazón negro.</p>
+
+                <div class="mystery-box">
+                    <p>Los investigadores encontraron rastros inexplicables: huellas que brillaban en infrarrojo horas después, y un susurro residual en las grabaciones: nombres de dioses olvidados. ¿Dimensión paralela? ¿Experimento fallido? ¿O el velo entre mundos se adelgaza en aeropuertos olvidados?</p>
+                </div>
+
+                <h3>Teorías del Abismo</h3>
+                <ul>
+                    <li><strong>El Portal Dimensional:</strong> Torenza como nexo entre realidades, activado por tormentas magnéticas globales.</li>
+                    <li><strong>La Maldición del Viajero:</strong> Anciana atrapada en un bucle temporal, condenada a vagar aeropuertos eternos.</li>
+                    <li><strong>Invasión Silenciosa:</strong> Primer contacto, disfrazado de inocente pasajera, probando las fisuras de nuestro mundo.</li>
+                </ul>
+
+                <p>Desde entonces, en noches de niebla en JFK, los trabajadores oyen pasos invisibles y sienten miradas desde las sombras. ¿Era ella la primera? ¿O solo la mensajera?</p>
+
+                <p>si te interesa esta historia busca mas detalles en youtube como "la pasajera de torenza"</p>
+            </article>
+
+            <footer class="post-footer">
+                <div class="post-tags">
+                    <span class="tags-label">Etiquetas:</span>
+                    <a href="#" class="tag">Misterio</a>
+                    <a href="#" class="tag">Torenza</a>
+                    <a href="#" class="tag">Terror</a>
+                    <a href="#" class="tag">Paranormal</a>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
