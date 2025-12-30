@@ -41,7 +41,7 @@ body[class*="season-"] .post-category {
     box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
 }
 
-body.season-fluttershy .post-category {
+body.season-pastel .post-category {
     color: #000;
 }
 
@@ -83,7 +83,7 @@ body[class*="season-"] .tag {
     box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
 }
 
-body.season-fluttershy .tag {
+body.season-pastel .tag {
     color: #000;
 }
 
@@ -462,7 +462,7 @@ body[class*="season-"] .tag-cloud .tag {
     box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
 }
 
-body.season-fluttershy .tag-cloud .tag {
+body.season-pastel .tag-cloud .tag {
     color: #000;
 }
 

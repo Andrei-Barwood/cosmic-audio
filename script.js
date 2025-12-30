@@ -38,11 +38,11 @@ if (navbar) {
     function getNavbarBackground(scrollOpacity) {
         const body = document.body;
         
-        if (body.classList.contains('season-twilight')) {
+        if (body.classList.contains('season-nocturne')) {
             return `rgba(46, 25, 70, ${scrollOpacity})`; // Purple oscuro
-        } else if (body.classList.contains('season-rainbow')) {
+        } else if (body.classList.contains('season-prism')) {
             return `rgba(27, 152, 209, ${scrollOpacity})`; // Azul
-        } else if (body.classList.contains('season-fluttershy')) {
+        } else if (body.classList.contains('season-pastel')) {
             return `rgba(250, 181, 98, ${scrollOpacity})`; // Amarillo
         } else if (body.classList.contains('season-80s')) {
             return `rgba(36, 126, 98, ${scrollOpacity})`; // Verde turquesa oscuro de los 80s
@@ -169,8 +169,8 @@ function copyLink() {
 function getSeasonColors() {
     const body = document.body;
     
-    if (body.classList.contains('season-twilight')) {
-        // SEASON: TWILIGHT (Mágico / Glitch Oscuro)
+    if (body.classList.contains('season-nocturne')) {
+        // SEASON: NOCTURNE (Mágico / Glitch Oscuro)
         return [
             "#2E1946", // Purple oscuro (wood-dark)
             "#662F89", // Coat Shadow (wood-medium)
@@ -181,8 +181,8 @@ function getSeasonColors() {
             "#00ffff", // Glitch cyan
             "#ff00ff"  // Glitch magenta
         ];
-    } else if (body.classList.contains('season-rainbow')) {
-        // SEASON: RAINBOW (Velocidad / Breakcore Ácido)
+    } else if (body.classList.contains('season-prism')) {
+        // SEASON: PRISM (Velocidad / Breakcore Ácido)
         return [
             "#1B98D1", // Azul intenso (wood-dark)
             "#5DBBE8", // Coat Mid (wood-medium)
@@ -192,8 +192,8 @@ function getSeasonColors() {
             "#EC4141", // Rojo crin (tertiary-color)
             "#FAF5AB"  // Amarillo crin (secondary-color)
         ];
-    } else if (body.classList.contains('season-fluttershy')) {
-        // SEASON: FLUTTERSHY (Pastel Creepy / Soft)
+    } else if (body.classList.contains('season-pastel')) {
+        // SEASON: PASTEL BLOOM (Pastel Creepy / Soft)
         return [
             "#FABA62", // Coat Shadow (wood-dark)
             "#FAF5AB", // Coat (wood-medium)

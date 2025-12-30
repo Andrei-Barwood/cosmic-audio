@@ -15,9 +15,9 @@ Honey, if you're looking for a website that's as **glamorous** as a Las Vegas sh
 
 Oh my goodness, we have **FIVE absolutely STUNNING seasonal themes** that you can switch between like changing your outfit for the day! Each one is more fabulous than the last:
 
-- **✨ Season Twilight** (`season-twilight`) - Dark magic meets glitch aesthetics in the most mysterious lavender vibes you've ever seen! Like a midnight show at The Venetian! 💜🌙
-- **🌈 Season Rainbow** (`season-rainbow`) - Fast-paced breakcore acid vibes with blue and rainbow accents! Perfect for those wild nights on The Strip! 💙⚡
-- **🎀 Season Fluttershy** (`season-fluttershy`) - Pastel creepy meets soft aesthetics! Yellow and pink vibes that are so adorably unsettling, you'll want to frame them! 💛💗
+- **✨ Season Nocturne** (`season-nocturne`) - Dark magic meets glitch aesthetics in the most mysterious lavender vibes you've ever seen! Like a midnight show at The Venetian! 💜🌙
+- **🌈 Season Prism** (`season-prism`) - Fast-paced breakcore acid vibes with blue and prismatic accents! Perfect for those wild nights on The Strip! 💙⚡
+- **🎀 Season Pastel Bloom** (`season-pastel`) - Pastel eerie meets soft aesthetics! Yellow and pink vibes that are so adorably unsettling, you'll want to frame them! 💛💗
 - **🕶️ Season 80s** (`season-80s`) - An 80s nightmare in the BEST way possible! Turquoise green and neon that screams retro glamour! 🟢💚
 - **🖤 Season Goth-Pajamas** (`season-goth-pajamas`) - Black and gothic purple that's so dark and chic, it could walk the runway! Currently the active theme, and honey, it's STUNNING! 🖤💜
 

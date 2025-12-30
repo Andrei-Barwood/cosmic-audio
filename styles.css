@@ -56,16 +56,15 @@
 }
 
 /* =========================================
-   SISTEMA DE TEMPORADAS MLP VECTOR CLUB
-   "The Broken Toy Box" - Traumacore/Pastel Gore
+   SISTEMA DE TEMPORADAS - COSMIC SUITE
    ========================================= */
 
-/* 1. SEASON: TWILIGHT (Mágico / Glitch Oscuro) */
-body.season-twilight {
+/* 1. SEASON: NOCTURNE (Mágico / Glitch Oscuro) */
+body.season-nocturne {
     /* Base: Lavanda Sucio (Madera pintada) */
-    --wood-dark: #2E1946;    /* Purple (Official MLP Dark) */
-    --wood-medium: #662F89;  /* Coat Shadow */
-    --wood-light: #9B7FB8;   /* Coat Light */
+    --wood-dark: #2E1946;    /* Purple base oscuro */
+    --wood-medium: #662F89;  /* Sombra lavanda */
+    --wood-light: #9B7FB8;   /* Highlight lavanda */
     
     /* Acentos Ácidos */
     --primary-color: #EC058E; /* Pink Sparkle (Magenta Ácido) */
@@ -99,20 +98,20 @@ body.season-twilight {
     --glitch-color-2: #ff00ff;
 }
 
-/* 2. SEASON: RAINBOW (Velocidad / Breakcore Ácido) */
-body.season-rainbow {
+/* 2. SEASON: PRISM (Velocidad / Breakcore Ácido) */
+body.season-prism {
     /* Base: Azul Cielo (Madera celeste) */
     --wood-dark: #1B98D1;    /* Coat Shadow (Azul intenso) */
     --wood-medium: #5DBBE8;  /* Coat Mid */
     --wood-light: #9BD1E8;   /* Coat Light */
     
-    /* Acentos Rainbow (Usamos los colores de la crin para botones/glitch) */
-    --primary-color: #EF7135; /* Naranja crin */
-    --acid-green: #5FBB4E;    /* Verde crin (Perfecto para breakcore) */
-    --tertiary-color: #EC4141; /* Rojo crin */
+    /* Acentos Prismáticos (gradiente multi color para botones/glitch) */
+    --primary-color: #EF7135; /* Naranja prismático */
+    --acid-green: #5FBB4E;    /* Verde acento (Perfecto para breakcore) */
+    --tertiary-color: #EC4141; /* Rojo acento */
     
     /* Reasignación de variables base */
-    --secondary-color: #FAF5AB; /* Amarillo crin */
+    --secondary-color: #FAF5AB; /* Amarillo acento */
     --success-color: var(--acid-green);
     --olive-accent: var(--tertiary-color);
     
@@ -129,7 +128,7 @@ body.season-rainbow {
     
     /* Textos */
     --text-primary: #ffffff;
-    --text-secondary: #FAF5AB; /* Amarillo crin */
+    --text-secondary: #FAF5AB; /* Amarillo acento */
     --border-color: var(--primary-color);
     --border-accent: var(--acid-green);
     
@@ -138,17 +137,17 @@ body.season-rainbow {
     --glitch-color-2: #EC4141;
 }
 
-/* 3. SEASON: FLUTTERSHY (Pastel Creepy / Soft) */
-body.season-fluttershy {
+/* 3. SEASON: PASTEL BLOOM (Pastel Creepy / Soft) */
+body.season-pastel {
     /* Base: Amarillo Mantequilla (Madera clara) */
-    --wood-dark: #FABA62;    /* Coat Shadow (Ocre) */
-    --wood-medium: #FAF5AB;  /* Coat (Amarillo muy pálido) */
-    --wood-light: #FEF9E7;   /* Coat Highlight */
+    --wood-dark: #FABA62;    /* Ocre cálido */
+    --wood-medium: #FAF5AB;  /* Amarillo muy pálido */
+    --wood-light: #FEF9E7;   /* Amarillo claro */
     
     /* Acentos: Rosa suave pero con borde negro */
-    --primary-color: #F06EAA; /* Mane (Rosa) */
-    --acid-green: #50C356;    /* Ojos (Verde tóxico) */
-    --tertiary-color: #F5B5C7; /* Mane Highlight */
+    --primary-color: #F06EAA; /* Rosa principal */
+    --acid-green: #50C356;    /* Verde tóxico */
+    --tertiary-color: #F5B5C7; /* Rosa claro */
     
     /* Reasignación de variables base */
     --secondary-color: var(--wood-medium);
@@ -350,34 +349,34 @@ body[class*="season-"] .blog-hero-title::after {
     left: 8%;
 }
 
-/* Fluttershy necesita contorno invertido */
-body.season-fluttershy h1, 
-body.season-fluttershy h2,
-body.season-fluttershy h3,
-body.season-fluttershy .section-title,
-body.season-fluttershy .nav-brand,
-body.season-fluttershy .feed-title,
-body.season-fluttershy .blog-hero-title {
+/* Pastel Bloom necesita contorno invertido */
+body.season-pastel h1, 
+body.season-pastel h2,
+body.season-pastel h3,
+body.season-pastel .section-title,
+body.season-pastel .nav-brand,
+body.season-pastel .feed-title,
+body.season-pastel .blog-hero-title {
     -webkit-text-stroke: 2px #000000;
     text-shadow: 
         4px 4px 0px rgba(255,255,255,0.3),
         -1px -1px 0 #000000;
 }
 
-body.season-fluttershy h1::before,
-body.season-fluttershy h2::before,
-body.season-fluttershy h3::before,
-body.season-fluttershy .section-title::before,
-body.season-fluttershy .nav-brand::before,
-body.season-fluttershy .feed-title::before,
-body.season-fluttershy .blog-hero-title::before,
-body.season-fluttershy h1::after,
-body.season-fluttershy h2::after,
-body.season-fluttershy h3::after,
-body.season-fluttershy .section-title::after,
-body.season-fluttershy .nav-brand::after,
-body.season-fluttershy .feed-title::after,
-body.season-fluttershy .blog-hero-title::after {
+body.season-pastel h1::before,
+body.season-pastel h2::before,
+body.season-pastel h3::before,
+body.season-pastel .section-title::before,
+body.season-pastel .nav-brand::before,
+body.season-pastel .feed-title::before,
+body.season-pastel .blog-hero-title::before,
+body.season-pastel h1::after,
+body.season-pastel h2::after,
+body.season-pastel h3::after,
+body.season-pastel .section-title::after,
+body.season-pastel .nav-brand::after,
+body.season-pastel .feed-title::after,
+body.season-pastel .blog-hero-title::after {
     height: 5px;
     opacity: 0.9;
 }
@@ -470,9 +469,9 @@ body[class*="season-"] .btn-primary:hover {
     box-shadow: 7px 7px 0px rgba(0,0,0,0.4);
 }
 
-/* Fluttershy: botones con texto oscuro */
-body.season-fluttershy .btn,
-body.season-fluttershy .btn-primary {
+/* Pastel Bloom: botones con texto oscuro */
+body.season-pastel .btn,
+body.season-pastel .btn-primary {
     color: #000;
     background: var(--primary-color);
 }
@@ -1259,7 +1258,7 @@ body[class*="season-"] .glitch {
         0 0 30px var(--primary-color);
 }
 
-body.season-fluttershy .glitch {
+body.season-pastel .glitch {
     -webkit-text-stroke: 2px #000000;
     text-shadow: 
         4px 4px 0px rgba(255,255,255,0.3),
