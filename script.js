@@ -3,18 +3,18 @@ const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
 if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
 }
 
 // Close mobile menu when clicking on a link
 if (navMenu) {
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-        });
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
     });
+});
 }
 
 // Smooth scrolling for anchor links
@@ -31,36 +31,69 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
+// Navbar background on scroll - respeta las temporadas
 const navbar = document.getElementById('navbar');
 if (navbar) {
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(119, 150, 236, 0.98)';
+    // Función para obtener el color de fondo según la temporada activa
+    function getNavbarBackground(scrollOpacity) {
+        const body = document.body;
+        
+        if (body.classList.contains('season-twilight')) {
+            return `rgba(46, 25, 70, ${scrollOpacity})`; // Purple oscuro
+        } else if (body.classList.contains('season-rainbow')) {
+            return `rgba(27, 152, 209, ${scrollOpacity})`; // Azul
+        } else if (body.classList.contains('season-fluttershy')) {
+            return `rgba(250, 181, 98, ${scrollOpacity})`; // Amarillo
+        } else if (body.classList.contains('season-80s')) {
+            return `rgba(36, 126, 98, ${scrollOpacity})`; // Verde turquesa oscuro de los 80s
+        } else if (body.classList.contains('season-goth-pajamas')) {
+            // No aplicar estilo inline para goth-pajamas, dejar que el CSS lo maneje
+            return null; // Retornar null para que el CSS tome control
         } else {
-            navbar.style.background = 'rgba(119, 150, 236, 0.95)';
+            // Estilo original Pinocho
+            return `rgba(42, 26, 17, ${scrollOpacity})`; // Madera oscura
+        }
+    }
+    
+    window.addEventListener('scroll', () => {
+        const scrollOpacity = window.scrollY > 100 ? 0.98 : 0.95;
+        const bgColor = getNavbarBackground(scrollOpacity);
+        if (bgColor) {
+            navbar.style.background = bgColor;
+        } else {
+            // Para goth-pajamas, remover estilo inline y dejar que CSS maneje
+            navbar.style.background = '';
         }
     });
+    
+    // Aplicar el color inicial al cargar la página
+    const initialBgColor = getNavbarBackground(0.95);
+    if (initialBgColor) {
+        navbar.style.background = initialBgColor;
+    } else {
+        // Para goth-pajamas, remover estilo inline y dejar que CSS maneje
+        navbar.style.background = '';
+    }
 }
 
 // Back to top button
 const backToTop = document.getElementById('backToTop');
 
 if (backToTop) {
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-    });
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+});
 
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+backToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
+});
 }
 
 // Intersection Observer for fade-in animations
@@ -130,13 +163,86 @@ function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
 }
 
-// DYNAMIC FAVICON
+// DYNAMIC FAVICON - Colores según temporada activa
 
-// Color palette: change/add hex codes for your moods/seasons!
-const colors = [
-  "#0C6182", "#00B6A3", "#67E6D0", "#9CFBFF", "#7796EC", "#9990F2",
-  "#5684E5", "#6E66C0", "#C4BEF7", "#7770B9", "#9995BF"
-];
+// Función para obtener la paleta de colores según la temporada
+function getSeasonColors() {
+    const body = document.body;
+    
+    if (body.classList.contains('season-twilight')) {
+        // SEASON: TWILIGHT (Mágico / Glitch Oscuro)
+        return [
+            "#2E1946", // Purple oscuro (wood-dark)
+            "#662F89", // Coat Shadow (wood-medium)
+            "#9B7FB8", // Coat Light (wood-light)
+            "#EC058E", // Pink Sparkle (primary-color)
+            "#B19CD9", // Highlight Top (tertiary-color)
+            "#CCB2D3", // Highlight Bottom (text-secondary)
+            "#00ffff", // Glitch cyan
+            "#ff00ff"  // Glitch magenta
+        ];
+    } else if (body.classList.contains('season-rainbow')) {
+        // SEASON: RAINBOW (Velocidad / Breakcore Ácido)
+        return [
+            "#1B98D1", // Azul intenso (wood-dark)
+            "#5DBBE8", // Coat Mid (wood-medium)
+            "#9BD1E8", // Coat Light (wood-light)
+            "#EF7135", // Naranja crin (primary-color)
+            "#5FBB4E", // Verde crin (acid-green)
+            "#EC4141", // Rojo crin (tertiary-color)
+            "#FAF5AB"  // Amarillo crin (secondary-color)
+        ];
+    } else if (body.classList.contains('season-fluttershy')) {
+        // SEASON: FLUTTERSHY (Pastel Creepy / Soft)
+        return [
+            "#FABA62", // Coat Shadow (wood-dark)
+            "#FAF5AB", // Coat (wood-medium)
+            "#FEF9E7", // Coat Highlight (wood-light)
+            "#F06EAA", // Mane Rosa (primary-color)
+            "#50C356", // Ojos Verde tóxico (acid-green)
+            "#F5B5C7", // Mane Highlight (tertiary-color)
+            "#D4669C"  // Text secondary
+        ];
+    } else if (body.classList.contains('season-80s')) {
+        // SEASON: 80s NIGHTMARE (Pesadilla de los 80')
+        return [
+            "#247E62", // Verde oscuro base (wood-dark)
+            "#30A281", // Verde turquesa medio (wood-medium)
+            "#66C5A8", // Verde turquesa claro (wood-light)
+            "#E6F90B", // Amarillo lima brillante (primary-color)
+            "#85FFDA", // Cyan brillante (acid-green)
+            "#FF5285", // Rosa/magenta vibrante (tertiary-color)
+            "#FFB900", // Amarillo dorado (secondary-color)
+            "#BAC81C"  // Verde lima (olive-accent)
+        ];
+    } else if (body.classList.contains('season-goth-pajamas')) {
+        // SEASON: GOTH-PAJAMAS (Gótico Nocturno)
+        return [
+            "#000000", // Negro puro (wood-dark)
+            "#323232", // Gris oscuro (wood-medium)
+            "#5F3B7C", // Morado medio oscuro (wood-light)
+            "#905BBA", // Morado/violeta principal (primary-color)
+            "#6B438C", // Morado oscuro (secondary-color)
+            "#E8EFEE", // Gris muy claro (tertiary-color)
+            "#93A1A1", // Gris azulado (acid-green)
+            "#352043"  // Morado muy oscuro (olive-accent)
+        ];
+    } else {
+        // Estilo original Pinocho (default)
+        return [
+            "#2A1A11", // Madera oscura (wood-dark)
+            "#4A2E1F", // Madera media (wood-medium)
+            "#8B5E3C", // Madera clara (wood-light)
+            "#ccff00", // Verde ácido (acid-green)
+            "#00ffff", // Glitch cyan
+            "#ff4400", // Naranja óxido (rust-orange)
+            "#ff00ff"  // Glitch magenta
+        ];
+    }
+}
+
+// Obtener colores de la temporada actual
+const colors = getSeasonColors();
 
 // Your Evilz heart SVG path data
 const heartPath = `M491 551q-7 0 -16 11.5t-9 22.5q0 19 26 19q22 0 22 -17q0 -11 -7.5 -23.5t-15.5 -12.5zM577 408q-24 0 -41 20t-17 49q0 28 17 48.5t41 20.5q25 0 42 -20.5t17 -48.5q0 -29 -17 -49t-42 -20zM401 408q-25 0 -42 20t-17 49q0 28 17 48.5t42 20.5q24 0 41 -20.5t17 -48.5
@@ -166,4 +272,4 @@ function cycleFavicon() {
   colorIndex = (colorIndex + 1) % colors.length;
 }
 cycleFavicon(); // Set immediately on page load
-setInterval(cycleFavicon, 4000); // Change every 4 seconds
+setInterval(cycleFavicon, 2000); // Change every 2 seconds

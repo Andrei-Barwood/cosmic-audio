@@ -1,5 +1,7 @@
 /* Import Evilz Font */
 @import url('https://fonts.cdnfonts.com/css/evilz');
+/* Import fonts from Bunny Fonts (Privacy-focused alternative to Google Fonts - No tracking, GDPR compliant) */
+@import url('https://fonts.bunny.net/css?family=permanent-marker|kalam:300,400,700|space-mono:400,700&display=swap');
 
 
 /* Reset & Base Styles */
@@ -10,31 +12,648 @@
 }
 
 :root {
-    /* Primary Brand Colors */
-    --primary-color: #282D5A;        /* Lime green - main accent */
-    --secondary-color: #090E1D;      /* Yellow - secondary accent */
-    --tertiary-color: #9995BF;       /* Bright lime - highlights */
-    --success-color: #7770B9;        /* Bright green - CTAs */
-    --olive-accent: #9CFBFF;         /* Olive green - subtle accent */
+    /* == PALETA TÍTERE DE MADERA == */
+    /* Madera oscura y barnizada para el fondo */
+    --wood-dark: #2A1A11; 
+    --wood-medium: #4A2E1F;
+    --wood-light: #8B5E3C;
     
-    /* Teal Accents */
-    --teal-dark: #844FDE;            /* Dark teal - borders */
-    --teal-darker: #4B37CA;          /* Darker teal - backgrounds */
-    --teal-medium: #1C4CC2;          /* Medium teal - hover states */
+    /* == ACENTOS BREAKCORE == */
+    /* Verde Terminal / Ácido para el contraste digital */
+    --acid-green: #ccff00;
+    --glitch-cyan: #00ffff;
+    --rust-orange: #ff4400;
+
+    /* Reasignación a tus variables originales para que funcione con tu HTML actual */
+    --primary-color: var(--acid-green);      /* Botones y acentos principales */
+    --secondary-color: var(--wood-light);    /* Detalles secundarios */
+    --tertiary-color: var(--rust-orange);    /* Degradados */
+    --success-color: var(--acid-green);      /* CTAs */
+    --olive-accent: var(--glitch-cyan);      /* Acentos sutiles */
+    
+    /* Teal Accents - ahora en tonos madera */
+    --teal-dark: #5c3a2a;                    /* Bordes (ahora madera) */
+    --teal-darker: #1a0f0a;                  /* Fondos más oscuros */
+    --teal-medium: #6B4E3D;                  /* Hover states */
     
     /* Background Colors */
-    --dark-bg: #6E66C0;              /* Almost black - main bg */
-    --darker-bg: #FFFFFF;            /* Very dark gray - sections */
-    --card-bg: #000000;              /* Medium dark gray - cards */
-    --card-hover-bg: #5684E5;        /* Dark gray - hover */
+    --dark-bg: var(--wood-dark);             /* Fondo principal */
+    --darker-bg: #1a0f0a;                    /* Fondos de secciones oscuras */
+    --card-bg: rgba(42, 26, 17, 0.95);      /* Fondo de tarjetas */
+    --card-hover-bg: rgba(74, 46, 31, 0.95); /* Hover */
     
     /* Text & Borders */
-    --text-primary: #67E6D0;         /* Light blue - main text color */
-    --text-secondary: #0C6182;       /* Medium gray - secondary text */
-    --border-color: #9990F2;
-    --border-accent: #C4BEF7;
+    --text-primary: #f0e6d2;                 /* Color hueso/papel viejo para texto */
+    --text-secondary: #cba885;               /* Madera clara para subtítulos */
+    --border-color: var(--acid-green);       /* Bordes brillantes */
+    --border-accent: var(--glitch-cyan);
     
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.1s steps(4);         /* Animaciones "tartamudas" tipo marioneta */
+    
+    /* Glitch Colors (default) */
+    --glitch-color-1: #00ffff;
+    --glitch-color-2: #ff00ff;
+}
+
+/* =========================================
+   SISTEMA DE TEMPORADAS MLP VECTOR CLUB
+   "The Broken Toy Box" - Traumacore/Pastel Gore
+   ========================================= */
+
+/* 1. SEASON: TWILIGHT (Mágico / Glitch Oscuro) */
+body.season-twilight {
+    /* Base: Lavanda Sucio (Madera pintada) */
+    --wood-dark: #2E1946;    /* Purple (Official MLP Dark) */
+    --wood-medium: #662F89;  /* Coat Shadow */
+    --wood-light: #9B7FB8;   /* Coat Light */
+    
+    /* Acentos Ácidos */
+    --primary-color: #EC058E; /* Pink Sparkle (Magenta Ácido) */
+    --acid-green: #ccff00;    /* Mantiene el verde breakcore para contraste */
+    --tertiary-color: #B19CD9; /* Highlight Top */
+    
+    /* Reasignación de variables base */
+    --secondary-color: var(--wood-light);
+    --success-color: var(--primary-color);
+    --olive-accent: var(--tertiary-color);
+    
+    /* Teal Accents - ahora en tonos lavanda */
+    --teal-dark: #662F89;
+    --teal-darker: #2E1946;
+    --teal-medium: #9B7FB8;
+    
+    /* Background Colors */
+    --dark-bg: var(--wood-dark);
+    --darker-bg: #1A0F2E;
+    --card-bg: rgba(46, 25, 70, 0.95);
+    --card-hover-bg: rgba(102, 47, 137, 0.95);
+    
+    /* Text & Borders */
+    --text-primary: #FFFFFF;
+    --text-secondary: #CCB2D3; /* Highlight Bottom */
+    --border-color: var(--primary-color);
+    --border-accent: var(--acid-green);
+    
+    /* Glitch Específico */
+    --glitch-color-1: #00ffff;
+    --glitch-color-2: #ff00ff;
+}
+
+/* 2. SEASON: RAINBOW (Velocidad / Breakcore Ácido) */
+body.season-rainbow {
+    /* Base: Azul Cielo (Madera celeste) */
+    --wood-dark: #1B98D1;    /* Coat Shadow (Azul intenso) */
+    --wood-medium: #5DBBE8;  /* Coat Mid */
+    --wood-light: #9BD1E8;   /* Coat Light */
+    
+    /* Acentos Rainbow (Usamos los colores de la crin para botones/glitch) */
+    --primary-color: #EF7135; /* Naranja crin */
+    --acid-green: #5FBB4E;    /* Verde crin (Perfecto para breakcore) */
+    --tertiary-color: #EC4141; /* Rojo crin */
+    
+    /* Reasignación de variables base */
+    --secondary-color: #FAF5AB; /* Amarillo crin */
+    --success-color: var(--acid-green);
+    --olive-accent: var(--tertiary-color);
+    
+    /* Teal Accents - ahora en tonos azul */
+    --teal-dark: #5DBBE8;
+    --teal-darker: #1B98D1;
+    --teal-medium: #9BD1E8;
+    
+    /* Background Colors */
+    --dark-bg: var(--wood-dark);
+    --darker-bg: #0F5A7A;
+    --card-bg: rgba(27, 152, 209, 0.95);
+    --card-hover-bg: rgba(93, 187, 232, 0.95);
+    
+    /* Textos */
+    --text-primary: #ffffff;
+    --text-secondary: #FAF5AB; /* Amarillo crin */
+    --border-color: var(--primary-color);
+    --border-accent: var(--acid-green);
+    
+    /* Glitch Colors */
+    --glitch-color-1: #EF7135;
+    --glitch-color-2: #EC4141;
+}
+
+/* 3. SEASON: FLUTTERSHY (Pastel Creepy / Soft) */
+body.season-fluttershy {
+    /* Base: Amarillo Mantequilla (Madera clara) */
+    --wood-dark: #FABA62;    /* Coat Shadow (Ocre) */
+    --wood-medium: #FAF5AB;  /* Coat (Amarillo muy pálido) */
+    --wood-light: #FEF9E7;   /* Coat Highlight */
+    
+    /* Acentos: Rosa suave pero con borde negro */
+    --primary-color: #F06EAA; /* Mane (Rosa) */
+    --acid-green: #50C356;    /* Ojos (Verde tóxico) */
+    --tertiary-color: #F5B5C7; /* Mane Highlight */
+    
+    /* Reasignación de variables base */
+    --secondary-color: var(--wood-medium);
+    --success-color: var(--acid-green);
+    --olive-accent: var(--tertiary-color);
+    
+    /* Teal Accents - ahora en tonos pastel */
+    --teal-dark: #FABA62;
+    --teal-darker: #E8A842;
+    --teal-medium: #FAF5AB;
+    
+    /* Background Colors */
+    --dark-bg: var(--wood-dark);
+    --darker-bg: #E8A842;
+    --card-bg: rgba(250, 181, 98, 0.95);
+    --card-hover-bg: rgba(250, 245, 171, 0.95);
+    
+    /* Textos (Invertidos para legibilidad en fondo claro) */
+    --text-primary: #3c2a1e;  /* Marrón oscuro */
+    --text-secondary: #D4669C;
+    --border-color: #000000;  /* Borde negro para contraste */
+    --border-accent: var(--acid-green);
+    
+    /* Glitch Colors */
+    --glitch-color-1: #F06EAA;
+    --glitch-color-2: #50C356;
+}
+
+/* 4. SEASON: 80s NIGHTMARE (Pesadilla de los 80') */
+body.season-80s {
+    /* Base: Verde Turquesa Oscuro (Estilo sintwave/cyberpunk) */
+    --wood-dark: #247E62;    /* Verde oscuro base */
+    --wood-medium: #30A281;  /* Verde turquesa medio */
+    --wood-light: #66C5A8;   /* Verde turquesa claro */
+    
+    /* Acentos vibrantes de los 80s */
+    --primary-color: #E6F90B; /* Amarillo lima brillante (el más característico) */
+    --acid-green: #85FFDA;    /* Cyan brillante */
+    --tertiary-color: #FF5285; /* Rosa/magenta vibrante */
+    
+    /* Reasignación de variables base */
+    --secondary-color: #FFB900; /* Amarillo dorado */
+    --success-color: var(--acid-green);
+    --olive-accent: #BAC81C; /* Verde lima */
+    
+    /* Teal Accents - ahora en tonos verde turquesa */
+    --teal-dark: #30A281;
+    --teal-darker: #247E62;
+    --teal-medium: #66C5A8;
+    
+    /* Background Colors */
+    --dark-bg: var(--wood-dark);
+    --darker-bg: #1A5A47;
+    --card-bg: rgba(36, 126, 98, 0.95);
+    --card-hover-bg: rgba(48, 162, 129, 0.95);
+    
+    /* Textos - colores vibrantes sobre fondo oscuro */
+    --text-primary: #E6F90B;  /* Amarillo lima para texto principal */
+    --text-secondary: #85FFDA; /* Cyan para texto secundario */
+    --border-color: #E6F90B;  /* Amarillo lima para bordes */
+    --border-accent: #FF5285; /* Rosa para acentos */
+    
+    /* Glitch Colors - colores neón de los 80s */
+    --glitch-color-1: #E6F90B;
+    --glitch-color-2: #FF5285;
+}
+
+/* 5. SEASON: GOTH-PAJAMAS (Gótico Nocturno) */
+body.season-goth-pajamas {
+    /* Base: Negro y Grises Oscuros (Estilo gótico/nocturno) */
+    --wood-dark: #000000;    /* Negro puro (fondo principal) */
+    --wood-medium: #323232;  /* Gris oscuro */
+    --wood-light: #5F3B7C;   /* Morado medio oscuro */
+    
+    /* Acentos Morados/Violetas (Estilo gótico suave) */
+    --primary-color: #905BBA; /* Morado/violeta principal (el más característico) */
+    --acid-green: #93A1A1;     /* Gris azulado (contraste suave) */
+    --tertiary-color: #E8EFEE; /* Gris muy claro/blanco azulado (acentos) */
+    
+    /* Reasignación de variables base */
+    --secondary-color: #6B438C; /* Morado oscuro */
+    --success-color: var(--primary-color);
+    --olive-accent: #352043; /* Morado muy oscuro */
+    
+    /* Teal Accents - ahora en tonos morados */
+    --teal-dark: #6B438C;
+    --teal-darker: #352043;
+    --teal-medium: #905BBA;
+    
+    /* Background Colors */
+    --dark-bg: var(--wood-dark);
+    --darker-bg: #352043; /* Morado muy oscuro */
+    --card-bg: rgba(0, 0, 0, 0.95);
+    --card-hover-bg: rgba(53, 32, 67, 0.95);
+    
+    /* Textos - colores claros sobre fondo oscuro */
+    --text-primary: #FFFFFF;  /* Blanco para texto principal */
+    --text-secondary: #93A1A1; /* Gris azulado para texto secundario */
+    --border-color: #905BBA;  /* Morado para bordes */
+    --border-accent: #E8EFEE; /* Gris claro para acentos */
+    
+    /* Glitch Colors - colores góticos */
+    --glitch-color-1: #905BBA;
+    --glitch-color-2: #E8EFEE;
+}
+
+/* =========================================
+   INTEGRACIÓN PINOCHO + PASTEL
+   Madera Pintada Descascarada
+   ========================================= */
+
+/* Ajuste de Fondo: Madera Pintada Pastel con descascarado */
+body[class*="season-"] {
+    background-image: 
+        /* Ruido estático gris (siempre presente en breakcore) */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E"),
+        /* Vetas de madera sutiles sobre el color pastel (descascarado) */
+        repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 10px,
+            rgba(0,0,0,0.08) 10px, /* Vetas oscuras más visibles (madera cruda) */
+            rgba(0,0,0,0.08) 12px,
+            transparent 12px,
+            transparent 22px
+        ),
+        /* Manchas de descascarado (áreas donde se ve la madera cruda) */
+        radial-gradient(circle at 20% 30%, rgba(0,0,0,0.1) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(0,0,0,0.1) 0%, transparent 30%),
+        radial-gradient(circle at 50% 50%, rgba(0,0,0,0.05) 0%, transparent 40%);
+}
+
+/* Ajuste de Títulos: "Cute but Wrong" */
+body[class*="season-"] h1, 
+body[class*="season-"] h2,
+body[class*="season-"] h3,
+body[class*="season-"] .section-title,
+body[class*="season-"] .nav-brand,
+body[class*="season-"] .feed-title,
+body[class*="season-"] .blog-hero-title {
+    font-family: 'Kalam', cursive; /* Fuente handwritten */
+    color: var(--primary-color);
+    /* Borde grueso estilo sticker o caricatura */
+    -webkit-text-stroke: 2px var(--wood-dark); 
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.8), /* Sombra dura negra para contraste */
+        -1px -1px 0 var(--wood-dark); /* Contorno adicional */
+    position: relative;
+}
+
+/* Rayones con pseudo-elementos para temporadas (más visibles) */
+body[class*="season-"] h1::before, 
+body[class*="season-"] h2::before,
+body[class*="season-"] h3::before,
+body[class*="season-"] .section-title::before,
+body[class*="season-"] .nav-brand::before,
+body[class*="season-"] .feed-title::before,
+body[class*="season-"] .blog-hero-title::before,
+body[class*="season-"] h1::after, 
+body[class*="season-"] h2::after,
+body[class*="season-"] h3::after,
+body[class*="season-"] .section-title::after,
+body[class*="season-"] .nav-brand::after,
+body[class*="season-"] .feed-title::after,
+body[class*="season-"] .blog-hero-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #000;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+body[class*="season-"] h1::before,
+body[class*="season-"] h2::before,
+body[class*="season-"] h3::before,
+body[class*="season-"] .section-title::before,
+body[class*="season-"] .nav-brand::before,
+body[class*="season-"] .feed-title::before,
+body[class*="season-"] .blog-hero-title::before {
+    top: 30%;
+    transform: rotate(-3deg);
+    width: 85%;
+}
+
+body[class*="season-"] h1::after,
+body[class*="season-"] h2::after,
+body[class*="season-"] h3::after,
+body[class*="season-"] .section-title::after,
+body[class*="season-"] .nav-brand::after,
+body[class*="season-"] .feed-title::after,
+body[class*="season-"] .blog-hero-title::after {
+    top: 55%;
+    transform: rotate(4deg);
+    width: 80%;
+    left: 8%;
+}
+
+/* Fluttershy necesita contorno invertido */
+body.season-fluttershy h1, 
+body.season-fluttershy h2,
+body.season-fluttershy h3,
+body.season-fluttershy .section-title,
+body.season-fluttershy .nav-brand,
+body.season-fluttershy .feed-title,
+body.season-fluttershy .blog-hero-title {
+    -webkit-text-stroke: 2px #000000;
+    text-shadow: 
+        4px 4px 0px rgba(255,255,255,0.3),
+        -1px -1px 0 #000000;
+}
+
+body.season-fluttershy h1::before,
+body.season-fluttershy h2::before,
+body.season-fluttershy h3::before,
+body.season-fluttershy .section-title::before,
+body.season-fluttershy .nav-brand::before,
+body.season-fluttershy .feed-title::before,
+body.season-fluttershy .blog-hero-title::before,
+body.season-fluttershy h1::after,
+body.season-fluttershy h2::after,
+body.season-fluttershy h3::after,
+body.season-fluttershy .section-title::after,
+body.season-fluttershy .nav-brand::after,
+body.season-fluttershy .feed-title::after,
+body.season-fluttershy .blog-hero-title::after {
+    height: 5px;
+    opacity: 0.9;
+}
+
+/* Season 80s: Títulos con contorno neón */
+body.season-80s h1, 
+body.season-80s h2,
+body.season-80s h3,
+body.season-80s .section-title,
+body.season-80s .nav-brand,
+body.season-80s .feed-title,
+body.season-80s .blog-hero-title {
+    font-family: 'Permanent Marker', cursive;
+    color: var(--primary-color);
+    -webkit-text-stroke: 2px #000000;
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.8),
+        -1px -1px 0 #000000,
+        0 0 20px var(--primary-color), /* Glow neón amarillo */
+        0 0 40px var(--primary-color); /* Glow más fuerte */
+    position: relative;
+}
+
+/* Rayones para season 80s - más vibrantes */
+body.season-80s h1::before,
+body.season-80s h2::before,
+body.season-80s h3::before,
+body.season-80s .section-title::before,
+body.season-80s .nav-brand::before,
+body.season-80s .feed-title::before,
+body.season-80s .blog-hero-title::before,
+body.season-80s h1::after,
+body.season-80s h2::after,
+body.season-80s h3::after,
+body.season-80s .section-title::after,
+body.season-80s .nav-brand::after,
+body.season-80s .feed-title::after,
+body.season-80s .blog-hero-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #000;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.9;
+    box-shadow: 0 0 10px var(--tertiary-color); /* Glow rosa en rayones */
+}
+
+body.season-80s h1::before,
+body.season-80s h2::before,
+body.season-80s h3::before,
+body.season-80s .section-title::before,
+body.season-80s .nav-brand::before,
+body.season-80s .feed-title::before,
+body.season-80s .blog-hero-title::before {
+    top: 30%;
+    transform: rotate(-3deg);
+    width: 85%;
+}
+
+body.season-80s h1::after,
+body.season-80s h2::after,
+body.season-80s h3::after,
+body.season-80s .section-title::after,
+body.season-80s .nav-brand::after,
+body.season-80s .feed-title::after,
+body.season-80s .blog-hero-title::after {
+    top: 55%;
+    transform: rotate(4deg);
+    width: 80%;
+    left: 8%;
+}
+
+/* Botones: Estilo "Caramelo Duro" con borde negro cómic */
+body[class*="season-"] .btn,
+body[class*="season-"] .btn-primary {
+    border: 3px solid #000; /* Borde negro estilo cómic */
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.3);
+    font-family: 'Kalam', cursive;
+}
+
+body[class*="season-"] .btn:hover,
+body[class*="season-"] .btn-primary:hover {
+    background: var(--tertiary-color);
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0px rgba(0,0,0,0.4);
+}
+
+/* Fluttershy: botones con texto oscuro */
+body.season-fluttershy .btn,
+body.season-fluttershy .btn-primary {
+    color: #000;
+    background: var(--primary-color);
+}
+
+/* Season 80s: Botones con efecto neón */
+body.season-80s .btn,
+body.season-80s .btn-primary {
+    border: 3px solid #000;
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 
+        5px 5px 0px rgba(0,0,0,0.3),
+        0 0 20px var(--primary-color); /* Glow neón */
+    font-family: 'Permanent Marker', cursive;
+}
+
+body.season-80s .btn:hover,
+body.season-80s .btn-primary:hover {
+    background: var(--tertiary-color);
+    color: #000;
+    transform: translate(-2px, -2px);
+    box-shadow: 
+        7px 7px 0px rgba(0,0,0,0.4),
+        0 0 30px var(--tertiary-color); /* Glow rosa al hover */
+}
+
+/* Season Goth-Pajamas: Títulos con contorno gótico suave */
+body.season-goth-pajamas h1, 
+body.season-goth-pajamas h2,
+body.season-goth-pajamas h3,
+body.season-goth-pajamas .section-title,
+body.season-goth-pajamas .nav-brand,
+body.season-goth-pajamas .feed-title,
+body.season-goth-pajamas .blog-hero-title {
+    font-family: 'Permanent Marker', cursive;
+    color: var(--primary-color);
+    -webkit-text-stroke: 2px #000000;
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.9),
+        -1px -1px 0 #000000,
+        0 0 15px var(--primary-color), /* Glow morado suave */
+        0 0 30px rgba(144, 91, 186, 0.5); /* Glow más difuso */
+    position: relative;
+}
+
+/* Rayones para season goth-pajamas - estilo gótico */
+body.season-goth-pajamas h1::before,
+body.season-goth-pajamas h2::before,
+body.season-goth-pajamas h3::before,
+body.season-goth-pajamas .section-title::before,
+body.season-goth-pajamas .nav-brand::before,
+body.season-goth-pajamas .feed-title::before,
+body.season-goth-pajamas .blog-hero-title::before,
+body.season-goth-pajamas h1::after,
+body.season-goth-pajamas h2::after,
+body.season-goth-pajamas h3::after,
+body.season-goth-pajamas .section-title::after,
+body.season-goth-pajamas .nav-brand::after,
+body.season-goth-pajamas .feed-title::after,
+body.season-goth-pajamas .blog-hero-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #000;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+    box-shadow: 0 0 8px var(--primary-color); /* Glow morado en rayones */
+}
+
+body.season-goth-pajamas h1::before,
+body.season-goth-pajamas h2::before,
+body.season-goth-pajamas h3::before,
+body.season-goth-pajamas .section-title::before,
+body.season-goth-pajamas .nav-brand::before,
+body.season-goth-pajamas .feed-title::before,
+body.season-goth-pajamas .blog-hero-title::before {
+    top: 30%;
+    transform: rotate(-3deg);
+    width: 85%;
+}
+
+body.season-goth-pajamas h1::after,
+body.season-goth-pajamas h2::after,
+body.season-goth-pajamas h3::after,
+body.season-goth-pajamas .section-title::after,
+body.season-goth-pajamas .nav-brand::after,
+body.season-goth-pajamas .feed-title::after,
+body.season-goth-pajamas .blog-hero-title::after {
+    top: 55%;
+    transform: rotate(4deg);
+    width: 80%;
+    left: 8%;
+}
+
+/* Season Goth-Pajamas: Botones con efecto gótico */
+body.season-goth-pajamas .btn,
+body.season-goth-pajamas .btn-primary {
+    border: 3px solid #000;
+    background: var(--primary-color);
+    color: #FFFFFF;
+    box-shadow: 
+        5px 5px 0px rgba(0,0,0,0.4),
+        0 0 15px var(--primary-color); /* Glow morado */
+    font-family: 'Permanent Marker', cursive;
+}
+
+body.season-goth-pajamas .btn:hover,
+body.season-goth-pajamas .btn-primary:hover {
+    background: var(--tertiary-color);
+    color: #000;
+    transform: translate(-2px, -2px);
+    box-shadow: 
+        7px 7px 0px rgba(0,0,0,0.5),
+        0 0 25px var(--tertiary-color); /* Glow gris claro al hover */
+}
+
+/* Tarjetas: Estilo "Sticker Rasgado" */
+body[class*="season-"] .music-card,
+body[class*="season-"] .event-card,
+body[class*="season-"] .blog-post,
+body[class*="season-"] .feed-post {
+    border: 3px solid #000;
+    box-shadow: 
+        6px 6px 0px rgba(0,0,0,0.2),
+        inset 0 0 0 1px var(--wood-light); /* Borde interno para efecto descascarado */
+}
+
+body[class*="season-"] .music-card:hover,
+body[class*="season-"] .event-card:hover,
+body[class*="season-"] .blog-post:hover,
+body[class*="season-"] .feed-post:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 
+        8px 8px 0px rgba(0,0,0,0.3),
+        inset 0 0 0 1px var(--wood-light);
+}
+
+/* Season 80s: Tarjetas con glow neón */
+body.season-80s .music-card,
+body.season-80s .event-card,
+body.season-80s .blog-post,
+body.season-80s .feed-post {
+    border: 3px solid var(--primary-color);
+    box-shadow: 
+        6px 6px 0px rgba(0,0,0,0.2),
+        0 0 15px var(--primary-color); /* Glow neón en tarjetas */
+}
+
+body.season-80s .music-card:hover,
+body.season-80s .event-card:hover,
+body.season-80s .blog-post:hover,
+body.season-80s .feed-post:hover {
+    transform: translate(-2px, -2px);
+    border-color: var(--tertiary-color);
+    box-shadow: 
+        8px 8px 0px rgba(0,0,0,0.3),
+        0 0 25px var(--tertiary-color); /* Glow rosa al hover */
+}
+
+body.season-goth-pajamas .music-card,
+body.season-goth-pajamas .event-card,
+body.season-goth-pajamas .blog-post,
+body.season-goth-pajamas .feed-post {
+    border: 3px solid var(--primary-color);
+    box-shadow: 
+        6px 6px 0px rgba(0,0,0,0.3),
+        0 0 12px var(--primary-color); /* Glow morado en tarjetas */
+}
+
+body.season-goth-pajamas .music-card:hover,
+body.season-goth-pajamas .event-card:hover,
+body.season-goth-pajamas .blog-post:hover,
+body.season-goth-pajamas .feed-post:hover {
+    transform: translate(-2px, -2px);
+    border-color: var(--tertiary-color);
+    box-shadow: 
+        8px 8px 0px rgba(0,0,0,0.4),
+        0 0 20px var(--tertiary-color); /* Glow gris claro al hover */
 }
 
 
@@ -91,12 +710,287 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Títulos con estética de Cuento de Terror */
+h1, h2, h3, .feed-title, .blog-hero-title {
+    font-family: 'Permanent Marker', cursive !important; /* Fuente estilo marcador */
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--text-primary);
+    text-shadow: 
+        3px 3px 0px var(--wood-dark),
+        -1px -1px 0 var(--acid-green); /* Sombra digital dura */
+    position: relative;
+}
+
+/* =========================================
+   CLASES DE TEXTO CON RAYONES/TACHONES
+   Opciones para aplicar efecto de "tachado"
+   ========================================= */
+
+/* Clase con fuente estilo marcador (rayones más visibles) */
+.scratched-text,
+h1.scratched, h2.scratched, h3.scratched,
+.nav-brand.scratched-text,
+.section-title.scratched,
+.feed-title.scratched-text,
+.blog-hero-title.scratched-text {
+    font-family: 'Permanent Marker', cursive !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+/* Clase alternativa con fuente handwritten rough (más suave) */
+.handwritten-scratched,
+.nav-brand.handwritten-scratched,
+.section-title.handwritten-scratched,
+.feed-title.handwritten-scratched,
+.blog-hero-title.handwritten-scratched {
+    font-family: 'Kalam', cursive !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+/* En temporadas, las clases scratched mantienen los colores de temporada */
+body[class*="season-"] .scratched-text,
+body[class*="season-"] h1.scratched,
+body[class*="season-"] h2.scratched,
+body[class*="season-"] h3.scratched,
+body[class*="season-"] .section-title.scratched,
+body[class*="season-"] .nav-brand.scratched-text,
+body[class*="season-"] .feed-title.scratched-text,
+body[class*="season-"] .blog-hero-title.scratched-text {
+    color: var(--primary-color);
+    -webkit-text-stroke: 2px var(--wood-dark);
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.8),
+        -1px -1px 0 var(--wood-dark);
+}
+
+body[class*="season-"] .handwritten-scratched,
+body[class*="season-"] .nav-brand.handwritten-scratched,
+body[class*="season-"] .section-title.handwritten-scratched,
+body[class*="season-"] .feed-title.handwritten-scratched,
+body[class*="season-"] .blog-hero-title.handwritten-scratched {
+    color: var(--primary-color);
+    -webkit-text-stroke: 2px var(--wood-dark);
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.8),
+        -1px -1px 0 var(--wood-dark);
+}
+
+/* Season 80s: Mantener el glow neón incluso con clases scratched */
+body.season-80s .scratched-text,
+body.season-80s h1.scratched,
+body.season-80s h2.scratched,
+body.season-80s h3.scratched,
+body.season-80s .section-title.scratched,
+body.season-80s .nav-brand.scratched-text,
+body.season-80s .feed-title.scratched-text,
+body.season-80s .blog-hero-title.scratched-text,
+body.season-80s .handwritten-scratched,
+body.season-80s .nav-brand.handwritten-scratched,
+body.season-80s .section-title.handwritten-scratched,
+body.season-80s .feed-title.handwritten-scratched,
+body.season-80s .blog-hero-title.handwritten-scratched {
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.8),
+        -1px -1px 0 #000000,
+        0 0 20px var(--primary-color),
+        0 0 40px var(--primary-color);
+}
+
+/* Season Goth-Pajamas: Mantener el glow gótico incluso con clases scratched */
+body.season-goth-pajamas .scratched-text,
+body.season-goth-pajamas h1.scratched,
+body.season-goth-pajamas h2.scratched,
+body.season-goth-pajamas h3.scratched,
+body.season-goth-pajamas .section-title.scratched,
+body.season-goth-pajamas .nav-brand.scratched-text,
+body.season-goth-pajamas .feed-title.scratched-text,
+body.season-goth-pajamas .blog-hero-title.scratched-text,
+body.season-goth-pajamas .handwritten-scratched,
+body.season-goth-pajamas .nav-brand.handwritten-scratched,
+body.season-goth-pajamas .section-title.handwritten-scratched,
+body.season-goth-pajamas .feed-title.handwritten-scratched,
+body.season-goth-pajamas .blog-hero-title.handwritten-scratched {
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.9),
+        -1px -1px 0 #000000,
+        0 0 15px var(--primary-color),
+        0 0 30px rgba(144, 91, 186, 0.5);
+}
+
+/* Efecto de rayones/tachones usando pseudo-elementos (más compatible) */
+h1::before, h2::before, h3::before, .feed-title::before, .blog-hero-title::before,
+h1::after, h2::after, h3::after, .feed-title::after, .blog-hero-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+    z-index: 1;
+}
+
+h1::before, h2::before, h3::before, .feed-title::before, .blog-hero-title::before {
+    top: 35%;
+    transform: rotate(-2deg);
+    width: 80%;
+}
+
+h1::after, h2::after, h3::after, .feed-title::after, .blog-hero-title::after {
+    top: 60%;
+    transform: rotate(3deg);
+    width: 75%;
+    left: 10%;
+}
+
+/* Rayones mejorados para clases scratched - múltiples líneas */
+.scratched-text::before,
+h1.scratched::before, h2.scratched::before, h3.scratched::before,
+.section-title.scratched::before,
+.nav-brand.scratched-text::before,
+.feed-title.scratched-text::before,
+.blog-hero-title.scratched-text::before,
+.handwritten-scratched::before,
+.nav-brand.handwritten-scratched::before,
+.section-title.handwritten-scratched::before,
+.feed-title.handwritten-scratched::before,
+.blog-hero-title.handwritten-scratched::before {
+    content: '';
+    position: absolute;
+    left: -5%;
+    top: 30%;
+    width: 90%;
+    height: 4px;
+    background: #000;
+    transform: rotate(-3deg);
+    pointer-events: none;
+    z-index: 10; /* Más alto que los rayones por defecto */
+    opacity: 0.9;
+    box-shadow: 0 2px 0 rgba(255, 0, 0, 0.3); /* Sombra roja sutil para efecto de tinta */
+}
+
+.scratched-text::after,
+h1.scratched::after, h2.scratched::after, h3.scratched::after,
+.section-title.scratched::after,
+.nav-brand.scratched-text::after,
+.feed-title.scratched-text::after,
+.blog-hero-title.scratched-text::after,
+.handwritten-scratched::after,
+.nav-brand.handwritten-scratched::after,
+.section-title.handwritten-scratched::after,
+.feed-title.handwritten-scratched::after,
+.blog-hero-title.handwritten-scratched::after {
+    content: '';
+    position: absolute;
+    left: 5%;
+    top: 55%;
+    width: 85%;
+    height: 4px;
+    background: #000;
+    transform: rotate(4deg);
+    pointer-events: none;
+    z-index: 10; /* Más alto que los rayones por defecto */
+    opacity: 0.9;
+}
+
+/* Tercera línea de rayón para efecto más intenso */
+.scratched-text,
+h1.scratched, h2.scratched, h3.scratched,
+.section-title.scratched,
+.nav-brand.scratched-text,
+.feed-title.scratched-text,
+.blog-hero-title.scratched-text,
+.handwritten-scratched,
+.nav-brand.handwritten-scratched,
+.section-title.handwritten-scratched,
+.feed-title.handwritten-scratched,
+.blog-hero-title.handwritten-scratched {
+    position: relative;
+}
+
+.scratched-text::before,
+h1.scratched::before, h2.scratched::before, h3.scratched::before,
+.section-title.scratched::before,
+.nav-brand.scratched-text::before,
+.feed-title.scratched-text::before,
+.blog-hero-title.scratched-text::before {
+    box-shadow: 
+        0 0 0 1px rgba(255, 0, 0, 0.2),
+        0 2px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Season 80s: Rayones con glow rosa para las clases scratched */
+body.season-80s .scratched-text::before,
+body.season-80s h1.scratched::before,
+body.season-80s h2.scratched::before,
+body.season-80s h3.scratched::before,
+body.season-80s .section-title.scratched::before,
+body.season-80s .nav-brand.scratched-text::before,
+body.season-80s .feed-title.scratched-text::before,
+body.season-80s .blog-hero-title.scratched-text::before,
+body.season-80s .handwritten-scratched::before,
+body.season-80s .nav-brand.handwritten-scratched::before,
+body.season-80s .section-title.handwritten-scratched::before,
+body.season-80s .feed-title.handwritten-scratched::before,
+body.season-80s .blog-hero-title.handwritten-scratched::before,
+body.season-80s .scratched-text::after,
+body.season-80s h1.scratched::after,
+body.season-80s h2.scratched::after,
+body.season-80s h3.scratched::after,
+body.season-80s .section-title.scratched::after,
+body.season-80s .nav-brand.scratched-text::after,
+body.season-80s .feed-title.scratched-text::after,
+body.season-80s .blog-hero-title.scratched-text::after,
+body.season-80s .handwritten-scratched::after,
+body.season-80s .nav-brand.handwritten-scratched::after,
+body.season-80s .section-title.handwritten-scratched::after,
+body.season-80s .feed-title.handwritten-scratched::after,
+body.season-80s .blog-hero-title.handwritten-scratched::after {
+    box-shadow: 0 0 10px var(--tertiary-color); /* Glow rosa en rayones para 80s */
+}
+
+/* El texto normal se queda como código/consola */
+p, li, a, span, .hero-subtitle {
+    font-family: 'Space Mono', monospace;
+}
+
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--dark-bg);
+    font-family: 'Space Mono', monospace;
+    background-color: var(--wood-dark);
+    /* Patrón de madera generado con CSS (fallback si no hay season) */
+    background-image: 
+        /* Ruido digital sutil */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E"),
+        /* Vetas de madera verticales */
+        repeating-linear-gradient(
+            90deg,
+            var(--wood-dark) 0px,
+            var(--wood-dark) 10px,
+            #332218 12px,
+            #22110a 24px
+        );
+    background-attachment: fixed;
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+/* Si no hay season class, mantener el estilo original de madera oscura */
+body:not([class*="season-"]) {
+    background-color: var(--wood-dark);
+    background-image: 
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E"),
+        repeating-linear-gradient(
+            90deg,
+            var(--wood-dark) 0px,
+            var(--wood-dark) 10px,
+            #332218 12px,
+            #22110a 24px
+        );
 }
 
 
@@ -113,11 +1007,31 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(86, 132, 229, 0.95);
+    background: rgba(42, 26, 17, 0.95); /* Color por defecto (madera) */
     backdrop-filter: blur(10px);
     z-index: 1000;
     transition: var(--transition);
-    border-bottom: 1px solid var(--teal-dark);
+    border-bottom: 2px solid var(--acid-green);
+}
+
+/* Color inicial para Goth-Pajamas - se aplica antes de que JS cargue */
+body.season-goth-pajamas .navbar {
+    background: rgba(53, 32, 67, 0.95) !important; /* Morado muy oscuro desde el inicio */
+}
+
+/* Navbar con temporadas */
+body[class*="season-"] .navbar {
+    background: rgba(0, 0, 0, 0.7);
+    border-bottom: 3px solid #000;
+    box-shadow: 0 2px 0 var(--primary-color);
+}
+
+/* Navbar específica para Goth-Pajamas - Mayor especificidad */
+body.season-goth-pajamas .navbar,
+body.season-goth-pajamas #navbar {
+    background: rgba(53, 32, 67, 0.98) !important; /* Morado muy oscuro (#352043) - !important para sobrescribir JS */
+    border-bottom: 3px solid var(--primary-color) !important; /* Borde morado (#905BBA) */
+    box-shadow: 0 2px 0 var(--primary-color), 0 0 10px rgba(144, 91, 186, 0.3) !important; /* Glow morado sutil */
 }
 
 .navbar .container {
@@ -128,12 +1042,41 @@ body {
 }
 
 .nav-brand {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Kalam', cursive;
     font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--primary-color);
-    text-shadow: 0 0 20px rgba(119, 150, 236, 0.5);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-shadow: 
+        3px 3px 0px var(--wood-dark),
+        -1px -1px 0 var(--acid-green);
+    position: relative;
+}
+
+.nav-brand::before,
+.nav-brand::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.nav-brand::before {
+    top: 40%;
+    transform: rotate(-2deg);
+    width: 70%;
+}
+
+.nav-brand::after {
+    top: 65%;
+    transform: rotate(2deg);
+    width: 65%;
+    left: 5%;
 }
 
 .nav-menu {
@@ -150,9 +1093,49 @@ body {
     animation: navColorCycle 16s infinite;
 }
 
+/* Nav-link específico para Goth-Pajamas - colores morados en lugar de azules */
+body.season-goth-pajamas .nav-link {
+    animation: navColorCycleGoth 16s infinite;
+    color: var(--text-primary); /* Color inicial blanco */
+}
+
+@keyframes navColorCycleGoth {
+    0% {
+        color: #FFFFFF;  /* Blanco */
+    }
+    25% {
+        color: #905BBA;  /* Morado principal */
+    }
+    50% {
+        color: #E8EFEE;  /* Gris claro */
+    }
+    75% {
+        color: #93A1A1;  /* Gris azulado */
+    }
+    100% {
+        color: #FFFFFF;  /* Blanco */
+    }
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: -50px; /* Sale desde arriba */
+    left: 50%;
+    width: 1px;
+    height: 0%; /* Invisible por defecto */
+    background: rgba(255, 255, 255, 0.3);
+    transition: height 0.3s ease;
+    z-index: -1;
+}
+
+.nav-link:hover::before {
+    height: 100%; /* Cuerda baja al hacer hover */
+}
+
 @keyframes navColorCycle {
     0% {
-        color: #8C2A0A;  /* Light blue */
+        color: #8C2A0A;  /* Rojo/marrón (por defecto) */
     }
     25% {
         color: #5FB4C9;  /* Cyan */
@@ -213,7 +1196,7 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(135deg, var(--darker-bg) 0%, var(--teal-darker) 50%, var(--dark-bg) 100%);
+    background: linear-gradient(135deg, var(--darker-bg) 0%, var(--wood-medium) 50%, var(--dark-bg) 100%);
     overflow: hidden;
 }
 
@@ -251,35 +1234,96 @@ body {
 }
 
 .glitch {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Permanent Marker', cursive;
     font-size: clamp(3rem, 10vw, 8rem);
     font-weight: 700;
     letter-spacing: 8px;
     margin-bottom: 1rem;
     position: relative;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--tertiary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: glitch-skew 2s infinite;
-    filter: drop-shadow(0 0 30px rgba(242, 160, 186, 0.5));
+    display: inline-block;
+    color: var(--text-primary);
+    text-shadow: 
+        3px 3px 0px var(--wood-dark),
+        -1px -1px 0 var(--acid-green),
+        0 0 30px rgba(204, 255, 0, 0.5);
+    animation: glitch-skew 9s infinite steps(2, end); /* steps() hace que se vea robótico */
+}
+
+/* Glitch con colores de temporada */
+body[class*="season-"] .glitch {
+    color: var(--primary-color);
+    -webkit-text-stroke: 2px var(--wood-dark);
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.8),
+        -1px -1px 0 var(--wood-dark),
+        0 0 30px var(--primary-color);
+}
+
+body.season-fluttershy .glitch {
+    -webkit-text-stroke: 2px #000000;
+    text-shadow: 
+        4px 4px 0px rgba(255,255,255,0.3),
+        -1px -1px 0 #000000,
+        0 0 30px var(--primary-color);
+}
+
+/* Season 80s: Glitch con efecto neón múltiple */
+body.season-80s .glitch {
+    color: var(--primary-color);
+    -webkit-text-stroke: 2px #000000;
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.8),
+        -1px -1px 0 #000000,
+        0 0 20px var(--primary-color), /* Glow amarillo lima */
+        0 0 40px var(--primary-color),
+        0 0 60px var(--tertiary-color); /* Glow rosa adicional */
 }
 
 @keyframes glitch-skew {
-    0% { transform: skew(0deg); }
-    10% { transform: skew(-2deg); }
-    20% { transform: skew(2deg); }
-    30% { transform: skew(0deg); }
+    0% { transform: skew(0deg) translate(0,0); clip-path: inset(0 0 0 0); }
+    20% { transform: skew(-10deg) translate(-2px, 2px); clip-path: inset(10% 0 80% 0); }
+    40% { transform: skew(10deg) translate(2px, -2px); clip-path: inset(80% 0 5% 0); }
+    60% { transform: skew(0deg) translate(0,0); clip-path: inset(0 0 0 0); }
+    65% { transform: skew(50deg) scaleX(1.1); filter: invert(1); } /* Flashazo invertido */
+    70% { transform: skew(0deg); filter: invert(0); }
     100% { transform: skew(0deg); }
+}
+
+/* Líneas de tachado para elementos con clase glitch */
+.glitch::before,
+.glitch::after {
+    content: '';
+    position: absolute;
+    background: #000;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.9;
+}
+
+.glitch::before {
+    left: -5%;
+    top: 30%;
+    width: 90%;
+    height: 4px;
+    transform: rotate(-3deg);
+    box-shadow: 0 2px 0 rgba(255, 0, 0, 0.3); /* Sombra roja sutil para efecto de tinta */
+}
+
+.glitch::after {
+    left: 5%;
+    top: 55%;
+    width: 85%;
+    height: 4px;
+    transform: rotate(4deg);
 }
 
 .hero-subtitle {
     font-size: 1.2rem;
-    color: #98DDED;  /* Cyan blue color */
+    color: var(--text-secondary);
     margin-bottom: 2rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(152, 221, 237, 0.4);  /* Optional glow effect */
+    text-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
 }
 
 
@@ -293,8 +1337,8 @@ body {
 /* Buttons */
 .btn {
     padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 2px;
+    border: 2px solid var(--acid-green);
+    border-radius: 0; /* Nada de bordes redondos, todo cuadrado */
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;
@@ -303,18 +1347,22 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.9rem;
+    font-family: 'Kalam', cursive;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
-    color: var(--dark-bg);
-    box-shadow: 0 0 20px rgba(242, 160, 186, 0.3);
+    background: var(--wood-medium);
+    color: var(--acid-green);
+    box-shadow: none;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, var(--tertiary-color), var(--success-color));
-    transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(242, 160, 186, 0.5);
+    background: var(--acid-green);
+    color: var(--wood-dark);
+    box-shadow: 5px 5px 0px var(--rust-orange);
+    transform: translate(-2px, -2px);
 }
 
 .btn-outline {
@@ -366,18 +1414,47 @@ body {
 
 .section-dark {
     background: var(--darker-bg);
-    border-top: 1px solid var(--teal-dark);
-    border-bottom: 1px solid var(--teal-dark);
+    border-top: 2px solid var(--wood-light);
+    border-bottom: 2px solid var(--wood-light);
 }
 
 .section-title {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Permanent Marker', cursive;
     font-size: 3rem;
     margin-bottom: 3rem;
     text-align: center;
-    letter-spacing: 3px;
-    color: var(--primary-color);
-    text-shadow: 0 0 30px rgba(242, 160, 186, 0.3);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-shadow: 
+        3px 3px 0px var(--wood-dark),
+        -1px -1px 0 var(--acid-green);
+    position: relative;
+}
+
+.section-title::before,
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.section-title::before {
+    top: 35%;
+    transform: rotate(-2deg);
+    width: 80%;
+}
+
+.section-title::after {
+    top: 60%;
+    transform: rotate(3deg);
+    width: 75%;
+    left: 10%;
 }
 
 /* Music Grid */
@@ -389,15 +1466,21 @@ body {
 
 .music-card {
     background: var(--card-bg);
-    border: 1px solid var(--teal-dark);
+    border: 2px solid var(--wood-light);
+    border-radius: 0; /* Todo cuadrado */
     transition: var(--transition);
     overflow: hidden;
+    box-shadow: 
+        5px 5px 0px var(--wood-dark), /* Sombra dura, no difusa */
+        6px 6px 0px var(--acid-green); /* Borde glitch */
 }
 
 .music-card:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(242, 160, 186, 0.2);
+    border-color: var(--acid-green);
+    transform: translate(-2px, -2px);
+    box-shadow: 
+        7px 7px 0px var(--wood-dark),
+        8px 8px 0px var(--acid-green);
 }
 
 .music-card-image {
@@ -423,12 +1506,17 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(140, 42, 10, 0.9);
+    background: rgba(140, 42, 10, 0.9); /* Color por defecto (rojo/marrón) */
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: var(--transition);
+}
+
+/* Play overlay para temporada Goth-Pajamas */
+body.season-goth-pajamas .play-overlay {
+    background: rgba(53, 32, 67, 0.9) !important; /* Morado muy oscuro (#352043) */
 }
 
 .music-card:hover .play-overlay {
@@ -512,11 +1600,15 @@ body {
     gap: 2rem;
     padding: 2rem;
     background: var(--card-bg);
-    border: 1px solid var(--teal-dark);
+    border: 2px solid var(--wood-light);
+    border-radius: 0;
     margin-bottom: 1.5rem;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    box-shadow: 
+        5px 5px 0px var(--wood-dark),
+        6px 6px 0px var(--acid-green);
 }
 
 .event-card::before {
@@ -601,7 +1693,7 @@ body {
 .about-image img {
     width: 100%;
     height: auto;
-    border: 2px solid var(--teal-dark);
+    border: 2px solid var(--wood-light);
     display: block;
 }
 
@@ -629,7 +1721,8 @@ body {
     align-items: center;
     justify-content: center;
     background: var(--card-bg);
-    border: 1px solid var(--teal-dark);
+    border: 2px solid var(--wood-light);
+    border-radius: 0;
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 700;
@@ -637,11 +1730,11 @@ body {
 }
 
 .social-link:hover {
-    background: var(--primary-color);
-    color: var(--dark-bg);
-    border-color: var(--primary-color);
-    box-shadow: 0 0 20px rgba(242, 160, 186, 0.5);
-    transform: translateY(-3px);
+    background: var(--acid-green);
+    color: var(--wood-dark);
+    border-color: var(--acid-green);
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.5);
+    transform: translate(-2px, -2px);
 }
 
 /* Contact Section */
@@ -677,17 +1770,18 @@ body {
 .contact-form textarea {
     padding: 1rem;
     background: var(--card-bg);
-    border: 1px solid var(--teal-dark);
+    border: 2px solid var(--wood-light);
+    border-radius: 0;
     color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Mono', monospace;
     transition: var(--transition);
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 15px rgba(242, 160, 186, 0.2);
+    border-color: var(--acid-green);
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.3);
 }
 
 .contact-form input::placeholder,
@@ -699,7 +1793,7 @@ body {
 .footer {
     background: var(--darker-bg);
     padding: 2rem 0;
-    border-top: 1px solid var(--teal-dark);
+    border-top: 2px solid var(--wood-light);
 }
 
 .footer .container {
@@ -837,18 +1931,22 @@ body {
 /* Alternative: Apply to specific glitch element */
 .glitch.evilz-heart {
     font-family: 'Evilz', sans-serif;
+    display: inline-block;
+    animation: glitch-skew 9s infinite steps(2, end), heartColorCycle 16s infinite;
+    /* Mantener el text-shadow del glitch base pero con el glow que cambia de color */
+    text-shadow: 
+        3px 3px 0px var(--wood-dark),
+        -1px -1px 0 var(--acid-green),
+        0 0 2px currentColor,
+        0 0 30px currentColor;
 }
 
 /* Make sure the data-text attribute also uses Evilz font */
 .glitch.evilz-heart::before,
 .glitch.evilz-heart::after {
     font-family: 'Evilz', sans-serif;
-}
-
-/* Evilz Heart Color Animation */
-.glitch.evilz-heart {
-    font-family: 'Evilz', sans-serif;
-    animation: heartColorCycle 16s infinite;
+    /* Las líneas de tachado ya están definidas en .glitch::before y .glitch::after */
+    /* Se mantienen las líneas de tachado pero con la fuente Evilz si se necesita para contenido de texto */
 }
 
 @keyframes heartColorCycle {
@@ -867,17 +1965,6 @@ body {
     100% {
         color: #5FB4C9;  /* Back to bright green */
     }
-}
-
-/* Optional: Add glow effect that changes with the color */
-.glitch.evilz-heart {
-    text-shadow: 0 0 2px currentColor;
-}
-
-/* Make sure the glitch pseudo-elements also use Evilz font */
-.glitch.evilz-heart::before,
-.glitch.evilz-heart::after {
-    font-family: 'Evilz', sans-serif;
 }
 
 .share-buttons {

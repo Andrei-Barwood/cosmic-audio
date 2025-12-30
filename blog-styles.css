@@ -20,14 +20,29 @@
 
 /* Category styling */
 .post-category {
-    background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
-    color: var(--dark-bg);
+    background-color: var(--text-primary);
+    color: var(--wood-dark);
     padding: 0.4rem 1rem;
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border-radius: 2px;
+    border-radius: 0;
+    border: 1px dashed var(--wood-dark); /* Borde punteado como costura */
+    transform: rotate(-2deg); /* Ligeramente chuecos */
+    font-family: 'Space Mono', monospace;
+}
+
+/* Categories con temporadas */
+body[class*="season-"] .post-category {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+}
+
+body.season-fluttershy .post-category {
+    color: #000;
 }
 
 /* Reading time styling */
@@ -51,11 +66,25 @@
 
 .tag {
     padding: 0.3rem 0.7rem;
-    background: rgba(127, 202, 219, 0.1);
-    color: var(--secondary-color);
+    background-color: var(--text-primary);
+    color: var(--wood-dark);
     font-size: 0.8rem;
-    border-radius: 3px;
-    border: 1px solid rgba(127, 202, 219, 0.3);
+    border-radius: 0;
+    border: 1px dashed var(--wood-dark); /* Borde punteado como costura */
+    transform: rotate(-2deg); /* Ligeramente chuecos */
+    font-family: 'Space Mono', monospace;
+}
+
+/* Tags con temporadas - estilo sticker */
+body[class*="season-"] .tag {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+}
+
+body.season-fluttershy .tag {
+    color: #000;
 }
 
 /* Add subtle scale animation on hover */
@@ -83,12 +112,15 @@
 }
 
 .blog-hero-title {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Rye', serif;
     font-size: clamp(2.5rem, 6vw, 4rem);
-    color: var(--primary-color);
+    color: var(--text-primary);
     margin-bottom: 1rem;
-    letter-spacing: 3px;
-    text-shadow: 0 0 30px rgba(242, 160, 186, 0.3);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 
+        3px 3px 0px var(--wood-dark),
+        -1px -1px 0 var(--acid-green);
 }
 
 .blog-hero-subtitle {
@@ -146,15 +178,21 @@
 /* Blog Post Cards */
 .blog-post {
     background: var(--card-bg);
-    border: 1px solid var(--teal-dark);
+    border: 2px solid var(--wood-light);
+    border-radius: 0;
     transition: var(--transition);
     overflow: hidden;
+    box-shadow: 
+        5px 5px 0px var(--wood-dark),
+        6px 6px 0px var(--acid-green);
 }
 
 .blog-post:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(242, 160, 186, 0.2);
+    border-color: var(--acid-green);
+    transform: translate(-2px, -2px);
+    box-shadow: 
+        7px 7px 0px var(--wood-dark),
+        8px 8px 0px var(--acid-green);
 }
 
 .blog-post-image {
@@ -396,20 +434,42 @@
     gap: 0.5rem;
 }
 
-.tag {
+.tag-cloud .tag {
     padding: 0.5rem 1rem;
-    background: var(--darker-bg);
-    border: 1px solid var(--teal-dark);
-    color: var(--text-primary);
+    background-color: var(--text-primary);
+    border: 1px dashed var(--wood-dark);
+    color: var(--wood-dark);
     text-decoration: none;
     font-size: 0.85rem;
     transition: var(--transition);
+    border-radius: 0;
+    transform: rotate(-2deg);
+    font-family: 'Space Mono', monospace;
 }
 
-.tag:hover {
-    background: var(--primary-color);
-    color: var(--dark-bg);
-    border-color: var(--primary-color);
+.tag-cloud .tag:hover {
+    background: var(--acid-green);
+    color: var(--wood-dark);
+    border-color: var(--acid-green);
+    transform: rotate(0deg) scale(1.05);
+}
+
+/* Tag cloud con temporadas */
+body[class*="season-"] .tag-cloud .tag {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+}
+
+body.season-fluttershy .tag-cloud .tag {
+    color: #000;
+}
+
+body[class*="season-"] .tag-cloud .tag:hover {
+    background: var(--tertiary-color);
+    transform: rotate(0deg) scale(1.1);
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
 }
 
 /* Newsletter Widget */
@@ -1063,12 +1123,17 @@
 .play-overlay-mini {
     position: absolute;
     inset: 0;
-    background: rgba(140, 42, 10, 0.8);
+    background: rgba(140, 42, 10, 0.8); /* Color por defecto (rojo/marrón) */
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: var(--transition);
+}
+
+/* Play overlay mini para temporada Goth-Pajamas */
+body.season-goth-pajamas .play-overlay-mini {
+    background: rgba(53, 32, 67, 0.8) !important; /* Morado muy oscuro (#352043) */
 }
 
 .mix-card:hover .play-overlay-mini {
@@ -1123,6 +1188,8 @@
 /* ===== TUTORIAL POST TEMPLATE ===== */
 .post-tutorial {
     padding-top: 80px;
+    background: linear-gradient(135deg, var(--darker-bg), var(--teal-darker));
+    min-height: 100vh;
 }
 
 .category-tutorial {
@@ -2252,4 +2319,4 @@
     .inline-newsletter-form {
         flex-direction: column;
     }
-}a
+}
