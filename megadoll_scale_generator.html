@@ -4,14 +4,152 @@
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Underground DJ & Music Producer - Live Sets, Events & Releases">
-    <title>Mega Doll | Musical Artist </title>
+    <title>Mega Doll | Composition Suite - Scales & Framework</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:300,400,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/evilz" rel="stylesheet">
-
-
-
+    
+    <style>
+        /* Styles for the Compositional Framework Section */
+        .composition-framework {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .composition-framework .framework-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .composition-framework .framework-header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 3px solid #905BBA;
+            margin-bottom: 40px;
+        }
+        
+        .composition-framework .framework-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #905BBA;
+        }
+        
+        .composition-framework .framework-subtitle {
+            color: #93A1A1;
+            font-size: 1.2em;
+        }
+        
+        .composition-framework .category {
+            margin-bottom: 50px;
+        }
+        
+        .composition-framework .category-header {
+            background: linear-gradient(90deg, #905BBA 0%, #000000 100%);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #905BBA;
+        }
+        
+        .composition-framework .category-title {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        
+        .composition-framework .mechanics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+        }
+        
+        .composition-framework .mechanic-card {
+            background: #323232;
+            border: 1px solid #905BBA;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .composition-framework .mechanic-card:hover {
+            background: #5F3B7C;
+            border-color: #B19CD9;
+            box-shadow: 0 0 20px rgba(144, 91, 186, 0.3);
+        }
+        
+        .composition-framework .mechanic-number {
+            color: #E8EFEE;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .composition-framework .mechanic-name {
+            font-size: 1.3em;
+            color: #93A1A1;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .composition-framework .game-mechanic {
+            color: #E8EFEE;
+            margin: 10px 0;
+            padding: 10px;
+            background: #1a1a1a;
+            border-left: 3px solid #E8EFEE;
+        }
+        
+        .composition-framework .composition-technique {
+            color: #905BBA;
+            margin: 10px 0;
+            padding: 10px;
+            background: #1f1f1f;
+            border-left: 3px solid #905BBA;
+        }
+        
+        .composition-framework .renoise-implementation {
+            color: #B19CD9;
+            margin: 10px 0;
+            padding: 10px;
+            background: #1a1a1a;
+            border-left: 3px solid #B19CD9;
+            font-size: 0.9em;
+        }
+        
+        .composition-framework .composer-ref {
+            color: #93A1A1;
+            font-style: italic;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+        
+        .composition-framework .label {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 1px;
+        }
+        
+        .composition-framework .framework-footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 3px solid #905BBA;
+            margin-top: 60px;
+            color: #93A1A1;
+        }
+        
+        .composition-framework .framework-footer a {
+            color: #b080c7;
+            text-decoration: none;
+        }
+        
+        .composition-framework .framework-footer a:hover {
+            color: #e8efee;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .composition-framework .mechanics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body class="season-goth-pajamas">
@@ -48,7 +186,7 @@
 
 
 <!-- Chord Generator Section -->
-    <section class="section" id="about">
+    <section class="section" id="generator">
         <div class="container">
             <div class="about-grid">
                 <!--<div class="about-image">
@@ -64,6 +202,9 @@
                             <option value="hungarian_minor">Hungarian Minor</option>
                             <option value="phrygian_dominant">Phrygian Dominant</option>
                             <option value="augmented">Augmented</option>
+                            <option value="minor_pentatonic">Minor Pentatonic</option>
+                            <option value="major_pentatonic">Major Pentatonic</option>
+                            <option value="neutral_pentatonic">Neutral Pentatonic</option>
                         </select>
                         <p></p>
                         <label>Chord Type: </label>
@@ -83,6 +224,852 @@
         </div>
     </section>
 
+    <!-- Compositional Framework Section -->
+    <section class="section section-dark composition-framework" id="framework">
+        <div class="container framework-container">
+            <div class="framework-header">
+                <h1>WHERE WINDS MEET → BREAKCORE - THE WITCH SERIES</h1>
+                <p class="framework-subtitle">48 Mecánicas del Juego Traducidas a Fundamentos Compositivos</p>
+                <p class="framework-subtitle">Augmented Yangtze × Amen Breaks × Compositional Architecture</p>
+            </div>
+
+                    <!-- CATEGORÍA 1: COMBAT MECHANICS -->
+                    <div class="category">
+                        <div class="category-header">
+                            <div class="category-title">I. COMBAT MECHANICS (16)</div>
+                        </div>
+                        <div class="mechanics-grid">
+
+                            <!-- Mechanic 1 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#01</div>
+                                <div class="mechanic-name">Light Attack Chains</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Ataques rápidos en cadena que construyen momentum y combo meter
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Ostinato rítmico ascendente del amen break con subdivisiones de semicorcheas que aumentan en densidad cada 4 compases
+                                    <div class="composer-ref">→ Técnica Stravinsky: acumulación de células rítmicas</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Patrón de 96 líneas, BPM=72, LPB=12. Líneas 0-23: kick+snare básico | Líneas 24-47: +hi-hat (subdivisión múltiplos de 2) | Líneas 48-71: +ghost notes | Líneas 72-95: full rolls
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 2 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#02</div>
+                                <div class="mechanic-name">Heavy Charged Attacks</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Ataques cargados poderosos con animación de preparación y release devastador
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Crescendo instrumental: 8 líneas de build con filtro low-pass abriéndose + release en cluster fortissimo del Yangtze (todas las teclas presionadas)
+                                    <div class="composer-ref">→ Técnica Bruckner: terrazas dinámicas pp → fff</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Líneas 0-63: automation de filter cutoff 0→127 + volume fade in | Línea 64: tutti con velocity 127 + reverb send 100%
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 3 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#03</div>
+                                <div class="mechanic-name">Parry & Perfect Block</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Timing perfecto para desviar ataques enemigos, crea ventana de contraataque
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Cesura abrupta de 1 línea (silencio total) seguida de contraataque melódico en movimiento retrógrado del motivo enemigo
+                                    <div class="composer-ref">→ Técnica Webern: simetría espejo + economía de materiales</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Línea X (múltiplo de 2): comando 0C00 (note cut) en todos los tracks | Línea X+2: melodía invertida del patrón anterior (C-D-E se convierte E-D-C)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 4 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#04</div>
+                                <div class="mechanic-name">Combo Meter (10+ hits)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Sistema de contador que activa buffs al superar 10 golpes consecutivos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Addición instrumental progresiva: cada 10 líneas de patrón entra un nuevo instrumento hasta alcanzar tutti en línea 100
+                                    <div class="composer-ref">→ Técnica Ravel: orquestación acumulativa (Bolero)</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 192 líneas, BPM=72, LPB=12. Líneas 0-31: solo bajo | 32-63: +amen break | 64-95: +Yangtze Erhu | 96-127: +Voices | 128-159: +Pigments | 160-191: tutti completo
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 5 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#05</div>
+                                <div class="mechanic-name">Dodge Roll (i-frames)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Evasión con frames de invulnerabilidad donde ataques enemigos no conectan
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Silencio anticipado: 2 líneas antes del "impacto" esperado, crear hueco rítmico donde debería estar el downbeat
+                                    <div class="composer-ref">→ Técnica Ligeti: métrica asimétrica + ausencia estructural</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. En métrica 4/4, omitir beats 2 y 4 durante 2 compases (líneas múltiplos de 2). Amen break con OFF en snare positions. Crear "ghost beat"
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 6 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#06</div>
+                                <div class="mechanic-name">Qi Gauge System</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Barra de energía especial que se llena con ataques y se gasta en habilidades místicas
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Polifonía estratificada: cada capa representa 20% de Qi. A 100% todas las voces convergen en un punto de sincronía vertical
+                                    <div class="composer-ref">→ Técnica Mahler: convergencia polifónica hacia climax</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. 5 tracks independientes con delays progresivos. Track 1 (20%): delay 0ms | Track 2 (40%): delay 2 ticks (múltiplo de 2) | etc. En línea 64: todos align en 0ms delay
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 7 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#07</div>
+                                <div class="mechanic-name">Stagger State</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Enemigo aturdido tras romper su poise, vulnerable a finishers de alto daño
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Drone disonante sostenido en Dominante Frigia (dulce tensión) seguido de resolución armónica abrupta a Húngara Menor (romántica liberación)
+                                    <div class="composer-ref">→ Técnica Penderecki: cluster hacia tonalidad</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Líneas 0-7: Yangtze en cluster Dominante Frigia (dulce tensión) con velocity 110 | Línea 8: resolución a Húngara Menor (romántica liberación) con velocity 127 + reverb
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 8 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#08</div>
+                                <div class="mechanic-name">Weapon Switching Mid-Combat</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Cambiar entre espada/lanza/arco sin interrumpir flujo de batalla
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Modulación abrupta sin pivote: cambio directo de tonalidad (Dominante Frigia → Hexatona Aumentada) sin preparación armónica
+                                    <div class="composer-ref">→ Técnica Schubert: modulaciones por terceras</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern A (96 líneas): Dominante Frigia (dulce, etérea) | Pattern B (96 líneas) inmediatamente después: Hexatona Aumentada (intensa, brillante). BPM=72, LPB=12. Sin acordes puente. Uso de command 0Dxx para jump abrupto
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 9 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#09</div>
+                                <div class="mechanic-name">Boss Multi-Phase System</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Jefes tienen 2-3 fases con cambio de patrón al 70%, 40%, 10% HP
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Forma sonata abreviada: Exposición (fase 1) → Desarrollo (fase 2) → Recapitulación variada (fase 3). Cada sección transforma el tema inicial
+                                    <div class="composer-ref">→ Técnica Beethoven: desarrollo motívico</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Patterns 0-20 (96 líneas cada uno): tema A | Patterns 21-40: tema A fragmentado + aumentación rítmica | Patterns 41-60: tema A en diminución + tutti. BPM=72, LPB=12
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 10 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#10</div>
+                                <div class="mechanic-name">Red-Glow Attacks (Unblockable)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Ataques especiales marcados en rojo que atraviesan bloqueos, solo esquivables
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Glissando cromático descendente del Yangtze (Erhu) desde registro agudo a grave en 4 líneas + sforzando del tutti
+                                    <div class="composer-ref">→ Técnica Bartók: glissandi expresionistas</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze track: pitch bend automation de +1200 a -1200 cents en 8 líneas (múltiplos de 2). Otros tracks: note con velocity 127 en línea 8 (impacto)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 11 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#11</div>
+                                <div class="mechanic-name">Gold-Glow Attacks (Counter-only)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Ataques dorados que requieren perfect parry para crear opening
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Anticipación armónica falsa: Hexatona Aumentada (tensión intensa) que NO resuelve como se espera sino a Húngara Menor (romántica sorpresa)
+                                    <div class="composer-ref">→ Técnica Wagner: cadencia rota</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Líneas 0-3: Hexatona Aumentada (tensión intensa) | Línea 4: Húngara Menor (resolución romántica inesperada) en vez de la resolución esperada. Crear tensión no resuelta
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 12 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#12</div>
+                                <div class="mechanic-name">Aerial Combos</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Lanzar enemigos al aire y mantener juggle con ataques consecutivos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Ascensión melódica por saltos de octava sin pasos intermedios + amen break con pitch shift ascendente gradual
+                                    <div class="composer-ref">→ Técnica Messiaen: saltos interválicos extremos</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze: C3 → C4 → C5 → C6 (cada octava en líneas 0, 24, 48, 72). Amen track: pitch automation de 0 → +800 cents en 96 líneas
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 13 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#13</div>
+                                <div class="mechanic-name">Stamina Depletion</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Barra de stamina que limita acciones, regenera lentamente al no atacar
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Rarefacción textural: comenzar con 8 instrumentos activos, eliminar uno cada 8 compases hasta quedar solo el bajo
+                                    <div class="composer-ref">→ Técnica Webern: economía extrema de recursos</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Patterns de 96 líneas cada uno, BPM=72, LPB=12. Pattern 0: 8 tracks activos | Pattern 1: 7 tracks (mute Voices) | Pattern 2: 6 tracks (mute Pigments) | etc. Hasta solo Bass Master
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 14 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#14</div>
+                                <div class="mechanic-name">Weapon Durability Loss</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Armas se degradan con uso, pierden efectividad hasta repararse
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Degradación tímbrica: aplicar progresivamente bitcrusher y low-pass filter al Yangtze cada 16 compases
+                                    <div class="composer-ref">→ Técnica Electroacústica: transformación gradual del timbre</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze DSP chain: bitcrusher automation de 16-bit → 8-bit → 4-bit en 96 líneas. Filter cutoff 20kHz → 2kHz gradualmente
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 15 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#15</div>
+                                <div class="mechanic-name">Elemental Damage Types</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Fuego, hielo, veneno, rayo - cada elemento con efectos únicos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> 3 escalas para elementos: Fuego/Rayo=Hexatona Aumentada (intensa, abrasadora) | Hielo=Dominante Frigia (dulce, cristalina) | Veneno=Húngara Menor (romántica, insidiosa)
+                                    <div class="composer-ref">→ Técnica modal: asociación color-escala</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Patterns de 96 líneas, BPM=72, LPB=12. Crear 3 instrument presets del Yangtze. Fire/Lightning: Hexatona Aumentada | Ice: Dominante Frigia | Poison: Húngara Menor
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 16 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#16</div>
+                                <div class="mechanic-name">Finisher Execution</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Animación cinemática de golpe final cuando enemigo está en stagger crítico
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Cadencia épica: Húngara Menor (preparación romántica) → Hexatona Aumentada (impacto devastador) con tutti + cymbal crash reverso
+                                    <div class="composer-ref">→ Técnica Bruckner: cadencia masiva + técnica tape music</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Húngara Menor líneas 0-7 → Hexatona Aumentada en tutti línea 8. Amen crash: render sample, invertir en sample editor, aplicar pitchbend +2400 cents
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- CATEGORÍA 2: MYSTIC ARTS & SKILLS -->
+                    <div class="category">
+                        <div class="category-header">
+                            <div class="category-title">II. MYSTIC ARTS & SKILLS (8)</div>
+                        </div>
+                        <div class="mechanics-grid">
+
+                            <!-- Mechanic 17 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#17</div>
+                                <div class="mechanic-name">Meridian Touch (Immobilize)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Toca puntos de acupuntura para congelar enemigos temporalmente
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Cesura total de 4 líneas seguida de fermate en cluster armónico sostenido (todas las notas del Yangtze en freeze)
+                                    <div class="composer-ref">→ Técnica Feldman: suspensión temporal absoluta</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Líneas 0-3: OFF en todos los tracks | Línea 4: C4+C#4+D4+D#4+E4 simultáneos del Yangtze con sustain infinito (no note-off)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 18 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#18</div>
+                                <div class="mechanic-name">Lion's Roar (Area Stun)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Rugido sónico que aturde a todos los enemigos en área amplia
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Cluster tone fortissimo (rango de 2 octavas) del Yangtze procesado con heavy distortion + sub-bass drop
+                                    <div class="composer-ref">→ Técnica Penderecki: masa sonora + dubstep bass</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze: todas las notas C3-C5 en línea 0, velocity 127, DSP: distortion + filter resonance 90%. Bass: C0 con portamento down 2 octavas
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 19 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#19</div>
+                                <div class="mechanic-name">Cloud Steps (Vertical Dash)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Levitación rápida para alcanzar plataformas elevadas o esquivar
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Ascensión melódica etérea en Dominante Frigia por bloques de octava (dulce levitación espiritual)
+                                    <div class="composer-ref">→ Técnica tradicional china + impresionismo: capas celestiales</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze Dizi en Dominante Frigia: octava baja (líneas 0-3) | octava media (4-7) | octava alta (8-11). Bajo en pedal. Carácter dulce y flotante
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 20 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#20</div>
+                                <div class="mechanic-name">Dragon's Breath (Fire Projectile)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Lanzar bola de fuego que interrumpe y causa daño masivo
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Rasgado rápido de Pipa del Yangtze (trémolo) con glissando ascendente + amen break con flamming en snare
+                                    <div class="composer-ref">→ Técnica tradicional Pipa + jazz drumming</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze Pipa: notas rápidas G3-G4 glissando en 4 líneas (subdivisión múltiplos de 2). Amen snare: 2 hits en 1 línea (tick 0, tick 6) con velocity 110-127
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 21 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#21</div>
+                                <div class="mechanic-name">Ghost Bind (Spirit Trap)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Invocar espíritus que atrapan y ralentizan enemigos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Amen break con reverse + delay infinito (feedback 90%) + Voices en registro grave con reverb decay 10s
+                                    <div class="composer-ref">→ Técnica tape music: inversión temporal + espacio electroacústico</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Amen: render & reverse en sample editor | Delay DSP: feedback 90%, time 2/16 (múltiplo de 2) | Augmented Voices en Húngara Menor (romántica, espectral) con reverb wet 100%
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 22 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#22</div>
+                                <div class="mechanic-name">Leaping Toad (Poison DoT)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Salto con daño de veneno que continúa dañando por tiempo
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Salto melódico en Dominante Frigia seguido de descenso en Húngara Menor (dulce veneno que se dispersa románticamente)
+                                    <div class="composer-ref">→ Técnica Berg: cromatismo expresionista</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze: salto en Dominante Frigia (dulce) en línea 0 | Líneas 2-16: descenso en Húngara Menor (romántico decaimiento, múltiplos de 2). Loop pattern
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 23 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#23</div>
+                                <div class="mechanic-name">Drunken Poet (Evasion Buff)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Estilo de combate errático que aumenta evasión pero tambalea
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Métrica irregular 5/8 → 3/4 → 7/8 → 4/4 cambiando cada 2 compases. Tiempo rubato en melodía
+                                    <div class="composer-ref">→ Técnica Bartók: métricas búlgaras + improvisación</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern A: 96 líneas en Húngara Menor (romántico tambaleo) | Pattern B: 192 líneas | Pattern C: 384 líneas. BPM=72, LPB=12. Yangtze: notas con random delay -10 to +10 ticks (ajustado a múltiplos de 2)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 24 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#24</div>
+                                <div class="mechanic-name">Glow of Fireflies (Light Summon)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Invocar luciérnagas que iluminan y confunden enemigos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Trémolo rápido del Yangqin en registro agudo (C6-C7) con patrón irregular de pulsos (simula parpadeo)
+                                    <div class="composer-ref">→ Técnica Yangtze tradicional: trémolo Yangqin</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze Yangqin: Dominante Frigia en registro agudo (dulce parpadeo luminoso) en líneas 0,2,4,6,8,10,12,14 (patrón en múltiplos de 2). Velocity alterna 70-100-85-110
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- CATEGORÍA 3: MOVEMENT & ENVIRONMENT -->
+                    <div class="category">
+                        <div class="category-header">
+                            <div class="category-title">III. MOVEMENT & ENVIRONMENTAL INTERACTION (8)</div>
+                        </div>
+                        <div class="mechanics-grid">
+
+                            <!-- Mechanic 25 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#25</div>
+                                <div class="mechanic-name">Parkour Wall Run</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Correr sobre paredes verticales para alcanzar zonas inaccesibles
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Ostinato rítmico del bajo en corcheas constantes mientras melodía asciende cromáticamente sin interrupción
+                                    <div class="composer-ref">→ Técnica minimalista: ground bass + transformación gradual</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Bass: pedal en Hexatona Aumentada (intensa energía constante) en todas las líneas pares | Yangtze: ascenso cromático en Hexatona Aumentada hasta completar en líneas impares
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 26 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#26</div>
+                                <div class="mechanic-name">Grapple Hook Swing</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Usar gancho para balancearse entre puntos y cruzar abismos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Arpeggio oscilante del Yangtze en movimiento pendular (ascendente-descendente-ascendente) + tempo acceleration/deceleration
+                                    <div class="composer-ref">→ Técnica Chopin: rubato + física del péndulo</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 192 líneas, BPM=72, LPB=12. Yangtze: arpeggio en Húngara Menor (romántico, oscilante)... | Volume automation: 80→100→80→100 cada 48 líneas (simula momentum del swing)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 27 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#27</div>
+                                <div class="mechanic-name">Stealth Crouch Mode</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Agacharse para reducir detección enemiga, movimiento lento y silencioso
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Textura minimal: solo Yangtze Xiao en registro grave + hi-hat en ghost notes pp. Tempo reducido perceptualmente con LPB bajo
+                                    <div class="composer-ref">→ Técnica Satie: furniture music + minimalismo</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze Xiao: Dominante Frigia (dulce, sigilosa) cada 8 líneas (múltiplos de 2) | Amen hi-hat: velocity 20-30, solo cada 4 líneas
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 28 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#28</div>
+                                <div class="mechanic-name">Horse Mounting/Riding</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Montar caballo para viaje rápido por mundo abierto
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Ritmo de galope: patrón rítmico en múltiplos de 2 (simula paso del caballo) + melodía en Húngara Menor (romántica, épica)
+                                    <div class="composer-ref">→ Técnica música mongola: ritmo galopante + Erhu lírico</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Bass pattern: kick en líneas 0,4,8 (múltiplos de 2) loop | Yangtze Erhu: Húngara Menor (carácter romántico, nostálgico) con vibrato LFO
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 29 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#29</div>
+                                <div class="mechanic-name">Glider Descent</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Planear desde alturas con control direccional
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Descenso melódico por grados conjuntos con aumento gradual de reverb y delay (simula distancia creciente)
+                                    <div class="composer-ref">→ Técnica espacial: perspectiva acústica mediante efectos</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze Dizi: descenso en Dominante Frigia (dulce, flotante) | Reverb automation: wet 0%→80% en 96 líneas | Delay time 0→500ms
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 30 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#30</div>
+                                <div class="mechanic-name">Swimming & Diving</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Nadar en superficie y sumergirse para explorar bajo agua
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Pigments pad con LFO lento (0.5 Hz) en filter cutoff + Voices procesado con chorus pesado (simula fluido acuático)
+                                    <div class="composer-ref">→ Técnica Debussy: impresionismo + síntesis de modulación</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Pigments: pad en Dominante Frigia (dulce, acuática), LFO sine a filter cada 120 ticks (múltiplo de 2) | Voices: DSP chorus rate 2Hz depth 80% + reverb wet 60%
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 31 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#31</div>
+                                <div class="mechanic-name">Treasure Chest Opening</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Animación de cofre revelando contenido, momento de recompensa
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Cadencia suspensiva en Dominante Frigia (dulce anticipación) seguida de resolución triunfal en Húngara Menor (romántica recompensa) con arpeggio del Yangqin
+                                    <div class="composer-ref">→ Técnica Zelda: fanfarria de recompensa + arpeggio característico</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Líneas 0-7: Dominante Frigia (hold dulce) | Línea 8: Húngara Menor + Yangqin arpeggio en líneas 8-12 con velocity crescendo (romántica alegría)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 32 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#32</div>
+                                <div class="mechanic-name">Weather System (Rain/Snow)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Clima dinámico que afecta visibilidad y combate
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Capa de noise blanco filtrado (high-pass 8kHz) en volumen bajo + Yangtze con reverb decay extendido (simula ambiente)
+                                    <div class="composer-ref">→ Técnica musique concrète: sonido ambiental sintético</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Track de noise: white noise sample, filter HP 8kHz, volume -18dB loop | Yangtze: cualquier melodía + reverb decay 8s, predelay 50ms
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- CATEGORÍA 4: CRAFTING & GATHERING -->
+                    <div class="category">
+                        <div class="category-header">
+                            <div class="category-title">IV. CRAFTING, GATHERING & PROGRESSION (8)</div>
+                        </div>
+                        <div class="mechanics-grid">
+
+                            <!-- Mechanic 33 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#33</div>
+                                <div class="mechanic-name">Fishing Mini-Game</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Timing-based mini-juego para capturar peces raros
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Ostinato hipnótico del Guqin (patrón repetitivo) con acentos irregulares que representan "bites" (momento de captura)
+                                    <div class="composer-ref">→ Técnica Glass: minimalismo repetitivo + acentos asimétricos</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze Guqin: patrón en Dominante Frigia (dulce, contemplativo) loop | Cada 12 líneas (múltiplo de 2): accent con velocity 127 + snare hit (el "bite")
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 34 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#34</div>
+                                <div class="mechanic-name">Herb Gathering (Harvest)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Recolectar plantas medicinales con animación de recogida
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Motivo ascendente breve de 4 notas del Dizi (G-A-B-C) con mordente al final + silencio post-motivo
+                                    <div class="composer-ref">→ Técnica barroca: ornamentación + articulación clara</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze Dizi: línea 0: G4 | 2: A4 | 4: B4 | 6: C5 con mordente (C5-B4-C5 rápido en 2 ticks) | Líneas 8-95: OFF
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 35 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#35</div>
+                                <div class="mechanic-name">Mining & Logging</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Golpear repetidamente recursos hasta extraerlos (3-5 hits)
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Ostinato percusivo del amen break (solo kick+snare) en patrón 4/4 por 5 compases + release en cymbal crash
+                                    <div class="composer-ref">→ Técnica minimalista: patrón laboral repetitivo + release</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> 5 patterns de 96 líneas cada uno, BPM=72, LPB=12 en Hexatona Aumentada (intensa labor): kick en líneas 0,48 | snare en 24,72 (steady pattern) | Pattern 6: crash + resolución en Húngara Menor (romántica satisfacción) línea 0 con reverb
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 36 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#36</div>
+                                <div class="mechanic-name">Cooking System (Buffs)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Combinar ingredientes para crear comida con buffs temporales
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Superposición de 3 motivos independientes en las 3 escalas (ingredientes) que convergen en Húngara Menor final (romántico plato terminado)
+                                    <div class="composer-ref">→ Técnica Bach: contrapunto convergente</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Track 1: motivo A en Dominante Frigia | Track 2: motivo B en Húngara Menor | Track 3: motivo C en Dominante Frigia | Línea 16: todos convergen en Húngara Menor (romántico resultado final)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 37 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#37</div>
+                                <div class="mechanic-name">Crafting Weapons/Armor</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Forjar equipo en talleres con materiales recolectados
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Tema en forma binaria (A-B) donde B es variación rítmica aumentada de A (notas 2x más largas = templado del metal)
+                                    <div class="composer-ref">→ Técnica renacentista: aumentación proporcional</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Sección A (48 líneas): Bass en Hexatona Aumentada (intensa forja) subdivisiones múltiplos de 2 | Sección B (48 líneas): mismo patrón en Húngara Menor (romántico templado) subdivisiones más largas (múltiplos de 4)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 38 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#38</div>
+                                <div class="mechanic-name">Equipment Enhancement (+1 to +10)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Sistema de mejora progresiva con riesgo de falla en niveles altos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Progresión de Dominante Frigia (dulce) a Hexatona Aumentada (intensa) con tensión creciente. Éxito=Húngara Menor (romántica), fallo=Hexatona disonante
+                                    <div class="composer-ref">→ Técnica Scriabin: armonía por cuartas + tensión creciente</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> 10 patterns de 96 líneas cada uno, BPM=72, LPB=12: +1 a +5=Dominante Frigia (dulce tensión creciente) | +6 a +10=Hexatona Aumentada (intensidad máxima). Success: Húngara Menor (romántico triunfo) | Fail: Hexatona disonante
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 39 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#39</div>
+                                <div class="mechanic-name">Energy System (1pt per 9min)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Regeneración lenta de energía para recompensas, máximo 500 puntos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Track de 289 segundos (5 min) dividido en 25 secciones de 20 líneas, cada una introduce 1 elemento nuevo (acumulación gradual)
+                                    <div class="composer-ref">→ Técnica Ravel: orquestación por capas (Bolero extended)</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Patterns de 96 líneas cada uno, BPM=72, LPB=12. Pattern 0-19: bajo solo | 20-39: +amen | 40-59: +Yangtze 1 | 60-79: +Yangtze 2 | etc. 500 patterns = tutti completo
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 40 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#40</div>
+                                <div class="mechanic-name">Mental Energy Rewards (Weekly)</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Sistema de recompensas que escala, mejor esperar mid-game para maximizar
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Tema con 3 variaciones progresivamente más complejas. Var 1: melodía simple | Var 2: + contrapunto | Var 3: + tutti orquestal
+                                    <div class="composer-ref">→ Técnica Brahms: variaciones con complejidad creciente</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Tema base (96 líneas): Yangtze solo en Dominante Frigia (dulce simplicidad) | Var 1: +Bass en Húngara Menor (romántico contrapunto) | Var 2: +Voices + Pigments en Húngara Menor | Var 3: tutti en Hexatona Aumentada + amen full (intensa culminación). BPM=72, LPB=12
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- CATEGORÍA 5: PUZZLES & EXPLORATION -->
+                    <div class="category">
+                        <div class="category-header">
+                            <div class="category-title">V. PUZZLES & EXPLORATION MECHANICS (8)</div>
+                        </div>
+                        <div class="mechanics-grid">
+
+                            <!-- Mechanic 41 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#41</div>
+                                <div class="mechanic-name">Tai Chi Yin-Yang Dial</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Rotar disco central para alinear 4 pilares (Heaven, Earth, Water, Fire) en pares opuestos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> 4 voces en contrapunto donde cada rotación cambia qué pares tocan en movimiento paralelo vs contrario
+                                    <div class="composer-ref">→ Técnica Palestrina: contrapunto estricto + reglas de conducción</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 192 líneas, BPM=72, LPB=12. State 1: Heaven+Earth en Dominante Frigia (dulce armonía), Water+Fire en Hexatona Aumentada (tensión intensa) | State 2: alternancia de escalas. Rotar cada 48 líneas (múltiplos de 2)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 42 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#42</div>
+                                <div class="mechanic-name">Meridian Pressure Point Sequence</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Activar puntos específicos en orden correcto para desbloquear secreto
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Serie dodecafónica: secuencia de 12 notas sin repetición hasta completar (cada nota = punto de acupuntura)
+                                    <div class="composer-ref">→ Técnica Schoenberg: serialismo estricto</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Patterns de 96 líneas cada uno, BPM=72, LPB=12. Yangtze: secuencia de 12 notas en Hexatona Aumentada (intensa precisión ritual), 1 nota por pattern. Completar = unlock en Húngara Menor (romántica apertura, tutti en pattern 13)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 43 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#43</div>
+                                <div class="mechanic-name">Heavenly Constellation Puzzle</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Conectar estrellas en patrón específico basado en constelaciones chinas
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Melodía formada por saltos interválicos que dibujan la constelación (C4 → E5 → G3 = triángulo estelar)
+                                    <div class="composer-ref">→ Técnica Xenakis: música estocástica + geometría</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze en Dominante Frigia (dulce, celestial): mapear coordenadas X=pitch, Y=tiempo. Constelación de 7 estrellas = 7 notas en posiciones precisas del pattern (múltiplos de 2)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 44 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#44</div>
+                                <div class="mechanic-name">Light Reflection Mirrors</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Redirigir rayos de luz usando espejos para activar objetivos
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Canon en espejo: voz 1 toca melodía normal, voz 2 toca la inversión exacta simultáneamente (reflejo musical)
+                                    <div class="composer-ref">→ Técnica Bach: canon cancrizans</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 96 líneas, BPM=72, LPB=12. Yangtze track 1: Húngara Menor ascendente (romántica) | Track 2 simultáneo: Húngara Menor descendente (inversión espejada, elegante reflejo)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 45 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#45</div>
+                                <div class="mechanic-name">Stone Tablet Lore Discovery</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Encontrar tablillas que revelan historia y desbloquean misiones
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Fragmento melódico incompleto (4 compases) que se completa al encontrar todas las tablillas (forma A-B-C-D unificada)
+                                    <div class="composer-ref">→ Técnica Satie: formas fragmentarias + ensamblaje</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Patterns de 96 líneas cada uno, BPM=72, LPB=12. Tablilla 1: Dominante Frigia fragmento (incompleto, misterioso) | Tablilla 2: Húngara Menor fragmento | Tablilla 3: Dominante Frigia fragmento | Todas: Húngara Menor completa (romántica revelación)
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 46 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#46</div>
+                                <div class="mechanic-name">Torch Lighting Sequence</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Encender antorchas en orden correcto antes de que se apaguen
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Patrón rítmico en aceleración (tempo incrementing): cada antorcha = nuevo pulso que se añade al ostinato
+                                    <div class="composer-ref">→ Técnica Ligeti: polirritmia acumulativa + aceleración</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 192 líneas, BPM=72, LPB=12. Torch 1: Dominante Frigia (subdivisiones largas, dulce inicio) | +Torch 2: añade Húngara Menor | +Torch 3: añade Hexatona Aumentada | +Torch 4: tutti en Hexatona (intensidad máxima). Todas superpuestas en crescendo
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 47 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#47</div>
+                                <div class="mechanic-name">Hidden Path Discovery</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Muros falsos y pasajes secretos que se revelan con interacción específica
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Modulación a escala remota (Dominante Frigia → Húngara Menor) sin preparación, como abrir puerta secreta a otro mundo romántico
+                                    <div class="composer-ref">→ Técnica Liszt: modulaciones dramáticas por tritono</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern A (96 líneas) en Dominante Frigia (dulce misterio) | Command: Pattern Break 0Dxx | Pattern B (96 líneas) inmediato: Húngara Menor (romántico descubrimiento) sin transición. BPM=72, LPB=12
+                                </div>
+                            </div>
+
+                            <!-- Mechanic 48 -->
+                            <div class="mechanic-card">
+                                <div class="mechanic-number">#48</div>
+                                <div class="mechanic-name">Boss Summoning Ritual</div>
+                                <div class="game-mechanic">
+                                    <span class="label">Juego:</span> Secuencia ceremonial que invoca jefe final de dungeon
+                                </div>
+                                <div class="composition-technique">
+                                    <span class="label">Composición:</span> Introducción lenta (Grave) en Húngara Menor (romántica invocación) → explosión en Hexatona Aumentada (intenso despertar del boss)
+                                    <div class="composer-ref">→ Técnica Beethoven: introduzione + allegro dramático (Sinfonía 1)</div>
+                                </div>
+                                <div class="renoise-implementation">
+                                    <span class="label">Renoise:</span> Pattern de 192 líneas, BPM=72, LPB=12. Líneas 0-95: Húngara Menor pedal (romántico ritual), Yangtze en drone | Línea 96: Volume automation 80→127 | Hexatona Aumentada tutti + amen break full fire (intensidad máxima)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+            <div class="framework-footer">
+                <p><strong>Where Winds Meet → Breakcore Compositional Framework</strong></p>
+                <p>48 Game Mechanics × Musical Architecture</p>
+                <p><a href="https://www.arturia.com/products/software-instruments/augmented" target="_blank">Augmented Yangtze</a> | <a href="https://www.arturia.com/products/software-instruments/augmented" target="_blank">Augmented Voices</a> | <a href="https://www.arturia.com/products/software-instruments/augmented" target="_blank">Pigments</a> | <a href="https://www.pluginboutique.com/product/1-Instruments/64-Virtual-Instruments/4412-Bass-Master-" target="_blank">Bass Master</a> | <a href="https://www.producerloops.com/Download-Nebula-Samples-100-Amen-Breaks-By-Veak.html" target="_blank">Amen Breaks</a> | <a href="https://www.arturia.com/products/software-instruments/augmented" target="_blank">Arturia</a> | <a href="https://www.producerloops.com/Download-Nebula-Samples-100-Amen-Breaks-By-Veak.html" target="_blank">Producer Loops</a> | <a href="https://www.loopmasters.com" target="_blank">Loop Masters</a></p>
+                <p><a href="https://www.renoise.com" target="_blank">Renoise Tracker Environment</a> | BPM 72 | LPB 12 | Patrones: 96, 192, 384 o 480 líneas | Duraciones en múltiplos de 2</p>
+                <p style="margin-top: 20px; color: #905BBA;">
+                    Sistema Escalístico: Dominante Frigia (dulce, suave) | Hexatona Aumentada (intensa, fuerte) | Húngara Menor (romántica)<br>
+                    Compositional Influences: Bruckner | Mahler | Stravinsky | Bartók | Ligeti | Feldman | Messiaen | Schoenberg | Debussy | Bach
+                </p>
+                <p style="margin-top: 10px; font-size: 0.8em;">
+                    © 2025 | Mega Doll - The Witch Series | Composition Suite - Scales & Framework
+                </p>
+                <p style="margin-top: 6px; font-size: 0.8em; color: #b080c7;">
+                    Contenido fan-made sin relación directa con NetEase ni con Where Winds Meet; la mención es solo inspiración porque el juego es fantástico e invita a jugarlo. No existe vínculo comercial ni afiliación con NetEase o Where Winds Meet, pero igual jueguenlo, está fantástico.
+                </p>
+            </div>
+
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">

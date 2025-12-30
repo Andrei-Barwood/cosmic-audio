@@ -1,8 +1,11 @@
 // SCALE DATA
 const SCALES = {
-  hungarian_minor:    [0, 2, 3, 6, 7, 8, 11],
-  phrygian_dominant:  [0, 1, 4, 5, 7, 8, 10],
-  augmented:          [0, 3, 4, 7, 8, 11]
+  hungarian_minor:        [0, 2, 3, 6, 7, 8, 11],
+  phrygian_dominant:      [0, 1, 4, 5, 7, 8, 10],
+  augmented:              [0, 3, 4, 7, 8, 11],
+  minor_pentatonic:       [0, 3, 5, 7, 10],
+  major_pentatonic:       [0, 2, 4, 7, 9],
+  neutral_pentatonic:     [0, 2, 5, 7, 10]
 };
 
 const NOTE_NAMES = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
