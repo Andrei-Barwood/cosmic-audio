@@ -7,61 +7,20 @@ const SCALES = {
 
 const NOTE_NAMES = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
 
-// Agrega el tipo de acorde "rnb" en la lógica
-function buildChords(scaleNotes, chordType) {
-    let result = [];
-    let scaleLength = scaleNotes.length;
-    for (let degree = 0; degree < scaleLength; degree++) {
-        let degreeNotes = [];
-        if (chordType === "suspended") { // Sus4: 1-4-5
-            degreeNotes = [
-                scaleNotes[(degree) % scaleLength],
-                scaleNotes[(degree+3) % scaleLength],
-                scaleNotes[(degree+4) % scaleLength]
-            ];
-        } else if (chordType === "seventh") { // Diatonic 7th: stack every other degree
-            degreeNotes = [
-                scaleNotes[(degree) % scaleLength],
-                scaleNotes[(degree+2) % scaleLength],
-                scaleNotes[(degree+4) % scaleLength],
-                scaleNotes[(degree+6) % scaleLength]
-            ];
-        } else if (chordType === "rnb") { // NUEVO: R&B tetrada con séptima y novena de la escala
-            degreeNotes = [
-                scaleNotes[(degree) % scaleLength],
-                scaleNotes[(degree+2) % scaleLength],
-                scaleNotes[(degree+4) % scaleLength],
-                scaleNotes[(degree+6) % scaleLength],
-                scaleNotes[(degree+1) % scaleLength] // añadimos la novena dentro de la escala
-            ];
-        } else { // Ninth: 7th plus 9th, octave up
-            degreeNotes = [
-                scaleNotes[(degree) % scaleLength],
-                scaleNotes[(degree+2) % scaleLength],
-                scaleNotes[(degree+4) % scaleLength],
-                scaleNotes[(degree+6) % scaleLength],
-                transposeNote(scaleNotes[(degree+2) % scaleLength], 12)
-            ];
-        }
-        // Generate inversions (rotate order)
-        let inversions = [];
-        for (let i = 0; i < degreeNotes.length; i++) {
-            let inv = degreeNotes.slice(i).concat(degreeNotes.slice(0,i));
-            inversions.push(inv);
-        }
-        result.push({ degree: degree + 1, inversions: inversions });
-    }
-    return result;
-}
-
-
-// Given root "C" and interval 3 returns "Eb"
+// Given root "C" or "C4" and interval 3 returns "Eb" or "Eb4"
 function transposeNote(root, interval) {
-  let idx = NOTE_NAMES.indexOf(root.replace('b', 'b').replace('#', '#'));
+  // Extract note name without octave number
+  let noteMatch = root.match(/^([A-G][b#]?)/);
+  if (!noteMatch) return "C4";
+  let noteName = noteMatch[1];
+  
+  let idx = NOTE_NAMES.indexOf(noteName);
+  if (idx === -1) return "C4"; // Fallback if note not found
+  
   let newIdx = (idx + interval) % 12;
-  let octave = 4;
+  let octave = 4; // Default octave
   if (root.match(/\d/)) { 
-    octave = parseInt(root.match(/\d/)[0],10);
+    octave = parseInt(root.match(/\d/)[0], 10);
   }
   // If we wrap past C, bump octave (+1 for each 12 semitones)
   let octaveOffset = Math.floor((idx + interval) / 12);
@@ -103,6 +62,15 @@ function buildChords(scaleNotes, chordType) {
         scaleNotes[ (degree+4) % scaleLength ],
         scaleNotes[ (degree+6) % scaleLength ]
       ];
+    } else if (chordType === "rnb") {
+      // R&B tetrada con séptima y novena de la escala
+      degreeNotes = [
+        scaleNotes[ (degree) % scaleLength ],
+        scaleNotes[ (degree+2) % scaleLength ],
+        scaleNotes[ (degree+4) % scaleLength ],
+        scaleNotes[ (degree+6) % scaleLength ],
+        scaleNotes[ (degree+1) % scaleLength ] // añadimos la novena dentro de la escala
+      ];
     } else {
       // Ninth: 7th plus 9th (next scale degree, octave up)
       degreeNotes = [
@@ -110,7 +78,7 @@ function buildChords(scaleNotes, chordType) {
         scaleNotes[ (degree+2) % scaleLength ],
         scaleNotes[ (degree+4) % scaleLength ],
         scaleNotes[ (degree+6) % scaleLength ],
-        transposeNote(scaleNotes[ (degree+2) % scaleLength ], 12)
+        transposeNote(scaleNotes[ (degree+1) % scaleLength ], 12)
       ];
     }
     // Generate inversions (rotate order)
