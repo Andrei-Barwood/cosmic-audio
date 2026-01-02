@@ -13,13 +13,14 @@ Honey, if you're looking for a website that's as **glamorous** as a Las Vegas sh
 
 ### 🎨 **THE SEASONAL COLLECTION SYSTEM** 🎨
 
-Oh my goodness, we have **FIVE absolutely STUNNING seasonal themes** that you can switch between like changing your outfit for the day! Each one is more fabulous than the last:
+Oh my goodness, we have **SIX absolutely STUNNING seasonal themes** that you can switch between like changing your outfit for the day! Each one is more fabulous than the last:
 
 - **✨ Season Nocturne** (`season-nocturne`) - Dark magic meets glitch aesthetics in the most mysterious lavender vibes you've ever seen! Like a midnight show at The Venetian! 💜🌙
 - **🌈 Season Prism** (`season-prism`) - Fast-paced breakcore acid vibes with blue and prismatic accents! Perfect for those wild nights on The Strip! 💙⚡
 - **🎀 Season Pastel Bloom** (`season-pastel`) - Pastel eerie meets soft aesthetics! Yellow and pink vibes that are so adorably unsettling, you'll want to frame them! 💛💗
 - **🕶️ Season 80s** (`season-80s`) - An 80s nightmare in the BEST way possible! Turquoise green and neon that screams retro glamour! 🟢💚
 - **🖤 Season Goth-Pajamas** (`season-goth-pajamas`) - Black and gothic purple that's so dark and chic, it could walk the runway! Currently the active theme, and honey, it's STUNNING! 🖤💜
+- **🔥 Season Cloud-of-the-Desert** (`season-cloud-of-the-desert`) - Red desert heat meets fiery aesthetics! Dark browns and blazing reds that burn with intensity! Like a desert mirage at sunset! 🔥🌵
 
 *Just add the class to the `<body>` tag and watch the magic happen, darling!*
 

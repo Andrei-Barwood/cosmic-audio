@@ -254,6 +254,45 @@ body.season-goth-pajamas {
     --glitch-color-2: #E8EFEE;
 }
 
+/* 6. SEASON: CLOUD-OF-THE-DESERT (Nube del Desierto) */
+body.season-cloud-of-the-desert {
+    /* Base: Tonos Oscuros Desérticos (Marrón rojizo y negro) */
+    --wood-dark: #2B1F1F;    /* Marrón oscuro rojizo (fondo principal) */
+    --wood-medium: #450A0A;  /* Rojo muy oscuro */
+    --wood-light: #8B0000;   /* Rojo oscuro */
+    
+    /* Acentos Rojos Vibrantes (Estilo desértico ardiente) */
+    --primary-color: #FF1744; /* Rojo brillante/vibrante (el más característico) */
+    --acid-green: #DC143C;     /* Crimson/rojo medio (contraste) */
+    --tertiary-color: #FF4444; /* Rojo claro/rosa rojizo (acentos) */
+    
+    /* Reasignación de variables base */
+    --secondary-color: #8B0000; /* Rojo oscuro */
+    --success-color: var(--primary-color);
+    --olive-accent: #450A0A; /* Rojo muy oscuro */
+    
+    /* Teal Accents - ahora en tonos rojizos oscuros */
+    --teal-dark: #8B0000;
+    --teal-darker: #1A0F0F;
+    --teal-medium: #450A0A;
+    
+    /* Background Colors */
+    --dark-bg: var(--wood-dark);
+    --darker-bg: #0D0208; /* Casi negro (fondo más oscuro) */
+    --card-bg: rgba(43, 31, 31, 0.95);
+    --card-hover-bg: rgba(69, 10, 10, 0.95);
+    
+    /* Textos - colores claros sobre fondo oscuro */
+    --text-primary: #FF4444;  /* Rojo claro para texto principal */
+    --text-secondary: #DC143C; /* Crimson para texto secundario */
+    --border-color: #FF1744;  /* Rojo brillante para bordes */
+    --border-accent: #FF4444; /* Rojo claro para acentos */
+    
+    /* Glitch Colors - colores rojos desérticos */
+    --glitch-color-1: #FF1744;
+    --glitch-color-2: #DC143C;
+}
+
 /* =========================================
    INTEGRACIÓN PINOCHO + PASTEL
    Madera Pintada Descascarada
@@ -655,6 +694,121 @@ body.season-goth-pajamas .feed-post:hover {
         0 0 20px var(--tertiary-color); /* Glow gris claro al hover */
 }
 
+/* Season Cloud-of-the-Desert: Títulos con contorno rojo ardiente */
+body.season-cloud-of-the-desert h1, 
+body.season-cloud-of-the-desert h2,
+body.season-cloud-of-the-desert h3,
+body.season-cloud-of-the-desert .section-title,
+body.season-cloud-of-the-desert .nav-brand,
+body.season-cloud-of-the-desert .feed-title,
+body.season-cloud-of-the-desert .blog-hero-title {
+    font-family: 'Permanent Marker', cursive;
+    color: var(--primary-color);
+    -webkit-text-stroke: 2px #000000;
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.9),
+        -1px -1px 0 #000000,
+        0 0 15px var(--primary-color), /* Glow rojo brillante */
+        0 0 30px rgba(255, 23, 68, 0.6); /* Glow más difuso */
+    position: relative;
+}
+
+/* Rayones para season cloud-of-the-desert - estilo ardiente */
+body.season-cloud-of-the-desert h1::before,
+body.season-cloud-of-the-desert h2::before,
+body.season-cloud-of-the-desert h3::before,
+body.season-cloud-of-the-desert .section-title::before,
+body.season-cloud-of-the-desert .nav-brand::before,
+body.season-cloud-of-the-desert .feed-title::before,
+body.season-cloud-of-the-desert .blog-hero-title::before,
+body.season-cloud-of-the-desert h1::after,
+body.season-cloud-of-the-desert h2::after,
+body.season-cloud-of-the-desert h3::after,
+body.season-cloud-of-the-desert .section-title::after,
+body.season-cloud-of-the-desert .nav-brand::after,
+body.season-cloud-of-the-desert .feed-title::after,
+body.season-cloud-of-the-desert .blog-hero-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #000;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+    box-shadow: 0 0 8px var(--primary-color); /* Glow rojo en rayones */
+}
+
+body.season-cloud-of-the-desert h1::before,
+body.season-cloud-of-the-desert h2::before,
+body.season-cloud-of-the-desert h3::before,
+body.season-cloud-of-the-desert .section-title::before,
+body.season-cloud-of-the-desert .nav-brand::before,
+body.season-cloud-of-the-desert .feed-title::before,
+body.season-cloud-of-the-desert .blog-hero-title::before {
+    top: 30%;
+    transform: rotate(-3deg);
+    width: 85%;
+}
+
+body.season-cloud-of-the-desert h1::after,
+body.season-cloud-of-the-desert h2::after,
+body.season-cloud-of-the-desert h3::after,
+body.season-cloud-of-the-desert .section-title::after,
+body.season-cloud-of-the-desert .nav-brand::after,
+body.season-cloud-of-the-desert .feed-title::after,
+body.season-cloud-of-the-desert .blog-hero-title::after {
+    top: 55%;
+    transform: rotate(4deg);
+    width: 80%;
+    left: 8%;
+}
+
+/* Season Cloud-of-the-Desert: Botones con efecto rojo ardiente */
+body.season-cloud-of-the-desert .btn,
+body.season-cloud-of-the-desert .btn-primary {
+    border: 3px solid #000;
+    background: var(--primary-color);
+    color: #FFFFFF;
+    box-shadow: 
+        5px 5px 0px rgba(0,0,0,0.4),
+        0 0 15px var(--primary-color); /* Glow rojo */
+    font-family: 'Permanent Marker', cursive;
+}
+
+body.season-cloud-of-the-desert .btn:hover,
+body.season-cloud-of-the-desert .btn-primary:hover {
+    background: var(--tertiary-color);
+    color: #FFFFFF;
+    transform: translate(-2px, -2px);
+    box-shadow: 
+        7px 7px 0px rgba(0,0,0,0.5),
+        0 0 25px var(--tertiary-color); /* Glow rojo claro al hover */
+}
+
+/* Season Cloud-of-the-Desert: Tarjetas con glow rojo */
+body.season-cloud-of-the-desert .music-card,
+body.season-cloud-of-the-desert .event-card,
+body.season-cloud-of-the-desert .blog-post,
+body.season-cloud-of-the-desert .feed-post {
+    border: 3px solid var(--primary-color);
+    box-shadow: 
+        6px 6px 0px rgba(0,0,0,0.3),
+        0 0 12px var(--primary-color); /* Glow rojo en tarjetas */
+}
+
+body.season-cloud-of-the-desert .music-card:hover,
+body.season-cloud-of-the-desert .event-card:hover,
+body.season-cloud-of-the-desert .blog-post:hover,
+body.season-cloud-of-the-desert .feed-post:hover {
+    transform: translate(-2px, -2px);
+    border-color: var(--tertiary-color);
+    box-shadow: 
+        8px 8px 0px rgba(0,0,0,0.4),
+        0 0 20px var(--tertiary-color); /* Glow rojo claro al hover */
+}
+
 
 /* Add these animations to your styles.css file */
 
@@ -821,6 +975,27 @@ body.season-goth-pajamas .blog-hero-title.handwritten-scratched {
         0 0 30px rgba(144, 91, 186, 0.5);
 }
 
+/* Season Cloud-of-the-Desert: Mantener el glow rojo incluso con clases scratched */
+body.season-cloud-of-the-desert .scratched-text,
+body.season-cloud-of-the-desert h1.scratched,
+body.season-cloud-of-the-desert h2.scratched,
+body.season-cloud-of-the-desert h3.scratched,
+body.season-cloud-of-the-desert .section-title.scratched,
+body.season-cloud-of-the-desert .nav-brand.scratched-text,
+body.season-cloud-of-the-desert .feed-title.scratched-text,
+body.season-cloud-of-the-desert .blog-hero-title.scratched-text,
+body.season-cloud-of-the-desert .handwritten-scratched,
+body.season-cloud-of-the-desert .nav-brand.handwritten-scratched,
+body.season-cloud-of-the-desert .section-title.handwritten-scratched,
+body.season-cloud-of-the-desert .feed-title.handwritten-scratched,
+body.season-cloud-of-the-desert .blog-hero-title.handwritten-scratched {
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.9),
+        -1px -1px 0 #000000,
+        0 0 15px var(--primary-color),
+        0 0 30px rgba(255, 23, 68, 0.6);
+}
+
 /* Efecto de rayones/tachones usando pseudo-elementos (más compatible) */
 h1::before, h2::before, h3::before, .feed-title::before, .blog-hero-title::before,
 h1::after, h2::after, h3::after, .feed-title::after, .blog-hero-title::after {
@@ -952,6 +1127,36 @@ body.season-80s .blog-hero-title.handwritten-scratched::after {
     box-shadow: 0 0 10px var(--tertiary-color); /* Glow rosa en rayones para 80s */
 }
 
+/* Season Cloud-of-the-Desert: Rayones con glow rojo para las clases scratched */
+body.season-cloud-of-the-desert .scratched-text::before,
+body.season-cloud-of-the-desert h1.scratched::before,
+body.season-cloud-of-the-desert h2.scratched::before,
+body.season-cloud-of-the-desert h3.scratched::before,
+body.season-cloud-of-the-desert .section-title.scratched::before,
+body.season-cloud-of-the-desert .nav-brand.scratched-text::before,
+body.season-cloud-of-the-desert .feed-title.scratched-text::before,
+body.season-cloud-of-the-desert .blog-hero-title.scratched-text::before,
+body.season-cloud-of-the-desert .handwritten-scratched::before,
+body.season-cloud-of-the-desert .nav-brand.handwritten-scratched::before,
+body.season-cloud-of-the-desert .section-title.handwritten-scratched::before,
+body.season-cloud-of-the-desert .feed-title.handwritten-scratched::before,
+body.season-cloud-of-the-desert .blog-hero-title.handwritten-scratched::before,
+body.season-cloud-of-the-desert .scratched-text::after,
+body.season-cloud-of-the-desert h1.scratched::after,
+body.season-cloud-of-the-desert h2.scratched::after,
+body.season-cloud-of-the-desert h3.scratched::after,
+body.season-cloud-of-the-desert .section-title.scratched::after,
+body.season-cloud-of-the-desert .nav-brand.scratched-text::after,
+body.season-cloud-of-the-desert .feed-title.scratched-text::after,
+body.season-cloud-of-the-desert .blog-hero-title.scratched-text::after,
+body.season-cloud-of-the-desert .handwritten-scratched::after,
+body.season-cloud-of-the-desert .nav-brand.handwritten-scratched::after,
+body.season-cloud-of-the-desert .section-title.handwritten-scratched::after,
+body.season-cloud-of-the-desert .feed-title.handwritten-scratched::after,
+body.season-cloud-of-the-desert .blog-hero-title.handwritten-scratched::after {
+    box-shadow: 0 0 10px var(--primary-color); /* Glow rojo en rayones para cloud-of-the-desert */
+}
+
 /* El texto normal se queda como código/consola */
 p, li, a, span, .hero-subtitle {
     font-family: 'Space Mono', monospace;
@@ -1031,6 +1236,18 @@ body.season-goth-pajamas #navbar {
     background: rgba(53, 32, 67, 0.98) !important; /* Morado muy oscuro (#352043) - !important para sobrescribir JS */
     border-bottom: 3px solid var(--primary-color) !important; /* Borde morado (#905BBA) */
     box-shadow: 0 2px 0 var(--primary-color), 0 0 10px rgba(144, 91, 186, 0.3) !important; /* Glow morado sutil */
+}
+
+/* Navbar específica para Cloud-of-the-Desert - Mayor especificidad */
+body.season-cloud-of-the-desert .navbar {
+    background: rgba(13, 2, 8, 0.95) !important; /* Casi negro (#0D0208) desde el inicio */
+}
+
+body.season-cloud-of-the-desert .navbar,
+body.season-cloud-of-the-desert #navbar {
+    background: rgba(13, 2, 8, 0.98) !important; /* Casi negro (#0D0208) - !important para sobrescribir JS */
+    border-bottom: 3px solid var(--primary-color) !important; /* Borde rojo brillante (#FF1744) */
+    box-shadow: 0 2px 0 var(--primary-color), 0 0 10px rgba(255, 23, 68, 0.3) !important; /* Glow rojo sutil */
 }
 
 .navbar .container {
@@ -1113,6 +1330,30 @@ body.season-goth-pajamas .nav-link {
     }
     100% {
         color: #FFFFFF;  /* Blanco */
+    }
+}
+
+/* Nav-link específico para Cloud-of-the-Desert - colores rojos */
+body.season-cloud-of-the-desert .nav-link {
+    animation: navColorCycleDesert 16s infinite;
+    color: var(--text-primary); /* Color inicial rojo claro */
+}
+
+@keyframes navColorCycleDesert {
+    0% {
+        color: #FF4444;  /* Rojo claro */
+    }
+    25% {
+        color: #FF1744;  /* Rojo brillante */
+    }
+    50% {
+        color: #DC143C;  /* Crimson */
+    }
+    75% {
+        color: #FF4444;  /* Rojo claro */
+    }
+    100% {
+        color: #FF1744;  /* Rojo brillante */
     }
 }
 
@@ -1276,6 +1517,18 @@ body.season-80s .glitch {
         0 0 20px var(--primary-color), /* Glow amarillo lima */
         0 0 40px var(--primary-color),
         0 0 60px var(--tertiary-color); /* Glow rosa adicional */
+}
+
+/* Season Cloud-of-the-Desert: Glitch con efecto rojo ardiente */
+body.season-cloud-of-the-desert .glitch {
+    color: var(--primary-color);
+    -webkit-text-stroke: 2px #000000;
+    text-shadow: 
+        4px 4px 0px rgba(0,0,0,0.9),
+        -1px -1px 0 #000000,
+        0 0 20px var(--primary-color), /* Glow rojo brillante */
+        0 0 40px var(--primary-color),
+        0 0 60px var(--tertiary-color); /* Glow rojo claro adicional */
 }
 
 @keyframes glitch-skew {
@@ -1516,6 +1769,11 @@ body.season-80s .glitch {
 /* Play overlay para temporada Goth-Pajamas */
 body.season-goth-pajamas .play-overlay {
     background: rgba(53, 32, 67, 0.9) !important; /* Morado muy oscuro (#352043) */
+}
+
+/* Play overlay para temporada Cloud-of-the-Desert */
+body.season-cloud-of-the-desert .play-overlay {
+    background: rgba(13, 2, 8, 0.9) !important; /* Casi negro (#0D0208) */
 }
 
 .music-card:hover .play-overlay {

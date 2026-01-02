@@ -49,6 +49,9 @@ if (navbar) {
         } else if (body.classList.contains('season-goth-pajamas')) {
             // No aplicar estilo inline para goth-pajamas, dejar que el CSS lo maneje
             return null; // Retornar null para que el CSS tome control
+        } else if (body.classList.contains('season-cloud-of-the-desert')) {
+            // No aplicar estilo inline para cloud-of-the-desert, dejar que el CSS lo maneje
+            return null; // Retornar null para que el CSS tome control
         } else {
             // Estilo original Pinocho
             return `rgba(42, 26, 17, ${scrollOpacity})`; // Madera oscura
@@ -226,6 +229,18 @@ function getSeasonColors() {
             "#E8EFEE", // Gris muy claro (tertiary-color)
             "#93A1A1", // Gris azulado (acid-green)
             "#352043"  // Morado muy oscuro (olive-accent)
+        ];
+    } else if (body.classList.contains('season-cloud-of-the-desert')) {
+        // SEASON: CLOUD-OF-THE-DESERT (Nube del Desierto)
+        return [
+            "#2B1F1F", // Marrón oscuro rojizo (wood-dark)
+            "#450A0A", // Rojo muy oscuro (wood-medium)
+            "#8B0000", // Rojo oscuro (wood-light)
+            "#FF1744", // Rojo brillante/vibrante (primary-color)
+            "#DC143C", // Crimson/rojo medio (acid-green)
+            "#FF4444", // Rojo claro/rosa rojizo (tertiary-color)
+            "#1A0F0F", // Negro con tinte rojizo (teal-darker)
+            "#0D0208"  // Casi negro (darker-bg)
         ];
     } else {
         // Estilo original Pinocho (default)

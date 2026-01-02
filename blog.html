@@ -11,7 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=inter:300,400,600,700&display=swap" rel="stylesheet">
 
 <!-- inicio Prevenir la desactivacion de JavaScript -->
-<script src="security - check-js.js"></script>
+<!-- <script src="security - check-js.js"></script> -->
     <noscript>
         <meta http-equiv="refresh" content="0;url=/https://www.enable-javascript.com/">
     </noscript>
@@ -22,7 +22,7 @@
 
 
 </head>
-<body class="season-goth-pajamas">
+<body class="season-cloud-of-the-desert">
     <!-- JavaScript Detection - Required for all pages -->
 <noscript>
     <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
@@ -94,6 +94,247 @@
                     <div class="blog-grid">
                         
                         <!-- Blog Posts -->
+
+                        <article class="blog-post">
+    <div class="blog-post-image">
+        <div id="p5-sketch-archimedean" style="
+            width: 100%; 
+            height: 250px; 
+            aspect-ratio: 16/9;
+            position: relative;
+            background: linear-gradient(135deg, #0d0f1c 0%, #2E270F 100%);
+            overflow: hidden;
+            border-radius: 8px;
+        ">
+            <!-- Canvas se crea aquí automáticamente -->
+        </div>
+    </div>
+    
+    <div class="blog-post-content">
+        <div class="post-meta">
+            <span class="post-category" style="background: linear-gradient(135deg, #FF1744, #DC143C); color: #fff;">Archimedean Fortress</span>
+            <span class="post-date">October 15, 2025</span>
+            <span class="post-reading-time">⏱️ 25 min read</span>
+        </div>
+        <h3 class="post-title">
+            <a href="archimedean-forest.html">The Great Rhombicuboctahedron: A Sonic Fortress</a>
+        </h3>
+        <p class="post-excerpt">
+            Una estructura sonora poliédrica de 26 facetas, 48 vértices y 72 aristas. No es una mezcla—es la erección de un poliedro semiregular en el vacío del dancefloor. Arquitectura geométrica oscura y futurismo cuántico.
+        </p>
+        <div style="margin: 1rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(255, 23, 68, 0.15); color: #FF1744; border-radius: 3px; border: 1px solid rgba(255, 23, 68, 0.3);">#GeometricArchitecture</span>
+            <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(220, 20, 60, 0.15); color: #DC143C; border-radius: 3px; border: 1px solid rgba(220, 20, 60, 0.3);">#Futurism2026</span>
+            <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(139, 0, 0, 0.15); color: #8B0000; border-radius: 3px; border: 1px solid rgba(139, 0, 0, 0.3);">#PolyhedralSound</span>
+        </div>
+        <a href="archimedean-forest.html" class="read-more">Construye la Fortaleza →</a>
+    </div>
+
+    <!-- p5.js Archimedean Solid Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+    <style>
+        #p5-sketch-archimedean canvas {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            display: block !important;
+        }
+    </style>
+    <script>
+        let myp5Archimedean;
+
+        let sketchArchimedean = function(p) {
+            let angleX = 0;
+            let angleY = 0;
+            let angleZ = 0;
+            let canvasReady = false;
+            let vertices = [];
+            let faces = [];
+            
+            // Colores para las diferentes facetas
+            const colors = {
+                square: [255, 23, 68],      // Rojo brillante
+                hexagon: [220, 20, 60],     // Crimson
+                octagon: [139, 0, 0]        // Rojo oscuro
+            };
+
+            // Generar vértices del Rombicuboctaedro (simplificado)
+            function generateRhombicuboctahedron() {
+                vertices = [];
+                const a = 1 + Math.sqrt(2);
+                const b = 1;
+                
+                // Vértices del rombicuboctaedro truncado
+                const signs = [[1,1,1], [1,1,-1], [1,-1,1], [1,-1,-1],
+                              [-1,1,1], [-1,1,-1], [-1,-1,1], [-1,-1,-1]];
+                
+                for (let s of signs) {
+                    vertices.push([s[0]*a, s[1]*b, s[2]*b]);
+                    vertices.push([s[0]*b, s[1]*a, s[2]*b]);
+                    vertices.push([s[0]*b, s[1]*b, s[2]*a]);
+                }
+            }
+
+            p.setup = function() {
+                let container = document.getElementById('p5-sketch-archimedean');
+                if (!container) {
+                    canvasReady = false;
+                    return;
+                }
+                
+                let w = container.offsetWidth || 400;
+                let h = container.offsetHeight || 250;
+                
+                if (w === 0 || h === 0) {
+                    w = 400;
+                    h = 250;
+                }
+                
+                // Crear canvas en modo WEBGL
+                p.createCanvas(w, h, p.WEBGL);
+                p.frameRate(30);
+                generateRhombicuboctahedron();
+                canvasReady = true;
+            };
+
+            p.windowResized = function() {
+                if (!canvasReady) return;
+                let container = document.getElementById('p5-sketch-archimedean');
+                if (container) {
+                    p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+                }
+            };
+
+            p.draw = function() {
+                if (!canvasReady || p.width === 0 || p.height === 0) {
+                    return;
+                }
+
+                p.background(13, 2, 8, 30); // Fade suave
+                
+                // Iluminación mejorada (solo funciona en WEBGL)
+                p.ambientLight(60, 20, 30);
+                p.pointLight(255, 23, 68, p.cos(p.frameCount * 0.02) * 300, p.sin(p.frameCount * 0.03) * 300, 200);
+                p.pointLight(220, 20, 60, -p.cos(p.frameCount * 0.025) * 300, -p.sin(p.frameCount * 0.02) * 300, -200);
+
+                // Rotación
+                angleX += 0.008;
+                angleY += 0.012;
+                angleZ += 0.004;
+
+                p.rotateX(angleX);
+                p.rotateY(angleY);
+                p.rotateZ(angleZ * 0.5);
+
+                // Escalar para visualización
+                let scale = Math.min(p.width, p.height) * 0.12;
+                p.scale(scale);
+
+                // Dibujar facetas representativas primero (para efecto de profundidad)
+                p.blendMode(p.ADD);
+                
+                // Facetas cuadradas (12 cuadrados del rombicuboctaedro)
+                p.fill(255, 23, 68, 25);
+                p.noStroke();
+                for (let i = 0; i < 6; i++) {
+                    p.push();
+                    if (i < 3) {
+                        p.rotateY((i * p.TWO_PI / 3) + angleY);
+                        p.translate(0, 0, 1.8);
+                    } else {
+                        p.rotateX((i * p.TWO_PI / 3) + angleX);
+                        p.translate(0, 1.8, 0);
+                    }
+                    p.plane(0.7, 0.7);
+                    p.pop();
+                }
+
+                // Facetas hexagonales (8 hexágonos)
+                p.fill(220, 20, 60, 20);
+                for (let i = 0; i < 4; i++) {
+                    p.push();
+                    p.rotateY((i * p.TWO_PI / 4) + angleY);
+                    p.rotateX(p.PI / 4 + angleX * 0.5);
+                    p.translate(0, 0, 1.5);
+                    p.beginShape();
+                    for (let j = 0; j < 6; j++) {
+                        let a = (j * p.TWO_PI / 6);
+                        p.vertex(Math.cos(a) * 0.6, Math.sin(a) * 0.6, 0);
+                    }
+                    p.endShape(p.CLOSE);
+                    p.pop();
+                }
+
+                // Facetas octagonales (6 octágonos)
+                p.fill(139, 0, 0, 15);
+                for (let i = 0; i < 3; i++) {
+                    p.push();
+                    p.rotateZ((i * p.TWO_PI / 3) + angleZ);
+                    p.rotateY(p.PI / 4 + angleY * 0.7);
+                    p.translate(1.4, 0, 0);
+                    p.beginShape();
+                    for (let j = 0; j < 8; j++) {
+                        let a = (j * p.TWO_PI / 8);
+                        p.vertex(Math.cos(a) * 0.5, Math.sin(a) * 0.5, 0);
+                    }
+                    p.endShape(p.CLOSE);
+                    p.pop();
+                }
+                
+                p.blendMode(p.BLEND);
+
+                // Dibujar aristas (conexiones entre vértices visibles)
+                p.stroke(220, 20, 60, 80);
+                p.strokeWeight(0.025);
+                p.noFill();
+                
+                // Dibujar solo aristas seleccionadas para mejor rendimiento
+                let edgeCount = 0;
+                for (let i = 0; i < vertices.length && edgeCount < 72; i++) {
+                    for (let j = i + 1; j < vertices.length && edgeCount < 72; j++) {
+                        let v1 = vertices[i];
+                        let v2 = vertices[j];
+                        
+                        let dist = Math.sqrt(
+                            Math.pow(v1[0] - v2[0], 2) +
+                            Math.pow(v1[1] - v2[1], 2) +
+                            Math.pow(v1[2] - v2[2], 2)
+                        );
+                        
+                        if (dist < 2.3 && dist > 1.5) {
+                            p.push();
+                            p.beginShape(p.LINES);
+                            p.vertex(v1[0], v1[1], v1[2]);
+                            p.vertex(v2[0], v2[1], v2[2]);
+                            p.endShape();
+                            p.pop();
+                            edgeCount++;
+                        }
+                    }
+                }
+
+                // Dibujar vértices como puntos brillantes (48 vértices)
+                p.fill(255, 23, 68, 180);
+                p.noStroke();
+                for (let v of vertices) {
+                    p.push();
+                    p.translate(v[0], v[1], v[2]);
+                    p.sphere(0.06, 6, 6);
+                    p.pop();
+                }
+            };
+        };
+
+        // Inicializa después de load
+        window.addEventListener('load', () => {
+            if (!myp5Archimedean) {
+                myp5Archimedean = new p5(sketchArchimedean, 'p5-sketch-archimedean');
+            }
+        });
+    </script>
+</article>
 
                         <article class="blog-post">
                             <div class="blog-post-image">
@@ -189,7 +430,7 @@
                     p.createCanvas(container.offsetWidth, container.offsetHeight);
                     p.frameRate(45);
                     p.pixelDensity(1.5);
-                    p.background('#0d0f1c');
+                    p.background('#0D0208'); // darker-bg: casi negro desértico
                     initParticles();
                 }, 50);
             };
@@ -210,19 +451,19 @@
             p.windowResized = function() {
                 let container = document.getElementById('p5-sketch-filia');
                 p.resizeCanvas(container.offsetWidth, container.offsetHeight);
-                p.background('#0d0f1c');
+                p.background('#0D0208'); // darker-bg: casi negro desértico
                 initParticles(); // Reinicia partículas
             };
 
             p.draw = function() {
                 // Fallback primera frame
                 if (firstDraw || p.width === 0 || p.height === 0) {
-                    p.background('#0d0f1c');
+                    p.background('#0D0208'); // darker-bg: casi negro desértico
                     firstDraw = false;
                     return;
                 }
 
-                p.background(13, 15, 28, 30); // Fade suave
+                p.background(43, 31, 31, 30); // wood-dark: marrón oscuro rojizo con fade suave
 
                 // Partículas
                 p.blendMode(p.SCREEN);
@@ -237,7 +478,11 @@
                     part.x = (part.x + p.width) % p.width;
                     part.y = (part.y + p.height) % p.height;
 
-                    p.fill(232 + p.sin(time*0.05 + i)*20, 180, 211, 150);
+                    // Rojo brillante (primary-color) con variación hacia rojo claro (tertiary-color)
+                    let baseRed = 255 + p.sin(time*0.05 + i)*20;
+                    let baseGreen = 23 + p.sin(time*0.03 + i*0.5)*45;
+                    let baseBlue = 68 + p.sin(time*0.04 + i*0.7)*30;
+                    p.fill(baseRed, baseGreen, baseBlue, 150);
                     p.noStroke();
                     p.circle(part.x, part.y, 4);
                     part.life -= 0.4;
@@ -246,7 +491,7 @@
 
                 // Espiral sagrada
                 p.blendMode(p.BLEND);
-                p.stroke(232, 180, 211, 130);
+                p.stroke(220, 20, 60, 130); // acid-green/crimson: rojo medio desértico
                 p.strokeWeight(1.3);
                 p.noFill();
                 p.push();
@@ -280,8 +525,8 @@
             width: 100%;
             height: 100%;
             position: relative;
-            background: linear-gradient(135deg, #2E270F 0%, #5F5D87 100%);
-            border-bottom: 2px solid #844FDE;
+            background: linear-gradient(135deg, #0D0208 0%, #2B1F1F 100%);
+            border-bottom: 2px solid #FF1744;
             overflow: hidden;
         "></div>
     </div>
@@ -668,11 +913,12 @@
 <!-- Script específico para la animación -->
 <script>
 new p5(function(p) {
+    // Paleta cloud-of-the-desert
     const colors = {
-        purpleLight: '#844FDE',
-        purpleMedium: '#4B37CA',
-        blueDark: '#1C4CC2',
-        white: '#FFFFFF'
+        redBright: '#FF1744',    // primary-color: rojo brillante/vibrante
+        crimson: '#DC143C',      // acid-green: crimson/rojo medio
+        redDark: '#8B0000',      // wood-light: rojo oscuro
+        redLight: '#FF4444'      // tertiary-color: rojo claro/rosa rojizo
     };
     
     let time = 0;
@@ -691,8 +937,8 @@ new p5(function(p) {
     p.draw = function() {
         time += 0.02;
         
-        // Fondo con gradiente
-        p.background(46, 39, 15, 20);
+        // Fondo con gradiente desértico (wood-dark: marrón oscuro rojizo)
+        p.background(43, 31, 31, 20);
         
         // Doble espiral temporal
         drawDualSpiral();
@@ -708,8 +954,8 @@ new p5(function(p) {
         p.push();
         p.translate(centerX, centerY);
         
-        // Primera espiral (Presente)
-        p.stroke(colors.purpleLight);
+        // Primera espiral (Presente) - rojo brillante
+        p.stroke(colors.redBright);
         p.strokeWeight(2);
         p.noFill();
         p.beginShape();
@@ -721,8 +967,8 @@ new p5(function(p) {
         }
         p.endShape();
         
-        // Segunda espiral (Futuro) - desfasada
-        p.stroke(colors.blueDark);
+        // Segunda espiral (Futuro) - desfasada - crimson
+        p.stroke(colors.crimson);
         p.beginShape();
         for (let i = 0; i < p.TWO_PI * 2; i += 0.1) {
             let r = 40 + 10 * p.sin(i * 2 - time);
@@ -739,9 +985,9 @@ new p5(function(p) {
         p.push();
         p.translate(centerX, centerY);
         
-        // Anillo exterior pulsante
+        // Anillo exterior pulsante - rojo claro
         p.noFill();
-        p.stroke(colors.white);
+        p.stroke(colors.redLight);
         p.strokeWeight(1);
         let pulse = 15 + p.sin(time * 3) * 3;
         p.circle(0, 0, pulse * 2);
@@ -749,16 +995,16 @@ new p5(function(p) {
         // Símbolo de flecha doble
         p.strokeWeight(2);
         
-        // Flecha derecha (futuro)
-        p.stroke(colors.purpleLight);
+        // Flecha derecha (futuro) - rojo brillante
+        p.stroke(colors.redBright);
         drawSimpleArrow(8, 0, 1.0);
         
-        // Flecha izquierda (presente)
-        p.stroke(colors.blueDark);
+        // Flecha izquierda (presente) - crimson
+        p.stroke(colors.crimson);
         drawSimpleArrow(-8, 0, -1.0);
         
-        // Punto central
-        p.fill(colors.white);
+        // Punto central - rojo claro
+        p.fill(colors.redLight);
         p.noStroke();
         p.circle(0, 0, 6);
         
@@ -795,8 +1041,8 @@ new p5(function(p) {
             let x = centerX + p.cos(angle) * distance;
             let y = centerY + p.sin(angle) * distance;
             
-            // Alternar colores
-            let color = i % 2 === 0 ? colors.purpleLight : colors.blueDark;
+            // Alternar colores entre rojo brillante y crimson
+            let color = i % 2 === 0 ? colors.redBright : colors.crimson;
             
             p.fill(color);
             p.noStroke();

@@ -1,0 +1,23 @@
+# Archivos grandes que no deberían estar en el repo
+*.pdf
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tar
+
+# Archivos grandes de código
+p5.js
+lib/p5.js
+
+# Directorios grandes que pueden contener archivos grandes
+ocean-pro/assets/img/content/*.gif
+images/cine/
+2025/descargar/
+
+# Archivos temporales
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+
