@@ -29,6 +29,12 @@ seasons/
 └── create-season.zsh      # Helper para crear nuevas temporadas
 ```
 
+## 📖 Documentación
+
+- **[TUTORIAL.md](TUTORIAL.md)** - Tutorial completo paso a paso (¡Empieza aquí!)
+- **[QUICKSTART.md](QUICKSTART.md)** - Guía rápida de referencia
+- **[TESTING.md](TESTING.md)** - Guía de testing y verificación
+
 ## 🚀 Uso Rápido
 
 ### 1. Crear una nueva temporada

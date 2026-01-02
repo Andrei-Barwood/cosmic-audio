@@ -1,0 +1,12 @@
+# Logs de temporadas
+.season-logs.txt
+.schedule-daemon.pid
+
+# Archivos temporales de test
+*.bak
+*.tmp
+index.html.test-backup
+
+# Temporadas de test (opcional, descomenta si no quieres commitear temporadas de test)
+# season-test-*
+

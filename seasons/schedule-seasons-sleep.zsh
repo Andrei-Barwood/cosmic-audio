@@ -96,15 +96,12 @@ process_season() {
     (
         sleep "$seconds_until"
         echo "${GREEN}🚀 Aplicando temporada: $season_name${NC}"
+        
+        # Aplicar temporada (esto incluye commit y push automático)
         "$APPLY_SCRIPT" "$season_dir"
         
-        # Opcional: hacer commit
-        if [ -d ".git" ]; then
-            git add -A
-            GIT_DATE="$publish_date 12:00:00"
-            GIT_AUTHOR_DATE="$GIT_DATE" GIT_COMMITTER_DATE="$GIT_DATE" git commit -m "🎨 Temporada: $season_name" || true
-            # git push || true  # Descomenta si quieres push automático
-        fi
+        # Log de ejecución
+        echo "[$(date)] Temporada $season_name aplicada y publicada" >> "$SCRIPT_DIR/seasons/.season-logs.txt" 2>/dev/null || true
     ) &
     
     echo "${GREEN}   ✓${NC} Proceso en background iniciado (PID: $!)\n"

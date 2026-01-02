@@ -20,16 +20,16 @@
     SISTEMA DE TEMPORADAS:
     Para cambiar la estética, añade una clase de temporada al <body>:
     
-    - <body class="season-cloud-of-the-desert">   → Vibe mágica/glitch oscuro (Lavanda)
-    - <body class="season-cloud-of-the-desert">      → Vibe rápida/breakcore ácido (Azul/Prismático)
-    - <body class="season-cloud-of-the-desert">     → Vibe pastel creepy/soft (Amarillo/Rosa)
-    - <body class="season-cloud-of-the-desert">        → Pesadilla de los 80' (Verde turquesa/Neón)
-    - <body class="season-cloud-of-the-desert"> → Goth-Pajamas (Negro/Morado Gótico)
-    - <body class="season-cloud-of-the-desert"> → Cloud-of-the-Desert (Rojo desértico ardiente)
+    - <body class="season-test-push-auto">   → Vibe mágica/glitch oscuro (Lavanda)
+    - <body class="season-test-push-auto">      → Vibe rápida/breakcore ácido (Azul/Prismático)
+    - <body class="season-test-push-auto">     → Vibe pastel creepy/soft (Amarillo/Rosa)
+    - <body class="season-test-push-auto">        → Pesadilla de los 80' (Verde turquesa/Neón)
+    - <body class="season-test-push-auto"> → Goth-Pajamas (Negro/Morado Gótico)
+    - <body class="season-test-push-auto"> → Cloud-of-the-Desert (Rojo desértico ardiente)
     
     Sin clase = Estilo original Pinocho (madera oscura)
 -->
-<body class="season-cloud-of-the-desert">
+<body class="season-test-push-auto">
     <!-- JavaScript Detection - Required for all pages -->
 <noscript>
     <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
@@ -84,11 +84,11 @@
         <div class="sidebar-widget" style="background: linear-gradient(135deg, var(--teal-darker), var(--darker-bg)); border-color: var(--primary-color);">
     <h3 class="widget-title">Arcade Game of this Season</h3>
     <div style="text-align: center;">
-        <p style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">L-POP 🍭</p>
-        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">yes it means fried butter</p>
-        <p style="color: var(--text-secondary);">Mega Doll Arcade</p>
+        <p style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">Game Title</p>
+        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">Game Subtitle</p>
+        <p style="color: var(--text-secondary);">Game Description</p>
         <div style="margin-top: 1.5rem; padding: 1rem; background: var(--card-bg);">
-            <p style="font-size: 0.9rem; margin: 0; color: var(--text-secondary);">"Fench Butter matharfackar"</p>
+            <p style="font-size: 0.9rem; margin: 0; color: var(--text-secondary);">"Game Quote"</p>
         </div>
         <!-- Game Canvas -->
         <div id="gameCanvas" style="margin-top: 1rem;"></div>
@@ -231,146 +231,45 @@
 <!-- season game -->
 
 <script>
-function sketch_snake(p) {
-    let colors = [
-        "#0E1111", "#E7F800", "#00383B", "#093534", "#0F5150", "#B2E5F2", "#5B9E00"
-    ];
-    let messages = [
-        "sluts in the wild",
-        "breakfast in the pool",
-        "school of manners to serve milk",
-        "Milk Enema Studios Represent",
-        "sluts poison level bro ",
-        "I DO NOT CARE!!",
-        "stretch yo ass girl",
-        "i wanna eat like them",
-        "give me shards",
-        "give me the damn job",
-        "blow me...",
-        "HA! HA! HA! 😈"
-    ];
-    let currentMessage = "", lastMessageScore = 0;
-    let scl = 20, dirX = 0, dirY = 0, snake = [{x: 7, y: 5}], food = {x: 10, y: 7};
-    let score = 0, cols, rows, gameOver = false, started = false;
+// Template de juego p5.js para la temporada
+// Reemplaza este contenido con tu juego personalizado
 
+function sketch_season_game(p) {
+    // Colores de la temporada (ajusta según tu paleta)
+    let colors = {
+        bg: "#0E1111",
+        primary: "#E7F800",
+        secondary: "#00383B",
+        accent: "#B2E5F2"
+    };
+    
     p.setup = function() {
         p.createCanvas(280, 200).parent('gameCanvas');
-        cols = Math.floor(p.width/scl);
-        rows = Math.floor(p.height/scl);
-        p.frameRate(3);
-        placeFood();
+        p.frameRate(30);
     };
-
-    function resetGame() {
-        dirX = 0; dirY = 0;
-        snake = [{x: 7, y: 5}];
-        food = {x: 10, y: 7};
-        score = 0;
-        gameOver = false;
-        started = false;
-        currentMessage = "";
-        lastMessageScore = 0;
-        placeFood();
-    }
-
-    function placeFood(){
-        let valid = false;
-        while (!valid) {
-            food.x = Math.floor(p.random(cols));
-            food.y = Math.floor(p.random(rows));
-            valid = !snake.some(s => s.x === food.x && s.y === food.y);
-        }
-    }
-
+    
     p.draw = function() {
-        p.background(colors[0]);
-        p.stroke(colors[4]);
-        for (let i = 0; i < cols; i++) p.line(i*scl, 0, i*scl, p.height);
-        for (let j = 0; j < rows; j++) p.line(0, j*scl, p.width, j*scl);
-
-        if (gameOver) {
+        p.background(colors.bg, 20); // Fade suave
+        
+        // Juego de prueba: Partículas verdes
+        for (let i = 0; i < 20; i++) {
+            let x = p.width/2 + p.sin(p.frameCount * 0.01 + i) * 50;
+            let y = p.height/2 + p.cos(p.frameCount * 0.01 + i) * 50;
+            p.fill(colors.primary);
             p.noStroke();
-            p.fill(colors[1]);
-            p.textSize(22);
-            p.textAlign(p.CENTER, p.CENTER);
-            p.text("VOMIT!!", p.width/2, p.height/2-26);
-            p.fill(colors[5]);
-            p.textSize(16);
-            p.text("HA! HA! HA! 😈: "+score, p.width/2, p.height/2+0);
-            p.fill(colors[6]);
-            p.textSize(10);
-            p.text("Las Vegas kind of Buffet", p.width/2, p.height/2+22);
-            p.textSize(12);
-            p.text("Press SPACE to restart", p.width/2, p.height/2+40);
-            return;
+            p.circle(x, y, 5);
         }
-
-        if (started) {
-            let head = {x: snake[0].x + dirX, y: snake[0].y + dirY};
-            if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows) gameOver = true;
-            for (let i = 0; i < snake.length; i++)
-                if (snake[i].x === head.x && snake[i].y === head.y) gameOver = true;
-            if (gameOver) return;
-            snake.unshift(head);
-
-            if (head.x === food.x && head.y === food.y){ 
-                score++; 
-                placeFood(); 
-                if (score % 2 === 0) {
-                    let randIdx = Math.floor(Math.random() * messages.length);
-                    currentMessage = messages[randIdx];
-                    lastMessageScore = score;
-                }
-            } else {
-                snake.pop();
-            }
-        }
-
-        p.noStroke();
-        p.fill(colors[3]);
-        p.rect(food.x * scl, food.y * scl, scl, scl);
-        for (let i = snake.length - 1; i >= 0; i--) {
-            p.fill(i === 0 ? colors[1] : colors[2]);
-            p.rect(snake[i].x * scl, snake[i].y * scl, scl, scl);
-        }
-
-        p.fill(colors[5]);
-        p.textSize(16);
-        p.textAlign(p.LEFT, p.TOP);
-        p.text('Score: ' + score, 6, 6);
-
-        p.fill(colors[6]);
-        p.textSize(8);
-        p.text('Stairway to Hell', 6, 22);
-
-        if (currentMessage && score === lastMessageScore) {
-            p.fill(colors[6]);
-            p.textSize(10);
-            p.textAlign(p.CENTER, p.TOP);
-            p.text(currentMessage, p.width/2, 34);
-        }
-
-        if (!started && !gameOver) {
-            p.fill(colors[6]);
-            p.textSize(10);
-            p.text("Press arrows to start!", 80, p.height-18);
-        }
-    };
-
-    p.keyPressed = function() {
-        if (gameOver && p.key === " ") {
-            resetGame();
-            return;
-        }
-        if (!gameOver) {
-            if (p.keyCode === p.UP_ARROW && dirY !== 1)     { dirX = 0; dirY = -1; started = true; }
-            else if (p.keyCode === p.DOWN_ARROW && dirY !== -1){ dirX = 0; dirY = 1; started = true; }
-            else if (p.keyCode === p.LEFT_ARROW && dirX !== 1) { dirX = -1; dirY = 0; started = true; }
-            else if (p.keyCode === p.RIGHT_ARROW && dirX !== -1){ dirX = 1; dirY = 0; started = true; }
-        }
+        
+        // Título
+        p.fill(colors.primary);
+        p.textAlign(p.CENTER, p.CENTER);
+        p.textSize(14);
+        p.text("TEST PUSH", p.width/2, p.height/2);
     };
 }
-new p5(sketch_snake, 'gameCanvas');
+
+new p5(sketch_season_game, 'gameCanvas');
+
 </script>
 
 
@@ -384,9 +283,5 @@ document.addEventListener('keydown', function(event) {
     event.preventDefault();
   }
 }, false);
-</script>
-
-
-
-</body>
+</script></body>
 </html>

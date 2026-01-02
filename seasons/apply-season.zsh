@@ -135,29 +135,7 @@ document.addEventListener('keydown', function(event) {
 }, false);
 </script>"
     
-    # Reemplazar el bloque del juego (desde <!-- season game --> hasta el último </script> antes de </body>)
-    # Usar awk para hacer el reemplazo de manera más segura
-    awk -v new_game="$GAME_BLOCK" -v game_title="$GAME_TITLE" -v game_subtitle="$GAME_SUBTITLE" -v game_desc="$GAME_DESC" -v game_quote="$GAME_QUOTE" '
-    /<!-- season game -->/ {
-        in_game_block = 1
-        print "<!-- season game -->"
-        print "<script>"
-        # El juego se insertará aquí, pero necesitamos leerlo de otra manera
-        next
-    }
-    in_game_block && /<\/script>/ && !/document\.addEventListener/ {
-        in_game_block = 0
-        # Aquí insertaríamos el nuevo juego, pero es complejo con awk
-        # Por ahora, usamos un método más simple con sed
-        next
-    }
-    !in_game_block {
-        print
-    }
-    ' index.html.bak > index.html.tmp || cp index.html.bak index.html
-    
-    # Método más simple: usar Python o Perl para reemplazo multilínea
-    # Por ahora, usamos un método con marcadores
+    # Reemplazar el bloque del juego usando Python (maneja mejor multilínea)
     if command -v python3 &> /dev/null; then
         python3 <<PYTHON_EOF
 import re
@@ -193,8 +171,8 @@ new_content = re.sub(pattern, game_block, content, flags=re.DOTALL)
 # También actualizar el título y subtítulo del juego si están en el HTML
 title_pattern = r'(<p style="font-size: 1\.5rem; color: var\(--primary-color\); margin-bottom: 0\.5rem;">)[^<]*(</p>)'
 subtitle_pattern = r'(<p style="font-size: 1\.2rem; margin-bottom: 0\.5rem;">)[^<]*(</p>)'
-desc_pattern = r'(<p style="color: var\(--text-secondary\);">)[^<]*(</p>)')
-quote_pattern = r'(<p style="font-size: 0\.9rem; margin: 0; color: var\(--text-secondary\);">")[^"]*("</p>)')
+desc_pattern = r'(<p style="color: var\(--text-secondary\);">)[^<]*(</p>)'
+quote_pattern = r'(<p style="font-size: 0\.9rem; margin: 0; color: var\(--text-secondary\);">")[^"]*("</p>)'
 
 new_content = re.sub(title_pattern, r'\1$GAME_TITLE\2', new_content)
 new_content = re.sub(subtitle_pattern, r'\1$GAME_SUBTITLE\2', new_content)
@@ -227,43 +205,80 @@ fi
 echo "${BLUE}📝 Paso 4: Agregando entradas de blog...${NC}"
 BLOG_COUNT=0
 if [ -d "$SEASON_DIR/blog-posts" ]; then
+    # Evitar error si no hay archivos
+    setopt NULL_GLOB 2>/dev/null || true
     for blog_file in "$SEASON_DIR/blog-posts"/*.html; do
         if [ -f "$blog_file" ]; then
             FILENAME=$(basename "$blog_file")
             cp "$blog_file" "$FILENAME"
             echo "${GREEN}✓${NC} Blog post agregado: $FILENAME"
-            ((BLOG_COUNT++))
+            BLOG_COUNT=$((BLOG_COUNT + 1))
         fi
     done
+    unsetopt NULL_GLOB 2>/dev/null || true
 fi
 echo "${GREEN}   Entradas agregadas: $BLOG_COUNT${NC}\n"
 
-# 5. Hacer commit de git (si estamos en un repo git)
-echo "${BLUE}📦 Paso 5: Preparando commit de git...${NC}"
+# 5. Hacer commit y push de git (si estamos en un repo git)
+echo "${BLUE}📦 Paso 5: Commit y push de git...${NC}"
 if [ -d ".git" ]; then
-    # Agregar todos los cambios
-    git add -A
-    
-    # Crear commit con fecha de publicación
-    COMMIT_MSG="🎨 Temporada: $DISPLAY_NAME - Publicada el $PUBLISH_DATE"
-    
-    # Usar la fecha de publicación para el commit (si es en el futuro, git la respetará al hacer push)
-    if command -v gdate &> /dev/null; then
-        # macOS con coreutils
-        GIT_DATE=$(gdate -d "$PUBLISH_DATE" +"%Y-%m-%d %H:%M:%S")
+    # Verificar si hay cambios
+    if ! git diff --quiet || ! git diff --cached --quiet; then
+        # Agregar todos los cambios
+        git add -A
+        
+        # Crear commit con fecha de publicación
+        COMMIT_MSG="🎨 Temporada: $DISPLAY_NAME - Publicada el $PUBLISH_DATE"
+        
+        # Usar la fecha de publicación para el commit
+        if command -v gdate &> /dev/null; then
+            # macOS con coreutils
+            GIT_DATE=$(gdate -d "$PUBLISH_DATE" +"%Y-%m-%d %H:%M:%S" 2>/dev/null || echo "")
+        else
+            # Linux o macOS sin coreutils
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                GIT_DATE=$(date -j -f "%Y-%m-%d" "$PUBLISH_DATE" "+%Y-%m-%d 12:00:00" 2>/dev/null || echo "")
+            else
+                GIT_DATE=$(date -d "$PUBLISH_DATE 12:00:00" "+%Y-%m-%d %H:%M:%S" 2>/dev/null || echo "")
+            fi
+        fi
+        
+        # Hacer commit con fecha
+        if [ -n "$GIT_DATE" ]; then
+            echo "${BLUE}   Haciendo commit con fecha: $GIT_DATE${NC}"
+            GIT_AUTHOR_DATE="$GIT_DATE" GIT_COMMITTER_DATE="$GIT_DATE" \
+                git commit -m "$COMMIT_MSG" > /dev/null 2>&1 || {
+                # Si falla con fecha futura, intentar sin fecha
+                echo "${YELLOW}   ⚠️  No se pudo usar fecha futura, haciendo commit normal${NC}"
+                git commit -m "$COMMIT_MSG" > /dev/null 2>&1 || {
+                    echo "${YELLOW}   ⚠️  No se pudo hacer commit (puede que no haya cambios nuevos)${NC}"
+                }
+            }
+        else
+            echo "${BLUE}   Haciendo commit normal${NC}"
+            git commit -m "$COMMIT_MSG" > /dev/null 2>&1 || {
+                echo "${YELLOW}   ⚠️  No se pudo hacer commit (puede que no haya cambios nuevos)${NC}"
+            }
+        fi
+        
+        # Verificar si hay un remote configurado
+        if git remote | grep -q .; then
+            REMOTE=$(git remote | head -1)
+            BRANCH=$(git branch --show-current 2>/dev/null || echo "main")
+            
+            echo "${BLUE}   Haciendo push a $REMOTE/$BRANCH...${NC}"
+            if git push "$REMOTE" "$BRANCH" > /dev/null 2>&1; then
+                echo "${GREEN}✓${NC} Push exitoso a $REMOTE/$BRANCH"
+            else
+                echo "${YELLOW}   ⚠️  Push falló (puede que necesites hacer push manualmente)${NC}"
+                echo "${YELLOW}   💡 Ejecuta: git push $REMOTE $BRANCH${NC}"
+            fi
+        else
+            echo "${YELLOW}   ⚠️  No hay remote configurado, commit hecho localmente${NC}"
+            echo "${YELLOW}   💡 Para hacer push, configura un remote primero${NC}"
+        fi
     else
-        # Linux o macOS sin coreutils
-        GIT_DATE=$(date -j -f "%Y-%m-%d" "$PUBLISH_DATE" "+%Y-%m-%d 00:00:00" 2>/dev/null || date -d "$PUBLISH_DATE" "+%Y-%m-%d 00:00:00" 2>/dev/null || echo "")
-    fi
-    
-    if [ -n "$GIT_DATE" ]; then
-        echo "${GREEN}✓${NC} Commit preparado para fecha: $GIT_DATE"
-        echo "${YELLOW}💡 Para hacer commit con fecha futura, ejecuta:${NC}"
-        echo "   ${BLUE}GIT_AUTHOR_DATE='$GIT_DATE' GIT_COMMITTER_DATE='$GIT_DATE' git commit -m '$COMMIT_MSG'${NC}"
-        echo "   ${YELLOW}O simplemente: git commit -m '$COMMIT_MSG'${NC}"
-    else
-        echo "${YELLOW}⚠️  No se pudo parsear la fecha, haciendo commit normal${NC}"
-        echo "   ${BLUE}git commit -m '$COMMIT_MSG'${NC}"
+        echo "${YELLOW}   ⚠️  No hay cambios para commitear${NC}"
     fi
 else
     echo "${YELLOW}⚠️  No es un repositorio git${NC}"

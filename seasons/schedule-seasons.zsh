@@ -115,13 +115,16 @@ for season_dir in "$SCHEDULED_DIR"/*/; do
     TEMP_SCRIPT=$(mktemp)
     cat > "$TEMP_SCRIPT" <<EOF
 #!/bin/zsh
+# Script generado automáticamente para aplicar temporada: $SEASON_NAME
+# Fecha de ejecución: $PUBLISH_DATE
+
 cd "$SCRIPT_DIR"
+
+# Aplicar temporada (esto incluye commit y push automático)
 "$APPLY_SCRIPT" "$season_dir"
 
-# Hacer commit y push (opcional, descomenta si quieres)
-# git add -A
-# GIT_AUTHOR_DATE='$PUBLISH_DATE 12:00:00' GIT_COMMITTER_DATE='$PUBLISH_DATE 12:00:00' git commit -m "🎨 Temporada: $SEASON_NAME"
-# git push
+# Log de ejecución
+echo "[$(date)] Temporada $SEASON_NAME aplicada y publicada" >> "$SCRIPT_DIR/seasons/.season-logs.txt" 2>/dev/null || true
 EOF
     
     chmod +x "$TEMP_SCRIPT"
