@@ -99,8 +99,25 @@ for season_dir in "$SCHEDULED_DIR"/*/; do
     MONTH=$(echo "$PUBLISH_DATE" | cut -d'-' -f2)
     DAY=$(echo "$PUBLISH_DATE" | cut -d'-' -f3)
     
-    # Usar mediodía (12:00) como hora por defecto
-    AT_TIME="${MONTH}${DAY}1200 ${YEAR}"
+    # Leer hora de publicación si existe, sino usar mediodía (12:00) por defecto
+    if command -v jq &> /dev/null; then
+        PUBLISH_TIME=$(jq -r '.publish_time // "12:00"' "$CONFIG_FILE")
+    else
+        PUBLISH_TIME=$(grep -o '"publish_time"[[:space:]]*:[[:space:]]*"[^"]*"' "$CONFIG_FILE" | head -1 | sed 's/.*"\([^"]*\)".*/\1/' || echo "12:00")
+    fi
+    
+    # Convertir hora a formato para 'at' (HHMM)
+    HOUR=$(echo "$PUBLISH_TIME" | cut -d':' -f1)
+    MINUTE=$(echo "$PUBLISH_TIME" | cut -d':' -f2)
+    if [ -z "$HOUR" ] || [ -z "$MINUTE" ]; then
+        HOUR="12"
+        MINUTE="00"
+    fi
+    # Asegurar formato de 2 dígitos
+    HOUR=$(printf "%02d" "$HOUR")
+    MINUTE=$(printf "%02d" "$MINUTE")
+    
+    AT_TIME="${MONTH}${DAY}${HOUR}${MINUTE} ${YEAR}"
     
     # Verificar si la fecha es en el futuro
     CURRENT_DATE=$(date +%Y%m%d)

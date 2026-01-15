@@ -2706,3 +2706,227 @@ body.season-test-push-auto {
     --glitch-color-1: #00ffff;
     --glitch-color-2: #ff00ff;
 }
+
+/* =========================================
+   TEMPORADA: Evil Trees - Bosque Embrujado
+   Aplicada automáticamente el 2026-01-15
+   ========================================= */
+/* Temporada: Evil Trees - Bosque Embrujado */
+/* Paleta basada en imagen: rojo/púrpura oscuro con acentos naranja */
+body.season-evil-trees {
+    /* Base: Púrpura/Rojo Oscuro (como el monstruo de la imagen) */
+    --wood-dark: #1a0a1a;        /* Púrpura muy oscuro (fondo principal) */
+    --wood-medium: #2a1a3a;      /* Púrpura oscuro medio */
+    --wood-light: #4a1a5a;       /* Púrpura oscuro claro */
+    
+    /* Acentos Naranja/Rojo (como los dientes y contornos) */
+    --primary-color: #ff4400;     /* Naranja rojizo brillante (dientes) */
+    --acid-green: #ff6600;        /* Naranja más claro (acentos) */
+    --tertiary-color: #ff8800;    /* Naranja claro (highlights) */
+    
+    /* Reasignación de variables base */
+    --secondary-color: #4a1a5a;
+    --success-color: var(--primary-color);
+    --olive-accent: #ff6600;
+    
+    /* Teal Accents - ahora en tonos púrpura oscuro */
+    --teal-dark: #2a1a3a;
+    --teal-darker: #1a0a1a;
+    --teal-medium: #4a1a5a;
+    
+    /* Background Colors - usando paleta de sombras proporcionada */
+    --dark-bg: #060606;           /* Sombra más oscura */
+    --darker-bg: #060606;         /* Casi negro absoluto */
+    --card-bg: rgba(32, 32, 32, 0.95);  /* #202020 con transparencia */
+    --card-hover-bg: rgba(46, 46, 46, 0.95);  /* #2E2E2E con transparencia */
+    
+    /* Textos - colores que contrasten con fondo oscuro */
+    --text-primary: #ffffff;      /* Blanco para texto principal */
+    --text-secondary: #898989;    /* Gris medio para texto secundario */
+    --border-color: #ff4400;      /* Naranja rojizo para bordes */
+    --border-accent: #ff6600;     /* Naranja para acentos */
+    
+    /* Glitch Colors - naranja/púrpura */
+    --glitch-color-1: #ff4400;
+    --glitch-color-2: #8b1a8b;    /* Púrpura medio */
+    
+    /* Sombras adicionales de la paleta proporcionada */
+    --shadow-1: #060606;
+    --shadow-2: #202020;
+    --shadow-3: #767676;
+    --shadow-4: #5A5A5A;
+    --shadow-5: #898989;
+    --shadow-6: #5E5E5E;
+    --shadow-7: #2E2E2E;
+    --shadow-8: #FFFFFF;
+    --shadow-9: #212625;
+    --shadow-10: #474747;
+}
+
+/* =========================================
+   TEMPORADA: Evil Trees - Bosque Embrujado
+   Aplicada automáticamente el 2026-01-15
+   ========================================= */
+/* Temporada: Evil Trees - Bosque Embrujado */
+/* Paleta basada en imagen: rojo/púrpura oscuro con acentos naranja */
+body.season-evil-trees {
+    /* Base: Púrpura/Rojo Oscuro (como el monstruo de la imagen) */
+    --wood-dark: #1a0a1a;        /* Púrpura muy oscuro (fondo principal) */
+    --wood-medium: #2a1a3a;      /* Púrpura oscuro medio */
+    --wood-light: #4a1a5a;       /* Púrpura oscuro claro */
+    
+    /* Acentos Naranja/Rojo (como los dientes y contornos) */
+    --primary-color: #ff4400;     /* Naranja rojizo brillante (dientes) */
+    --acid-green: #ff6600;        /* Naranja más claro (acentos) */
+    --tertiary-color: #ff8800;    /* Naranja claro (highlights) */
+    
+    /* Reasignación de variables base */
+    --secondary-color: #4a1a5a;
+    --success-color: var(--primary-color);
+    --olive-accent: #ff6600;
+    
+    /* Teal Accents - ahora en tonos púrpura oscuro */
+    --teal-dark: #2a1a3a;
+    --teal-darker: #1a0a1a;
+    --teal-medium: #4a1a5a;
+    
+    /* Background Colors - usando paleta de sombras proporcionada */
+    --dark-bg: #060606;           /* Sombra más oscura */
+    --darker-bg: #060606;         /* Casi negro absoluto */
+    --card-bg: rgba(32, 32, 32, 0.95);  /* #202020 con transparencia */
+    --card-hover-bg: rgba(46, 46, 46, 0.95);  /* #2E2E2E con transparencia */
+    
+    /* Textos - colores que contrasten con fondo oscuro */
+    --text-primary: #ffffff;      /* Blanco para texto principal */
+    --text-secondary: #898989;    /* Gris medio para texto secundario */
+    --border-color: #ff4400;      /* Naranja rojizo para bordes */
+    --border-accent: #ff6600;     /* Naranja para acentos */
+    
+    /* Glitch Colors - naranja/púrpura */
+    --glitch-color-1: #ff4400;
+    --glitch-color-2: #8b1a8b;    /* Púrpura medio */
+    
+    /* Sombras adicionales de la paleta proporcionada */
+    --shadow-1: #060606;
+    --shadow-2: #202020;
+    --shadow-3: #767676;
+    --shadow-4: #5A5A5A;
+    --shadow-5: #898989;
+    --shadow-6: #5E5E5E;
+    --shadow-7: #2E2E2E;
+    --shadow-8: #FFFFFF;
+    --shadow-9: #212625;
+    --shadow-10: #474747;
+}
+
+/* =========================================
+   TEMPORADA: Evil Trees - Bosque Embrujado
+   Aplicada automáticamente el 2026-01-15
+   ========================================= */
+/* Temporada: Evil Trees - Bosque Embrujado */
+/* Paleta basada en imagen: rojo/púrpura oscuro con acentos naranja */
+body.season-evil-trees {
+    /* Base: Púrpura/Rojo Oscuro (como el monstruo de la imagen) */
+    --wood-dark: #1a0a1a;        /* Púrpura muy oscuro (fondo principal) */
+    --wood-medium: #2a1a3a;      /* Púrpura oscuro medio */
+    --wood-light: #4a1a5a;       /* Púrpura oscuro claro */
+    
+    /* Acentos Naranja/Rojo (como los dientes y contornos) */
+    --primary-color: #ff4400;     /* Naranja rojizo brillante (dientes) */
+    --acid-green: #ff6600;        /* Naranja más claro (acentos) */
+    --tertiary-color: #ff8800;    /* Naranja claro (highlights) */
+    
+    /* Reasignación de variables base */
+    --secondary-color: #4a1a5a;
+    --success-color: var(--primary-color);
+    --olive-accent: #ff6600;
+    
+    /* Teal Accents - ahora en tonos púrpura oscuro */
+    --teal-dark: #2a1a3a;
+    --teal-darker: #1a0a1a;
+    --teal-medium: #4a1a5a;
+    
+    /* Background Colors - usando paleta de sombras proporcionada */
+    --dark-bg: #060606;           /* Sombra más oscura */
+    --darker-bg: #060606;         /* Casi negro absoluto */
+    --card-bg: rgba(32, 32, 32, 0.95);  /* #202020 con transparencia */
+    --card-hover-bg: rgba(46, 46, 46, 0.95);  /* #2E2E2E con transparencia */
+    
+    /* Textos - colores que contrasten con fondo oscuro */
+    --text-primary: #ffffff;      /* Blanco para texto principal */
+    --text-secondary: #898989;    /* Gris medio para texto secundario */
+    --border-color: #ff4400;      /* Naranja rojizo para bordes */
+    --border-accent: #ff6600;     /* Naranja para acentos */
+    
+    /* Glitch Colors - naranja/púrpura */
+    --glitch-color-1: #ff4400;
+    --glitch-color-2: #8b1a8b;    /* Púrpura medio */
+    
+    /* Sombras adicionales de la paleta proporcionada */
+    --shadow-1: #060606;
+    --shadow-2: #202020;
+    --shadow-3: #767676;
+    --shadow-4: #5A5A5A;
+    --shadow-5: #898989;
+    --shadow-6: #5E5E5E;
+    --shadow-7: #2E2E2E;
+    --shadow-8: #FFFFFF;
+    --shadow-9: #212625;
+    --shadow-10: #474747;
+}
+
+/* =========================================
+   TEMPORADA: Evil Trees - Bosque Embrujado
+   Aplicada automáticamente el 2026-01-15
+   ========================================= */
+/* Temporada: Evil Trees - Bosque Embrujado */
+/* Paleta basada en imagen: rojo/púrpura oscuro con acentos naranja */
+body.season-evil-trees {
+    /* Base: Púrpura/Rojo Oscuro (como el monstruo de la imagen) */
+    --wood-dark: #1a0a1a;        /* Púrpura muy oscuro (fondo principal) */
+    --wood-medium: #2a1a3a;      /* Púrpura oscuro medio */
+    --wood-light: #4a1a5a;       /* Púrpura oscuro claro */
+    
+    /* Acentos Naranja/Rojo (como los dientes y contornos) */
+    --primary-color: #ff4400;     /* Naranja rojizo brillante (dientes) */
+    --acid-green: #ff6600;        /* Naranja más claro (acentos) */
+    --tertiary-color: #ff8800;    /* Naranja claro (highlights) */
+    
+    /* Reasignación de variables base */
+    --secondary-color: #4a1a5a;
+    --success-color: var(--primary-color);
+    --olive-accent: #ff6600;
+    
+    /* Teal Accents - ahora en tonos púrpura oscuro */
+    --teal-dark: #2a1a3a;
+    --teal-darker: #1a0a1a;
+    --teal-medium: #4a1a5a;
+    
+    /* Background Colors - usando paleta de sombras proporcionada */
+    --dark-bg: #060606;           /* Sombra más oscura */
+    --darker-bg: #060606;         /* Casi negro absoluto */
+    --card-bg: rgba(32, 32, 32, 0.95);  /* #202020 con transparencia */
+    --card-hover-bg: rgba(46, 46, 46, 0.95);  /* #2E2E2E con transparencia */
+    
+    /* Textos - colores que contrasten con fondo oscuro */
+    --text-primary: #ffffff;      /* Blanco para texto principal */
+    --text-secondary: #898989;    /* Gris medio para texto secundario */
+    --border-color: #ff4400;      /* Naranja rojizo para bordes */
+    --border-accent: #ff6600;     /* Naranja para acentos */
+    
+    /* Glitch Colors - naranja/púrpura */
+    --glitch-color-1: #ff4400;
+    --glitch-color-2: #8b1a8b;    /* Púrpura medio */
+    
+    /* Sombras adicionales de la paleta proporcionada */
+    --shadow-1: #060606;
+    --shadow-2: #202020;
+    --shadow-3: #767676;
+    --shadow-4: #5A5A5A;
+    --shadow-5: #898989;
+    --shadow-6: #5E5E5E;
+    --shadow-7: #2E2E2E;
+    --shadow-8: #FFFFFF;
+    --shadow-9: #212625;
+    --shadow-10: #474747;
+}

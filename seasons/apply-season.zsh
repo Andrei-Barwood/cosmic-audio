@@ -4,7 +4,7 @@
 # Uso: ./apply-season.zsh <season-directory>
 # Ejemplo: ./apply-season.zsh seasons/scheduled/season-2026-02-15
 
-set -e
+# No usar set -e para permitir continuar aunque haya errores menores
 
 # Colores para output
 GREEN='\033[0;32m'
@@ -82,12 +82,12 @@ for file in *.html; do
         sed -i '' "s/class[[:space:]]*=[[:space:]]*\"season-[^\"]*\"/class=\"$SEASON_NAME\"/g" "$file"
         sed -i '' "s/class[[:space:]]*=[[:space:]]*'season-[^']*'/class='$SEASON_NAME'/g" "$file"
         
-        if ! diff -q "$file.bak" "$file" > /dev/null; then
+        if ! diff -q "$file.bak" "$file" > /dev/null 2>&1; then
             echo "${GREEN}✓${NC} Actualizado: $file"
-            rm "$file.bak"
-            ((COUNT++))
+            rm "$file.bak" 2>/dev/null || true
+            COUNT=$((COUNT + 1))
         else
-            mv "$file.bak" "$file"
+            mv "$file.bak" "$file" 2>/dev/null || true
         fi
     fi
 done

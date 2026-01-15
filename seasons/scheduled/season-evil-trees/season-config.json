@@ -1,0 +1,48 @@
+{
+  "season_name": "season-evil-trees",
+  "display_name": "Evil Trees - Bosque Embrujado",
+  "publish_date": "2026-01-15",
+  "publish_time": "06:00",
+  "description": "Nueva temporada creada automáticamente",
+  "color_palette": {
+    "wood-dark": "#2A1A11",
+    "wood-medium": "#4A2E1F",
+    "wood-light": "#8B5E3C",
+    "primary-color": "#ccff00",
+    "acid-green": "#ccff00",
+    "tertiary-color": "#ff4400",
+    "secondary-color": "#8B5E3C",
+    "success-color": "#ccff00",
+    "olive-accent": "#00ffff",
+    "teal-dark": "#5c3a2a",
+    "teal-darker": "#1a0f0a",
+    "teal-medium": "#6B4E3D",
+    "dark-bg": "#2A1A11",
+    "darker-bg": "#1a0f0a",
+    "card-bg": "rgba(42, 26, 17, 0.95)",
+    "card-hover-bg": "rgba(74, 46, 31, 0.95)",
+    "text-primary": "#f0e6d2",
+    "text-secondary": "#cba885",
+    "border-color": "#ccff00",
+    "border-accent": "#00ffff",
+    "glitch-color-1": "#00ffff",
+    "glitch-color-2": "#ff00ff"
+  },
+  "game": {
+    "type": "p5js",
+    "file": "game.js",
+    "title": "poison",
+    "subtitle": "INDIGESTIÓN!",
+    "description": "Mega Doll Arcade",
+    "quote": "diarrhh dudes"
+  },
+  "blog_posts": [
+    {
+      "title": "De Nubes Eléctricas y Maderas Malditas: Un Compendio de Venenos Arbóreos",
+      "filename": "venenos-arboreos.html",
+      "category": "Esoteric Study",
+      "date": "2026-01-15",
+      "excerpt": "Manuscrito esotérico descubierto en los archivos de la Academia Silvestre de Inverness (1847). Un estudio ficticio que combina ciencia mágica y esoterismo wicca sobre la corrupción arbórea y la restauración mediante rituales lunares."
+    }
+  ]
+}

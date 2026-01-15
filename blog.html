@@ -22,7 +22,7 @@
 
 
 </head>
-<body class="season-cloud-of-the-desert">
+<body class="season-evil-trees">
     <!-- JavaScript Detection - Required for all pages -->
 <noscript>
     <div style="position: fixed; inset: 0; background: #121312; color: #B2E5F2; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Inter', sans-serif;">
@@ -69,7 +69,215 @@
             <div class="blog-layout">
                 <!-- Main Content -->
                 <div class="blog-main">
-                    <!-- Featured Post -->
+                    <!-- Featured Post - Nueva Temporada Evil Trees -->
+                    <article class="blog-post featured-post">
+                        <div class="blog-post-image">
+                            <div id="p5-sketch-evil-trees-thumbnail" style="
+                                width: 100%; 
+                                height: 100%;
+                                position: relative;
+                                background: linear-gradient(135deg, #060606 0%, #1a0a1a 50%, #2a1a3a 100%);
+                                overflow: hidden;
+                                border-bottom: 2px solid #ff4400;
+                            ">
+                                <!-- Canvas se crea aquí automáticamente -->
+                            </div>
+                            <span class="post-badge" style="background: linear-gradient(135deg, #ff4400, #ff6600);">Evil Trees</span>
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="post-meta">
+                                <span class="post-category" style="background: linear-gradient(135deg, #ff4400, #ff6600); color: #fff;">Esoteric Study</span>
+                                <span class="post-date">January 15, 2026</span>
+                                <span class="post-reading-time">⏱️ 25 min read</span>
+                            </div>
+                            <h2 class="post-title">
+                                <a href="venenos-arboreos.html">De Nubes Eléctricas y Maderas Malditas: Un Compendio de Venenos Arbóreos</a>
+                            </h2>
+                            <p class="post-excerpt">Manuscrito esotérico descubierto en los archivos de la Academia Silvestre de Inverness (1847). Un estudio ficticio que combina ciencia mágica y esoterismo wicca sobre la corrupción arbórea y la restauración mediante rituales lunares.</p>
+                            <div style="margin: 1rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                                <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(255, 68, 0, 0.15); color: #ff4400; border-radius: 3px; border: 1px solid rgba(255, 68, 0, 0.3);">#Wicca</span>
+                                <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(255, 102, 0, 0.15); color: #ff6600; border-radius: 3px; border: 1px solid rgba(255, 102, 0, 0.3);">#Esoteric</span>
+                                <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(42, 26, 58, 0.15); color: #898989; border-radius: 3px; border: 1px solid rgba(42, 26, 58, 0.3);">#BotanicalMagic</span>
+                            </div>
+                            <a href="venenos-arboreos.html" class="read-more">Explora los Venenos →</a>
+                        </div>
+
+                        <!-- p5.js Thumbnail Animation -->
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+                        <style>
+                            #p5-sketch-evil-trees-thumbnail canvas {
+                                position: absolute !important;
+                                top: 0 !important;
+                                left: 0 !important;
+                                width: 100% !important;
+                                height: 100% !important;
+                                display: block !important;
+                            }
+                        </style>
+                        <script>
+                            let myp5EvilTrees;
+
+                            let sketchEvilTreesThumbnail = function(p) {
+                                let trees = [];
+                                let particles = [];
+                                let time = 0;
+                                let canvasReady = false;
+
+                                // Colores del bosque embrujado
+                                const colors = {
+                                    bg: [6, 6, 6],           // #060606
+                                    tree: [42, 26, 58],      // #2a1a3a
+                                    glow: [255, 68, 0],      // #ff4400
+                                    glow2: [255, 102, 0],   // #ff6600
+                                    shadow: [26, 10, 26],    // #1a0a1a
+                                    mist: [118, 118, 118]    // #767676
+                                };
+
+                                p.setup = function() {
+                                    let container = document.getElementById('p5-sketch-evil-trees-thumbnail');
+                                    if (!container) {
+                                        canvasReady = false;
+                                        return;
+                                    }
+                                    
+                                    let w = container.offsetWidth || 400;
+                                    let h = container.offsetHeight || 250;
+                                    
+                                    if (w === 0 || h === 0) {
+                                        w = 400;
+                                        h = 250;
+                                    }
+                                    
+                                    p.createCanvas(w, h);
+                                    p.frameRate(30);
+                                    initTrees();
+                                    initParticles();
+                                    canvasReady = true;
+                                };
+
+                                function initTrees() {
+                                    trees = [];
+                                    for (let i = 0; i < 5; i++) {
+                                        trees.push({
+                                            x: p.random(p.width * 0.1, p.width * 0.9),
+                                            y: p.height,
+                                            width: 15 + p.random(10),
+                                            height: 80 + p.random(40),
+                                            glowPhase: p.random(p.TWO_PI)
+                                        });
+                                    }
+                                }
+
+                                function initParticles() {
+                                    particles = [];
+                                    for (let i = 0; i < 30; i++) {
+                                        particles.push({
+                                            x: p.random(p.width),
+                                            y: p.random(p.height),
+                                            vx: p.random(-0.5, 0.5),
+                                            vy: p.random(-0.3, 0.3),
+                                            size: p.random(2, 4),
+                                            life: p.random(100)
+                                        });
+                                    }
+                                }
+
+                                p.windowResized = function() {
+                                    if (!canvasReady) return;
+                                    let container = document.getElementById('p5-sketch-evil-trees-thumbnail');
+                                    if (container) {
+                                        p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+                                        initTrees();
+                                        initParticles();
+                                    }
+                                };
+
+                                p.draw = function() {
+                                    if (!canvasReady || p.width === 0 || p.height === 0) {
+                                        return;
+                                    }
+
+                                    // Fondo con fade
+                                    p.background(colors.bg[0], colors.bg[1], colors.bg[2], 30);
+                                    
+                                    // Niebla de fondo
+                                    p.blendMode(p.SCREEN);
+                                    for (let part of particles) {
+                                        part.x += part.vx;
+                                        part.y += part.vy;
+                                        part.x = (part.x + p.width) % p.width;
+                                        part.y = (part.y + p.height) % p.height;
+                                        
+                                        p.fill(colors.mist[0], colors.mist[1], colors.mist[2], 40);
+                                        p.noStroke();
+                                        p.circle(part.x, part.y, part.size);
+                                        part.life -= 0.2;
+                                        if (part.life < 0) part.life = 100;
+                                    }
+                                    p.blendMode(p.BLEND);
+
+                                    // Dibujar árboles
+                                    for (let tree of trees) {
+                                        // Sombra
+                                        p.fill(colors.shadow[0], colors.shadow[1], colors.shadow[2], 100);
+                                        p.noStroke();
+                                        p.rect(tree.x - tree.width/2 + 3, tree.y - tree.height + 3, tree.width, tree.height);
+                                        
+                                        // Tronco
+                                        p.fill(colors.tree[0], colors.tree[1], colors.tree[2]);
+                                        p.rect(tree.x - tree.width/2, tree.y - tree.height, tree.width, tree.height);
+                                        
+                                        // Brillo naranja (como ojos o energía)
+                                        let glowIntensity = p.sin(time * 0.05 + tree.glowPhase) * 0.5 + 0.5;
+                                        p.fill(colors.glow[0], colors.glow[1], colors.glow[2], 100 * glowIntensity);
+                                        p.circle(tree.x, tree.y - tree.height * 0.7, tree.width * 0.6);
+                                        
+                                        // Ramas (triángulos)
+                                        p.fill(colors.shadow[0], colors.shadow[1], colors.shadow[2], 150);
+                                        p.triangle(
+                                            tree.x - tree.width * 1.2, tree.y - tree.height,
+                                            tree.x + tree.width * 1.2, tree.y - tree.height,
+                                            tree.x, tree.y - tree.height - 20
+                                        );
+                                        
+                                        // Partículas alrededor (nube eléctrica)
+                                        p.blendMode(p.ADD);
+                                        for (let i = 0; i < 5; i++) {
+                                            let angle = time * 0.1 + i * p.TWO_PI / 5;
+                                            let dist = tree.width * 0.8;
+                                            let px = tree.x + p.cos(angle) * dist;
+                                            let py = tree.y - tree.height * 0.5 + p.sin(angle) * dist;
+                                            p.fill(colors.glow2[0], colors.glow2[1], colors.glow2[2], 80);
+                                            p.noStroke();
+                                            p.circle(px, py, 3);
+                                        }
+                                        p.blendMode(p.BLEND);
+                                    }
+
+                                    // Efecto de iluminación desde abajo (como si hubiera fuego o energía)
+                                    p.fill(colors.glow[0], colors.glow[1], colors.glow[2], 20);
+                                    p.noStroke();
+                                    for (let i = 0; i < 3; i++) {
+                                        let x = p.width * (0.2 + i * 0.3);
+                                        let y = p.height;
+                                        let radius = 30 + p.sin(time * 0.1 + i) * 10;
+                                        p.circle(x, y, radius);
+                                    }
+
+                                    time += 1;
+                                };
+                            };
+
+                            // Inicializa después de load
+                            window.addEventListener('load', () => {
+                                if (!myp5EvilTrees) {
+                                    myp5EvilTrees = new p5(sketchEvilTreesThumbnail, 'p5-sketch-evil-trees-thumbnail');
+                                }
+                            });
+                        </script>
+                    </article>
+
+                    <!-- Featured Post Original -->
                     <article class="blog-post featured-post">
                         <div class="blog-post-image">
                             <img src="img/39.jpeg" alt="The Underground Journal">
